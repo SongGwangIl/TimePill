@@ -27,7 +27,10 @@
 		<!-- @Controller 애노테이션이 붙은 클래스는 스프링에 등록 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-		
+	
+	<mvc:annotation-driven/>
+	<mvc:default-servlet-handler/>	
+	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
