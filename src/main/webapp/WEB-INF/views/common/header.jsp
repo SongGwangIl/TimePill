@@ -8,8 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<c:out value="${loginUser.userId}"/> 님 환영합니다.
+<c:choose>
+	<c:when test="${userInfo.userName != null}">
+		<c:out value="${userInfo.userName} 님 환영합니다."></c:out>
+	</c:when>
+	<c:when test="${userInfo.protName != null}">
+		<c:out value="${userInfo.protName} 님 환영합니다."></c:out>
+	</c:when>
+	<c:otherwise>
+		<c:out value="${loginUser.userId}"/> 님 환영합니다.	
+	</c:otherwise>
+</c:choose>
 | <a href='${pageContext.request.contextPath}/login'>로그아웃</a>
 	| <c:url var="regUrl" value="/schedule/list.do" ></c:url>
 	<a href="${regUrl}">스케쥴 리스트</a>
