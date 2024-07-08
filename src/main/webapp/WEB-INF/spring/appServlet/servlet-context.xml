@@ -27,21 +27,7 @@
 		<!-- @Controller 애노테이션이 붙은 클래스는 스프링에 등록 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	
-<<<<<<< HEAD
-	<interceptors>
-		<interceptor>
-			<mapping path="/**"/>
-			<exclude-mapping path="/resources/css/login.css"/>
-			<exclude-mapping path="/login.do"/>
-			<beans:bean class="kr.ac.kopo.com.LoginInterceptor"></beans:bean>
-		</interceptor>
-	</interceptors>
-=======
-	<mvc:annotation-driven/>
-	<mvc:default-servlet-handler/>	
->>>>>>> branch 'master' of https://github.com/SongGwangIl/fillDispensor.git
-	
+		
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
