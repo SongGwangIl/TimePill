@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,19 +36,44 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute UserVO vo, HttpSession session) {
+	public String login(@ModelAttribute UserVO vo, HttpSession session, ModelMap model) {
 			
-		UserVO uvo = userService.login(vo);
+		UserVO uvo = userService.login(vo.getUserId());
+		UserInfoVO uivo = null;
+		if(uvo.getUserSelect().equals("user"))
+			uivo = (UserInfoVO) userService.getUserInfo(vo.getUserId());
+		if(uvo.getUserSelect().equals("protector"))
+			uivo = (UserInfoVO) userService.getProtectorInfo(vo.getUserId());
+		
+		model.addAttribute("userId",vo.getUserId());
 		
 		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
 				vo.getUserPwd().equals(uvo.getUserPwd()) ) 
 		{
 			//로그인 성공
 			session.setAttribute("loginUser", uvo);
-			return "redirect:/main";
+			if(uivo != null) {
+				session.setAttribute("userInfo", uivo);
+				
+				return "user/main";
+			}
+				
+			else {
+				if(uvo.getUserSelect().equals("user"))					
+					return "user/addUserInfo";				
+				else 
+					return "user/addProtectorInfo";				
+			}
 		}
 		// 로그인 실패	
 		return "redirect:/login";
+	}
+	
+	@RequestMapping(path = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/cover";
 	}
 	
 	@RequestMapping(path = "/singup", method = RequestMethod.GET)
@@ -64,7 +90,7 @@ public class UserController {
 		request.setAttribute("msg", "회원가입 되었습니다.");
 		request.setAttribute("url", "/kopo/cover");		
 		
-		return "user/alert";			
+		return "user/msg";			
 	}
 	
 	@ResponseBody
@@ -74,5 +100,39 @@ public class UserController {
 		
 		return result;
 	}
+	
+	@RequestMapping(path = "/addProtectorInfo", method = RequestMethod.GET)
+	public String ProtectorInfo() {
+		
+		return "user/addProtectorInfo";
+	}
+	
+	@RequestMapping(path = "/addProtectorInfo", method = RequestMethod.POST)
+	public String addProtectorInfo(UserInfoVO vo, HttpServletRequest request) {
+		
+		userService.addProtectorInfo(vo);
+		
+		request.setAttribute("msg", "정보가 등록 되었습니다.");
+		request.setAttribute("url", "/kopo/cover");
+		
+		return "user/msg";
+	}
+	
+	
+	@RequestMapping(path = "/addUserInfo", method = RequestMethod.GET)
+	public String UserInfo() {
+		
+		return "user/addUserInfo";
+	}
 
+	@RequestMapping(path = "/addUserInfo", method = RequestMethod.POST)
+	public String addUserInfo(UserInfoVO vo, HttpServletRequest request) {
+		
+		userService.addUserInfo(vo);
+		
+		request.setAttribute("msg", "정보가 등록 되었습니다.");
+		request.setAttribute("url", "/kopo/cover");
+		
+		return "user/msg";
+	}
 }

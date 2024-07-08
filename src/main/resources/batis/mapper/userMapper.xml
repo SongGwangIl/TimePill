@@ -23,4 +23,22 @@
   <select id="checkId" resultType="String">
   	SELECT COUNT(*) FROM user WHERE user_id = #{userId}
   </select>
+  <select id="getUserInfo">
+  	SELECT user_name, user_phone, user_gender, user_height, user_weight, user_birth
+  	FROM user_info
+  	WHERE user_id = #{userId}
+  </select>
+  <select id="getProtectorInfo">
+  	SELECT prot_name, prot_phone, prot_relation
+  	FROM protector
+  	WHERE user_id = #{userId}
+  </select>
+  <insert id="addUserInfo">
+  	INSERT INTO user_info(user_id, user_name, user_phone, user_gender, user_height, user_weight, user_birth)
+  	values(#{userId}, #{userName}, #{userPhone}, #{userGender}, #{userHeight}, #{userWeight}, #{userBirth})
+  </insert>
+  <insert id="addProtectorInfo">
+  	INSERT INTO protector(user_id, prot_name, prot_phone, prot_relation)
+  	values(#{userId}, #{protName}, #{protPhone}, #{protRelation})
+  </insert>
 </mapper>
