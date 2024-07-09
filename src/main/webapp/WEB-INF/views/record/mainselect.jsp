@@ -32,14 +32,14 @@
 <!-- 조회 날짜 선택 -->
 <form action="${pageContext.request.contextPath}/alarmSelect.do" method="post">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
-	<input type="date" id="takeDate" name="takeDate">
+	<input type="date" id="takeDate" name="takeDate" value="${takeDate}">
 	<input type="submit" value="조회">
 </form> <br><br>
 
 
 <c:choose>
-	<c:when test="${alarmList.isEmpty()}">
-		<p> 조회할 복약 기록이 없습니다. </p>
+	<c:when test="${alarmByDateList.isEmpty()}">
+		<h3> 지금 당장 알람을 등록해보세요! </h3>
 	</c:when>
 	<c:otherwise>
 		<table>
@@ -60,7 +60,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="al" items="${alarmList}">
+				<c:forEach var="al" items="${alarmByDateList}">
 				<tr>
 					<c:forEach var="sdl" items="${al.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
 					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
@@ -87,36 +87,26 @@
 <a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
 
 
-<p>	추가 구현 필요 : <br>
-	체크 버튼을 누르면 메인리스트에서도 takeDate 로그 출력, <br> 
-	takelog 테이블에서 date 데이터를 받아와서 출력해야 하므로 ajax로 해야 할 것 같다.... <br>
-	복용을 표시하는 on/off 토글 (해당 페이지의 변화를 유지해야 함) <br>
-	날짜 변경을 통한 조회 페이지 갱신 (ajax) <br>
-	날짜 변경용 DATE form (일주일 단위, 한달 단위) <br>
-	체크 버튼을 누르면 현재 시간으로 등록, 다시 누르면 update(use_at의 비활성화) <br>
-	미래의 복용체크는 누르지 못하도록, 시간이 지난 약은 복용체크를 할 수 없음
-</p>
-
 <p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
 </div>
 
 <script>
-        function displayCurrentTime() {
-        	var now = new Date();
-        	var year = now.getFullYear();
-            var month = now.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1 해줌
-            var day = now.getDate();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-
-            var currentDateTimeString = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
-            document.getElementById('current-time').textContent = "현재 시각 " + currentTimeString;
-        }
-
-        // 페이지 로드 시에 한 번 호출하거나, setInterval을 사용하여 일정 간격으로 업데이트 가능
-        displayCurrentTime();
-        setInterval(displayCurrentTime, 1000); // 1초마다 업데이트
-    </script>
+		function displayCurrentTime() {
+			var now = new Date();
+			var year = now.getFullYear();
+		    var month = now.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1 해줌
+		    var day = now.getDate();
+		    var hours = now.getHours();
+		    var minutes = now.getMinutes();
+		    var seconds = now.getSeconds();
+		
+		    var currentDateTimeString = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
+		    document.getElementById('current-time').textContent = "현재 시각 " + currentTimeString;
+		}
+		
+		// 페이지 로드 시에 한 번 호출하거나, setInterval을 사용하여 일정 간격으로 업데이트 가능
+		displayCurrentTime();
+		setInterval(displayCurrentTime, 1000); // 1초마다 업데이트
+</script>
 </body>
 </html>

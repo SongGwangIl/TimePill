@@ -90,6 +90,19 @@
         	AND USER_ID = #{userId}
 	</select>
 	
+	<select id="selectAlarmByDate" resultMap="RecordMap">
+		SELECT 
+			SCHE_ID
+			, TIME_ID
+			, SCHE_TITLE
+			, TIME_NAME
+			, TIME_ARLAM
+		FROM SCHE_TIME NATURAL JOIN SCHEDULE
+		WHERE 
+        	SCHE_END_DATE &gt;= DATE(#{takeDate})
+        	AND SCHE_START_DATE &lt;= DATE(#{takeDate})
+        	AND USER_ID = #{userId}
+	</select>
 	<insert id="addTakeLog">
 		INSERT INTO 
 			TAKE_LOG (

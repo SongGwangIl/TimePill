@@ -39,6 +39,11 @@ public class RecordServiceImpl implements RecordService{
 	public int addTakeLog(String timeId, String userId) {
 		return recordDAO.addTakeLog(timeId, userId);
 	}
+
+	@Override //날짜별 알람 조회
+	public List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate) {
+		return recordDAO.selectAlarmByDate(timeId, userId, takeDate);
+	}
 	
 	
 	

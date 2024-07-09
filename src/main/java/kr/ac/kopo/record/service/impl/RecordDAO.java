@@ -19,4 +19,6 @@ public interface RecordDAO {
 	List<RecordVO> selectAlarmList(@Param("takeDate") String takeDate, @Param("userId") String userId);
 	
 	int addTakeLog(@Param("timeId") String timeId, @Param("userId") String userId);
+
+	List<RecordVO> selectAlarmByDate(@Param("timeId") String timeId, @Param("userId") String userId, @Param("takeDate") String takeDate);
 }

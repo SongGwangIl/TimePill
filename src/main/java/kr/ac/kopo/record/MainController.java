@@ -43,26 +43,45 @@ public class MainController{
 	}
 	
 	@PostMapping("/addlog.do")
-	public String addLog(ScheTimeVO vo, Model model, HttpSession session) {
+	public String addLog(ScheTimeVO stvo, Model model, HttpSession session) {
 		
 		//세션객체에 저장된 로그인 정보에서 id를 받아옴
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		String userId = uvo.getUserId();
 		
 		//ScheTimeVO를 통해 timeId 받아옴
-		String timeId = vo.getTimeId();
-		
-		//디버깅로그
-		System.out.println(timeId);
-		
+		String timeId = stvo.getTimeId();
+
 		//timeId, userId를 매개변수로 addTakeLog 실행
 		int num = recordService.addTakeLog(timeId, userId);
 		
 		//디버깅로그
 		System.out.println(num + "개의 takeLog 추가");
 		
-		
 		return "redirect:/main";
+		
+	}
+	
+	@PostMapping("/alarmSelect.do")
+	public String alarmSelect(RecordVO rvo, ScheTimeVO stvo, Model model, HttpSession session) {
+		
+		//세션객체에 저장된 로그인 정보에서 id를 받아옴
+		UserVO uvo = (UserVO) session.getAttribute("loginUser");
+		String userId = uvo.getUserId();
+		
+		//ScheTimeVO를 통해 timeId 받아옴
+		String timeId = stvo.getTimeId();
+		
+		//vo로 받아온 파라미터 takeDate
+		String takeDate = rvo.getTakeDate();
+
+		//timeId, userId를 매개변수로 addTakeLog 실행
+		List<RecordVO> alarmByDateList = recordService.selectAlarmByDate(timeId, userId, takeDate);
+		
+		model.addAttribute("alarmByDateList", alarmByDateList);
+		model.addAttribute("takeDate", takeDate);
+		
+		return "/record/mainselect";
 		
 	}
 

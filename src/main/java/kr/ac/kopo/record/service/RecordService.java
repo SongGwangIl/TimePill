@@ -13,4 +13,6 @@ public interface RecordService {
 	List<RecordVO> selectAlarmList(String takeDate, String userId);
 	
 	int addTakeLog(String timeId, String userId);
+	
+	List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate);
 }
