@@ -9,7 +9,7 @@
 </head>
 <body>
 <c:choose>
-	<c:when test="${name != null}">
+	<c:when test="${loginUser.userValid.toString() == 'Y'}">
 		<c:out value="${name} 님 환영합니다."></c:out>
 	</c:when>
 	<c:otherwise>
