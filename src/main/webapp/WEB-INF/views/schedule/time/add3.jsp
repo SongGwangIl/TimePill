@@ -22,7 +22,7 @@
 			</ul>
 			<ul>
 				<label for="scheStartDate">알림 시간</label>
-				<input type="time" name="timeArlam"> 
+				<input type="time" name="timeAlarm"> 
 			</ul>
             <ul>
 				<label for="timeLimit">~ 시간 제한</label>
@@ -38,8 +38,8 @@
 				</select>
 			</ul>
 			<ul>
-				<label for="reArlamTime">재알림 주기</label>
-				<select name="reArlamTime">
+				<label for="reAlarmTime">재알림 주기</label>
+				<select name="reAlarmTime">
 					<option value=1>1분</option>
 					<option value=3>3분</option>
 					<option value=5>5분</option>
@@ -47,8 +47,8 @@
 					<option value=30>30분</option>
 					<option value=60>1시간</option>
 				</select> 간격으로 
-                <label for="reArlamCount"></label>
-				<select name="reArlamCount">
+                <label for="reAlarmCount"></label>
+				<select name="reAlarmCount">
 					<option value=1>1회</option>
 					<option value=2>2회</option>
 					<option value=3 selected>3회</option>

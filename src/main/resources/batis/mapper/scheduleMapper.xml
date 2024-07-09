@@ -17,6 +17,7 @@
 	<select id="list" resultType="ScheduleVO">
 		SELECT * FROM SCHEDULE
 		WHERE USER_ID=#{userId}
+		ORDER BY sche_id DESC;
 	</select>
 
 	<insert id="add">
@@ -25,5 +26,10 @@
 	VALUES
 	(CONCAT('sche_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0')), #{userId}, #{scheTitle}, #{scheTakeNum}, #{scheSelect}, #{scheStartDate}, #{scheEndDate})
 	</insert>
+	
+	<select id="findById">
+		SELECT * FROM SCHEDULE
+		WHERE SCHE_ID=#{scheId}
+	</select>
 
 </mapper>

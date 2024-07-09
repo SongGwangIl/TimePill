@@ -13,4 +13,6 @@ public interface ScheduleDAO {
 
 	int add(ScheduleVO vo);
 
+	ScheduleVO findById(String scheId);
+
 }

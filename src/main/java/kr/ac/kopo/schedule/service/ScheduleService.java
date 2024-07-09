@@ -9,4 +9,6 @@ public interface ScheduleService {
 	List<ScheduleVO> list(String userId);
 
 	int add(ScheduleVO vo);
+
+	ScheduleVO findById(String scheId);
 }
