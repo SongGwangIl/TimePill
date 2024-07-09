@@ -22,5 +22,5 @@ public interface UserDAO {
 
 	void addUserInfo(UserInfoVO vo);
 
-	void hasInfo();
+	void hasInfo(String userId);
 }

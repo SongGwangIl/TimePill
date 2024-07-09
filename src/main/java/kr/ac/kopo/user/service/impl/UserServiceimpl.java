@@ -51,7 +51,7 @@ public class UserServiceimpl implements UserService{
 	public void addProtectorInfo(UserInfoVO vo) {
 		
 		userdao.addProtectorInfo(vo);
-		userdao.hasInfo();
+		userdao.hasInfo(vo.getUserId());
 		
 	}
 
@@ -59,7 +59,7 @@ public class UserServiceimpl implements UserService{
 	public void addUserInfo(UserInfoVO vo) {
 		
 		userdao.addUserInfo(vo);
-		userdao.hasInfo();
+		userdao.hasInfo(vo.getUserId());
 		
 	}
 }

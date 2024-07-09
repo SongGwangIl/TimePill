@@ -7,14 +7,14 @@
 <head>
 <link rel="icon" href="data:,">
 <meta charset="UTF-8">
-<title>임시페이지</title>
+<title>사용자 정보 입력</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h1>임시 userInfo 입력폼</h1>
+	<h1>사용자 정보 입력</h1>
 	<form action="${pageContext.request.contextPath}/addUserInfo"
 		method="post">
-		<input type="hidden" name="userId" value="${userId}"><br>
+		<input type="hidden" name="userId" value="${loginUser.userId}"><br>
 		<ul class="input">
 			<li><label class="label">이름</label> <input type="text"
 				name="userName" required><br></li>
