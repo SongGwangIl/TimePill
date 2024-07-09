@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>메인 페이지</title>
+<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
 </head>
 <body>
 
@@ -18,21 +19,20 @@
 
 <hr>
 
-<h1>임시 메인 페이지</h1>
+<div id="container">
+<h1>메인 페이지</h1>
 
 <!-- 조회 날짜 선택 -->
-<div id="container">
 <form action="${pageContext.request.contextPath}/record/select.do" method="get">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
 	<input type="date" id="takeDate" name="takeDate">
 	<input type="submit" value="조회">
 </form> <br><br>
 
-
-<!-- 오늘날짜 디폴트 값 로그 조회 -->
-<h1> 오늘의 복용기록 </h1>
+<!-- 오늘 날짜 디폴트 알람 목록 -->
+<h1> 오늘의 알람 </h1><br><br>
 <c:choose>
-	<c:when test="${recordSelectByToday.isEmpty()}">
+	<c:when test="${alarmList.isEmpty()}">
 		<p> 조회할 복약 기록이 없습니다. </p>
 	</c:when>
 	<c:otherwise>
@@ -40,38 +40,33 @@
 			<thead>
 				<tr>
 					<th>
-						복약로그 ID
+						복용 약물 이름
 					</th>
 					<th>
-						사용자 ID
+						시간이름
 					</th>
 					<th>
-						복용한 약품이름
+						설정한 알람 시간
 					</th>
 					<th>
-						복약한 시간알림 ID
-					</th>
-					<th>
-						복약한 시간 이름
-					</th>
-					<th>
-						복약 날짜
-					</th>
-					<th>
-						복약 성공 여부
+						복용 체크
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="tvo" items="${recordSelectByToday}">
+				<c:forEach var="al" items="${alarmList}">
 				<tr>
-					<td> ${tvo.takeId} </td>
-					<td> ${tvo.userId} </td>
-					<c:forEach var="sdl" items="${tvo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-					<td> ${tvo.timeId} </td>
-					<c:forEach var="stl" items="${tvo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
-					<td> ${tvo.takeDate} </td>
-					<td> ${tvo.takeSuccess} </td>
+					<c:forEach var="sdl" items="${al.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
+					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
+					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeArlam}</td></c:forEach>
+					<c:forEach var="stl" items="${al.scheTimeList}">
+					<td>
+						<form action="${pageContext.request.contextPath}/addlog.do" method="post">
+							<input type="hidden" name="timeId" value="${stl.timeId}">
+					    	<button type="submit">복용 완료!</button>
+						</form>
+					</td>
+					</c:forEach>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -80,59 +75,11 @@
 </c:choose>
 <br><br>
 
+<a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
 
-<h1> 기간별 복용기록 조회 </h1>
-<c:choose>
-	<c:when test="${recordSelectByAll.isEmpty()}">
-		<p> 조회할 복약 기록이 없습니다. </p>
-	</c:when>
-	<c:otherwise>
-		<table>
-			<thead>
-				<tr>
-					<th>
-						복약로그 ID
-					</th>
-					<th>
-						사용자 ID
-					</th>
-					<th>
-						복용한 약품이름
-					</th>
-					<th>
-						복약한 시간알림 ID
-					</th>
-					<th>
-						복약한 시간 이름
-					</th>
-					<th>
-						복약 날짜
-					</th>
-					<th>
-						복약 성공 여부
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="avo" items="${recordSelectByAll}">
-				<tr>
-					<td> ${avo.takeId} </td>
-					<td> ${avo.userId} </td>
-					<c:forEach var="sdl" items="${avo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-					<td> ${avo.timeId} </td>
-					<c:forEach var="stl" items="${avo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
-					<td> ${avo.takeDate} </td>
-					<td> ${avo.takeSuccess} </td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</c:otherwise>
-</c:choose>
 
-<br><br><br>
-<hr>
-
+<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
+</div>
 
 </body>
 </html>

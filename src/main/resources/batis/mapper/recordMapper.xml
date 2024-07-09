@@ -43,6 +43,7 @@
 			, TAKE_SUCCESS
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE USER_ID = #{userId}
+		ORDER BY TAKE_DATE
 	</select>
 	
 	<select id="selectByToday" resultMap="RecordMap">
@@ -57,6 +58,7 @@
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE DATE(TAKE_DATE) = DATE(NOW())
 			AND USER_ID = #{userId}
+		ORDER BY TAKE_DATE
 	</select>
 	
 	<select id="selectByDate" resultMap="RecordMap">
@@ -71,5 +73,38 @@
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE DATE(TAKE_DATE) = DATE(#{takeDate})
 			AND USER_ID = #{userId}
+		ORDER BY TAKE_DATE
 	</select>
+	
+	<select id="selectAlarmList" resultMap="RecordMap">
+		SELECT 
+			SCHE_ID
+			, TIME_ID
+			, SCHE_TITLE
+			, TIME_NAME
+			, TIME_ARLAM
+		FROM SCHE_TIME NATURAL JOIN SCHEDULE
+		WHERE 
+        	SCHE_END_DATE &gt;= DATE(NOW())
+        	AND SCHE_START_DATE &lt;= DATE(NOW())
+        	AND USER_ID = #{userId}
+	</select>
+	
+	<insert id="addTakeLog">
+		INSERT INTO 
+			TAKE_LOG (
+				TAKE_ID
+				, USER_ID
+				, TIME_ID
+				, TAKE_DATE
+				, TAKE_SUCCESS
+				)
+			VALUES (
+				CONCAT('LOG_', LPAD(NEXT VALUE FOR SQ_TIME, 6, '0'))
+				, #{userId}
+				, #{timeId}
+				, NOW()
+				, 'N'
+				)
+	</insert>
 </mapper>

@@ -10,4 +10,7 @@ public interface RecordService {
 	
 	List<RecordVO> selectByDate(String takeDate, String userId);
 
+	List<RecordVO> selectAlarmList(String takeDate, String userId);
+	
+	int addTakeLog(String timeId, String userId);
 }

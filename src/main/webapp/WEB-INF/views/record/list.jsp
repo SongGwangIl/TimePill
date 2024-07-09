@@ -127,13 +127,10 @@
 		</table>
 	</c:otherwise>
 </c:choose>
-
-<br><br><br>
-<hr>
-<p> 추가 구현해야 할 기능 </p>
-<p> : 로그인 정보를 받아서 로그인 한 사용자의 로그만 조회할 수 있도록 (구현 완료)</p>
-<p> : 브라우저에서 date 값을 설정할 수 있는 장치 (원하는 날짜로 바꿔서 조회) </p>
-
+<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
 </div>
+
+
+
 </body>
 </html>

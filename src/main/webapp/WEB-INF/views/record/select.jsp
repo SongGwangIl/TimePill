@@ -76,5 +76,7 @@
 </c:choose>
 <br><br>
 </div>
+
+<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
 </body>
 </html>

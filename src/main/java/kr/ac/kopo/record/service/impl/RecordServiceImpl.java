@@ -29,6 +29,17 @@ public class RecordServiceImpl implements RecordService{
 	public List<RecordVO> selectByDate(String takeDate, String userId) {
 		return recordDAO.selectByDate(takeDate, userId);
 	}
+
+	@Override //오늘의 알람 조회
+	public List<RecordVO> selectAlarmList(String takeDate, String userId) {
+		return recordDAO.selectAlarmList(takeDate, userId);
+	}
+
+	@Override //복용 로그 등록
+	public int addTakeLog(String timeId, String userId) {
+		return recordDAO.addTakeLog(timeId, userId);
+	}
+	
 	
 	
 }
