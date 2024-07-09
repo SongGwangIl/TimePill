@@ -8,10 +8,10 @@
 		<id column="time_id" property="timeId"/>
 		<result column="sche_id" property="scheId"/>
 		<result column="time_name" property="timeName"/>
-		<result column="time_arlam" property="timeArlam"/>
+		<result column="time_alarm" property="timeAlarm"/>
 		<result column="time_limit" property="timeLimit"/>
-		<result column="re_arlam_count" property="reArlamCount"/>
-		<result column="re_arlam_time" property="reArlamTime"/>
+		<result column="re_alarm_count" property="reAlarmCount"/>
+		<result column="re_alarm_time" property="reAlarmTime"/>
 		<result column="med_location" property="medLocation"/>
 	</resultMap>
 	
@@ -21,10 +21,10 @@
 
 	<insert id="add">
 	INSERT INTO SCHE_TIME
-	(time_id, sche_id, time_name, time_arlam, time_limit, re_arlam_count, re_arlam_time, med_location)
+	(time_id, sche_id, time_name, time_alarm, time_limit, re_alarm_count, re_alarm_time, med_location)
 	VALUES
 	(CONCAT('time_', LPAD(NEXT VALUE FOR SQ_TIME, 5, '0'))
-	, #{scheId}, #{timeName}, #{timeArlam}, #{timeLimit}, #{reArlamCount}, #{reArlamTime}, #{medLocation})
+	, #{scheId}, #{timeName}, #{timeAlarm}, #{timeLimit}, #{reAlarmCount}, #{reAlarmTime}, #{medLocation})
 	</insert>
 
 </mapper>

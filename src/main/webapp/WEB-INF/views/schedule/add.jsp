@@ -33,9 +33,9 @@
 					<ul>
 						<label for="scheTakeNum">하루 복약횟수</label>
 						<select name="scheTakeNum">
-							<option value=1 selected>1회</option>
+							<option value=1>1회</option>
 							<option value=2 >2회</option>
-							<option value=3>3회</option>
+							<option value=3 selected>3회</option>
 						</select>
 					</ul>
 					<ul>

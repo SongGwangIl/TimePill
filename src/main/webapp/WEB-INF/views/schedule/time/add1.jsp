@@ -14,7 +14,8 @@
 	<form action="${pageContext.request.contextPath}/schedule/time/add1.do"
 		method="post">
 		<fieldset>
-			<legend>${svo.scheTitle} 알람시간 등록 (1)</legend>
+			<legend><c:out value="${svo.scheTitle} 의 알람시간 등록 (1)"/> </legend>
+			<input type="hidden" name="scheId" value="${svo.scheId}"/>
 			<ul>
 				<label for="timeId">1회차 제목</label>
 				<input type="text" name="timeName">

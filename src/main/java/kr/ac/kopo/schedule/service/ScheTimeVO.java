@@ -11,9 +11,9 @@ public class ScheTimeVO {
 	private String timeId;
 	private String scheId;
 	private String timeName;
-	private LocalTime timeArlam;
-	private LocalTime timeLimit;
-	private int reArlamCount;
-	private int reArlamTime;
+	private String timeAlarm;
+	private String timeLimit;
+	private int reAlarmCount;
+	private int reAlarmTime;
 	private int medLocation;
 }

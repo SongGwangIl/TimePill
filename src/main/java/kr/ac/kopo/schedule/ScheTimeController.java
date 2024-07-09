@@ -20,15 +20,16 @@ public class ScheTimeController {
 	ScheTimeService scheTimeService;
 
 	@PostMapping("/add1.do")
-	public String add1(ScheduleVO svo, ScheTimeVO tvo, Model model) {
+	public String add1(String scheId, ScheTimeVO tvo, Model model) {
 		
+		ScheduleVO svo = (ScheduleVO)model.getAttribute("svo");
 		tvo.setScheId(svo.getScheId());
 		
 		if(scheTimeService.add(tvo) == 1) 
-			System.out.println("scheTime add1 완료");
+			System.out.println(svo.getScheId() + "의 scheTime add1 완료");
 		
 		if(svo.getScheTakeNum() > 1) {
-			model.addAttribute("scheduleVO", svo);
+			model.addAttribute("svo", svo);
 			return "schedule/time/add2";
 		}
 		else return "redirect:/schedule/list.do";
@@ -40,10 +41,10 @@ public class ScheTimeController {
 		tvo.setScheId(svo.getScheId());
 		
 		if(scheTimeService.add(tvo) == 1) 
-			System.out.println("scheTime add2 완료");
+			System.out.println(svo.getScheId() + "의 scheTime add2 완료");
 		
 		if(svo.getScheTakeNum() > 2) {
-			model.addAttribute("scheduleVO", svo);
+			model.addAttribute("svo", svo);
 			return "schedule/time/add3";
 		}
 		else return "redirect:/schedule/list.do";
@@ -55,7 +56,7 @@ public class ScheTimeController {
 		tvo.setScheId(svo.getScheId());
 		
 		if(scheTimeService.add(tvo) == 1) 
-			System.out.println("scheTime add3 완료");
+			System.out.println(svo.getScheId() + "의 scheTime add3 완료");
 		return "redirect:/schedule/list.do";
 	}
 }
