@@ -11,9 +11,9 @@ public interface UserService {
 
 	String checkId(String userId);
 
-	UserInfoVO getUserInfo(String userId);
+	String getUserName(String userId);
 
-	UserInfoVO getProtectorInfo(String userId);
+	String getProtectorName(String userId);
 
 	void addProtectorInfo(UserInfoVO vo);
 

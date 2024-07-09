@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +22,6 @@ public class UserController {
 		return "user/cover";
 	}
 	
-	@RequestMapping(path = "/main", method = RequestMethod.GET)
-	public String list() {
-		
-		return "user/main";
-	}
-	
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
 	public String loginForm() {
 		
@@ -36,33 +29,32 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute UserVO vo, HttpSession session, ModelMap model) {
+	public String login(@ModelAttribute("userId") UserVO vo, HttpSession session) {
 			
 		UserVO uvo = userService.login(vo.getUserId());
-		UserInfoVO uivo = null;
-		if(uvo.getUserSelect().equals("user"))
-			uivo = (UserInfoVO) userService.getUserInfo(vo.getUserId());
-		if(uvo.getUserSelect().equals("protector"))
-			uivo = (UserInfoVO) userService.getProtectorInfo(vo.getUserId());
+		String name = null;
 		
-		model.addAttribute("userId",vo.getUserId());
+		if(uvo.getUserSelect().equals("user"))
+			name = userService.getUserName(vo.getUserId());
+		else if(uvo.getUserSelect().equals("protector"))
+			name = userService.getProtectorName(vo.getUserId());
+		
 		
 		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
 				vo.getUserPwd().equals(uvo.getUserPwd()) ) 
 		{
 			//로그인 성공
 			session.setAttribute("loginUser", uvo);
-			if(uivo != null) {
-				session.setAttribute("userInfo", uivo);
-				
-				return "user/main";
-			}
-				
-			else {
-				if(uvo.getUserSelect().equals("user"))					
+			if(name == null) {
+				if(uvo.getUserSelect().equals("user"))				
 					return "user/addUserInfo";				
 				else 
 					return "user/addProtectorInfo";				
+			}				
+			else {
+				session.setAttribute("name", name);
+				
+				return "redirect:/main";
 			}
 		}
 		// 로그인 실패	

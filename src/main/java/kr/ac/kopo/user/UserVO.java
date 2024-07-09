@@ -1,5 +1,9 @@
 package kr.ac.kopo.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class UserVO {
 	private String userId;
 	private String userPwd;
@@ -7,43 +11,4 @@ public class UserVO {
 	private char userValid;
 	private char deviceRegist;
 	private String userSelect;
-	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getUserPwd() {
-		return userPwd;
-	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	public char getUserValid() {
-		return userValid;
-	}
-	public void setUserValid(char userValid) {
-		this.userValid = userValid;
-	}
-	public char getDeviceRegist() {
-		return deviceRegist;
-	}
-	public void setDeviceRegist(char deviceRegist) {
-		this.deviceRegist = deviceRegist;
-	}
-	public String getUserSelect() {
-		return userSelect;
-	}
-	public void setUserSelect(String userSelect) {
-		this.userSelect = userSelect;
-	}
-	
-	
 }

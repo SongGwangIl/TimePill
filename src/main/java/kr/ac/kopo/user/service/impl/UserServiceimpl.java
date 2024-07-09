@@ -35,22 +35,23 @@ public class UserServiceimpl implements UserService{
 
 
 	@Override
-	public UserInfoVO getUserInfo(String userId) {
+	public String getUserName(String userId) {
 		
-		return userdao.getUserInfo(userId);
+		return userdao.getUserName(userId);
 	}
 
 
 	@Override
-	public UserInfoVO getProtectorInfo(String userId) {
+	public String getProtectorName(String userId) {
 		
-		return userdao.getProtectorInfo(userId);
+		return userdao.getProtectorName(userId);
 	}
 
 	@Override
 	public void addProtectorInfo(UserInfoVO vo) {
 		
 		userdao.addProtectorInfo(vo);
+		userdao.hasInfo();
 		
 	}
 
@@ -58,6 +59,7 @@ public class UserServiceimpl implements UserService{
 	public void addUserInfo(UserInfoVO vo) {
 		
 		userdao.addUserInfo(vo);
+		userdao.hasInfo();
 		
 	}
 }
