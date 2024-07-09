@@ -9,11 +9,11 @@
 </head>
 <body>
 <c:choose>
-	<c:when test="${loginUser.userSelect == 'user' && loginUser.userValid.toString() == 'Y'}">
-		<c:out value="${name} 님 환영합니다."></c:out>
+	<c:when test="${userInfo.userName != null}">
+		<c:out value="${userInfo.userName} 님 환영합니다."></c:out>
 	</c:when>
-	<c:when test="${loginUser.userSelect == 'protector' && loginUser.userValid.toString() == 'Y'}">
-		<c:out value="${name} 님 환영합니다."></c:out>
+	<c:when test="${userInfo.protName != null}">
+		<c:out value="${userInfo.protName} 님 환영합니다."></c:out>
 	</c:when>
 	<c:otherwise>
 		<c:out value="${loginUser.userId}"/> 님 환영합니다.	
@@ -23,6 +23,9 @@
 	| <c:url var="regUrl" value="/schedule/list.do" ></c:url>
 	<a href="${regUrl}">스케쥴 리스트</a>
 	| <c:url var="recordUrl" value="/record/list.do" ></c:url>
-	<a href="${recordUrl}"> 복약 기록 조회</a><br>
+	<a href="${recordUrl}"> 복약 기록 조회</a>
+	| <c:url var="mainUrl" value="/main" ></c:url>
+	<a href="${mainUrl}"> 메인 화면 </a><br>
+
 </body>
 </html>
