@@ -9,11 +9,8 @@
 </head>
 <body>
 <c:choose>
-	<c:when test="${userInfo.userName != null}">
-		<c:out value="${userInfo.userName} 님 환영합니다."></c:out>
-	</c:when>
-	<c:when test="${userInfo.protName != null}">
-		<c:out value="${userInfo.protName} 님 환영합니다."></c:out>
+	<c:when test="${name != null}">
+		<c:out value="${name} 님 환영합니다."></c:out>
 	</c:when>
 	<c:otherwise>
 		<c:out value="${loginUser.userId}"/> 님 환영합니다.	
