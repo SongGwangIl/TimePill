@@ -8,13 +8,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>알람시간 등록 - 3</title>
+<style>
+form {
+	width: 500px;
+	margin : 0 auto;
+}
+label {
+	margin : 0 auto;
+	text-align: center;
+}
+</style>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/schedule/time/add3.do"
 		method="post">
 		<fieldset>
-			<legend><c:out value="${svo.scheTitle}"/> 알람시간 등록 (3)</legend>
+			<legend><c:out value="${svo.scheTitle} 의 알람시간 등록 (3)"/> </legend>
 			<input type="hidden" name="scheId" value="${svo.scheId}"/>
 			<ul>
 				<label for="timeId">3회차 제목</label>
@@ -27,7 +37,7 @@
             <ul>
 				<label for="timeLimit">~ 시간 제한</label>
 				<input type="time" name="timeLimit"> <br>
-				위 시간이 지나면 복약 누락 처리됩니다.
+				<i>위 시간이 지나면 복약 누락 처리됩니다.</i>
 			</ul>
 			<ul>
 				<label for="medLocation">디스펜서 칸 위치</label>

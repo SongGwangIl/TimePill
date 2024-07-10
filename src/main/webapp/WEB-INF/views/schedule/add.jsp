@@ -12,12 +12,33 @@
 <title>스케쥴 등록 화면</title>
 
 <style>
+p {
+	width: 510px;
+	margin : 0 auto;
+}
+form {
+	padding: 20px;
+	width: 500px;
+	margin : 0 auto;
+}
 
 </style>
 
+
 </head>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<script>
+// 구동 안되는 오늘날짜 넣기 코드
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+const dd = String(today.getDate()).padStart(2, '0');
+
+const todayString = `${yyyy}-${mm}-${dd}`;
+document.getElementById('scheStartDate').value = todayString;
+</script>
+
+<p><jsp:include page="/WEB-INF/views/common/header.jsp"/></p>
 
 <body>
 	<div id=insertList">
@@ -45,14 +66,14 @@
 					<ul>
 						<label for="scheSelect">처방기간</label>
 						<select name="scheSelect">
-							<option value=7 selected>1주</option>
-							<option value=14>2주</option>
+							<option value=7>1주</option>
+							<option value=14 selected>2주</option>
 							<option value=21>3주</option>
 							<option value=28>4주</option>
 							<option value=35>5주</option>
 							<option value=42>6주</option>
+							<!-- 계산 안할거면 굳이 안넣어도 될것같음 ㅠㅠ -->
 						</select>	
-						<br>직접 선택은 스크립트 어떻게 할지 아직 구상못함...
 					</ul>
 					<ul>
 						<label for="scheEndDate">만료일자</label>
@@ -67,8 +88,6 @@
 	</div>
 </body>
 
-<script>
-	
 
-</script>
+
 </html>
