@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/add.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/jquery-ui.css" type="text/css">
 </head>
 <body>
 	<div id="wrap">
@@ -52,6 +52,6 @@
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/add.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/user/add.js"></script>
 </body>
 </html>

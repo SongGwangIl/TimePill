@@ -68,6 +68,20 @@ public class UserController {
 		return "redirect:/cover";
 	}
 	
+	@RequestMapping(path = "/terms", method = RequestMethod.GET)
+	public String terms() {
+		
+		return "user/terms";
+	}
+	
+	@RequestMapping(path = "/term1Show", method = RequestMethod.GET)
+	public String terms1Show() {
+		
+		return "user/term1";
+	}
+	
+	
+	
 	@RequestMapping(path = "/singup", method = RequestMethod.GET)
 	public String addForm() {
 		
@@ -105,7 +119,7 @@ public class UserController {
 		userService.addProtectorInfo(vo);
 		
 		request.setAttribute("msg", "정보가 등록 되었습니다.");
-		request.setAttribute("url", "/kopo/cover");
+		request.setAttribute("url", "/kopo/main");
 		
 		return "user/msg";
 	}
@@ -123,7 +137,7 @@ public class UserController {
 		userService.addUserInfo(vo);
 		
 		request.setAttribute("msg", "정보가 등록 되었습니다.");
-		request.setAttribute("url", "/kopo/cover");
+		request.setAttribute("url", "/kopo/main");
 		
 		return "user/msg";
 	}
