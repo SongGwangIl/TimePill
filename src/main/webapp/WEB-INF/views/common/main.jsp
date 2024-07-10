@@ -64,7 +64,7 @@
 				<tr>
 					<c:forEach var="sdl" items="${al.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
 					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
-					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeArlam}</td></c:forEach>
+					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeAlarm}</td></c:forEach>
 					<c:forEach var="stl" items="${al.scheTimeList}">
 					<td>
 						<form action="${pageContext.request.contextPath}/addlog.do" method="post">
@@ -101,22 +101,22 @@
 </div>
 
 <script>
-        function displayCurrentTime() {
-        	var now = new Date();
-        	var year = now.getFullYear();
-            var month = now.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1 해줌
-            var day = now.getDate();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
 
-            var currentDateTimeString = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
-            document.getElementById('current-time').textContent = "현재 시각 " + currentTimeString;
-        }
+	function displayCurrentTime() {
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = (String)(now.getMonth() + 1).padStart(2,'0');
+		var day = (String)(now.getDate()).padStart(2,'0');
+		var hours = (String)(now.getHours()).padStart(2,'0');
+		var minutes = (String)(now.getMinutes()).padStart(2,'0');
+		var seconds = (String)(now.getSeconds()).padStart(2,'0');
 
-        // 페이지 로드 시에 한 번 호출하거나, setInterval을 사용하여 일정 간격으로 업데이트 가능
-        displayCurrentTime();
-        setInterval(displayCurrentTime, 1000); // 1초마다 업데이트
-    </script>
+		var currentDateTimeString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+		document.getElementById('current-time').textContent = "현재 시각 " + currentDateTimeString;
+	}
+
+	displayCurrentTime();
+	setInterval(displayCurrentTime, 1000);
+</script>
 </body>
 </html>

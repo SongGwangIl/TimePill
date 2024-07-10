@@ -9,8 +9,6 @@
 <meta charset="UTF-8">
 <title> 복약 기록 조회 </title>
 <link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
-<style>
-</style>
 </head>
 <body>
 
@@ -25,6 +23,15 @@
 	<input type="date" id="takeDate" name="takeDate">
 	<input type="submit" value="조회">
 </form> <br><br>
+
+<!-- 차트조회 날짜 선택 -->
+<form action="${pageContext.request.contextPath}/record/selectChart" method="post">
+	<label for="takeDate"> 그래프 조회 날짜 선택 : </label>
+	<input type="date" id="takeDate" name="takeDate">
+	<input type="submit" value="조회">
+</form> <br><br>
+
+<h3> ${name} 님의 복약 상황을 확인해보세요!</h3>
 
 
 <!-- 오늘날짜 디폴트 값 로그 조회 -->
@@ -129,7 +136,6 @@
 </c:choose>
 <p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
 </div>
-
 
 
 </body>

@@ -44,6 +44,11 @@ public class RecordServiceImpl implements RecordService{
 	public List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate) {
 		return recordDAO.selectAlarmByDate(timeId, userId, takeDate);
 	}
+
+	@Override //날짜별 차트 수치 반환
+	public List<RecordVO> selectChart(String takeDate, String userId) {
+		return recordDAO.selectChart(takeDate, userId);
+	}
 	
 	
 	

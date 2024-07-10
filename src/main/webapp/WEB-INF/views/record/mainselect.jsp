@@ -64,7 +64,7 @@
 				<tr>
 					<c:forEach var="sdl" items="${al.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
 					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
-					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeArlam}</td></c:forEach>
+					<c:forEach var="stl" items="${al.scheTimeList}"><td> ${stl.timeAlarm}</td></c:forEach>
 					<c:forEach var="stl" items="${al.scheTimeList}">
 					<td>
 						<form action="${pageContext.request.contextPath}/addlog.do" method="post">

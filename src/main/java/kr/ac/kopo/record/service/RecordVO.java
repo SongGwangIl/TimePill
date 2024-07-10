@@ -19,4 +19,7 @@ public class RecordVO {
 	private List<ScheduleVO> scheduleList;
 	private List<ScheTimeVO> scheTimeList;
 	
+	private int cntTakeLog;
+	private int cntAlarm;
+
 }

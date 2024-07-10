@@ -15,4 +15,6 @@ public interface RecordService {
 	int addTakeLog(String timeId, String userId);
 	
 	List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate);
+	
+	List<RecordVO> selectChart(String takeDate, String userId);
 }

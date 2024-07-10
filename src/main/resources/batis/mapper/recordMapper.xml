@@ -23,10 +23,10 @@
 			<id column="TIME_ID" property="timeId"/>
 			<result column="SCHE_ID" property="scheId"/>
 			<result column="TIME_NAME" property="timeName"/>
-			<result column="TIME_ARLAM" property="timeArlam"/>
+			<result column="TIME_ALARM" property="timeAlarm"/>
 			<result column="TIME_LIMIT" property="timeLimit"/>
-			<result column="RE_ARLAM_COUNT" property="reArlamCount"/>
-			<result column="RE_ARLAM_TIME" property="reArlamTime"/>
+			<result column="RE_ALARM_COUNT" property="reAlarmCount"/>
+			<result column="RE_ALARM_TIME" property="reAlarmTime"/>
 		</collection>
 	</resultMap>
 
@@ -82,7 +82,7 @@
 			, TIME_ID
 			, SCHE_TITLE
 			, TIME_NAME
-			, TIME_ARLAM
+			, TIME_ALARM
 		FROM SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE 
         	SCHE_END_DATE &gt;= DATE(NOW())
@@ -96,13 +96,44 @@
 			, TIME_ID
 			, SCHE_TITLE
 			, TIME_NAME
-			, TIME_ARLAM
+			, TIME_ALARM
 		FROM SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE 
         	SCHE_END_DATE &gt;= DATE(#{takeDate})
         	AND SCHE_START_DATE &lt;= DATE(#{takeDate})
         	AND USER_ID = #{userId}
 	</select>
+	
+	<select id="selectChart" resultType="RecordVO">
+		SELECT 
+		    DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY)) AS TAKEDATE,
+		    (
+		        SELECT COUNT(*)
+		        FROM SCHE_TIME
+		        NATURAL JOIN SCHEDULE
+		        WHERE USER_ID = #{userId}
+			        AND SCHE_START_DATE &lt;= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+			        AND SCHE_END_DATE &gt;= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+		    ) AS CNTALARM,
+		    (
+		        SELECT COUNT(*)
+		        FROM TAKE_LOG
+		        WHERE USER_ID = #{userId}
+		        AND DATE(TAKE_DATE) = DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+		    ) AS CNTTAKELOG
+		FROM
+		    (
+		        SELECT 0 AS SEQ UNION ALL
+		        SELECT 1 UNION ALL
+		        SELECT 2 UNION ALL
+		        SELECT 3 UNION ALL
+		        SELECT 4 UNION ALL
+		        SELECT 5 UNION ALL
+		        SELECT 6
+		    ) AS TAKEDATE
+	</select>
+	
+	
 	<insert id="addTakeLog">
 		INSERT INTO 
 			TAKE_LOG (
