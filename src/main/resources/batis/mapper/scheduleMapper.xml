@@ -12,12 +12,29 @@
 		<result column="sche_start_date" property="scheStartDate"/>
 		<result column="sche_end_date" property="scheEndDate"/>
 		<result column="sche_date_expires" property="scheDateExpires"/>
+		<result property="scheTakeNum" column="sche_take_num" />
+		
+		<collection property="timeList" ofType="ScheTimeVO" column="sche_id" select="findAllByScheId">
+			<id property="timeId" column="timeId" />
+			<result property="scheId" column="scheId" />
+			<result property="timeName" column="timeName" />
+			<result property="timeAlarm" column="timeAlarm" />
+			<result property="timeLimit" column="timeLimit" />
+			<result property="reAlarmCount" column="reAlarmCount" />
+			<result property="reAlarmTime" column="reAlarmTime" />
+			<result property="medLocation" column="medLocation" />
+		</collection>
 	</resultMap>
 	
-	<select id="list" resultType="ScheduleVO">
+	<select id="list" resultMap="scheduleMap">
 		SELECT * FROM SCHEDULE
 		WHERE USER_ID=#{userId}
 		ORDER BY sche_id DESC;
+	</select>
+	
+	<select id="findAllByScheId" resultType="ScheTimeVO">
+		SELECT * FROM SCHE_TIME
+		WHERE SCHE_ID = #{scheId};
 	</select>
 
 	<insert id="add">
