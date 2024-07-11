@@ -11,4 +11,6 @@ public interface ScheduleService {
 	int add(ScheduleVO vo);
 
 	ScheduleVO findById(String scheId);
+
+	int delete(String scheId);
 }

@@ -55,4 +55,13 @@ public class ScheduleController {
 		return "redirect:/schedule/list.do";
 	}
 	
+	@GetMapping("/delete.do")
+	public String del(String scheId) {
+		
+		if(scheduleService.delete(scheId) == 1)
+			System.out.println(scheId + " 삭제 성공!");;  
+
+		return "redirect:/schedule/list.do";  
+	}
+	
 }

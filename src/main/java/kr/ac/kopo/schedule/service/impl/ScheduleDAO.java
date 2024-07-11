@@ -18,4 +18,6 @@ public interface ScheduleDAO {
 	
 	ScheTimeVO findAllByScheId(String scheId);
 
+	int delete(String scheId);
+
 }
