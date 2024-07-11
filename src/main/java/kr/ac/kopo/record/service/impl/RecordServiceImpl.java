@@ -15,18 +15,18 @@ public class RecordServiceImpl implements RecordService{
 	private RecordDAO recordDAO;
 
 	@Override //전체 조회
-	public List<RecordVO> selectByAll(String userId) {
-		return recordDAO.selectByAll(userId);
+	public List<RecordVO> selectLogByAll(String userId) {
+		return recordDAO.selectLogByAll(userId);
 	}
 
 	@Override //선택 날짜 조회
-	public List<RecordVO> selectByDate(String takeDate, String userId) {
-		return recordDAO.selectByDate(takeDate, userId);
+	public List<RecordVO> selectLogByDate(String takeDate, String userId) {
+		return recordDAO.selectLogByDate(takeDate, userId);
 	}
 
 	@Override //오늘의 알람 조회
-	public List<RecordVO> selectAlarmList(String takeDate, String userId) {
-		return recordDAO.selectAlarmList(takeDate, userId);
+	public List<RecordVO> selectAlarmToday(String takeDate, String userId) {
+		return recordDAO.selectAlarmToday(takeDate, userId);
 	}
 
 	@Override //복용 로그 등록

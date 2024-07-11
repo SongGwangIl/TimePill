@@ -31,21 +31,18 @@ public class MainController{
 	public String alarmList(RecordVO vo, Model model, HttpSession session) {
 		
 		//세션객체에 저장된 로그인 정보에서 id를 받아옴
-		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		String userId = uvo.getUserId();
-				
-		//takeDate 파라미터
+		//파라미터 takeDate
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
 		String takeDate = vo.getTakeDate();
 		
 		//오늘의 날짜
-		LocalDate today = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String fmtToday = today.format(formatter);
+		String today = LocalDate.now().format(formatter);
 
-		List<RecordVO> alarmList = recordService.selectAlarmList(takeDate, userId);
+		List<RecordVO> alarmList = recordService.selectAlarmToday(takeDate, userId);
 		
 		//view 출력용 model 세팅
-		model.addAttribute("today", fmtToday);
+		model.addAttribute("today", today);
 		model.addAttribute("alarmList", alarmList);
 
 		return "common/main";

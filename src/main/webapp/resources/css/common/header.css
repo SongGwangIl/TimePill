@@ -1,19 +1,26 @@
 @charset "UTF-8";
 
-nav {
+#nav {
 	width : 700px;
 	margin : 0 auto;
 }
-nav ul {
+#nav ul {
+	width : 700px;
 	display: flex;
 	text-align: center;
 }
-nav ul li {
+.menu {
+	padding: 0;
 	list-style: none;
 	text-align: center;
 }
-nav ul li a {
+.menu a {
 	text-decoration: none;
 	font-size: 1em;
 	font-weight: 800;
+}
+#recordForm {
+	width : 133px;
+	margin : 0;
+	padding: 0;
 }

@@ -12,21 +12,17 @@
 </head>
 <body>
 
+<div id="container">
 
+<!-- 헤더 -->
 <p><br>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
-<br><br>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<br></p>
 
 <hr>
 
-<div id="container">
-<h1>메인 페이지</h1><br><br>
+<h1>TimePill Main</h1>
 
-
- 
-
-<!-- 오늘 날짜 디폴트 알람 목록 -->
-<h1> 오늘의 알람 </h1><br><br>
 <h3 id="current-time"></h3>
 
 <!-- 조회 날짜 선택 -->
@@ -39,17 +35,17 @@
 
 <c:choose>
 	<c:when test="${alarmByDateList.isEmpty()}">
-		<h3> 지금 당장 알람을 등록해보세요! </h3>
+		<p> 지금 당장 알람을 등록해보세요! </p>
 	</c:when>
 	<c:otherwise>
 		<table>
 			<thead>
 				<tr>
 					<th>
-						복용 약물 이름
+						복용할 약 이름
 					</th>
 					<th>
-						시간이름
+						시간 이름
 					</th>
 					<th>
 						설정한 알람 시간
@@ -84,29 +80,18 @@
 </c:choose>
 <br><br>
 
-<a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
+<h3>
+	<a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
+</h3><br><br>
 
+<hr>
 
-<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
+<p><br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<br></p>
+
 </div>
 
-<script>
-		function displayCurrentTime() {
-			var now = new Date();
-			var year = now.getFullYear();
-		    var month = now.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1 해줌
-		    var day = now.getDate();
-		    var hours = now.getHours();
-		    var minutes = now.getMinutes();
-		    var seconds = now.getSeconds();
-		
-		    var currentDateTimeString = year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
-		    document.getElementById('current-time').textContent = "현재 시각 " + currentTimeString;
-		}
-		
-		// 페이지 로드 시에 한 번 호출하거나, setInterval을 사용하여 일정 간격으로 업데이트 가능
-		displayCurrentTime();
-		setInterval(displayCurrentTime, 1000); // 1초마다 업데이트
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/nowtime.js"></script>
 </body>
 </html>
