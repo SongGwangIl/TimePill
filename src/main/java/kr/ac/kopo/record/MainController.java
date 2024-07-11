@@ -1,5 +1,7 @@
 package kr.ac.kopo.record;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,11 +34,18 @@ public class MainController{
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
 		String userId = uvo.getUserId();
 				
-		//vo로 받아온 파라미터 takeDate
+		//takeDate 파라미터
 		String takeDate = vo.getTakeDate();
+		
+		//오늘의 날짜
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String fmtToday = today.format(formatter);
 
 		List<RecordVO> alarmList = recordService.selectAlarmList(takeDate, userId);
 		
+		//view 출력용 model 세팅
+		model.addAttribute("today", fmtToday);
 		model.addAttribute("alarmList", alarmList);
 
 		return "common/main";

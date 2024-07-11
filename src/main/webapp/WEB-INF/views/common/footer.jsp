@@ -8,13 +8,12 @@
 <title>Insert title here</title>
 <style>
 	h3 {
-		width : 300px;
+		text-align : center;
 		margin : 0 auto;
 	}
 </style>
 </head>
 <body>
-
 
  <h3>copyrightⓒtimePill</h3>
 

@@ -12,22 +12,23 @@
 </head>
 <body>
 
+<div id="container">
 
+<!-- 헤더 -->
 <p><br>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
-<br><br>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<br></p>
 
 <hr>
 
-<div id="container">
-<h1>메인 페이지</h1><br><br>
+<h1>TimePill Main</h1>
 
+<br><br>
 
- 
 
 <!-- 오늘 날짜 디폴트 알람 목록 -->
-<h1> 오늘의 알람 </h1><br><br>
-<h3 id="current-time"></h3>
+<h3>${name} 님의 오늘의 알람 </h3>
+<h3 id="current-time"></h3><br>
 
 <!-- 조회 날짜 선택 -->
 <form action="${pageContext.request.contextPath}/alarmSelect.do" method="post">
@@ -39,17 +40,17 @@
 
 <c:choose>
 	<c:when test="${alarmList.isEmpty()}">
-		<p> 조회할 복약 기록이 없습니다. </p>
+		<p> 오늘 복용할 약이 없습니다. </p>
 	</c:when>
 	<c:otherwise>
 		<table>
 			<thead>
 				<tr>
 					<th>
-						복용 약물 이름
+						복용할 약 이름
 					</th>
 					<th>
-						시간이름
+						시간 이름
 					</th>
 					<th>
 						설정한 알람 시간
@@ -84,24 +85,33 @@
 </c:choose>
 <br><br>
 
-<a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
+<h3>
+	<a href='${pageContext.request.contextPath}/schedule/add.do'>신규 알람 등록</a>
+</h3><br><br>
 
 
-<p>	추가 구현 필요 : <br>
-	체크 버튼을 누르면 메인리스트에서도 takeDate 로그 출력, <br> 
-	takelog 테이블에서 date 데이터를 받아와서 출력해야 하므로 ajax로 해야 할 것 같다.... <br>
-	복용을 표시하는 on/off 토글 (해당 페이지의 변화를 유지해야 함) <br>
-	날짜 변경을 통한 조회 페이지 갱신 (ajax) <br>
-	날짜 변경용 DATE form (일주일 단위, 한달 단위) <br>
-	체크 버튼을 누르면 현재 시간으로 등록, 다시 누르면 update(use_at의 비활성화) <br>
-	미래의 복용체크는 누르지 못하도록, 시간이 지난 약은 복용체크를 할 수 없음
-</p>
+<!-- <p>	추가 구현 필요 : <br> -->
+<!-- 	체크 버튼을 누르면 메인리스트에서도 takeDate 로그 출력, <br>  -->
+<!-- 	takelog 테이블에서 date 데이터를 받아와서 출력해야 하므로 ajax로 해야 할 것 같다.... <br> -->
+<!-- 	복용을 표시하는 on/off 토글 (해당 페이지의 변화를 유지해야 함) <br> -->
+<!-- 	날짜 변경을 통한 조회 페이지 갱신 (ajax) <br> -->
+<!-- 	날짜 변경용 DATE form (일주일 단위, 한달 단위) <br> -->
+<!-- 	체크 버튼을 누르면 현재 시간으로 등록, 다시 누르면 update(use_at의 비활성화) <br> -->
+<!-- 	미래의 복용체크는 누르지 못하도록, 시간이 지난 약은 복용체크를 할 수 없음 -->
+<!-- </p> -->
 
-<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
+<hr>
+
+<p><br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<br></p>
+
 </div>
 
-<script>
 
+
+<script>
+//시계 구현
 	function displayCurrentTime() {
 		var now = new Date();
 		var year = now.getFullYear();

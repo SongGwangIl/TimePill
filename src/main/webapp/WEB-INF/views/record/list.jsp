@@ -12,32 +12,44 @@
 </head>
 <body>
 
+
+<div id="container">
+
+<!-- 헤더 -->
 <p><br>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
 <br><br>
 
-<!-- 조회 날짜 선택 -->
-<div id="container">
-<form action="${pageContext.request.contextPath}/record/select.do" method="get">
+<hr>
+
+
+
+<h3> ${name} 님의 복약 상황을 확인해보세요! </h3>
+
+<!-- 리스트 조회 날짜 선택 -->
+<form action="${pageContext.request.contextPath}/record/list.do" method="post">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
 	<input type="date" id="takeDate" name="takeDate">
 	<input type="submit" value="조회">
-</form> <br><br>
+</form> <br>
 
-<!-- 차트조회 날짜 선택 -->
-<form action="${pageContext.request.contextPath}/record/selectChart" method="post">
-	<label for="takeDate"> 그래프 조회 날짜 선택 : </label>
-	<input type="date" id="takeDate" name="takeDate">
-	<input type="submit" value="조회">
-</form> <br><br>
-
-<h3> ${name} 님의 복약 상황을 확인해보세요!</h3>
+<div style="width:600px; height:400px; margin : 0 auto">
+	<canvas id="recordChart"></canvas>
+</div>
 
 
-<!-- 오늘날짜 디폴트 값 로그 조회 -->
-<h1> 오늘의 복용기록 </h1>
-<c:choose>
-	<c:when test="${recordSelectByToday.isEmpty()}">
+<!-- 로그 조회 -->
+ 	<c:choose>
+		<c:when test="${takeDate eq today}">
+			<h1>오늘의 복용기록 </h1>
+		</c:when>
+		<c:otherwise>
+			<h1>${takeDate}의 복용기록 </h1>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+	<c:when test="${recordSelectByDate.isEmpty()}">
 		<p> 조회할 복약 기록이 없습니다. </p>
 	</c:when>
 	<c:otherwise>
@@ -68,7 +80,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="tvo" items="${recordSelectByToday}">
+				<c:forEach var="tvo" items="${recordSelectByDate}">
 				<tr>
 					<td> ${tvo.takeId} </td>
 					<td> ${tvo.userId} </td>
@@ -86,7 +98,7 @@
 <br><br>
 
 
-<h1> 기간별 복용기록 조회 </h1>
+<h1> 기간별 복용기록 조회 (페이지네이션 너무절실) </h1>
 <c:choose>
 	<c:when test="${recordSelectByAll.isEmpty()}">
 		<p> 조회할 복약 기록이 없습니다. </p>
@@ -134,9 +146,18 @@
 		</table>
 	</c:otherwise>
 </c:choose>
-<p><br><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/><br><br></p>
 </div>
 
+<p><br><br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<br><br></p>
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	//JSON객체선언
+	var jsonData = ${JSON}
+</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
 </body>
 </html>
