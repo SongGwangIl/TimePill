@@ -34,9 +34,9 @@ public class UserController {
 		UserVO uvo = userService.login(vo.getUserId());
 		String name = null;
 		
-		if(uvo.getUserSelect().equals("user"))
+		if(uvo != null && uvo.getUserSelect().equals("user"))
 			name = userService.getUserName(vo.getUserId());
-		else if(uvo.getUserSelect().equals("protector"))
+		else if(uvo != null && uvo.getUserSelect().equals("protector"))
 			name = userService.getProtectorName(vo.getUserId());
 		
 		
@@ -73,14 +73,6 @@ public class UserController {
 		
 		return "user/terms";
 	}
-	
-	@RequestMapping(path = "/term1Show", method = RequestMethod.GET)
-	public String terms1Show() {
-		
-		return "user/term1";
-	}
-	
-	
 	
 	@RequestMapping(path = "/singup", method = RequestMethod.GET)
 	public String addForm() {

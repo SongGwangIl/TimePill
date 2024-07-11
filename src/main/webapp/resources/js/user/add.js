@@ -5,11 +5,11 @@ userId.onchange = checkId
 function checkId(){
   let userIdVal = userId.value;
   let idFlag = false;
-  const idRegExp = /^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{6,15}$/
+  const idRegExp = /^[a-z0-9]{6,15}$/
 
   if(!idRegExp.test(userIdVal)){
     userId.value = null;
-    idCheck.innerText = "6~15자리의 영문과 숫자를 가져야 합니다."
+    idCheck.innerText = "6~15자리의 영문이나 숫자를 가져야 합니다."
     idCheck.style.color = "#dc3545";
     userId.focus();  
   }

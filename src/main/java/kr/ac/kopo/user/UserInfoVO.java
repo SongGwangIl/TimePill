@@ -16,4 +16,7 @@ public class UserInfoVO {
 	private String protRelation;
 	private String protPhone;
 	private String protName;
+	private String yy;
+	private String mm;
+	private String dd;
 }

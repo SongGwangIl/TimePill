@@ -834,7 +834,7 @@
 
 	</div>
 	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/comm/jquery-3.7.1.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/user/terms.js"></script>
 </body>

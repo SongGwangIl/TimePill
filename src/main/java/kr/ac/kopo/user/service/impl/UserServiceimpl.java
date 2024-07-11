@@ -57,6 +57,8 @@ public class UserServiceimpl implements UserService{
 
 	@Override
 	public void addUserInfo(UserInfoVO vo) {
+		String birthDay = vo.getYy()+"-"+vo.getMm()+"-"+vo.getDd();
+		vo.setUserBirth(birthDay);
 		
 		userdao.addUserInfo(vo);
 		userdao.hasInfo(vo.getUserId());

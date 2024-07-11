@@ -39,6 +39,7 @@
 			<mvc:exclude-mapping path="/singup"/>
 			<mvc:exclude-mapping path="/cover"/>
 			<mvc:exclude-mapping path="/checkId*"/>
+			<mvc:exclude-mapping path="/terms"/>
 			<beans:bean class="kr.ac.kopo.com.LoginInterceptor"></beans:bean>
 		</mvc:interceptor>
 	</mvc:interceptors>	

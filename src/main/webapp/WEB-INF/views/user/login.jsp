@@ -14,13 +14,13 @@
 			<ul class="input">
 				<li>
 	                <label>아이디</label>
-	                <input type="text" name="userId">
+	                <input type="text" name="userId" id="userId" required>
 	            <li>
 	                <label>비밀번호</label>
-	                <input type="password" name="userPwd">
+	                <input type="password" name="userPwd" id="userPwd">
 				</li>
             </ul>
-	    	<input type="submit" value="로그인" id="btn">				
+	    	<input type="submit" value="로그인" id="btn">	
 		</form>
 		<a href="${pageContext.request.contextPath}/singup">회원가입</a><br>
 		<a href="#">아이디를 잃어버렸습니까?</a><br>
