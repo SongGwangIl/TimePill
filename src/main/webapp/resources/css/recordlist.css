@@ -1,32 +1,36 @@
 @charset "UTF-8";
 
-	h1 {
+h1 {
 		font-size: 25px;
-		width : 300px;
+		width : 500px;
 		margin : 0 auto;
 		text-align: center;
-	}
-	table{
-		width: 1000px;
+}
+table{
+		width: 900px;
 		font-size: 15px;
 		text-align: center;
 		border: 1px solid black;
 		border-collapse: collapse;
 		margin: 0 auto;
-    }
-	table th{
+}
+table th{
 		border: 1px solid black;
 		padding : 5px;
-	}
-	table td{
+}
+table td{
 		border: 1px solid black;
 		padding : 5px;
-	}
-	p {
+}
+p {
 		text-align : center;
 		margin : 0 auto;
-	}
-	#container {
-		width : 1000px;
+}
+#container {
+		width : 1200px;
 		margin : 0 auto;
-	}
+}
+h3 {
+		width : 500px;
+		text-align: center;
+}

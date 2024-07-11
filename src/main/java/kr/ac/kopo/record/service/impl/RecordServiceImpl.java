@@ -14,12 +14,6 @@ public class RecordServiceImpl implements RecordService{
 	@Autowired
 	private RecordDAO recordDAO;
 
-	
-	@Override //오늘의 날짜 조회
-	public List<RecordVO> selectByToday(String userId) {
-		return recordDAO.selectByToday(userId);
-	}
-
 	@Override //전체 조회
 	public List<RecordVO> selectByAll(String userId) {
 		return recordDAO.selectByAll(userId);

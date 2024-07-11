@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+nav {
+	width : 700px;
+	margin : 0 auto;
+}
+nav ul {
+	display: flex;
+	text-align: center;
+}
+nav ul li {
+	list-style: none;
+	text-align: center;
+}
+nav ul li a {
+	text-decoration: none;
+	font-size: 1em;
+	font-weight: 800;
+}

@@ -13,29 +13,28 @@
 <body>
 
 
-<p><br>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
-<br><br>
+<!-- <p><br> -->
+<%-- <jsp:include page="/WEB-INF/views/common/header.jsp"/> </p> --%>
+<!-- <br><br> -->
 
 <div id="container">
 
-<!-- 조회 날짜 선택 -->
-<form action="${pageContext.request.contextPath}/record/selectChart" method="post">
-	<label for="takeDate"> 조회 날짜 선택 : </label>
-	<input type="date" id="takeDate" name="takeDate">
-	<input type="submit" value="조회">
-</form> <br><br>
+<!-- <!-- 조회 날짜 선택 -->
+<%-- <form action="${pageContext.request.contextPath}/record/selectChart" method="post"> --%>
+<!-- 	<label for="takeDate"> 조회 날짜 선택 : </label> -->
+<!-- 	<input type="date" id="takeDate" name="takeDate"> -->
+<!-- 	<input type="submit" value="조회"> -->
+<!-- </form> <br><br> -->
 
-<h3> ${name} 님의 복약 상황을 확인해보세요!</h3>
 <div style="width:600px; height:400px; margin : 0 auto">
 	<canvas id="myChart"></canvas>
 </div>
-
-차트 알아보기 쉽게 + 꾸미기 
-리스트페이지 들어갈 때 같이 조회할 수 있도록
-차트 바 별로 넣을 데이터값이나 속성등에 대해서 어떻게 할지 option
-
 </div>
+
+<!-- 차트 알아보기 쉽게 + 꾸미기 <br> -->
+<!-- 리스트페이지 들어갈 때 같이 조회할 수 있도록 <br> -->
+<!-- 차트 바 별로 넣을 데이터값이나 속성등에 대해서 어떻게 할지 option <br><br> -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 

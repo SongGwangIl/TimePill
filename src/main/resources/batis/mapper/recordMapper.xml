@@ -45,22 +45,7 @@
 		WHERE USER_ID = #{userId}
 		ORDER BY TAKE_DATE
 	</select>
-	
-	<select id="selectByToday" resultMap="RecordMap">
-		SELECT 
-			TAKE_ID
-			, USER_ID
-			, SCHE_TITLE
-			, TIME_ID
-			, TIME_NAME 
-			, TAKE_DATE
-			, TAKE_SUCCESS
-		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
-		WHERE DATE(TAKE_DATE) = DATE(NOW())
-			AND USER_ID = #{userId}
-		ORDER BY TAKE_DATE
-	</select>
-	
+
 	<select id="selectByDate" resultMap="RecordMap">
 		SELECT 
 			TAKE_ID
