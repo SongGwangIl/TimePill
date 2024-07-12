@@ -50,11 +50,11 @@ li {
 				<a href='${pageContext.request.contextPath}/schedule/delete.do?scheId=${vo.scheId}'><button>지우기</button></a>
 			</li>
 
-			<li class="date">처방기간 : <c:out value="${vo.scheStartDate}" /> ~ <span><c:out
+			<li>처방기간 : <c:out value="${vo.scheStartDate}" /> ~ <span class="endDate"><c:out
 					value="${vo.scheEndDate}" /></span>
 			</li>
 			<c:if test="${vo.timeList.isEmpty()}">
-				<li><a
+				<li class="addTime"><a
 					href="${pageContext.request.contextPath}/schedule/time/add1.do?scheId=${vo.scheId}">알림
 						시간을 등록해주세요.</a></li>
 			</c:if>
@@ -67,21 +67,20 @@ li {
 	
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-	var dateList = document.querySelectorAll(".date");
 	
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = ("0" + (1 + date.getMonth())).slice(-2);
-    var day = ("0" + date.getDate()).slice(-2);
-    var today = year + "-" + month + "-" + day;
+	var today = new Date();
+	var dateList = document.querySelectorAll(".endDate");
 	
 	for(var i=0; i<dateList.length; i++) {
-		var endDate = dateList[i].querySelector("span").outerText;
-		if(endDate < today)
-			endDate.innerText += " [만료]";
+		var endDate = new Date(dateList[i].innerText);
+		if(endDate < today){
+			dateList[i].innerText += " [기간 만료]";
+			var addtime = document.querySelectorAll(".addTime")[i]
+			// addtime.removeChild(addtime.children[0]);
+			addtime.innerText = "등록된 알림이 없습니다."
+		}
 	}
 })
-
 </script>
 
 </body>
