@@ -1,6 +1,7 @@
 package kr.ac.kopo.record;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
@@ -32,23 +33,25 @@ public class RecordController{
 	public String list(RecordVO vo, Model model, HttpSession session) {
 		
 		//세션객체에 저장된 로그인 정보에서 id를 받아옴
-		UserVO uvo = (UserVO) session.getAttribute("loginUser");
-		String userId = uvo.getUserId();
-		
 		//파라미터 takeDate
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
 		String takeDate = vo.getTakeDate();
 		
-		Gson gson = new Gson();
-		JsonArray jArray = new JsonArray();
+		//오늘의 날짜
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String today = LocalDate.now().format(formatter);
 
 		//전체목록 조회, 날짜별목록 조회
-		List<RecordVO> listByAll = recordService.selectByAll(userId);
-		List<RecordVO> listByDate = recordService.selectByDate(takeDate, userId);
+		List<RecordVO> listByAll = recordService.selectLogByAll(userId);
+		List<RecordVO> listByDate = recordService.selectLogByDate(takeDate, userId);
 		List<RecordVO> listChart = recordService.selectChart(takeDate, userId);
 		
 		Iterator<RecordVO> it = listChart.iterator();
 
 		//JSON 
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
+		
 		while(it.hasNext()) {
 			RecordVO rvo = it.next();
 			JsonObject object = new JsonObject();
@@ -66,14 +69,9 @@ public class RecordController{
 		
 		String json = gson.toJson(jArray);
 		
-		//오늘의 날짜
-		LocalDate today = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String fmtToday = today.format(formatter);
-		
 		//view 출력용 model 세팅
 		model.addAttribute("JSON", json);
-		model.addAttribute("today", fmtToday);
+		model.addAttribute("today", today);
 		model.addAttribute("recordSelectByAll", listByAll);
 		model.addAttribute("recordSelectByDate", listByDate);
 		model.addAttribute("takeDate", takeDate);

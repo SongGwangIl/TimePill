@@ -13,6 +13,7 @@
 		<result column="sche_end_date" property="scheEndDate"/>
 		<result column="sche_date_expires" property="scheDateExpires"/>
 		<result property="scheTakeNum" column="sche_take_num" />
+		<result property="scheHide" column="sche_hide" />
 		
 		<collection property="timeList" ofType="ScheTimeVO" column="sche_id" select="findAllByScheId">
 			<id property="timeId" column="timeId" />
@@ -28,13 +29,13 @@
 	
 	<select id="list" resultMap="scheduleMap">
 		SELECT * FROM SCHEDULE
-		WHERE USER_ID=#{userId}
-		ORDER BY sche_id DESC;
+		WHERE USER_ID=#{userId} AND SCHE_HIDE='N'
+		ORDER BY sche_id DESC
 	</select>
 	
 	<select id="findAllByScheId" resultType="ScheTimeVO">
 		SELECT * FROM SCHE_TIME
-		WHERE SCHE_ID = #{scheId};
+		WHERE SCHE_ID = #{scheId}
 	</select>
 
 	<insert id="add">
@@ -48,5 +49,11 @@
 		SELECT * FROM SCHEDULE
 		WHERE SCHE_ID=#{scheId}
 	</select>
+	
+	<delete id="delete">
+		UPDATE SCHEDULE
+		SET SCHE_HIDE='Y'
+		WHERE SCHE_ID=#{scheId}
+	</delete>
 
 </mapper>

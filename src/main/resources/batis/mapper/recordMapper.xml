@@ -32,7 +32,7 @@
 
 	
 
-	<select id="selectByAll" resultMap="RecordMap">
+	<select id="selectLogByAll" resultMap="RecordMap">
 		SELECT 
 			TAKE_ID
 			, USER_ID
@@ -46,7 +46,7 @@
 		ORDER BY TAKE_DATE
 	</select>
 
-	<select id="selectByDate" resultMap="RecordMap">
+	<select id="selectLogByDate" resultMap="RecordMap">
 		SELECT 
 			TAKE_ID
 			, USER_ID
@@ -61,7 +61,7 @@
 		ORDER BY TAKE_DATE
 	</select>
 	
-	<select id="selectAlarmList" resultMap="RecordMap">
+	<select id="selectAlarmToday" resultMap="RecordMap">
 		SELECT 
 			SCHE_ID
 			, TIME_ID
@@ -118,22 +118,27 @@
 		    ) AS TAKEDATE
 	</select>
 	
-	
 	<insert id="addTakeLog">
-		INSERT INTO 
-			TAKE_LOG (
-				TAKE_ID
-				, USER_ID
-				, TIME_ID
-				, TAKE_DATE
-				, TAKE_SUCCESS
-				)
-			VALUES (
-				CONCAT('LOG_', LPAD(NEXT VALUE FOR SQ_TIME, 6, '0'))
+		INSERT INTO TAKE_LOG (
+			TAKE_ID
+			, USER_ID
+			, TIME_ID
+			, TAKE_DATE
+			, TAKE_SUCCESS
+			, TAKE_USE_AT
+			)
+			SELECT
+				CONCAT('LOG_', LPAD(NEXT VALUE FOR SQ_SCHE, 6, '0'))
 				, #{userId}
 				, #{timeId}
 				, NOW()
-				, 'N'
-				)
+				, CASE
+				    WHEN ST.TIME_ALARM &gt; TIME(NOW()) OR ST.TIME_LIMIT &lt; TIME(NOW()) THEN 'N'
+				    WHEN ST.TIME_ALARM &lt;= TIME(NOW()) AND ST.TIME_LIMIT &gt;= TIME(NOW()) THEN 'Y'
+			    	ELSE 'N'
+				END AS TAKE_SUCCESS
+				, 'Y'
+		FROM SCHE_TIME ST
+		WHERE TIME_ID= #{timeId}
 	</insert>
 </mapper>

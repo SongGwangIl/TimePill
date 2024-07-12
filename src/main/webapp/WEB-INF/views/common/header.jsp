@@ -10,9 +10,9 @@
 </head>
 
 <body>
-<nav>
+<nav id="nav">
 	<ul>
-		<li>
+		<li class="menu">
 		<c:choose>
 			<c:when test="${loginUser.userValid.toString() == 'Y'}">
 				<c:out value="${name} 님 환영합니다."></c:out>
@@ -21,26 +21,25 @@
 				<c:out value="${loginUser.userId}"/> 님 환영합니다.	
 			</c:otherwise>
 		</c:choose>
-		<li>
-		<li>
+		</li>
+		<li class="menu">
 			<a href='${pageContext.request.contextPath}/login'>  | 로그아웃 |</a>
 		</li>
-		
-		<li>
+		<li class="menu">
 			<c:url var="regUrl" value="/schedule/list.do" ></c:url>
 			<a href="${regUrl}"> | 스케쥴 리스트  |</a>
 		</li>
-		<li class="recordlist">
+		<li class="menu">
 			<c:url var="recordUrl" value="/record/list.do"></c:url>
 			<form id="recordForm" action="${recordUrl}" method="post">
 		    	<input type="hidden" name="takeDate" value="${today}" />
 		    	<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;"> | 복약 기록 조회  |</a>
 			</form>
 		</li>
-		<li>
+		<li class="menu">
 			<c:url var="mainUrl" value="/main" ></c:url>
 			<a href="${mainUrl}"> | 메인 화면 | </a><br>
-		<li>
+		</li>
 	</ul>
 </nav>
 

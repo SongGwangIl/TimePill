@@ -19,15 +19,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public List<ScheduleVO> list(String userId) {
 		return scheduleDAO.list(userId);
 	}
-
 	@Override
 	public int add(ScheduleVO vo) {
 		return scheduleDAO.add(vo);
 	}
-
 	@Override
 	public ScheduleVO findById(String scheId) {
 		return scheduleDAO.findById(scheId);
+	}
+	@Override
+	public int delete(String scheId) {
+		return scheduleDAO.delete(scheId);
 	}
 
 }

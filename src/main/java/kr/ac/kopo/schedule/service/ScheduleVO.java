@@ -16,6 +16,7 @@ public class ScheduleVO {
 	private String scheStartDate;
 	private String scheEndDate;
 	private char scheDateExpires;
+	private char scheHide;
 	
 	private List<ScheTimeVO> timeList;
 }

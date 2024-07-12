@@ -56,18 +56,18 @@
 		<table>
 			<thead>
 				<tr>
+<!-- 					<th> -->
+<!-- 						복약로그 ID -->
+<!-- 					</th> -->
 					<th>
-						복약로그 ID
-					</th>
-					<th>
-						사용자 ID
+						사용자 성명
 					</th>
 					<th>
 						복용한 약품이름
 					</th>
-					<th>
-						복약한 시간알림 ID
-					</th>
+<!-- 					<th> -->
+<!-- 						복약한 시간알림 ID -->
+<!-- 					</th> -->
 					<th>
 						복약한 시간 이름
 					</th>
@@ -82,10 +82,10 @@
 			<tbody>
 				<c:forEach var="tvo" items="${recordSelectByDate}">
 				<tr>
-					<td> ${tvo.takeId} </td>
-					<td> ${tvo.userId} </td>
+<%-- 					<td> ${tvo.takeId} </td> --%>
+					<td> ${name} </td>
 					<c:forEach var="sdl" items="${tvo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-					<td> ${tvo.timeId} </td>
+<%-- 					<td> ${tvo.timeId} </td> --%>
 					<c:forEach var="stl" items="${tvo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
 					<td> ${tvo.takeDate} </td>
 					<td> ${tvo.takeSuccess} </td>
@@ -107,18 +107,18 @@
 		<table>
 			<thead>
 				<tr>
+<!-- 					<th> -->
+<!-- 						복약로그 ID -->
+<!-- 					</th> -->
 					<th>
-						복약로그 ID
-					</th>
-					<th>
-						사용자 ID
+						사용자 성명
 					</th>
 					<th>
 						복용한 약품이름
 					</th>
-					<th>
-						복약한 시간알림 ID
-					</th>
+<!-- 					<th> -->
+<!-- 						복약한 시간알림 ID -->
+<!-- 					</th> -->
 					<th>
 						복약한 시간 이름
 					</th>
@@ -133,10 +133,10 @@
 			<tbody>
 				<c:forEach var="avo" items="${recordSelectByAll}">
 				<tr>
-					<td> ${avo.takeId} </td>
-					<td> ${avo.userId} </td>
+<%-- 					<td> ${avo.takeId} </td> --%>
+					<td> ${name} </td>
 					<c:forEach var="sdl" items="${avo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-					<td> ${avo.timeId} </td>
+<%-- 					<td> ${avo.timeId} </td> --%>
 					<c:forEach var="stl" items="${avo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
 					<td> ${avo.takeDate} </td>
 					<td> ${avo.takeSuccess} </td>
