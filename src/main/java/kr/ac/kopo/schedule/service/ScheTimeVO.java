@@ -1,7 +1,5 @@
 package kr.ac.kopo.schedule.service;
 
-import java.time.LocalTime;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +14,5 @@ public class ScheTimeVO {
 	private int reAlarmCount;
 	private int reAlarmTime;
 	private int medLocation;
+	private char timeHide;
 }

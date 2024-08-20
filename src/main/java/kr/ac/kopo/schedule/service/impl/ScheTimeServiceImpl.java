@@ -26,4 +26,11 @@ public class ScheTimeServiceImpl implements ScheTimeService {
 		return scheTimeDAO.add(vo);
 	}
 
+	@Override
+	public int delTime(String timeId) {
+		return scheTimeDAO.delete(timeId);
+	}
+	
+
+
 }

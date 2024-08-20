@@ -13,6 +13,7 @@
 		<result column="re_alarm_count" property="reAlarmCount"/>
 		<result column="re_alarm_time" property="reAlarmTime"/>
 		<result column="med_location" property="medLocation"/>
+		<result column="time_hide" property="timeHide" />
 	</resultMap>
 	
 	<select id="list" resultType="ScheTimeVO">
@@ -26,5 +27,11 @@
 	(CONCAT('time_', LPAD(NEXT VALUE FOR SQ_TIME, 5, '0'))
 	, #{scheId}, #{timeName}, #{timeAlarm}, #{timeLimit}, #{reAlarmCount}, #{reAlarmTime}, #{medLocation})
 	</insert>
+	
+	<delete id="delete">
+		UPDATE SCHE_TIME
+		SET TIME_HIDE='Y'
+		WHERE TIME_ID=#{timeId}
+	</delete>
 
 </mapper>

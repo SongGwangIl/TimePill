@@ -12,7 +12,6 @@
 	margin: 0 auto;
 	text-align: center;
 }
-
 h1 {
 	width: 300px;
 	margin: 0 auto;
@@ -27,7 +26,6 @@ ul {
 	padding: 10px;
 	margin: 5px auto;
 }
-
 li {
 	padding: 5px;
 }
@@ -38,29 +36,44 @@ li {
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 	<h1>복약 스케쥴 리스트</h1>
-	<a href='${pageContext.request.contextPath}/schedule/add.do'><button>신규
-			스케쥴 등록</button></a>
+	<a href='${pageContext.request.contextPath}/schedule/add.do'>
+		<button>신규 스케쥴 등록</button>
+	</a>
+	
 	<br>
 	<br>
+	
 	<c:forEach var="vo" items="${lvo}">
+	
 		<!-- 고유번호 : <c:out value= "${vo.scheId}"/> <br>  -->
+		
 		<ul class="schedule">
-			<li>제목 : <strong><c:out value="${vo.scheTitle}" /></strong> (매일
-				<c:out value="${vo.scheTakeNum}" />회) 
-				<a href='${pageContext.request.contextPath}/schedule/delete.do?scheId=${vo.scheId}'><button>지우기</button></a>
+		
+			<li>제목 : <strong><c:out value="${vo.scheTitle}" /></strong> 
+				(매일 <c:out value="${vo.scheTakeNum}" />회) 
+				<a href='${pageContext.request.contextPath}/schedule/edit.do?scheId=${vo.scheId}'><button>수정</button></a>
+				<a href='${pageContext.request.contextPath}/schedule/delete.do?scheId=${vo.scheId}'><button>삭제</button></a>
 			</li>
 
-			<li>처방기간 : <c:out value="${vo.scheStartDate}" /> ~ <span class="endDate"><c:out
-					value="${vo.scheEndDate}" /></span>
+			<li>처방기간 : <c:out value="${vo.scheStartDate}" /> ~ 
+				<span class="endDate"> <c:out value="${vo.scheEndDate}" /> </span>
 			</li>
+			
+			
 			<c:if test="${vo.timeList.isEmpty()}">
 				<li class="addTime"><a
 					href="${pageContext.request.contextPath}/schedule/time/add1.do?scheId=${vo.scheId}">알림
 						시간을 등록해주세요.</a></li>
 			</c:if>
+			
 			<c:forEach var="timeVo" items="${vo.timeList}">
-				<li><c:out value="${timeVo.timeName}" /> - <c:out
-						value="${timeVo.timeAlarm}" /></li>
+				<li>
+					<c:out value="${timeVo.timeName}" /> - <c:out value="${timeVo.timeAlarm}" /> 
+					
+					<a href='${pageContext.request.contextPath}/schedule/time/eidt.do?timeId=${timeVo.timeId}'>
+						<button>수정</button>
+					</a>
+				</li>
 			</c:forEach>
 		</ul>
 	</c:forEach>

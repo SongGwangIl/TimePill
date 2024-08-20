@@ -14,4 +14,5 @@ public interface ScheTimeDAO {
 
 	int add(ScheTimeVO vo);
 
+	int delete(String timeId);
 }

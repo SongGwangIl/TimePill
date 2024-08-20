@@ -7,4 +7,6 @@ public interface ScheTimeService {
 	List<ScheTimeVO> list(ScheduleVO vo);
 
 	int add(ScheTimeVO vo);
+	
+	int delTime(String timeId);
 }

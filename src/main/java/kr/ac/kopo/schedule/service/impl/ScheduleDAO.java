@@ -20,4 +20,5 @@ public interface ScheduleDAO {
 
 	int delete(String scheId);
 
+	int edit(ScheduleVO vo);
 }

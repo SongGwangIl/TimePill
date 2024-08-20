@@ -31,5 +31,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public int delete(String scheId) {
 		return scheduleDAO.delete(scheId);
 	}
+	@Override
+	public int edit(ScheduleVO vo) {
+		return scheduleDAO.edit(vo);
+	}
+	
 
 }

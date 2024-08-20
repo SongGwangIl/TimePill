@@ -12,8 +12,8 @@
 		<result column="sche_start_date" property="scheStartDate"/>
 		<result column="sche_end_date" property="scheEndDate"/>
 		<result column="sche_date_expires" property="scheDateExpires"/>
-		<result property="scheTakeNum" column="sche_take_num" />
-		<result property="scheHide" column="sche_hide" />
+		<result column="sche_take_num"  property="scheTakeNum" />
+		<result column="sche_hide" property="scheHide"  />
 		
 		<collection property="timeList" ofType="ScheTimeVO" column="sche_id" select="findAllByScheId">
 			<id property="timeId" column="timeId" />
@@ -24,6 +24,7 @@
 			<result property="reAlarmCount" column="reAlarmCount" />
 			<result property="reAlarmTime" column="reAlarmTime" />
 			<result property="medLocation" column="medLocation" />
+			<result property="timeHide" column="timeHide" />
 		</collection>
 	</resultMap>
 	
@@ -35,14 +36,14 @@
 	
 	<select id="findAllByScheId" resultType="ScheTimeVO">
 		SELECT * FROM SCHE_TIME
-		WHERE SCHE_ID = #{scheId}
+		WHERE SCHE_ID = #{scheId} AND TIME_HIDE='N'
 	</select>
 
 	<insert id="add">
-	INSERT INTO SCHEDULE
-	(SCHE_ID, USER_ID, SCHE_TITLE, SCHE_TAKE_NUM, SCHE_SELECT, SCHE_START_DATE, SCHE_END_DATE)
-	VALUES
-	(CONCAT('sche_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0')), #{userId}, #{scheTitle}, #{scheTakeNum}, #{scheSelect}, #{scheStartDate}, #{scheEndDate})
+		INSERT INTO SCHEDULE
+		(SCHE_ID, USER_ID, SCHE_TITLE, SCHE_TAKE_NUM, SCHE_SELECT, SCHE_START_DATE, SCHE_END_DATE)
+		VALUES
+		(CONCAT('sche_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0')), #{userId}, #{scheTitle}, #{scheTakeNum}, #{scheSelect}, #{scheStartDate}, #{scheEndDate})
 	</insert>
 	
 	<select id="findById">
@@ -55,5 +56,16 @@
 		SET SCHE_HIDE='Y'
 		WHERE SCHE_ID=#{scheId}
 	</delete>
+	
+	<update id="edit">
+		UPDATE SCHEDULE
+		SET 
+		    SCHE_TITLE = #{scheTitle},
+		    SCHE_SELECT = #{scheSelect},
+		    SCHE_START_DATE = #{scheStartDate},
+		    SCHE_END_DATE = #{scheEndDate}
+		WHERE 
+		    SCHE_ID = #{scheId}
+	</update>
 
 </mapper>

@@ -69,4 +69,13 @@ public class ScheTimeController {
 			System.out.println(scheId + "의 scheTime add3 완료");
 		return "redirect:/schedule/list.do";
 	}
+	
+	@GetMapping("/deltime.do")
+	public String delTime(String timeId) {
+		
+		if(scheTimeService.delTime(timeId) == 1)
+			System.out.println(timeId + " 삭제 성공!");
+
+		return "redirect:/schedule/list.do";  
+	}
 }
