@@ -19,4 +19,6 @@ public class UserInfoVO {
 	private String yy;
 	private String mm;
 	private String dd;
+	private String userEmail;
+	private String userSelect;
 }

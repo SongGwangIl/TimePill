@@ -4,10 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.ac.kopo.user.service.UserService;
 
@@ -132,5 +136,38 @@ public class UserController {
 		request.setAttribute("url", "/kopo/main");
 		
 		return "user/msg";
+	}
+	@GetMapping("/myPage")
+	public String myPage(@SessionAttribute("loginUser") UserVO vo, Model model) {
+		String userId = vo.getUserId();
+		String userValid = userService.getUserValid(userId);
+		String userSelect = userService.getUserSelect(userId);
+		
+		if(userValid.equals("F")) {
+			if(userSelect.equals("user"))
+				return "user/addUserInfo";
+			else
+				return "user/addProtectorInfo";
+		}
+		
+		UserInfoVO uivo = userService.getUserInfo(vo);
+		
+		model.addAttribute("myInfo", uivo);
+		
+		return "user/myPage";
+	}
+	@PostMapping("/myPage")
+	public String myPage(UserInfoVO uivo, HttpSession session) {
+		
+		String select = userService.updateMyInfo(uivo);
+		
+		String name;
+		if(select.equals("user"))
+			name = uivo.getUserName();
+		else
+			name = uivo.getProtName();
+		session.setAttribute("name", name);
+		
+		return "redirect:/main";
 	}
 }

@@ -23,4 +23,20 @@ public interface UserDAO {
 	void addUserInfo(UserInfoVO vo);
 
 	void hasInfo(String userId);
+	
+	UserInfoVO getUserInfo(String string);
+
+	UserInfoVO getProtectorInfo(String string);
+
+	String getUserEmail(String userId);
+
+	String getUserSelect(String userId);
+
+	void updateUserInfo(UserInfoVO uivo);
+
+	void updateProtectorInfo(UserInfoVO uivo);
+
+	void updateEmail(UserInfoVO uivo);
+
+	String getUserValid(String userId);
 }

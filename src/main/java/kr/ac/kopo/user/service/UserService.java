@@ -18,4 +18,12 @@ public interface UserService {
 	void addProtectorInfo(UserInfoVO vo);
 
 	void addUserInfo(UserInfoVO vo);
+	
+	UserInfoVO getUserInfo(UserVO vo);
+
+	String updateMyInfo(UserInfoVO uivo);
+
+	String getUserValid(String userId);
+
+	String getUserSelect(String userId);
 }

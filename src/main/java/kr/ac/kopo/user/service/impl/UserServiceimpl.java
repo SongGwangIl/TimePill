@@ -2,6 +2,7 @@ package kr.ac.kopo.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.kopo.user.UserInfoVO;
 import kr.ac.kopo.user.UserVO;
@@ -63,5 +64,55 @@ public class UserServiceimpl implements UserService{
 		userdao.addUserInfo(vo);
 		userdao.hasInfo(vo.getUserId());
 		
+	}
+	
+	@Override
+	public UserInfoVO getUserInfo(UserVO vo) {
+		
+		UserInfoVO uivo = new UserInfoVO();
+		
+		if(vo.getUserSelect().equals("user"))
+			uivo = (UserInfoVO)userdao.getUserInfo(vo.getUserId());
+		else if(vo.getUserSelect().equals("protector"))
+			uivo = (UserInfoVO)userdao.getProtectorInfo(vo.getUserId());
+		
+		String email = userdao.getUserEmail(vo.getUserId());
+		uivo.setUserEmail(email);
+		
+		String select = userdao.getUserSelect(vo.getUserId());
+		uivo.setUserSelect(select);
+		
+		return uivo;
+	}
+
+
+	@Transactional
+	public String updateMyInfo(UserInfoVO uivo) {
+		String select = userdao.getUserSelect(uivo.getUserId());
+		
+		
+		if(select.equals("user"))
+			userdao.updateUserInfo(uivo);
+		else
+			userdao.updateProtectorInfo(uivo);
+		
+		userdao.updateEmail(uivo);
+		
+		return select;
+		
+	}
+
+
+	@Override
+	public String getUserValid(String userId) {
+		
+		return userdao.getUserValid(userId);
+	}
+
+
+	@Override
+	public String getUserSelect(String userId) {
+		
+		return userdao.getUserSelect(userId);
 	}
 }
