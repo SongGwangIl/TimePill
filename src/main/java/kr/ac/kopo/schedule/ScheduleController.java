@@ -45,8 +45,10 @@ public class ScheduleController {
 	//대분류 알림 추가
 	@PostMapping("/add.do")
 	public String add(@SessionAttribute("loginUser") UserVO uvo, ScheduleVO svo) {
+		
 		svo.setUserId(uvo.getUserId());
-		int num = scheduleService.add(svo);
+		scheduleService.add(svo);
+		
 		System.out.println(svo.getScheTitle() + " 스케줄 추가 완료");
 		
 		return "redirect:/schedule/list.do";

@@ -31,7 +31,7 @@
 		</li>
 		<li class="menu">
 			<c:url var="recordUrl" value="/record/list.do"></c:url>
-			<form id="recordForm" action="${recordUrl}" method="post">
+			<form id="recordForm" action="${recordUrl}" method="get">
 		    	<input type="hidden" name="takeDate" value="${today}" />
 		    	<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;"> | 복약 기록 조회  |</a>
 			</form>
@@ -40,7 +40,7 @@
 			<c:url var="mainUrl" value="/main" ></c:url>
 			<a href="${mainUrl}"> | 메인 화면 | </a><br>
 		</li>
-		<li>
+		<li class="menu">
 			<c:url var="myPageUrl" value="/myPage"/>
 			<a href="${myPageUrl}"> 나의정보변경 </a>
 		</li>

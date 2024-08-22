@@ -22,4 +22,10 @@ public interface RecordDAO {
 
 	int addTakeLog(@Param("timeId") String timeId, @Param("userId") String userId);
 
+	int off(String takeId);
+
+	int selectLogToday(@Param("takeDate") String takeDate, @Param("timeId") String timeId);
+
+	int updateTakeLog(@Param("takeDateTime") String takeDateTime, @Param("timeId") String timeId);
+
 }

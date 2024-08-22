@@ -30,6 +30,16 @@ public class ScheTimeServiceImpl implements ScheTimeService {
 	public int delTime(String timeId) {
 		return scheTimeDAO.delete(timeId);
 	}
+
+	@Override
+	public ScheTimeVO findById(String timeId) {
+		return scheTimeDAO.findById(timeId);
+	}
+
+	@Override
+	public int edit(ScheTimeVO vo) {
+		return scheTimeDAO.edit(vo);
+	}
 	
 
 

@@ -78,10 +78,10 @@
 			</ul>
 			<ul id="buttons">
 				<li>
-					<button type="submit">등록</button>
+					<button type="submit" onclick="location.href='device'">등록</button>
 				</li>
 				<li>
-					<button type="button" onclick="location.href='main'">다음에 입력</button> <br>
+					<button type="button" onclick="location.href='device'">다음에 입력</button> <br>
 				</li>
 			</ul>
 		</form>

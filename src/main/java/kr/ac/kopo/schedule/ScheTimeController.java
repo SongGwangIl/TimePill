@@ -22,6 +22,28 @@ public class ScheTimeController {
 	@Autowired
 	ScheTimeService scheTimeService;
 	
+	//소분류 알림 상세 조회 및 수정용 페이지로 이동
+	@GetMapping("/edit.do")
+	public String findById(String timeId, Model model) {
+		ScheTimeVO svo = scheTimeService.findById(timeId);
+		model.addAttribute("svo", svo);
+		
+		return "schedule/time/edit";
+	}
+
+	
+	//소분류 알림 위 view 페이지에서 넘겨받은 값으로 수정
+	@PostMapping("/edit.do")
+	public String edit(ScheTimeVO vo) {
+		
+		if(scheTimeService.edit(vo) == 1)
+			System.out.println(vo + " 수정 성공!");
+
+		return "redirect:/schedule/list.do";  
+	}
+	
+	
+	
 	@GetMapping("/add1.do")
 	public String addform(String scheId, Model model) {
 		model.addAttribute("svo", scheduleService.findById(scheId));

@@ -15,5 +15,11 @@ public interface RecordService {
 	List<RecordVO> selectChart(String takeDate, String userId);
 	
 	int addTakeLog(String timeId, String userId);
+
+	int off(String takeId);
+	
+	int selectLogToday(String takeDate, String timeId);
+
+	int updateTakeLog(String takeDateTime, String timeId);
 	
 }

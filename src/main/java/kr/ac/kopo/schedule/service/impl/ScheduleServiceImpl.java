@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.schedule.service.ScheduleService;
 import kr.ac.kopo.schedule.service.ScheduleVO;
-import kr.ac.kopo.user.UserVO;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -35,6 +34,5 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public int edit(ScheduleVO vo) {
 		return scheduleDAO.edit(vo);
 	}
-	
 
 }

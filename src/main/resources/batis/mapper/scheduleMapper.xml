@@ -31,7 +31,7 @@
 	<select id="list" resultMap="scheduleMap">
 		SELECT * FROM SCHEDULE
 		WHERE USER_ID=#{userId} AND SCHE_HIDE='N'
-		ORDER BY sche_id DESC
+		ORDER BY SCHE_ID DESC
 	</select>
 	
 	<select id="findAllByScheId" resultType="ScheTimeVO">
@@ -40,10 +40,23 @@
 	</select>
 
 	<insert id="add">
-		INSERT INTO SCHEDULE
-		(SCHE_ID, USER_ID, SCHE_TITLE, SCHE_TAKE_NUM, SCHE_SELECT, SCHE_START_DATE, SCHE_END_DATE)
-		VALUES
-		(CONCAT('sche_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0')), #{userId}, #{scheTitle}, #{scheTakeNum}, #{scheSelect}, #{scheStartDate}, #{scheEndDate})
+		INSERT INTO SCHEDULE (
+			SCHE_ID
+			, USER_ID
+			, SCHE_TITLE
+			, SCHE_TAKE_NUM
+			, SCHE_SELECT
+			, SCHE_START_DATE
+			, SCHE_END_DATE
+		) VALUES (
+			CONCAT('SCHE_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0'))
+			, #{userId}
+			, #{scheTitle}
+			, #{scheTakeNum}
+			, #{scheSelect}
+			, #{scheStartDate}
+			, #{scheEndDate}
+			)
 	</insert>
 	
 	<select id="findById">
@@ -67,5 +80,4 @@
 		WHERE 
 		    SCHE_ID = #{scheId}
 	</update>
-
 </mapper>

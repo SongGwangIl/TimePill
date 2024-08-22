@@ -9,4 +9,8 @@ public interface ScheTimeService {
 	int add(ScheTimeVO vo);
 	
 	int delTime(String timeId);
+	
+	ScheTimeVO findById(String timeId);
+	
+	int edit(ScheTimeVO vo);
 }

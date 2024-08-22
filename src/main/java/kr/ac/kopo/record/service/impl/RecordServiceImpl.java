@@ -24,7 +24,7 @@ public class RecordServiceImpl implements RecordService{
 		return recordDAO.selectLogByDate(takeDate, userId);
 	}
 
-	@Override //오늘의 알람 조회
+	@Override //오늘의 알림 조회
 	public List<RecordVO> selectAlarmToday(String takeDate, String userId) {
 		return recordDAO.selectAlarmToday(takeDate, userId);
 	}
@@ -34,7 +34,7 @@ public class RecordServiceImpl implements RecordService{
 		return recordDAO.addTakeLog(timeId, userId);
 	}
 
-	@Override //날짜별 알람 조회
+	@Override //날짜별 알림 조회
 	public List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate) {
 		return recordDAO.selectAlarmByDate(timeId, userId, takeDate);
 	}
@@ -43,7 +43,19 @@ public class RecordServiceImpl implements RecordService{
 	public List<RecordVO> selectChart(String takeDate, String userId) {
 		return recordDAO.selectChart(takeDate, userId);
 	}
-	
-	
-	
+
+	@Override //등록된 복용 기록 off
+	public int off(String takeId) {
+		return recordDAO.off(takeId);
+	}
+
+	@Override 
+	public int selectLogToday(String takeDate, String timeId) {
+		return recordDAO.selectLogToday(takeDate, timeId);
+	}
+
+	@Override
+	public int updateTakeLog(String takeDateTime, String timeId) {
+		return recordDAO.updateTakeLog(takeDateTime, timeId);
+	}	
 }

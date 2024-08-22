@@ -10,6 +10,7 @@
 		<result column="TIME_ID" property="timeId"/>
 		<result column="TAKE_DATE" property="takeDate"/>
 		<result column="TAKE_SUCCESS" property="takeSuccess"/>
+		<result column="TAKE_USE_AT" property="takeUseAt"/>
 		<collection property="scheduleList" ofType="ScheduleVO"> 
 			<id column="SCHE_ID" property="scheId"/>
 			<result column="USER_ID" property="userId"/>
@@ -43,6 +44,7 @@
 			, TAKE_SUCCESS
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE USER_ID = #{userId}
+		AND TAKE_USE_AT = 'Y'
 		ORDER BY TAKE_DATE
 	</select>
 
@@ -58,6 +60,7 @@
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE DATE(TAKE_DATE) = DATE(#{takeDate})
 			AND USER_ID = #{userId}
+			AND TAKE_USE_AT = 'Y'
 		ORDER BY TAKE_DATE
 	</select>
 	
@@ -105,6 +108,8 @@
 		        FROM TAKE_LOG
 		        WHERE USER_ID = #{userId}
 		        AND DATE(TAKE_DATE) = DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+		        AND TAKE_SUCCESS = 'Y'
+		        AND TAKE_USE_AT = 'Y'
 		    ) AS CNTTAKELOG
 		FROM
 		    (
@@ -141,4 +146,31 @@
 		FROM SCHE_TIME ST
 		WHERE TIME_ID= #{timeId}
 	</insert>
+	
+	<update id="off">
+		UPDATE TAKE_LOG
+		SET TAKE_USE_AT = 'N'
+		WHERE TAKE_ID = #{takeId}
+	</update>
+	
+	<select id ="selectLogToday" resultType="Integer">
+		SELECT COUNT(*)
+		FROM TAKE_LOG
+		WHERE DATE(TAKE_DATE) = #{takeDate}
+			AND TIME_ID = #{timeId}
+	</select>
+	
+	<update id="updateTakeLog">
+	    UPDATE TAKE_LOG TL
+	    JOIN SCHE_TIME ST ON TL.TIME_ID = ST.TIME_ID
+	    SET TL.TAKE_USE_AT = 'Y',
+	        TL.TAKE_DATE = #{takeDateTime},
+	        TL.TAKE_SUCCESS = CASE
+	            WHEN ST.TIME_ALARM &gt; TIME(NOW()) OR ST.TIME_LIMIT &lt; TIME(NOW()) THEN 'N'
+	            WHEN ST.TIME_ALARM &lt;= TIME(NOW()) AND ST.TIME_LIMIT &gt;= TIME(NOW()) THEN 'Y'
+	            ELSE 'N'
+	        END
+	    WHERE DATE(TL.TAKE_DATE) = DATE(#{takeDateTime})
+	        AND TL.TIME_ID = #{timeId}
+	</update>
 </mapper>

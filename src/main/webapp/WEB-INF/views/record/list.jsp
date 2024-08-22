@@ -80,7 +80,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="tvo" items="${recordSelectByDate}">
+<c:forEach var="tvo" items="${recordSelectByDate}">
 				<tr>
 <%-- 					<td> ${tvo.takeId} </td> --%>
 					<td> ${name} </td>
@@ -89,6 +89,12 @@
 					<c:forEach var="stl" items="${tvo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
 					<td> ${tvo.takeDate} </td>
 					<td> ${tvo.takeSuccess} </td>
+					<td> 
+						<form action="${pageContext.request.contextPath}/record/off" method="post">
+							<input type="hidden" name="takeId" value="${tvo.takeId}">
+					    	<button type="submit">복용 Off</button>
+						</form>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -98,7 +104,7 @@
 <br><br>
 
 
-<h1> 기간별 복용기록 조회 (페이지네이션 너무절실) </h1>
+<h1> 기간별 복용기록 조회 </h1>
 <c:choose>
 	<c:when test="${recordSelectByAll.isEmpty()}">
 		<p> 조회할 복약 기록이 없습니다. </p>
