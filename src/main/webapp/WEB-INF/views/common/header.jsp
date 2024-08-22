@@ -40,6 +40,10 @@
 			<c:url var="mainUrl" value="/main" ></c:url>
 			<a href="${mainUrl}"> | 메인 화면 | </a><br>
 		</li>
+		<li>
+			<c:url var="myPageUrl" value="/myPage"/>
+			<a href="${myPageUrl}"> 나의정보변경 </a>
+		</li>
 	</ul>
 </nav>
 
