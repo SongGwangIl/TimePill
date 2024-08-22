@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.kopo.device.service.Impl.DeviceDAO">
+
+	<resultMap type="DeviceVO" id="DeviceMap">
+		<id column="DEVICE_ID" property="deviceId"/>
+		<result column="DEV_INFO_DATE" property="deviceDate"/>
+		<result column="DEV_INFO_FAC" property="deviceFac"/>
+		<result column="DEV_INFO_MODEL" property="deviceModel"/>
+	</resultMap>
+
+	<select id="getAlldeviceId">
+		SELECT DEVICE_ID
+		FROM DEVICE_INFO
+	</select>
+
+	<insert id="deviceRegister">
+		INSERT INTO device(DEVICE_ID, USER_ID)
+		VALUES(#{deviceId}, #{userId})
+	</insert>
+	
+	<select id="getdeviceId">
+		SELECT DEVICE_ID
+		FROM DEVICE
+	</select>
+	
+	
+</mapper>

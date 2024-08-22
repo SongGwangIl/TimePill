@@ -57,8 +57,10 @@ public class UserController {
 			}				
 			else {
 				session.setAttribute("name", name);
-				
-				return "redirect:/main";
+				if (uvo.getUserSelect().equals("user"))
+					return "device/deviceInfo";
+				else 
+					return "redirect:/main";
 			}
 		}
 		// 로그인 실패	
@@ -133,7 +135,7 @@ public class UserController {
 		userService.addUserInfo(vo);
 		
 		request.setAttribute("msg", "정보가 등록 되었습니다.");
-		request.setAttribute("url", "/kopo/main");
+		request.setAttribute("url", "/kopo/device");
 		
 		return "user/msg";
 	}
