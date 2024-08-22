@@ -44,4 +44,39 @@
   <update id="hasInfo">
   	UPDATE user SET USER_VALID = 'Y' WHERE user_id = #{userId}
   </update>
+  <select id="getUserInfo">
+  	SELECT user_id, user_name, user_phone, user_gender, user_height, user_weight, user_birth
+  	FROM user_info
+  	WHERE user_id = #{userId}
+  </select>
+  <select id="getProtectorInfo">
+  	SELECT user_id, prot_name, prot_phone, prot_relation
+  	FROM protector
+  	WHERE user_id = #{userId}
+  </select>
+  <select id="getUserEmail">
+  	SELECT user_email
+    FROM user
+    WHERE user_id = #{userId}
+  </select>
+  <select id="getUserSelect">
+  	SELECT USER_SELECT
+    FROM user
+    WHERE user_id = #{userId}
+  </select>
+  <select id="getUserValid">
+  	SELECT user_valid
+    FROM user
+    WHERE user_id = #{userId}
+  </select>
+  <update id="updateUserInfo">
+  	UPDATE user_info SET USER_NAME = #{userName}, USER_PHONE = #{userPhone}, USER_HEIGHT = #{userHeight},
+  		USER_WEIGHT = #{userWeight} WHERE user_id = #{userId}
+  </update>
+  <update id="updateProtectorInfo">
+  	UPDATE protector SET prot_name = #{protName}, prot_phone = #{protPhone}, prot_relation = #{protRelation} WHERE user_id = #{userId}
+  </update>
+  <update id="updateEmail">
+  	UPDATE user SET USER_EMAIL = #{userEmail} WHERE user_id = #{userId}
+  </update>
 </mapper>
