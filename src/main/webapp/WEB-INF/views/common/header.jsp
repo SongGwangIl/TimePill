@@ -31,7 +31,7 @@
 		</li>
 		<li class="menu">
 			<c:url var="recordUrl" value="/record/list.do"></c:url>
-			<form id="recordForm" action="${recordUrl}" method="post">
+			<form id="recordForm" action="${recordUrl}" method="get">
 		    	<input type="hidden" name="takeDate" value="${today}" />
 		    	<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;"> | 복약 기록 조회  |</a>
 			</form>

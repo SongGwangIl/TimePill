@@ -15,6 +15,7 @@ public class RecordVO {
 	private String timeId;
 	private String takeDate;
 	private char takeSuccess;
+	private char takeUseAt;
 	
 	private List<ScheduleVO> scheduleList;
 	private List<ScheTimeVO> scheTimeList;

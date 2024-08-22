@@ -21,11 +21,25 @@
 	</select>
 
 	<insert id="add">
-	INSERT INTO SCHE_TIME
-	(time_id, sche_id, time_name, time_alarm, time_limit, re_alarm_count, re_alarm_time, med_location)
-	VALUES
-	(CONCAT('time_', LPAD(NEXT VALUE FOR SQ_TIME, 5, '0'))
-	, #{scheId}, #{timeName}, #{timeAlarm}, #{timeLimit}, #{reAlarmCount}, #{reAlarmTime}, #{medLocation})
+	INSERT INTO SCHE_TIME(
+		TIME_ID
+		, SCHE_ID
+		, TIME_NAME
+		, TIME_ALARM
+		, TIME_LIMIT
+		, RE_ALARM_COUNT
+		, RE_ALARM_TIME
+		, MED_LOCATION
+		) VALUES (
+		CONCAT('TIME_', LPAD(NEXT VALUE FOR SQ_TIME, 5, '0'))
+		, #{scheId}
+		, #{timeName}
+		, #{timeAlarm}
+		, #{timeLimit}
+		, #{reAlarmCount}
+		, #{reAlarmTime}
+		, #{medLocation}
+		)
 	</insert>
 	
 	<delete id="delete">
@@ -33,5 +47,23 @@
 		SET TIME_HIDE='Y'
 		WHERE TIME_ID=#{timeId}
 	</delete>
-
+	
+	<select id="findById">
+		SELECT * 
+		FROM SCHE_TIME
+		WHERE TIME_ID=#{timeId}
+	</select>
+	
+	<update id="edit">
+		UPDATE SCHE_TIME
+		SET 
+		    TIME_NAME = #{timeName},
+		    TIME_ALARM = #{timeAlarm},
+		    TIME_LIMIT = #{timeLimit},
+		    MED_LOCATION = #{medLocation},
+		    RE_ALARM_TIME = #{reAlarmTime},
+		    RE_ALARM_COUNT = #{reAlarmCount}
+		WHERE 
+			TIME_ID=#{timeId}
+	</update>
 </mapper>
