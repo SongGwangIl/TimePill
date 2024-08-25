@@ -2,13 +2,14 @@ package kr.ac.kopo.record.service;
 
 import java.util.List;
 
+import kr.ac.kopo.com.Pagination;
 import kr.ac.kopo.schedule.service.ScheTimeVO;
 import kr.ac.kopo.schedule.service.ScheduleVO;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class RecordVO {
+public class RecordVO extends Pagination {
 	
 	private String takeId;
 	private String userId;

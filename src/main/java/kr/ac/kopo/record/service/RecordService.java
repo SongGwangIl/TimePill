@@ -4,13 +4,11 @@ import java.util.List;
 
 public interface RecordService {
 	
-	List<RecordVO> selectLogByAll(String userId);
+	List<RecordVO> selectLogByAll(RecordVO recordVO);
 	
 	List<RecordVO> selectLogByDate(String takeDate, String userId);
 
-	List<RecordVO> selectAlarmToday(String takeDate, String userId);
-	
-	List<RecordVO> selectAlarmByDate(String timeId, String userId, String takeDate);
+	List<RecordVO> selectAlarmByDate(String takeDate, String userId);
 	
 	List<RecordVO> selectChart(String takeDate, String userId);
 	

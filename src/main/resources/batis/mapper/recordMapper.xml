@@ -11,6 +11,7 @@
 		<result column="TAKE_DATE" property="takeDate"/>
 		<result column="TAKE_SUCCESS" property="takeSuccess"/>
 		<result column="TAKE_USE_AT" property="takeUseAt"/>
+		
 		<collection property="scheduleList" ofType="ScheduleVO"> 
 			<id column="SCHE_ID" property="scheId"/>
 			<result column="USER_ID" property="userId"/>
@@ -20,6 +21,7 @@
 			<result column="SCHE_END_DATE" property="scheEndDate"/>
 			<result column="SCHE_DATE_EXPIRES" property="scheDateExpires"/>
 		</collection>
+		
 		<collection property="scheTimeList" ofType="ScheTimeVO"> 
 			<id column="TIME_ID" property="timeId"/>
 			<result column="SCHE_ID" property="scheId"/>
@@ -46,6 +48,8 @@
 		WHERE USER_ID = #{userId}
 		AND TAKE_USE_AT = 'Y'
 		ORDER BY TAKE_DATE
+		LIMIT 10
+		OFFSET #{offset}
 	</select>
 
 	<select id="selectLogByDate" resultMap="RecordMap">
@@ -63,20 +67,7 @@
 			AND TAKE_USE_AT = 'Y'
 		ORDER BY TAKE_DATE
 	</select>
-	
-	<select id="selectAlarmToday" resultMap="RecordMap">
-		SELECT 
-			SCHE_ID
-			, TIME_ID
-			, SCHE_TITLE
-			, TIME_NAME
-			, TIME_ALARM
-		FROM SCHE_TIME NATURAL JOIN SCHEDULE
-		WHERE 
-        	SCHE_END_DATE &gt;= DATE(NOW())
-        	AND SCHE_START_DATE &lt;= DATE(NOW())
-        	AND USER_ID = #{userId}
-	</select>
+
 	
 	<select id="selectAlarmByDate" resultMap="RecordMap">
 		SELECT 
@@ -86,10 +77,13 @@
 			, TIME_NAME
 			, TIME_ALARM
 		FROM SCHE_TIME NATURAL JOIN SCHEDULE
+		<![CDATA[
 		WHERE 
-        	SCHE_END_DATE &gt;= DATE(#{takeDate})
-        	AND SCHE_START_DATE &lt;= DATE(#{takeDate})
+        	SCHE_END_DATE >= DATE(#{takeDate})
+        	AND SCHE_START_DATE <= DATE(#{takeDate})
+        	AND SCHE_HIDE = 'N'
         	AND USER_ID = #{userId}
+		]]>
 	</select>
 	
 	<select id="selectChart" resultType="RecordVO">
@@ -99,9 +93,11 @@
 		        SELECT COUNT(*)
 		        FROM SCHE_TIME
 		        NATURAL JOIN SCHEDULE
+		        <![CDATA[
 		        WHERE USER_ID = #{userId}
-			        AND SCHE_START_DATE &lt;= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
-			        AND SCHE_END_DATE &gt;= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+			        AND SCHE_START_DATE <= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+			        AND SCHE_END_DATE >= DATE(DATE_SUB(#{takeDate}, INTERVAL SEQ DAY))
+			    ]]>
 		    ) AS CNTALARM,
 		    (
 		        SELECT COUNT(*)
@@ -138,9 +134,11 @@
 				, #{timeId}
 				, NOW()
 				, CASE
-				    WHEN ST.TIME_ALARM &gt; TIME(NOW()) OR ST.TIME_LIMIT &lt; TIME(NOW()) THEN 'N'
-				    WHEN ST.TIME_ALARM &lt;= TIME(NOW()) AND ST.TIME_LIMIT &gt;= TIME(NOW()) THEN 'Y'
+				<![CDATA[
+				    WHEN ST.TIME_ALARM > TIME(NOW()) OR ST.TIME_LIMIT < TIME(NOW()) THEN 'N'
+				    WHEN ST.TIME_ALARM <= TIME(NOW()) AND ST.TIME_LIMIT >= TIME(NOW()) THEN 'Y'
 			    	ELSE 'N'
+			    	]]>
 				END AS TAKE_SUCCESS
 				, 'Y'
 		FROM SCHE_TIME ST
@@ -166,9 +164,11 @@
 	    SET TL.TAKE_USE_AT = 'Y',
 	        TL.TAKE_DATE = #{takeDateTime},
 	        TL.TAKE_SUCCESS = CASE
-	            WHEN ST.TIME_ALARM &gt; TIME(NOW()) OR ST.TIME_LIMIT &lt; TIME(NOW()) THEN 'N'
-	            WHEN ST.TIME_ALARM &lt;= TIME(NOW()) AND ST.TIME_LIMIT &gt;= TIME(NOW()) THEN 'Y'
+	       <![CDATA[
+	            WHEN ST.TIME_ALARM > TIME(NOW()) OR ST.TIME_LIMIT < TIME(NOW()) THEN 'N'
+	            WHEN ST.TIME_ALARM <= TIME(NOW()) AND ST.TIME_LIMIT >= TIME(NOW()) THEN 'Y'
 	            ELSE 'N'
+	            ]]>
 	        END
 	    WHERE DATE(TL.TAKE_DATE) = DATE(#{takeDateTime})
 	        AND TL.TIME_ID = #{timeId}

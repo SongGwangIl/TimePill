@@ -10,13 +10,11 @@ import kr.ac.kopo.record.service.RecordVO;
 @Mapper
 public interface RecordDAO {
 	
-	List<RecordVO> selectLogByAll(String userId);
+	List<RecordVO> selectLogByAll(RecordVO recordVO);
 
 	List<RecordVO> selectLogByDate(@Param("takeDate") String takeDate, @Param("userId") String userId);
 
-	List<RecordVO> selectAlarmToday(@Param("takeDate") String takeDate, @Param("userId") String userId);
-
-	List<RecordVO> selectAlarmByDate(@Param("timeId") String timeId, @Param("userId") String userId, @Param("takeDate") String takeDate);
+	List<RecordVO> selectAlarmByDate(@Param("takeDate") String takeDate, @Param("userId") String userId);
 
 	List<RecordVO> selectChart(@Param("takeDate") String takeDate, @Param("userId") String userId);
 

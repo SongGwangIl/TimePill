@@ -26,13 +26,14 @@
 
 <h3> ${name} 님의 복약 상황을 확인해보세요! </h3>
 
-<!-- 리스트 조회 날짜 선택 -->
-<form action="${pageContext.request.contextPath}/record/list.do" method="post">
+<!-- 조회 날짜 선택 -->
+<form action="${pageContext.request.contextPath}/record/list.do" method="get">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
-	<input type="date" id="takeDate" name="takeDate">
+	<input type="date" id="takeDate" name="takeDate" value="${takeDate}">
 	<input type="submit" value="조회">
 </form> <br>
 
+<!-- 차트 조회 -->
 <div style="width:600px; height:400px; margin : 0 auto">
 	<canvas id="recordChart"></canvas>
 </div>
@@ -40,7 +41,7 @@
 
 <!-- 로그 조회 -->
  	<c:choose>
-		<c:when test="${takeDate eq today}">
+		<c:when test="${takeDate eq today || takeDate.isEmpty()}">
 			<h1>오늘의 복용기록 </h1>
 		</c:when>
 		<c:otherwise>
@@ -56,18 +57,9 @@
 		<table>
 			<thead>
 				<tr>
-<!-- 					<th> -->
-<!-- 						복약로그 ID -->
-<!-- 					</th> -->
-					<th>
-						사용자 성명
-					</th>
 					<th>
 						복용한 약품이름
 					</th>
-<!-- 					<th> -->
-<!-- 						복약한 시간알림 ID -->
-<!-- 					</th> -->
 					<th>
 						복약한 시간 이름
 					</th>
@@ -80,12 +72,9 @@
 				</tr>
 			</thead>
 			<tbody>
-<c:forEach var="tvo" items="${recordSelectByDate}">
+			<c:forEach var="tvo" items="${recordSelectByDate}">
 				<tr>
-<%-- 					<td> ${tvo.takeId} </td> --%>
-					<td> ${name} </td>
 					<c:forEach var="sdl" items="${tvo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-<%-- 					<td> ${tvo.timeId} </td> --%>
 					<c:forEach var="stl" items="${tvo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
 					<td> ${tvo.takeDate} </td>
 					<td> ${tvo.takeSuccess} </td>
@@ -96,7 +85,7 @@
 						</form>
 					</td>
 				</tr>
-				</c:forEach>
+			</c:forEach>
 			</tbody>
 		</table>
 	</c:otherwise>
@@ -113,18 +102,9 @@
 		<table>
 			<thead>
 				<tr>
-<!-- 					<th> -->
-<!-- 						복약로그 ID -->
-<!-- 					</th> -->
-					<th>
-						사용자 성명
-					</th>
 					<th>
 						복용한 약품이름
 					</th>
-<!-- 					<th> -->
-<!-- 						복약한 시간알림 ID -->
-<!-- 					</th> -->
 					<th>
 						복약한 시간 이름
 					</th>
@@ -139,10 +119,7 @@
 			<tbody>
 				<c:forEach var="avo" items="${recordSelectByAll}">
 				<tr>
-<%-- 					<td> ${avo.takeId} </td> --%>
-					<td> ${name} </td>
 					<c:forEach var="sdl" items="${avo.scheduleList}"><td> ${sdl.scheTitle}</td></c:forEach>
-<%-- 					<td> ${avo.timeId} </td> --%>
 					<c:forEach var="stl" items="${avo.scheTimeList}"><td> ${stl.timeName}</td></c:forEach>
 					<td> ${avo.takeDate} </td>
 					<td> ${avo.takeSuccess} </td>
@@ -152,6 +129,19 @@
 		</table>
 	</c:otherwise>
 </c:choose>
+
+		<!-- 페이지네이션 인덱스 -->
+		<div class ="pagination" >
+			<div class="page-item"> <a class="page-link" href = "?page=1${vo.query}">처음</a></div>
+			<div class="page-item"> <a class="page-link" href = "?page=${vo.prev}${vo.query}">이전</a></div>
+			<c:forEach var="page" items="${vo.list}">
+				<div class="page-item ${vo.currentPage == page ? 'active' : ''}" > <a class="page-link" href ="?page=${page}${vo.query}"> ${page} </a></div>
+			</c:forEach>
+			<div class="page-item"> <a class="page-link" href = "?page=${vo.next}${vo.query}">다음</a></div>
+			<div class="page-item"> <a class="page-link" href = "?page=${vo.lastPage}${vo.query}">마지막</a></div>
+		</div>
+		
+
 </div>
 
 <p><br><br>
