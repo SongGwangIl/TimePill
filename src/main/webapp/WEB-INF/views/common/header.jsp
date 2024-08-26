@@ -26,7 +26,7 @@
 			</li>
 			
 			<li class="menu">
-				<a href='${pageContext.request.contextPath}/login'>  | 로그아웃 |</a>
+				<a href='${pageContext.request.contextPath}/login'>  |로그아웃|</a>
 			</li>
 			
 			<li class="menu">
@@ -50,6 +50,11 @@
 			<li class="menu">
 				<c:url var="myPageUrl" value="/myPage"/>
 				<a href="${myPageUrl}"> |나의정보변경| </a>
+			</li>
+			
+			<li class="menu">
+				<c:url var="registUrl" value="/myPage"/>
+				<a href="${registUrl}"> |사용자보호자등록| </a>
 			</li>
 			
 		</ul>
