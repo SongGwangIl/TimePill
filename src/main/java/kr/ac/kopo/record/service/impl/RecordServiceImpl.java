@@ -14,8 +14,13 @@ public class RecordServiceImpl implements RecordService{
 	@Autowired
 	private RecordDAO recordDAO;
 
-	@Override //전체 조회
+	@Override //복용 기록 전체 조회
 	public List<RecordVO> selectLogByAll(RecordVO recordVO) {
+		
+		System.out.println(recordVO.getUserId());
+		int total = recordDAO.total(recordVO);
+		recordVO.setTotal(total);
+		
 		return recordDAO.selectLogByAll(recordVO);
 	}
 

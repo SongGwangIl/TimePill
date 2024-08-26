@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스케쥴 등록 화면</title>
+<title>스케줄 수정 화면</title>
 
 <style>
 p {

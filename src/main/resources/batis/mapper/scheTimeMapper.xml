@@ -48,7 +48,7 @@
 		WHERE TIME_ID=#{timeId}
 	</delete>
 	
-	<select id="findById">
+	<select id="findById" resultMap="scheTimeMap">
 		SELECT * 
 		FROM SCHE_TIME
 		WHERE TIME_ID=#{timeId}

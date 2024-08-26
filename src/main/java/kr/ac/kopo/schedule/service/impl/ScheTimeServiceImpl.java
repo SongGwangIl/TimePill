@@ -18,7 +18,6 @@ public class ScheTimeServiceImpl implements ScheTimeService {
 	@Override
 	public List<ScheTimeVO> list(ScheduleVO vo) {
 		return scheTimeDAO.list(vo);
-		// 로그인한 사람의 리스트만 보여야 함... 일단 지금은 생략
 	}
 
 	@Override

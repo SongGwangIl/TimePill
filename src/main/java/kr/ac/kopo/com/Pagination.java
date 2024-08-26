@@ -14,7 +14,7 @@ public class Pagination {
 	private int currentPage = 1;		
 	
 	//내가 보고 있는 한 페이지 당 출력될 게시물의 갯수
-	private int recordPerPage = 10; 	
+	private int recordPerPage = 5; 	
 	
 	//전체 게시물이 몇 개가 있는지
 	private float total;		
@@ -24,20 +24,38 @@ public class Pagination {
 	private int pageSize = 5;
 	
 	//검색
-	private int search;
-	private String keyword;
+	private int searchKey;
+	private String searchValue;
 	
 	public String getQuery() {
 		String query="";
 		
-		if(search > 0) {
-			query += "&search=" + search + "&keyword=" + keyword;
+		if(searchKey > 0) {
+			query += "&searchKey=" + searchKey + "&searchValue=" + searchValue;
 		}
 		
 		return query;
 	}
+
 	
-	
+	public int getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(int searchKey) {
+		this.searchKey = searchKey;
+	}
+
+
+	public String getSearchValue() {
+		return searchValue;
+	}
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
+
+
+
+
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -74,7 +92,6 @@ public class Pagination {
 	//반올림 하면 해결
 	public int getLastPage() {
 		return (int) Math.ceil(total / recordPerPage);
-		// ((total - 1) / recordCountPerPage) + 1;
 	}
 	
 	public int getOffset() {

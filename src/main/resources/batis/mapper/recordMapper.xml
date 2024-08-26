@@ -32,7 +32,27 @@
 			<result column="RE_ALARM_TIME" property="reAlarmTime"/>
 		</collection>
 	</resultMap>
+	
+	<sql id="search">
+		<if test="searchKey == 1">
+			AND SCHE_TITLE LIKE CONCAT(CONCAT('%', #{searchValue}), '%')
+		</if>
+		<if test="searchKey == 2">
+			AND TIME_NAME LIKE CONCAT(CONCAT('%', #{searchValue}), '%')
+		</if>
+		<if test="searchKey == 3">
+			AND TAKE_SUCCESS LIKE CONCAT(CONCAT('%', #{searchValue}), '%')
+		</if>
+	</sql>
 
+	
+	<select id="total" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
+		WHERE USER_ID = #{userId}
+		AND TAKE_USE_AT = 'Y'
+		<include refid="search"></include>
+	</select>
 	
 
 	<select id="selectLogByAll" resultMap="RecordMap">
@@ -47,8 +67,9 @@
 		FROM TAKE_LOG TL NATURAL JOIN SCHE_TIME NATURAL JOIN SCHEDULE
 		WHERE USER_ID = #{userId}
 		AND TAKE_USE_AT = 'Y'
-		ORDER BY TAKE_DATE
-		LIMIT 10
+		<include refid="search"></include>
+		ORDER BY TAKE_DATE DESC
+		LIMIT #{recordPerPage}
 		OFFSET #{offset}
 	</select>
 

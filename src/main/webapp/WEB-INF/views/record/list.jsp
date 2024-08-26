@@ -51,7 +51,7 @@
 	
 	<c:choose>
 	<c:when test="${recordSelectByDate.isEmpty()}">
-		<p> 조회할 복약 기록이 없습니다. </p>
+		<p> 조회할 복용 기록이 없습니다. </p>
 	</c:when>
 	<c:otherwise>
 		<table>
@@ -61,13 +61,13 @@
 						복용한 약품이름
 					</th>
 					<th>
-						복약한 시간 이름
+						복용한 시간 이름
 					</th>
 					<th>
-						복약 날짜
+						복용 날짜
 					</th>
 					<th>
-						복약 성공 여부
+						복용 성공 여부
 					</th>
 				</tr>
 			</thead>
@@ -93,10 +93,34 @@
 <br><br>
 
 
-<h1> 기간별 복용기록 조회 </h1>
+<h1> 전체 복용기록 조회 </h1>
+
+<br>
+
+<!-- 검색 -->
+<div>
+	<form>
+	<input type="hidden" id="takeDate" name="takeDate" value="${takeDate}">
+	<div>
+		분류 : <select name="searchKey">
+				<option value="0">선택</option>
+				<option value="1" ${recordVO.searchKey == 1 ? 'selected' : ''}>약품명</option>
+				<option value="2" ${recordVO.searchKey == 2 ? 'selected' : ''}>시간명</option>
+				<option value="3" ${recordVO.searchKey == 3 ? 'selected' : ''}>성공여부</option>
+			</select>
+	</div>
+	<div>
+		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}">
+	</div>
+	<div>
+		<button>검색</button>
+	</div>
+	</form>
+</div>
+
 <c:choose>
 	<c:when test="${recordSelectByAll.isEmpty()}">
-		<p> 조회할 복약 기록이 없습니다. </p>
+		<p> 조회할 복용 기록이 없습니다. </p>
 	</c:when>
 	<c:otherwise>
 		<table>
@@ -106,13 +130,13 @@
 						복용한 약품이름
 					</th>
 					<th>
-						복약한 시간 이름
+						복용한 시간 이름
 					</th>
 					<th>
-						복약 날짜
+						복용 날짜
 					</th>
 					<th>
-						복약 성공 여부
+						복용 성공 여부
 					</th>
 				</tr>
 			</thead>
@@ -131,16 +155,22 @@
 </c:choose>
 
 		<!-- 페이지네이션 인덱스 -->
-		<div class ="pagination" >
-			<div class="page-item"> <a class="page-link" href = "?page=1${vo.query}">처음</a></div>
-			<div class="page-item"> <a class="page-link" href = "?page=${vo.prev}${vo.query}">이전</a></div>
-			<c:forEach var="page" items="${vo.list}">
-				<div class="page-item ${vo.currentPage == page ? 'active' : ''}" > <a class="page-link" href ="?page=${page}${vo.query}"> ${page} </a></div>
-			</c:forEach>
-			<div class="page-item"> <a class="page-link" href = "?page=${vo.next}${vo.query}">다음</a></div>
-			<div class="page-item"> <a class="page-link" href = "?page=${vo.lastPage}${vo.query}">마지막</a></div>
-		</div>
+		<c:url var="listUrl" value="/record/list.do">
+			<c:param name="takeDate" value="${takeDate}"/>
+			<c:param name="currentPage" value=""/>
+		</c:url>
 		
+		<div class ="pagination">
+		<ul class ="pagination" >
+			<li class="page-item"> <a class="page-link" href = "${listUrl}1${recordVO.query}">처음</a></li>
+			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.prev}${recordVO.query}">이전</a></li>
+			<c:forEach var="page" items="${recordVO.list}">
+				<li class="page-item ${recordVO.currentPage == page ? 'active' : ''}" > <a class="page-link" href ="${listUrl}${page}${recordVO.query}"> ${page} </a></li>
+			</c:forEach>
+			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.next}${recordVO.query}">다음</a></li>
+			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.lastPage}${recordVO.query}">마지막</a></li>
+		</ul>
+		</div>
 
 </div>
 

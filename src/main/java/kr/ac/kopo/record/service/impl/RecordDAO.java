@@ -11,6 +11,9 @@ import kr.ac.kopo.record.service.RecordVO;
 public interface RecordDAO {
 	
 	List<RecordVO> selectLogByAll(RecordVO recordVO);
+	
+	int total(RecordVO recordVO);
+	
 
 	List<RecordVO> selectLogByDate(@Param("takeDate") String takeDate, @Param("userId") String userId);
 
@@ -25,5 +28,6 @@ public interface RecordDAO {
 	int selectLogToday(@Param("takeDate") String takeDate, @Param("timeId") String timeId);
 
 	int updateTakeLog(@Param("takeDateTime") String takeDateTime, @Param("timeId") String timeId);
+	
 
 }

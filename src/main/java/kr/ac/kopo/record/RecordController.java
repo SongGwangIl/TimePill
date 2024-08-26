@@ -130,22 +130,21 @@ public class RecordController{
 		
 		
 		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
-		System.out.println(userId);
 		//세션객체에 저장된 로그인 정보에서 id를 받아옴
 		recordVO.setUserId(userId);
 
 		//조회를 위한 날짜 파라미터 값 
 		// 1. takeDate(브라우저로부터 넘겨받는 값) 
 		String takeDate = recordVO.getTakeDate();
-		System.out.println(takeDate);
 		
 		// 2. today(오늘의 날짜 첫 조회 디폴트 값) 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String today = LocalDate.now().format(formatter);
-		System.out.println(today);
 		
-		//전체목록 조회, 날짜별목록 조회
+		//전체목록 조회
 		List<RecordVO> listByAll = recordService.selectLogByAll(recordVO);
+		
+		//List<> 선언
 		List<RecordVO> listByDate;
 		List<RecordVO> listChart;
 		

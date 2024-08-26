@@ -25,7 +25,9 @@ public class ScheTimeController {
 	//소분류 알림 상세 조회 및 수정용 페이지로 이동
 	@GetMapping("/edit.do")
 	public String findById(String timeId, Model model) {
+		
 		ScheTimeVO svo = scheTimeService.findById(timeId);
+		
 		model.addAttribute("svo", svo);
 		
 		return "schedule/time/edit";
