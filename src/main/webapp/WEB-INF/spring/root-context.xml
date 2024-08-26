@@ -8,9 +8,14 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 프로퍼티 등록 -->
+	<context:property-placeholder location="classpath:properties/*.properties"/>
+	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="org.mariadb.jdbc.Driver"/>
-        <property name="url" value="jdbc:mariadb://172.16.144.34:3306/dispensor"></property><!-- 172.16.144.34 -->
+        <property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+<!--         <property name="driverClass" value="org.mariadb.jdbc.Driver"/> -->
+        <property name="url" value="jdbc:log4jdbc:mariadb://172.16.144.34:3306/dispensor"></property><!-- 172.16.144.34 -->
         <property name="username" value="fill"/>
         <property name="password" value="fillgood"/>
     </bean>
