@@ -10,14 +10,14 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- 프로퍼티 등록 -->
-	<context:property-placeholder location="classpath:properties/*.properties"/>
+	<context:property-placeholder location="classpath:*.properties"/>
+	
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-<!--         <property name="driverClass" value="org.mariadb.jdbc.Driver"/> -->
-        <property name="url" value="jdbc:log4jdbc:mariadb://172.16.144.34:3306/dispensor"></property><!-- 172.16.144.34 -->
-        <property name="username" value="fill"/>
-        <property name="password" value="fillgood"/>
+        <property name="driverClass" value="${db.DriverClass}"/>
+        <property name="url" value="${db.DbUrl}"></property>
+        <property name="username" value="${db.Username}"/>
+        <property name="password" value="${db.Password}"/>
     </bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
