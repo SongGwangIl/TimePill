@@ -53,7 +53,7 @@
 			</li>
 			
 			<li class="menu">
-				<c:url var="registUrl" value="/myPage"/>
+				<c:url var="registUrl" value="member/regist"/>
 				<a href="${registUrl}"> |사용자보호자등록| </a>
 			</li>
 			

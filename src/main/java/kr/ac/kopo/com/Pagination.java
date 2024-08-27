@@ -3,9 +3,6 @@ package kr.ac.kopo.com;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class Pagination {
 	
 	
@@ -26,6 +23,7 @@ public class Pagination {
 	//검색
 	private int searchKey;
 	private String searchValue;
+	private String type;
 	
 	public String getQuery() {
 		String query="";
@@ -33,8 +31,17 @@ public class Pagination {
 		if(searchKey > 0) {
 			query += "&searchKey=" + searchKey + "&searchValue=" + searchValue;
 		}
-		
 		return query;
+	}
+	
+	public String getRegistQuery() {
+		
+		String registQuery = "";
+		
+		if(searchKey > 0) {
+			registQuery += "?type" + type + "&searchKey=" + searchKey + "&searchValue=" + searchValue;
+		}
+		return registQuery;
 	}
 
 	
