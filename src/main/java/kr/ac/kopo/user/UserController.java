@@ -165,7 +165,7 @@ public class UserController {
 	public String myPage(UserInfoVO uivo, HttpSession session) {
 		
 		String select = userService.updateMyInfo(uivo);
-		
+		  
 		String name;
 		if(select.equals("user"))
 			name = uivo.getUserName();

@@ -31,7 +31,7 @@
 		SELECT DEVICE_ID
 		FROM DEVICE
 	</select>
-	
+	  
 	<select id="getdeviceInfo">
 		SELECT DEVICE_ID, USER_ID, DEVICE_NAME
 		FROM DEVICE

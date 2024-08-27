@@ -23,7 +23,7 @@
 					name="deviceName" class="input" value="${mydeviceInfo.deviceName}"><br></li>
 				
 			</ul>
-			
+			  
 			</ul>
 			<ul id="buttons">
 				<li>

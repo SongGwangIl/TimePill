@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/cover.css" type="text/css">
 </head>
-<body>
+<body>  
 
 	<h1>기기등록</h1>
 	

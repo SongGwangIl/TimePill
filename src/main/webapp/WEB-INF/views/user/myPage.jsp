@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
 </head>
-<body>
+<body>  
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div id="wrap">
 		<h1>나의정보변경</h1>

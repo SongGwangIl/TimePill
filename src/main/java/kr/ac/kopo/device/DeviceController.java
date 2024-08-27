@@ -112,7 +112,7 @@ public class DeviceController {
 		
 		deviceService.updateMydevice(dvo);
 		
-		/* String delete = deviceService.deleteMydevice(dvo); */
+		/* String delete = deviceService.deleteMydevice(dvo); */  
 		
 		return "redirect:/mydevice";
 		

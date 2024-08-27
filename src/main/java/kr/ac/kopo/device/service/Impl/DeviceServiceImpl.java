@@ -33,7 +33,7 @@ public class DeviceServiceImpl implements DeviceService {
 	@Override
 	public int deviceRegister(DeviceVO vo) {
 		return deviceDAO.deviceRegister(vo);
-	}
+	}  
 
 	@Override
 	public DeviceInfoVO getdeviceInfo(DeviceInfoVO dvo) {

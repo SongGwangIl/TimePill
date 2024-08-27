@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.device.DeviceInfoVO;
 import kr.ac.kopo.device.DeviceVO;
-
+  
 public interface DeviceService {
 
 	String getuserDeviceId(String userId);

@@ -9,7 +9,7 @@ import kr.ac.kopo.device.DeviceVO;
 
 @Mapper
 public interface DeviceDAO {
-
+  
 	String getuserDeviceId(String userId);
 
 	List<String> getAlldeviceId();
