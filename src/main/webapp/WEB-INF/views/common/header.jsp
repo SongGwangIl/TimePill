@@ -53,8 +53,8 @@
 			</li>
 			
 			<li class="menu">
-				<c:url var="registUrl" value="member/regist"/>
-				<a href="${registUrl}"> |사용자보호자등록| </a>
+				<c:url var="searchUrl" value="/member/search"/>
+				<a href="${searchUrl}"> |사용자보호자등록| </a>
 			</li>
 			
 			<li class="menu">
@@ -64,6 +64,7 @@
 			
 		</ul>
 	</nav>
+	
 	
 	
 <!-- <script type="text/javascript">

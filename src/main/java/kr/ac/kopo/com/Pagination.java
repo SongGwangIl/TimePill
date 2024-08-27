@@ -23,7 +23,6 @@ public class Pagination {
 	//검색
 	private int searchKey;
 	private String searchValue;
-	private String type;
 	
 	public String getQuery() {
 		String query="";
@@ -34,16 +33,6 @@ public class Pagination {
 		return query;
 	}
 	
-	public String getRegistQuery() {
-		
-		String registQuery = "";
-		
-		if(searchKey > 0) {
-			registQuery += "?type" + type + "&searchKey=" + searchKey + "&searchValue=" + searchValue;
-		}
-		return registQuery;
-	}
-
 	
 	public int getSearchKey() {
 		return searchKey;

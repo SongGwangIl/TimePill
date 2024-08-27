@@ -1,10 +1,11 @@
 package kr.ac.kopo.user;
 
+import kr.ac.kopo.com.Pagination;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UserInfoVO {
+public class UserInfoVO extends Pagination  {
 	
 	private String userId;  //회원아이디
 	private String userName; //사용자 이름
@@ -21,4 +22,6 @@ public class UserInfoVO {
 	private String dd;
 	private String userEmail; //사용자 이메일
 	private String userSelect; //사용자 구분 user 또는 protector
+	private String userProId;
+	private char userProRegist;
 }

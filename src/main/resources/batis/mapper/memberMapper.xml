@@ -4,33 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.kopo.member.service.impl.MemberDAO">
 
-	<resultMap type="UserVO" id="UserMap">
-		<id column="user_id" property="userId"/>
-		<result column="user_pwd" property="userPwd"/>
-		<result column="user_email" property="userEmail"/>
-		<result column="user_valid" property="userValid"/>
-		<result column="device_regist" property="deviceRegist"/>
-		<result column="user_select" property="userSelect"/>
-	</resultMap>
-	
-<!-- 	<sql id="searchKey1"> -->
-<!-- 		<if test="searchKey == '1'"> -->
-<!-- 			USER_ID LIKE CONCAT(CONCAT('%', #{searchValue}), '%') -->
-<!-- 		</if> -->
-<!-- 		<if test="searchKey == '2'"> -->
-<!-- 			USER_NAME LIKE CONCAT(CONCAT('%', #{searchValue}), '%') -->
-<!-- 		</if> -->
-<!-- 	</sql> -->
-	
-<!-- 	<sql id="searchKey2"> -->
-<!-- 		<if test="searchKey == '1'"> -->
-<!-- 			USER_ID LIKE CONCAT(CONCAT('%', #{searchValue}), '%') -->
-<!-- 		</if> -->
-<!-- 		<if test="searchKey == '2'"> -->
-<!-- 			USER_NAME LIKE CONCAT(CONCAT('%', #{searchValue}), '%') -->
-<!-- 		</if> -->
-<!-- 	</sql> -->
-	
+<!-- 	<resultMap type="UserVO" id="UserMap"> -->
+<!-- 		<id column="user_id" property="userId"/> -->
+<!-- 		<result column="user_pwd" property="userPwd"/> -->
+<!-- 		<result column="user_email" property="userEmail"/> -->
+<!-- 		<result column="user_valid" property="userValid"/> -->
+<!-- 		<result column="device_regist" property="deviceRegist"/> -->
+<!-- 		<result column="user_select" property="userSelect"/> -->
+<!-- 	</resultMap> -->
+
 	<!-- 사용자의 userSelect -->
 	<select id="userSelect" resultType="String">
 		SELECT USER_SELECT
@@ -38,11 +20,18 @@
 		WHERE USER_ID = #{userId}
 	</select>
 
-	<select id="deviceSelect" resultType="String">
-		SELECT UI.USER_ID
+	<!-- 등록기기 시리얼코드로 userId, userName select -->
+	<select id="deviceSelect" resultType="UserInfoVO">
+		SELECT 
+			UI.USER_ID
+			, UI.USER_NAME
 		FROM USER_INFO UI JOIN DEVICE D ON(UI.USER_ID=D.USER_ID) 
-		WHERE DEVICE_ID = #{deviceId}
-			AND 
+		WHERE DEVICE_ID = #{searchValue}
 	</select>
 	
+	<update id="registUser">
+		UPDATE USER_INFO
+		SET USER_PRO_ID = #{userProId}
+		WHERE USER_ID = #{userId}
+	</update>
 </mapper>

@@ -19,12 +19,16 @@
 1. 보호자가 사용자를 검색할 수 있는 기능 <br>
 - 검색 키워드는 기기 시리얼코드로만 가능하다 : 결과값은 항상 1개(정확한 일치) 혹은 0개(불일치) <br>
  
-2. 보호자는 검색된 사용자에게 관리 신청을 보낼 수 있음 (update,insert) <br>
+2. 보호자는 검색된 사용자에게 관리 신청을 보낼 수 있음 (update, 이미 있는 행에 내용추가) <br>
 사용자 n : 1 보호자 <br><br>
 
-보호자가 사용자에게 신청을 보내면 사용자 테이블의 보호자 아이디 컬럼에 insert하기<br><br>
+보호자가 사용자에게 신청을 보내면 사용자 테이블의 보호자 아이디 컬럼에 update하기<br><br>
+!!여기까진 구현완료!! 같은 vo의 같은 속성값 이름을 계속 사용해서 redirect할때나 등등..자꾸 파라미터 값이 유지되어서 돌아다님 <br><br>
 
-사용자 쪽에서 거절을 하면 사용자 테이블의 보호자 아이디를 delete하기 <br><br>
+사용자쪽에서 요청이 온 것을 select 할 수 있는 기능 추가<br>
+사용자 쪽에서 거절을 하면 사용자 테이블의 보호자 아이디를 delete용으로 update하기 <br><br>
+큰일났다 FK라서 null로 update하려면 데이터베이스가 거부한다....<br>
+사용자가 아닌 안쓰는 user를 하나 만들어서 해당 조건일 때는 null값과 동일한 취급을 하면 될 것 같기도 하고... <br><br>
 
 신청도중은 상태 컬럼을 하나 만들어서 T, F표기<br>
 사용자 쪽에서 승낙을 해야만 해당 상태 컬럼을 T로 전환<br>
@@ -38,38 +42,23 @@
 
 <!-- 검색 -->
 <div>
-	<form action="${pageContext.request.contextPath}/member/regist" method="post">
-	
-	<!-- 로그인한 유저의 사용자 타입에 따라서 
-		검색분류를 자동으로 출력예정 (사용자면 보호자 검색, 보호자면 사용자 검색) -->
-	<!-- 사용자 타입에 대한 정보 조회가 필요함 -->
-	<div>
-		<h3> 사용자의 유저 타입 : ${userSelect} </h3>
-		<h3> 분류 : 
-			<c:if test='${userSelect eq "user"}'>
-				보호자 검색
-				<input type="hidden" name="type" value="user">
-			</c:if>
-			<c:if test='${userSelect eq "protector"}'>
-				사용자 검색
-				<input type="hidden" name="type" value="protector">
-			</c:if>
-		</h3>
-	</div>
-	
-	<div>
-		검색 분류 : <select name="searchKey">
-						<option value="0"> 선택 </option>
-						<option value="1"> 이름 </option>
-						<option value="2"> 아이디 </option>
-					</select>
-		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}">
-	</div>
-	
-	<div>
-		<button>검색</button>
-	</div>
-	
+	<form action="${pageContext.request.contextPath}/member/search" method="post">	
+		<div>
+			유저 타입 : ${userSelect eq 'user' ? '사용자' : '보호자'} <br>
+			분류 : 
+				<c:if test='${userSelect eq "user"}'>
+					나의 보호자 정보 조회, 보호자에게 초대코드 보내기
+				</c:if>
+				<c:if test='${userSelect eq "protector"}'>
+					사용자 검색
+					<div>
+						검색 내용: <input type="text" name="searchValue" value="${searchValue}">
+					</div>
+					<div>
+						<button>검색</button>
+					</div>
+				</c:if>			
+		</div>
 	</form>
 </div>
 
@@ -85,18 +74,19 @@
 					</th>
 				</tr>
 			</thead>
-			
 			<tbody>
-			<c:forEach var="tvo" items="${recordSelectByDate}">
 				<tr>
-					<td> ${tvo.takeDate} </td>
-					<td> ${tvo.takeSuccess} </td>
+					<td> ${userInfoVO.userId} </td>
+					<td> ${userInfoVO.userName} </td>
 				</tr>
-			</c:forEach>
 			</tbody>
 		</table>
 	</div>
 
+	<form action="${pageContext.request.contextPath}/member/regist" method="post">
+		<input type="hidden" name="userId" value="${userInfoVO.userId}">
+		<button>관계 신청하기</button>
+	</form>
 
 <!-- footer -->
 <hr><p><br><jsp:include page="/WEB-INF/views/common/footer.jsp"/></p><br>
