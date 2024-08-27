@@ -60,7 +60,7 @@ public class UserController {
 			else {
 				session.setAttribute("name", name);
 				if (uvo.getUserSelect().equals("user"))
-					return "device/deviceInfo";
+					return "redirect:/device";
 				else 
 					return "redirect:/main";
 			}

@@ -57,6 +57,11 @@
 				<a href="${registUrl}"> |사용자보호자등록| </a>
 			</li>
 			
+			<li class="menu">
+				<c:url var="mydeviceUrl" value="/mydevice"/>
+				<a href="${mydeviceUrl}"> |기기정보변경| </a>
+			</li>
+			
 		</ul>
 	</nav>
 	

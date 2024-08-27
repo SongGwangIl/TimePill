@@ -17,7 +17,7 @@
 	
 	<div id="wrap">
 		<p>기기 등록이 완료되었습니다.추가정보를 입력하여 Timepill을 더욱 완벽하게 이용해보세요!</p>
-		<a href="">추가정보 등록하기</a>
+		<a href="${pageContext.request.contextPath}/device">추가정보 등록하기</a>
 		<a href="${pageContext.request.contextPath}/main">나중에 할게요</a>
 	</div>
 

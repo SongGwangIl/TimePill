@@ -57,7 +57,7 @@
 						</li>
 						<li>
 							<label class="label">전화번호</label>
-							<input type="text" name="protPhone" placeholder="-를 제외한 숫자만 입력" value="${myInfo.protPhone}">
+							<input type="text" name="protPhone" value="${myInfo.protPhone}">
 						</li>
 						<li>
 							<label class="label">관계</label>

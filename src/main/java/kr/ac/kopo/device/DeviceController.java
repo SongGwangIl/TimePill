@@ -23,8 +23,15 @@ public class DeviceController {
 	DeviceService deviceService;
 
 	@RequestMapping(path = "/device", method = RequestMethod.GET)
-	public String deviceform() {
-		return "device/deviceInfo";
+	public String deviceform(DeviceVO vo, HttpSession session, Model model) {
+		
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		model.addAttribute("list1", userId);
+		
+		String userDeviceID = deviceService.getuserDeviceId(userId);
+		model.addAttribute("userDeviceId", userDeviceID);
+		
+		return userId.equals(userDeviceID) ? "redirect:/main" : "device/deviceInfo";
 	}
 
 	@PostMapping("/device")
@@ -73,5 +80,55 @@ public class DeviceController {
 	public String register() {
 		return "device/register";
 	}
+	
+	@RequestMapping(path = "/mydevice", method = RequestMethod.GET)
+	public String mydevice(HttpSession session, Model model, DeviceVO vo, DeviceInfoVO dvo) {
+		
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		model.addAttribute("list1", userId);
+		dvo.setUserId(userId);
+		
+		String userDeviceID = deviceService.getuserDeviceId(userId);
+		model.addAttribute("userDeviceId", userDeviceID);
+		
+		// 기기정보 변경내용
+		DeviceInfoVO deviceInfo = deviceService.getdeviceInfo(dvo);
+		model.addAttribute("mydeviceInfo", deviceInfo);
+		
+		if (userId.equals(userDeviceID)) {
+			return "device/mydevice";
+		} else {
+			return "device/mydelete";
+		}
+		
+	}
+	
+	//기기정보 변경
+	@PostMapping("/mydevice")
+	public String mydevice(DeviceInfoVO dvo, HttpSession session) {
+		
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		dvo.setUserId(userId);
+		
+		deviceService.updateMydevice(dvo);
+		
+		/* String delete = deviceService.deleteMydevice(dvo); */
+		
+		return "redirect:/mydevice";
+		
+	}
+	
+	@GetMapping("/device/delete")
+	public String mydelete(DeviceInfoVO dvo, HttpSession session) {
+		
+		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId(); 
+		dvo.setUserId(userId);
+		
+		deviceService.deleteMydevice(dvo);
+		
+		return "redirect:/mydevice";
+	}
+	
+	
 }
 	
