@@ -10,7 +10,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- 프로퍼티 등록 -->
-	<context:property-placeholder location="classpath:*.properties"/>
+	<context:property-placeholder location="classpath:properties/*.properties"/>
 	
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
