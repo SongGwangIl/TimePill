@@ -9,17 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>알람시간 등록 - 2</title>
-<style>
-form {
-	width: 500px;
-	margin : 0 auto;
-}
-label {
-	margin : 0 auto;
-	text-align: center;
-}
-
-</style>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/schedule/time/add2.do"

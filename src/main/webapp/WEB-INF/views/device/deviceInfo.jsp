@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -17,18 +16,18 @@
 	
 	<div id="wrap">
 		<h2>Timepill 시리얼 코드 등록</h2>
+		
 		<form action="${pageContext.request.contextPath}/device" method="post">
-			<ul class="input">
+			<ul>
 				<li>
 	                <input type="text" name="deviceId" id="deviceId" required>
 	                <button type="submit">등록하기</button><br>
+	            </li>
             </ul>
 		</form>
 		
-			<ul>
-			 	<a href="${pageContext.request.contextPath}/main">나중에 할게요</a><br>
-			 </ul>
-		</li>
+		<a href="${pageContext.request.contextPath}/main" >나중에 할게요</a>
 	</div>
+	
 </body>
 </html>

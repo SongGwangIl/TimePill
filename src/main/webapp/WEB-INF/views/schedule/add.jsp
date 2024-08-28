@@ -5,40 +5,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>스케쥴 등록 화면</title>
 
-<style>
-p {
-	width: 510px;
-	margin : 0 auto;
-}
-form {
-	padding: 20px;
-	width: 500px;
-	margin : 0 auto;
-}
+<!-- <script>
+// 	// 구동 안되는 오늘날짜 넣기 코드
+// 	const today = new Date();
+// 	const yyyy = today.getFullYear();
+// 	const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+// 	const dd = String(today.getDate()).padStart(2, '0');
+	
+// 	const todayString = `${yyyy}-${mm}-${dd}`;
+// 	document.getElementById('scheStartDate').value = todayString;
+</script> -->
 
-</style>
-
-
-</head>
-
-<script>
-// 구동 안되는 오늘날짜 넣기 코드
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-const dd = String(today.getDate()).padStart(2, '0');
-
-const todayString = `${yyyy}-${mm}-${dd}`;
-document.getElementById('scheStartDate').value = todayString;
-</script>
-
-<p><jsp:include page="/WEB-INF/views/common/header.jsp"/></p>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <body>
 	<div id=insertList">
@@ -72,7 +51,6 @@ document.getElementById('scheStartDate').value = todayString;
 							<option value=28>4주</option>
 							<option value=35>5주</option>
 							<option value=42>6주</option>
-							<!-- 계산 안할거면 굳이 안넣어도 될것같음 ㅠㅠ -->
 						</select>	
 					</ul>
 					<ul>
@@ -87,7 +65,4 @@ document.getElementById('scheStartDate').value = todayString;
 		</form>
 	</div>
 </body>
-
-
-
 </html>

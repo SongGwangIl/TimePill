@@ -5,39 +5,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>스케줄 수정 화면</title>
+<!-- <script> 
+	// 구동 안되는 오늘날짜 넣기 코드
+	const today = new Date();
+	const yyyy = today.getFullYear();
+	const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+	const dd = String(today.getDate()).padStart(2, '0');
+	
+	const todayString = `${yyyy}-${mm}-${dd}`;
+	document.getElementById('scheStartDate').value = todayString;
+</script> -->
 
-<style>
-p {
-	width: 510px;
-	margin : 0 auto;
-}
-#insertList {
-	padding: 20px;
-	width: 500px;
-	margin : 0 auto;
-}
-</style>
-
-
-</head>
-
-<script>
-// 구동 안되는 오늘날짜 넣기 코드
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-const dd = String(today.getDate()).padStart(2, '0');
-
-const todayString = `${yyyy}-${mm}-${dd}`;
-document.getElementById('scheStartDate').value = todayString;
-</script>
-
-<p><jsp:include page="/WEB-INF/views/common/header.jsp"/></p>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <body>
 	<div id=insertList">
@@ -88,7 +67,4 @@ document.getElementById('scheStartDate').value = todayString;
 		</form>
 	</div>
 </body>
-
-
-
 </html>

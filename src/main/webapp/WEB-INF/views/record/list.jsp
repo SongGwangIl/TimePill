@@ -2,26 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> 복약 기록 조회 </title>
-<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
-</head>
-<body>
 
-
-<div id="container">
 
 <!-- 헤더 -->
-<p><br>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
-<br><br>
 
-<hr>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 
 <h3> ${name} 님의 복약 상황을 확인해보세요! </h3>
@@ -90,7 +75,6 @@
 		</table>
 	</c:otherwise>
 </c:choose>
-<br><br>
 
 
 <h1> 전체 복용기록 조회 </h1>
@@ -160,30 +144,26 @@
 			<c:param name="currentPage" value=""/>
 		</c:url>
 		
-		<div class ="pagination">
-		<ul class ="pagination" >
-			<li class="page-item"> <a class="page-link" href = "${listUrl}1${recordVO.query}">처음</a></li>
-			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.prev}${recordVO.query}">이전</a></li>
+		<div>
+		<ul>
+			<li> <a href = "${listUrl}1${recordVO.query}">처음</a></li>
+			<li> <a href = "${listUrl}${recordVO.prev}${recordVO.query}">이전</a></li>
 			<c:forEach var="page" items="${recordVO.list}">
-				<li class="page-item ${recordVO.currentPage == page ? 'active' : ''}" > <a class="page-link" href ="${listUrl}${page}${recordVO.query}"> ${page} </a></li>
+				<li> <a class="page-link" href ="${listUrl}${page}${recordVO.query}"> ${page} </a></li>
 			</c:forEach>
-			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.next}${recordVO.query}">다음</a></li>
-			<li class="page-item"> <a class="page-link" href = "${listUrl}${recordVO.lastPage}${recordVO.query}">마지막</a></li>
+			<li> <a href = "${listUrl}${recordVO.next}${recordVO.query}">다음</a></li>
+			<li> <a href = "${listUrl}${recordVO.lastPage}${recordVO.query}">마지막</a></li>
 		</ul>
 		</div>
 
-</div>
 
-<p><br><br>
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-<br><br></p>
-
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
+
 <script>
 	//JSON객체선언
 	var jsonData = ${JSON}
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
-</body>
-</html>

@@ -4,7 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+
 <p>사용자 검색</p>
+
 <form action="${pageContext.request.contextPath}/member/search" method="post">
 	<div>
 		시리얼 코드 입력  <input type="text" name="searchValue" value="${searchValue}">
@@ -34,10 +37,10 @@
 </div>
 
 
-	<form action="${pageContext.request.contextPath}/member/regist" method="post">
-		<input type="hidden" name="userId" value="${userInfoVO.userId}">
-		<button>관계 신청하기</button>
-	</form>
+<form action="${pageContext.request.contextPath}/member/regist" method="post">
+	<input type="hidden" name="userId" value="${userInfoVO.userId}">
+	<button>관계 신청하기</button>
+</form>
 
 	
 	

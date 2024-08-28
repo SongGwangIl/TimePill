@@ -6,17 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/login.css" type="text/css">
-<style>
-	.bg{
-		top: 0px;
-		left: 0px;
-		width: 1920px;
-		height: 1080px;
-		/* UI Properties */
-		background: transparent url('${pageContext.request.contextPath}/resources/img/background.png') 0% 0% no-repeat padding-box;
-		opacity: 1;
-	}
-</style>
+<!-- <style>
+/* 	.bg{ */
+/* 		top: 0px; */
+/* 		left: 0px; */
+/* 		width: 1920px; */
+/* 		height: 1080px; */
+/* 		/* UI Properties */ */
+/* 		background: transparent url('${pageContext.request.contextPath}/resources/img/background.png') 0% 0% no-repeat padding-box; */
+/* 		opacity: 1; */
+/* 	} */
+</style> -->
 </head>
 <body class="bg">
 	<div id="wrap">

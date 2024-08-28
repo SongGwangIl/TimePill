@@ -3,38 +3,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>메인 페이지</title>
-	<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
-</head>
+<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
 
 
-<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 
-	<div id="container">
-	
-	<!-- 헤더 -->
-	<p><br>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<br></p>
-	
-	<hr>
-	
-	<h1>TimePill Main</h1>
-	
-	<br><br>
-	
-	
+<h1>TimePill Main</h1>
+
 	<!-- 오늘 날짜 디폴트 알람 목록 -->
 	<h3>${name}님! <br> ${takeDate} 날에 복용해야 할 약품 목록을 확인하세요! </h3>
 	<h3 id="current-time"></h3>
-	
-	<br>
-	
+
 	
 	<!-- 조회 날짜 선택 -->
 	<form action="${pageContext.request.contextPath}/alarmSelect.do" method="get">
@@ -89,23 +70,13 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
-	<br><br>
-	
+
 	<h3>
 		<a href="${pageContext.request.contextPath}/schedule/add.do">신규 알람 등록</a>
 	</h3>
-	
-	<br><br><hr>
-	
-	<p><br>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<br></p>
-	
-	</div>
-	
-	
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/nowtime.js"></script>
 
-</body>
-</html>
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/nowtime.js"></script>

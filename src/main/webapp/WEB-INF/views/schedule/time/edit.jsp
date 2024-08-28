@@ -9,29 +9,6 @@
 <head>
     <meta charset="UTF-8">
     <title>알람시간 수정</title>
-    <style>
-        form {
-            width: 500px;
-            margin: 0 auto;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="submit"] {
-            display: block;
-            margin: 20px auto;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 15px;
-        }
-        i {
-            font-size: 0.9em;
-            color: gray;
-        }
-    </style>
 </head>
 
 <body>

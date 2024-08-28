@@ -9,26 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>알람시간 등록 - 1</title>
-<style>
-
-/* 중간에 페이지 빠져나가지 말라고 일부러 헤더 안보이게 함 */
-form {
-	width: 500px;
-	margin : 0 auto;
-}
-label {
-	margin : 0 auto;
-	text-align: center;
-}
-input#submit {
-	justify-content: center;
-	align-items: center;
-}
-</style>
 </head>
+
 <body>
-	<form action="${pageContext.request.contextPath}/schedule/time/add1.do"
-		method="post">
+	<form action="${pageContext.request.contextPath}/schedule/time/add1.do" method="post">
 		<fieldset>
 			<legend><c:out value="${svo.scheTitle} 의 알람시간 등록 (1)"/> </legend>
 			<input type="hidden" name="scheId" value="${svo.scheId}"/>

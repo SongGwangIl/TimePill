@@ -6,44 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <title>복약 스케줄 리스트</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        body {
-            padding: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        ul.schedule {
-            width: 500px;
-            border: 1px solid black;
-            list-style-type: none;
-            padding: 10px;
-            margin: 5px auto;
-        }
-        li {
-            padding: 5px;
-        }
-        button {
-            margin-left: 10px;
-        }
-        .addTime a {
-            color: red;
-        }
-    </style>
 </head>
 <body>
 
 	<!-- 헤더 -->
-	<p><br>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/> </p>
-	<br><br>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
-	<hr>
 
     <h1>복약 스케줄 리스트</h1>
     

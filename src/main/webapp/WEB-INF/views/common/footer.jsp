@@ -3,8 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<h3 id="footer">copyrightⓒtimePill</h3>
+<div id="footer">
+	<h3>copyrightⓒtimePill</h3>
+</div>
 
 </body>
 </html>
