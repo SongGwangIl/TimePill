@@ -10,12 +10,47 @@
 	<meta charset="UTF-8">
 	<title>메인 페이지</title>
 	<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
+	<style>
+	.bg{
+		top: 0px;
+		left: 0px;
+		width: 1920px;
+		height: 1080px;
+		/* UI Properties */
+		background: transparent url('${pageContext.request.contextPath}/resources/img/background.png') 0% 0% no-repeat padding-box;
+		opacity: 1;
+	}
+	.box{
+		top: 346px;
+		left: 360px;
+		width: 1200px;
+		height: 635px;
+		/* UI Properties */
+		background: #FFFFFF 0% 0% no-repeat padding-box;
+		box-shadow: 5px 5px 6px #00000029;
+		opacity: 1;
+	}
+	
+	.info-text {
+          position: absolute;
+          top: 229px;
+          left: 636px;
+          width: 648px;
+          height: 84px;
+          text-align: center;
+          font-size: 32px;
+          font-weight: bold;
+          letter-spacing: 0px;
+          color: #000000;
+          opacity: 1;
+        }
+        
+	</style>
 </head>
 
+<body class="bg">
 
-<body>
-
-	<div id="container">
+	<div>
 	
 	<!-- 헤더 -->
 	<p><br>
@@ -24,20 +59,20 @@
 	
 	<hr>
 	
-	<h1>TimePill Main</h1>
-
-	
 	<br><br>
 	
 	
 	<!-- 오늘 날짜 디폴트 알람 목록 -->
-	<h3>${name}님! <br> 오늘 복용해야 할 약품 목록을 확인하세요! </h3>
-	<h3 id="current-time"></h3>
+	<div id="container" class="box">
+	<h3>${name}님! <br> 오늘 복용해야 할 약품 목록을 확인하세요! </h3> <br>
+	<div id="current-time"></div>
 	
 	<br>
 	
 	
 	<!-- 조회 날짜 선택 -->
+	
+	<div>
 	<form action="${pageContext.request.contextPath}/alarmSelect.do" method="get">
 		<label for="takeDate"> 조회 날짜 선택 : </label>
 		<input type="date" id="takeDate" name="takeDate">
@@ -102,12 +137,14 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
+	</div>
+	
 	<br><br>
 	
 	<h3>
 		<a href="${pageContext.request.contextPath}/schedule/add.do">신규 알람 등록</a>
 	</h3>
-	
+	</div>
 	<br><br><hr>
 	
 	<p><br>
