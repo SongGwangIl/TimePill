@@ -24,4 +24,5 @@ public class UserInfoVO extends Pagination  {
 	private String userSelect; //사용자 구분 user 또는 protector
 	private String userProId;
 	private char userProRegist;
+	private String choice;
 }

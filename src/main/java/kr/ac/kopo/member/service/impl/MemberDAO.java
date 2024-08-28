@@ -10,8 +10,14 @@ public interface MemberDAO {
 
 	String userSelect(UserVO userVO);
 
-	UserInfoVO deviceSelect(UserInfoVO userVO);
+	UserInfoVO userInfoSelect(UserVO userVO);
+
+	UserInfoVO deviceSelect(UserInfoVO userInfoVO);
 
 	int registUser(UserInfoVO userInfoVO);
+	
+	int accept(UserInfoVO userInfoVo);
+	
+	int deny(UserInfoVO userInfoVo);
 
 }

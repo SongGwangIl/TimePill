@@ -17,16 +17,33 @@ public class MemberServiceImpl implements MemberService{
 	public String userSelect(UserVO userVO) {
 		return memberDAO.userSelect(userVO);
 	}
+	
+	@Override
+	public UserInfoVO userInfoSelect(UserVO userVO) {
+		return memberDAO.userInfoSelect(userVO);
+	}
 
 	@Override
-	public UserInfoVO deviceSelect(UserInfoVO vo) {
-		return memberDAO.deviceSelect(vo);
+	public UserInfoVO deviceSelect(UserInfoVO userInfoVO) {
+		return memberDAO.deviceSelect(userInfoVO);
 	}
 
 	@Override
 	public int registUser(UserInfoVO userInfoVO) {
 		return memberDAO.registUser(userInfoVO);
 	}
+	
+	@Override
+	public int accept(UserInfoVO userInfoVO) {
+		return memberDAO.accept(userInfoVO);
+	}
+	
+	@Override
+	public int deny(UserInfoVO userInfoVO) {
+		return memberDAO.deny(userInfoVO);
+	}
+
+
 
 
 
