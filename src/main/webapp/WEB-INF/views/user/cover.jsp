@@ -35,8 +35,8 @@
 		<div class="e1_4">
 			<div class="bg"></div>
 			<span class="desc1">
-				홀로 복용 관리에 어려움을 느끼는 노인들과 가족과 멀리 떨어져 지내는
-				보호자들에게 스마트한 어플리케이션을 제공하여 약물 복용 관리 맞춤형 서비스를 제공합니다.
+				홀로 복용 관리에 어려움을 느끼는 노인들과 <br> 가족과 멀리 떨어져 지내는
+				보호자들에게 <br> 스마트한 어플리케이션을 제공하여 <br>약물 복용 관리 맞춤형 서비스를 제공합니다.
 			</span>
 			<div class=e3_15>
 				<div class="device"></div>
@@ -60,6 +60,7 @@
 			</div>
 			<span class="e3_24">타임필 소프트웨어를 본격적으로 사용해보세요!</span>
 		</div>
-	</div>
-</body>
-</html>
+	</div><br><br>
+	
+<!-- footer -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -9,7 +9,7 @@
 	<style>
 		.text4 {
         position: absolute;
-        top: 1010px;
+        top: 1020px;
         left:880px;
         width: 262px;
         height: 20px;

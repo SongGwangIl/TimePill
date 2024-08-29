@@ -2,17 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="icon" href="data:,">
-<meta charset="UTF-8">
-<title>사용자 정보 입력</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
-</head>
-<body>
+
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addUserInfo.css" type="text/css">
+
+
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div id="wrap">
+	<div id="wrap" style="position: relative; z-index: 100; width : 500px;">
 		<h1>사용자 정보 입력</h1>
 		<form action="${pageContext.request.contextPath}/addUserInfo"
 			method="post">

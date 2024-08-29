@@ -2,15 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="icon" href="data:,"> 
-<meta charset="UTF-8">
-<title>보호자 정보 입력</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addProtectorInfo.css" type="text/css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addProtectorInfo.css" type="text/css">
 </head>
 <body>
+
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 	<div id="wrap">

@@ -19,11 +19,13 @@
         top: 346px;
         left: 360px;
         width: 1200px;
-        height: 635px;
+        height: 600px;
         background: #FFFFFF;
         box-shadow: 5px 5px 6px #00000029;
         opacity: 1;
-        border-radius: 4%;
+        border-radius: 3%;
+        overflow-y: scroll; /* 세로 스크롤 활성화 */
+        overflow-x: hidden; /* 가로 스크롤 비활성화 */
     }
 
   .current-time {
@@ -64,19 +66,19 @@
     }
     
     table {
-        width: 90%;
+        width: 70%;
         border-collapse: collapse;
         margin: 20px auto;
         margin-top: 50px
     }
-    
     table, th, td {
-        border: 1px solid black;
-        
+        border: 2px solid #ccc;
+		border-left: 1px solid white; /* 왼쪽 테두리 색상 */
+		border-right: 1px solid white; /* 오른쪽 테두리 색상 */
     }
     
     th, td {
-        padding: 4px 7px;
+    	padding: 8px 10px;
         text-align: center;
         border-spacing: 0;
     }
@@ -108,14 +110,17 @@
 	    margin-top: 40px;
 }
 
-.form{
+.form {
 	left: 50px;
 	position: relative;
 	border-collapse: collapse;
     margin: 20px auto;
     margin-top: 100px;
 }
-
-
-
-    
+#okaybtn {
+	font-size: 14px;
+	font-weight : 400;
+}
+a:hover{
+	color: #ccc;
+}

@@ -19,6 +19,18 @@
 	background-repeat:no-repeat;
 	background-size:cover;
 }
+	.text4 {
+        position: absolute;
+        top: 830px;
+        left:880px;
+        width: 262px;
+        height: 20px;
+        text-align: left;
+        font: normal normal normal 14px/20px 'Noto Sans CJK KR';
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+    }
 </style>
 </head>
 
@@ -63,5 +75,9 @@
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/user/add.js"></script>
+	
+<div id="footer" class="text4">
+	<h3>copyrightⓒtimePill</h3>
+</div>
 </body>
 </html>

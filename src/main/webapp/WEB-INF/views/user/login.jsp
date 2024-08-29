@@ -18,6 +18,21 @@
 	background-repeat:no-repeat;
 	background-size:cover;
 }
+		.text4 {
+        position: absolute;
+        top: 830px;
+        left:880px;
+        width: 262px;
+        height: 20px;
+        text-align: left;
+        font: normal normal normal 14px/20px 'Noto Sans CJK KR';
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+    }
+</head>
+
+
 </style>
 </head>
 <body>
@@ -40,5 +55,8 @@
 		<a href="#">아이디를 잃어버렸습니까?</a>
 		<a href="#">비밀번호를 잃어버렸습니까?</a>
 	</div>
+	<div id="footer" class="text4">
+	<h3>copyrightⓒtimePill</h3>
+</div>
 </body>
 </html>

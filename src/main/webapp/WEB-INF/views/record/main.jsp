@@ -22,7 +22,7 @@
 
 <span class="info-text">
 	${name}님!<br>
-	오늘 복용해야 할 약품 목록을 확인하세요! 
+	오늘 복용할 알약 목록을 확인하세요! 
 </span>
 		
 
@@ -46,12 +46,12 @@
 			</c:when>
 			
 			<c:otherwise>
-				<table >
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>복용할 약 이름</th>
-							<th>시간 이름	</th>
-							<th>설정한 알람 시간</th>
+							<th>알람 이름	</th>
+							<th>설정 알람 시간</th>
 							<th>복용 체크	</th>
 						</tr>
 					</thead>
@@ -60,7 +60,6 @@
 					
 						<c:forEach var="al" items="${alarmByDateList}">
 							<tr>
-								
 								<c:forEach var="sdl" items="${al.scheduleList}">
 									<td>${sdl.scheTitle}</td>
 								</c:forEach>
@@ -70,19 +69,17 @@
 								</c:forEach>
 
 								<c:forEach var="stl" items="${al.scheTimeList}">
-									<td>${stl.timeAlarm}</td>
+									<td> ${stl.timeAlarm} </td>
 								</c:forEach>
 
 								<c:forEach var="stl" items="${al.scheTimeList}">
 									<td>
-										<form action="${pageContext.request.contextPath}/addlog.do" method="post">
+										<form id="submitFrm" action="${pageContext.request.contextPath}/addlog.do" method="post">
 											<input type="hidden" name="timeId" value="${stl.timeId}">
-											<button type="submit">복용 완료!</button>
+											<a id = "okaybtn" href="#" onclick="document.querySelector('#submitFrm').submit(); return false;"> 완료 </a>
 										</form>
 									</td>
 								</c:forEach>
-
-								<td>NO</td>
 							</tr>
 						</c:forEach>
 
@@ -97,6 +94,7 @@
 	</div>
 </div>
 </div>
+
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
