@@ -5,9 +5,7 @@
 
 
 <!-- 헤더 -->
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
 
 <h3> ${name} 님의 복약 상황을 확인해보세요! </h3>
 
@@ -159,11 +157,14 @@
 
 
 
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
 
 <script>
 	//JSON객체선언
 	var jsonData = ${JSON}
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>

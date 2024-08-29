@@ -5,10 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/add.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addFrm.css" type="text/css">
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
+<style>
+.bg { 
+	width:1920px;
+	height:700px;
+	position:absolute;
+	left:0px;
+	top:80px;
+	background-image:url(resources/img/background.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+</style>
 </head>
+
 <body>
+
+<div class="bg"></div>
 	<div id="wrap">
 		<h1>회원가입</h1>
 		<form action="${pageContext.request.contextPath}/singup" method="post">
@@ -33,21 +49,15 @@
                 	<input type="email" name="userEmail" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required><br>
 				</li>
 				<li>
-                	<label class="label">사용방법선택</label>
                 	<div class="select">
-	                	<input type="radio" id=user name="userSelect" value="user"><label for="user" class="hover">사용자</label>
-	                	<input type="radio" id=protector name="userSelect" value="protector" checked><label for="protector" class="hover">보호자</label>	                
+                		<label class="label">사용방법선택</label>
+	                	<label for="user" class="user">사용자</label> <input type="radio" id=user name="userSelect" value="user">
+	                	<label for="protector" class="protector">보호자</label> <input type="radio" id=protector name="userSelect" value="protector" checked>	                
                 	</div>                
 				</li>
             </ul>
-            <ul id="buttons">
-            	<li>
-				    <button type="submit">회원가입</button><br>
-            	</li>
-            	<li>
-				    <button type="button" onclick="location.href='cover'">취소</button><br>        
-            	</li>
-            </ul>
+				<button class="btn" type="submit">회원가입</button>
+				<button class="btn" type="button" onclick="location.href='cover'">취소</button>      
 		</form>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
