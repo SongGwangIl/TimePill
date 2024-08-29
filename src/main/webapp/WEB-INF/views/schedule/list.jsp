@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>복약 스케줄 리스트</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
 </head>
 <body>
 
@@ -13,8 +14,9 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 
-    <h1>복약 스케줄 리스트</h1>
+    <span class="info-text">복약 스케줄 리스트</span>
     
+    <div class="box">
     <a href='${pageContext.request.contextPath}/schedule/add.do'>
         <button>신규 스케줄 등록</button>
     </a>
@@ -70,6 +72,6 @@
             }
         });
     </script>
-
+</div>
 </body>
 </html>

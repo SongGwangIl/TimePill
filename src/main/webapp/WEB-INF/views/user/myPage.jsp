@@ -8,13 +8,15 @@
 <link rel="icon" href="data:,">
 <meta charset="UTF-8">
 <title>myPage</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
 </head>
 <body>  
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div id="wrap">
-		<h1>나의정보변경</h1>
+	<span class="info-text">나의정보변경</span>
+	
+	<div id="wrap" class="box">
+		
 		<c:choose>
 			<c:when test="${myInfo.userSelect eq 'user'}">
 				<form action="${pageContext.request.contextPath}/myPage"

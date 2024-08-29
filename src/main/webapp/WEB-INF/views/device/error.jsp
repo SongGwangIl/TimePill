@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/cover.css" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
 </head>
 <body>
 

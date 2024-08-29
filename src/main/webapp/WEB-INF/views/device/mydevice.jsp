@@ -2,16 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
+
+<body>
+
 
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<span class="info-text">기기정보변경</span>
 	
-	<div>
-		<h1>기기정보변경</h1>
+	<div class="box">
+		
 		<form action="${pageContext.request.contextPath}/mydevice" method="post">
 			<ul>
 				<li>

@@ -3,14 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!DOCTYPE html>
+<html>
+<head>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
+<meta charset="UTF-8">
+<title>mydelete</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
-
+</head>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<span class="info-text">기기정보변경</span>
 	
-	<div>
+	<div class="box">
 		<h1>기기정보변경</h1>
 			<ul>
 				<li>

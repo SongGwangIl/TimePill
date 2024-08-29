@@ -16,10 +16,18 @@
 	document.getElementById('scheStartDate').value = todayString;
 </script> -->
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+</head>
 
 <body>
-	<div id=insertList">
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+ <span class="info-text">스케줄 관리</span>
+	<div id=insertList" class="box">
 		<form action="${pageContext.request.contextPath}/schedule/edit.do" method="post">
 			<fieldset>
 				<legend>스케줄 수정</legend>
