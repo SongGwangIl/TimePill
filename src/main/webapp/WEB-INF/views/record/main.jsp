@@ -9,42 +9,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>메인 페이지</title>
-	<link href="${pageContext.request.contextPath}/resources/css/recordlist.css" rel="stylesheet">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
 
 
 
-<body class="bg">
+<body>
 
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 
-<h3>
-	${name}님!
+<span class="info-text">
+	${name}님!<br>
 	오늘 복용해야 할 약품 목록을 확인하세요! 
-</h3>
+</span>
 		
-<div id="current-time"></div>
 
 	
 <!-- 조회 날짜 선택 -->
-<div>
-	<form action="${pageContext.request.contextPath}/alarmSelect.do" method="get">
-		<label for="takeDate"> 조회 날짜 선택 : </label>
-		<input type="date" id="takeDate" name="takeDate">
-		<input type="submit" value="조회">
-	</form>
-</div>
-
-	<div>
+<div class="box">
+	<div id="current-time" class="current-time"></div>
+	<div class="inner-contianer">
+	<div id="container">
+		<div class="form">
+			<form action="${pageContext.request.contextPath}/alarmSelect.do" method="get">
+				<label for="takeDate"> 조회 날짜 선택 : </label>
+				<input type="date" id="takeDate" name="takeDate">
+				<input type="submit" value="조회">
+			</form>
+		</div>
+		
 		<c:choose>
 			<c:when test="${alarmList.isEmpty()}">
 				<p>지금 당장 알람을 등록해보세요!</p>
 			</c:when>
 			
 			<c:otherwise>
-				<table>
+				<table >
 					<thead>
 						<tr>
 							<th>복용할 약 이름</th>
@@ -58,6 +60,7 @@
 					
 						<c:forEach var="al" items="${alarmByDateList}">
 							<tr>
+								
 								<c:forEach var="sdl" items="${al.scheduleList}">
 									<td>${sdl.scheTitle}</td>
 								</c:forEach>
@@ -79,7 +82,7 @@
 									</td>
 								</c:forEach>
 
-								<td class="status">NO</td>
+								<td>NO</td>
 							</tr>
 						</c:forEach>
 
@@ -87,14 +90,13 @@
 				</table>
 			</c:otherwise>
 		</c:choose>
-	</div>
 
-
-
-	<h3>
+	<span class="text5">
 		<a href="${pageContext.request.contextPath}/schedule/add.do">신규 알람 등록</a>
-	</h3>
-
+	</span>
+	</div>
+</div>
+</div>
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

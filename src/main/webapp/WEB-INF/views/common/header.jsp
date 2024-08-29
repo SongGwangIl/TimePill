@@ -8,17 +8,77 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<style>
+	 .background-element {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 1920px;
+        height: 1080px;
+        background: transparent url('${pageContext.request.contextPath}/resources/img/background.png') 0% 0% no-repeat padding-box;
+        opacity: 1;
+    }
+    
+    .ui-element {
+        position: absolute;
+        top: 80px;
+        left: 360px;
+        width: 48px;
+        height: 48px;
+        background: transparent url('${pageContext.request.contextPath}/resources/img/timpill.svg') 0% 0% no-repeat padding-box;
+        opacity: 1;
+    }
+    .logout {
+    	color: #FFFFFF;
+    }
+    
+	</style>
 </head>
-  
-  
-  
-  
 <body>
-
-
-	<nav>
-		<ul>
-			<li>
+	<div class="background-element">
+		<span class="text"><c:url var="mainUrl" value="/main" />
+				<a href="${mainUrl}">TimPill</a></span>
+	
+		<span class="text1">마이페이지
+			<ul class="text1">
+				<li>
+					<c:url var="myPageUrl" value="/myPage"/>
+					<a href="${myPageUrl}"> 나의정보변경 </a>
+				</li>
+				<li>
+					<c:url var="searchUrl" value="/member/search"/>
+					<a href="${searchUrl}"> 사용자보호자등록 </a>
+				</li>
+				<li>
+					<c:url var="mydeviceUrl" value="/mydevice"/>
+					<a href="${mydeviceUrl}"> 기기정보변경 </a>
+				</li>
+			</ul>
+		</span>
+		
+		<span class="text2">내 복약 정보	
+			<ul class="text2">
+				<li>
+					<c:url var="regUrl" value="/schedule/list.do" />
+					<a href="${regUrl}">스케줄 리스트</a>
+				</li>
+				<li>
+					<c:url var="recordUrl" value="/record/list.do"/>
+					<form id="recordForm" action="${recordUrl}" method="get">
+				    	<input type="hidden" name="takeDate" value="${today}" />
+				    	<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;"> 복약 기록 조회</a>
+					</form>
+				</li>
+			</ul>
+		</span>
+		
+		<span class="text3">고객센터
+			
+		</span>
+		
+		<span class="border">
+		<span>
 			<c:choose>
 				<c:when test="${loginUser.userValid.toString() == 'Y'}">
 					<c:out value="${name} 님 환영합니다."></c:out>
@@ -27,44 +87,11 @@
 					<c:out value="${loginUser.userId}"/> 님 환영합니다.	
 				</c:otherwise>
 			</c:choose>
-			</li>
+				<a href='${pageContext.request.contextPath}/login' class="logout">  | 로그아웃</a>
 			
-			<li>
-				<a href='${pageContext.request.contextPath}/login'>  |로그아웃|</a>
-			</li>
-			
-			<li>
-				<c:url var="regUrl" value="/schedule/list.do" />
-				<a href="${regUrl}"> |스케줄 리스트|</a>
-			</li>
-			
-			<li>
-				<c:url var="recordUrl" value="/record/list.do"/>
-				<form id="recordForm" action="${recordUrl}" method="get">
-			    	<input type="hidden" name="takeDate" value="${today}" />
-			    	<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;"> |복약 기록 조회|</a>
-				</form>
-			</li>
-			
-			<li>
-				<c:url var="mainUrl" value="/main" />
-				<a href="${mainUrl}"> |메인 화면| </a><br>
-			</li>
-			
-			<li>
-				<c:url var="myPageUrl" value="/myPage"/>
-				<a href="${myPageUrl}"> |나의정보변경| </a>
-			</li>
-			
-			<li>
-				<c:url var="searchUrl" value="/member/search"/>
-				<a href="${searchUrl}"> |사용자보호자등록| </a>
-			</li>
-			
-			<li>
-				<c:url var="mydeviceUrl" value="/mydevice"/>
-				<a href="${mydeviceUrl}"> |기기정보변경| </a>
-			</li>
-		</ul>
-	</nav>
+		</span>	
+	</div>
 
+	<div class="ui-element"></div>
+</body>
+</html>
