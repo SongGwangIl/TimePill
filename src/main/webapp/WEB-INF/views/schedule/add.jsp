@@ -16,33 +16,43 @@
 // 	const todayString = `${yyyy}-${mm}-${dd}`;
 // 	document.getElementById('scheStartDate').value = todayString;
 </script> -->
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add.css" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
+</head>
+<body>  
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <body>
-	<div id=insertList">
-		<form action="${pageContext.request.contextPath}/schedule/add.do" method="post">
-			<fieldset>
-				<legend>스케쥴 등록</legend>
-				
-					<ul>
-						<label for="scheTitle">스케쥴 제목</label>
-						<input type="text" id="scheTitle" name="scheTitle">  
-					</ul>
 
-					<ul>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<span class="info-text">스케줄 등록</span>
+
+	<div id=insertList" class="box">
+		<div class="form-group">
+		<form action="${pageContext.request.contextPath}/schedule/add.do" method="post">
+			<label for="scheTitle">스케쥴 제목</label>
+			<input type="text" id="scheTitle" name="scheTitle" placeholder="스케줄 제목을 입력하세요">  
+		</div>
+
+					<div class="form-group">
 						<label for="scheTakeNum">하루 복약횟수</label>
 						<select name="scheTakeNum">
 							<option value=1>1회</option>
 							<option value=2 >2회</option>
 							<option value=3 selected>3회</option>
 						</select>
-					</ul>
-					<ul>
+				</div>
+					<div class="form-group">
 						<label for="scheStartDate">처방일자</label>
 						<input type="date" id="scheStartDate" name="scheStartDate">	
-					</ul>
-					<ul>
+					</div>
+					<div class="form-group">
 						<label for="scheSelect">처방기간</label>
 						<select name="scheSelect">
 							<option value=7>1주</option>
@@ -52,17 +62,20 @@
 							<option value=35>5주</option>
 							<option value=42>6주</option>
 						</select>	
-					</ul>
-					<ul>
+					</div>
+					<div class="form-group">
 						<label for="scheEndDate">만료일자</label>
 						<input type="date" id="scheEndDate" name="scheEndDate">
-					</ul>
+					</div>
 					
-				</label>
-			<input type="submit" value="등록">
+				
+			<input id="button" type="submit" value="등록">
 			
-			</fieldset>
+			
 		</form>
+		</div>
 	</div>
+	<!-- footer -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
