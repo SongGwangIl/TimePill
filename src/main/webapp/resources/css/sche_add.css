@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'GmarketSans';
+}
+
+.box {
+	position: relative;
+	top: 300px;
+	left: 360px;
+	width: 1200px;
+	height: 635px;
+	background: #FFFFFF;
+	box-shadow: 5px 5px 6px #00000029;
+	opacity: 2;
+	border-radius: 4%;
+	overflow-y: scroll; /* 세로 스크롤 활성화 */
+	overflow-x: hidden; /* 가로 스크롤 비활성화 */
+}
+
+.info-text {
+	position: absolute;
+	top: 200px;
+	left: 632px;
+	width: 648px;
+	height: 84px;
+	text-align: center;
+	font-size: 32px;
+	font-weight: bold;
+	letter-spacing: 0px;
+	color: #000000;
+	opacity: 1;
+}
+
+.desc_text {
+	color: rgba(0, 0, 0, 1);
+	width: 210px;
+	height: 46px;
+	position: absolute;
+    left: 652px;
+    top: 466px;
+	font-weight: 600; 
+	text-align : center;
+	font-size: 22px;
+	z-index: 101;
+}
+
+.btn1 {
+	position: absolute;
+	width: 196px;
+	height: 46px;
+	left: 652px;
+    top: 566px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: rgba(255, 255, 255, 1);
+	font-size: 18px;
+	font-weight: 800;
+	text-align: center;
+	border: 0px solid rgba(0, 0, 0, 1);
+	z-index: 101;
+	border-radius: 12px;
+	
+	display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+.pill {
+	width : 20px;
+	height : 20px;
+	padding-right : 8px;
+}
+.btn1 p {
+	margin : 0;
+}
+.btn2 {
+	font-size: 16px;
+	text-align: center;
+	width : 100px;
+	height: 20px;
+	background-color: #eee;
+	border-radius: 10px;
+}
+.ab {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	left: 1px;
+    top: 1px;
+	
+}
+table {
+	width: 300px;
+	border-collapse: collapse;
+	margin: 20px auto;
+}
+
+th, td {
+	padding: 8px 10px;
+	text-align: center;
+	border-spacing: 0;
+}
+
+strong {
+	font-size: 25px;
+	font-weight: 1000;
+}
+
+.bold {
+	font-size: 20px;
+	font-weight: 800;
+	padding-right : 30px;
+}
+.light {
+	font-weight: 300;
+}
+.a {
+	display : inline-block;
+	width: 110px;
+}
+.tablewrap {
+	position: relative;
+	padding : 10px;
+	left: 600px;
+	top: 10px;
+	width : 400px;
+	box-shadow: 5px 5px 6px #00000029;
+	border-radius: 4%;
+	border: 1px solid #eeeeee;
+}
+a:hover {
+	color : #ccc;
+}
