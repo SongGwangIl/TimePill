@@ -3,18 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>메인 페이지</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-</head>
-
-
-
-<body>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -23,10 +12,9 @@
 <span class="info-text">
 	${name}님!<br>
 	오늘 복용할 알약 목록을 확인하세요! 
-</span>
-		
+</span> 
 
-	
+ 
 <!-- 조회 날짜 선택 -->
 <div class="box">
 	<div id="current-time" class="current-time"></div>

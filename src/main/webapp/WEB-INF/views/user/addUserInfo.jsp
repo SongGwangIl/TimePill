@@ -1,46 +1,70 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addUserInfo.css" type="text/css">
 
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div id="wrap" style="position: relative; z-index: 100; width : 500px;">
-		<h1>사용자 정보 입력</h1>
-		<form action="${pageContext.request.contextPath}/addUserInfo"
-			method="post">
-			<input type="hidden" name="userId" value="${loginUser.userId}"><br>
+	 
+	<div id="wrap"> 
+	  
+		<h1 class="title">사용자 정보 입력</h1>
+		
+		<form action="${pageContext.request.contextPath}/addUserInfo" method="post">
+			<input type="hidden" name="userId" value="${loginUser.userId}">
+			 
+			<br>
+			  
 			<ul>
-				<li><label class="label">이름</label> <input type="text"
-					name="userName" class="input" required><br></li>
-				<li><label class="label">전화번호</label> <input type="text"
-					name="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"><br></li>
-				<li><label class="label">성별</label>
-					<div class="select">
+				<li class="c1">
+					<label class="label">이름</label> 
+					<input type="text" name="userName" class="input" required>
+					<br><br>
+				</li>
+				
+				<li class="c1">
+					<label class="label">전화번호</label> 
+					<input type="text" name="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"><br><br>
+				</li>
+   
+				<li class="c1">
+					<label class="label">성별</label>
+					<div class="gender">
 						<input type="radio" id="male" name="userGender" value="m">
 						<label for="male" class="hover">남성</label> 
 						<input type="radio" id="female" name="userGender" value="fm" checked>
 						<label for="female" class="hover">여성</label>
-					</div>
+					</div><br><br>
+				</li> 
+   
+				<li class="c1"> 
+					<label class="label">키</label> 
+					<input type="number" name="userHeight" class="input"><br><br>
 				</li>
-				<li><label class="label">키</label> <input type="number"
-					name="userHeight" class="input"><br></li>
-				<li><label class="label">몸무게</label> <input type="number"
-					name="userWeight" class="input"><br></li>
-				<li>
+				
+				<li class="c1">
+					<label class="label">몸무게</label> 
+					<input type="number" name="userWeight" class="input"><br><br>
+				</li>
+				 
+				<li class="c1">
 					<!-- BIRTH -->
 	                <div id="birth">
 	                    <label for="yy" class="label">생년월일</label>
-	                    <div id="bir_wrap">                    
+ 
+	                    <div id="bir_wrap">  
+
+
 	                        <!-- BIRTH_YY -->
 	                        <div id="bir_yy">
 	                            <span class="box">
 	                                <input type="text" id="yy"  name="yy" class="int" maxlength="4" placeholder="년(4자)">
 	                            </span>
 	                        </div>
+	                        
+	                        
 	                        <!-- BIRTH_MM -->
 	                        <div id="bir_mm">
 	                            <span class="box">
@@ -61,25 +85,34 @@
 	                                </select>
 	                            </span>
 	                        </div>
+
+
 	                        <!-- BIRTH_DD -->
 	                        <div id="bir_dd">
 	                            <span class="box">
 	                                <input type="text" id="dd" name="dd" class="int" maxlength="2" placeholder="일">
 	                            </span>
 	                        </div>
-	
 	                    </div>
+	                    
 	                    <span class="error_next_box"></span>    
+	                    
 	                </div>
+	                <br><br>
 			</ul>
+			
 			<ul id="buttons">
+			
 				<li>
-					<button type="submit" onclick="location.href='device'">등록</button>
+					<button class="btn" type="submit" onclick="location.href='device'">등록</button>
 				</li>
+				
 				<li>
-					<button type="button" onclick="location.href='device'">다음에 입력</button> <br>
+					<button class="btn" type="button" onclick="location.href='device'">다음에 입력</button> <br>
 				</li>
+				
 			</ul>
+			 
 		</form>
 	</div>
 </body>
