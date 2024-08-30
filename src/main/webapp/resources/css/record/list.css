@@ -14,8 +14,17 @@
         overflow-x: hidden; /* 가로 스크롤 비활성화 */
 		border-radius: 4%;
     }
+
+.search {
+	display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
     
- .info-text {
+}
+.div {
+	margin : 20px;
+}
+
+.info-text {
         position: absolute;
         top: 200px;
         left: 636px;

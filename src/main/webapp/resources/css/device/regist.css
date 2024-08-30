@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+body {
+	font-family : 'GmarketSans';
+}
+
+.wrap  {
+	margin : 0 auto;
+	position: relative;
+	width: 600px;
+	height: 800px;
+	top : 80px;
+	background: #FFFFFF;
+	box-shadow: 5px 5px 6px #00000029;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 1%;
+	z-index: 2;
+}
+
+.title {
+	margin-top : -20px;
+	text-align : center;
+}
+
+h2 {
+	text-align : center;
+}
+.devi {
+	width : 250px;
+}
+
+.submit {
+	width: 390px;
+	height : 50px;
+	border : 2px solid #ccc;
+	padding : 3px;
+	border-radius : 10px;
+}
+.okbtn, .nobtn {
+	display : inline-block;
+	margin : 30px;
+	text-decoration : none;
+	color : black;
+}
+.btn1 {
+	font-size : 20px;
+	font-weight : 600;
+	background-color:rgba(211, 224, 236, 1);
+	width:140px;
+	height:50px;
+	border-radius:8px;
+	display: flex;
+	text-align : center;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    
+}
+.btn2 {
+	font-size : 20px;
+	font-weight : 400;
+	width:140px;
+	height:50px;
+	border-radius:8px;
+	display: flex;
+	text-align : center;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    border : 2px solid rgba(211, 224, 236, 1);
+}
+a:hover {
+	color : #5a77ba;
+}

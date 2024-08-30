@@ -15,6 +15,7 @@
 <div class="box GmarketSans">
 <div class="inner-contianer">
 <div id="container">
+<br> <br> <br> <br> <br> <br> <br> <br> 
 <form action="${pageContext.request.contextPath}/record/list.do" method="get">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
 	<input type="date" id="takeDate" name="takeDate" value="${takeDate}" class="GmarketSans">
@@ -80,6 +81,8 @@
 	</c:otherwise>
 </c:choose>
 
+<br> <br> <br> <br> <br> <br> <br> <br>
+
 <div>
 <h1 > 전체 복용기록 조회 </h1>
 
@@ -87,22 +90,22 @@
 
 <!-- 검색 -->
 
-	<form>
+	<form  class = "search" >
 	<input type="hidden" id="takeDate" name="takeDate" value="${takeDate}">
-	<div>
-		분류 : <select name="searchKey" class="GmarketSans">
-				<option value="0">선택</option>
-				<option value="1" ${recordVO.searchKey == 1 ? 'selected' : ''}>약품명</option>
-				<option value="2" ${recordVO.searchKey == 2 ? 'selected' : ''}>시간명</option>
-				<option value="3" ${recordVO.searchKey == 3 ? 'selected' : ''}>성공여부</option>
-			</select>
-	</div>
-	<div>
-		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}" class="GmarketSans" id="searchQuery" placeholder="검색어를 입력하세요">
-	</div>
-	<div>
-		<button class="GmarketSans">검색</button>
-	</div>
+		<div class="div">
+			분류 : <select name="searchKey" class="GmarketSans">
+					<option value="0">선택</option>
+					<option value="1" ${recordVO.searchKey == 1 ? 'selected' : ''}>약품명</option>
+					<option value="2" ${recordVO.searchKey == 2 ? 'selected' : ''}>시간명</option>
+					<option value="3" ${recordVO.searchKey == 3 ? 'selected' : ''}>성공여부</option>
+				</select>
+		</div>
+		<div class="div">
+			검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}" class="GmarketSans" id="searchQuery" placeholder="검색어를 입력하세요">
+		</div>
+		<div lass="div"> 
+			<button class="GmarketSans">검색</button>
+		</div>
 	</form>
 </div>
 
@@ -162,7 +165,10 @@
 		</div>
 		</div>
 		
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 	</div>
+
 
 
 
