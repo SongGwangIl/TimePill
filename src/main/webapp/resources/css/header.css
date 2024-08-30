@@ -166,3 +166,7 @@
     color: black;}
     
 	a:hover { text-decoration:none !important }
+	
+.GmarketSans {
+	font-family: GmarketSans;
+}

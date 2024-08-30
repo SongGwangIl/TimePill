@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 	<style>
 		.text4 {
         position: absolute;
@@ -19,9 +20,13 @@
         color: #000000;
         opacity: 1;
     }
+    
+   .GmarketSans {
+	font-family: GmarketSans;
+	}
 	</style>
 </head>
-<div id="footer" class="text4">
+<div id="footer" class="text4 GmarketSans">
 	<h3>copyrightⓒtimePill</h3>
 </div>
 

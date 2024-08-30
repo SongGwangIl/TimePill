@@ -4,26 +4,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 
-<span class="info-text">
+<span class="info-text GmarketSans" >
 	${name}님!<br>
 	오늘 복용할 알약 목록을 확인하세요! 
 </span> 
 
  
 <!-- 조회 날짜 선택 -->
-<div class="box">
-	<div id="current-time" class="current-time"></div>
+<div class="box GmarketSans">
+	<div id="current-time" class="current-time GmarketSans"></div>
 	<div class="inner-contianer">
 	<div id="container">
 		<div class="form">
 			<form action="${pageContext.request.contextPath}/alarmSelect.do" method="get">
 				<label for="takeDate"> 조회 날짜 선택 : </label>
-				<input type="date" id="takeDate" name="takeDate">
+				<input type="date" id="takeDate" name="takeDate" class="GmarketSans">
 				<input type="submit" value="조회">
 			</form>
 		</div>

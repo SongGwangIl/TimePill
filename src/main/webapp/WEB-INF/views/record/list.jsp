@@ -3,21 +3,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<h3> ${name} 님의 복약 상황을 확인해보세요! </h3>
+<span class="info-text GmarketSans"> ${name} 님의 복약 상황을 확인해보세요! </span>
 
 <!-- 조회 날짜 선택 -->
+<div class="box GmarketSans">
 <form action="${pageContext.request.contextPath}/record/list.do" method="get">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
-	<input type="date" id="takeDate" name="takeDate" value="${takeDate}">
-	<input type="submit" value="조회">
+	<input type="date" id="takeDate" name="takeDate" value="${takeDate}" class="GmarketSans">
+	<input type="submit" value="조회" class="GmarketSans">
 </form> <br>
 
 <!-- 차트 조회 -->
-<div style="width:600px; height:400px; margin : 0 auto">
+<div style="width:600px; height:400px; margin : 0 auto" class="GmarketSans">
 	<canvas id="recordChart"></canvas>
 </div>
 
@@ -64,7 +66,7 @@
 					<td> 
 						<form action="${pageContext.request.contextPath}/record/off" method="post">
 							<input type="hidden" name="takeId" value="${tvo.takeId}">
-					    	<button type="submit">복용 Off</button>
+					    	<button type="submit" class="GmarketSans">복용 Off</button>
 						</form>
 					</td>
 				</tr>
@@ -84,7 +86,7 @@
 	<form>
 	<input type="hidden" id="takeDate" name="takeDate" value="${takeDate}">
 	<div>
-		분류 : <select name="searchKey">
+		분류 : <select name="searchKey" class="GmarketSans">
 				<option value="0">선택</option>
 				<option value="1" ${recordVO.searchKey == 1 ? 'selected' : ''}>약품명</option>
 				<option value="2" ${recordVO.searchKey == 2 ? 'selected' : ''}>시간명</option>
@@ -92,10 +94,10 @@
 			</select>
 	</div>
 	<div>
-		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}">
+		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}" class="GmarketSans">
 	</div>
 	<div>
-		<button>검색</button>
+		<button class="GmarketSans">검색</button>
 	</div>
 	</form>
 </div>
@@ -168,3 +170,4 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
+</div>

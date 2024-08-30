@@ -24,6 +24,7 @@
 <title></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add.css" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 </head>
 <body>  
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -31,18 +32,18 @@
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<span class="info-text">스케줄 등록</span>
+	<span class="info-text GmarketSans">스케줄 등록</span>
 
-	<div id=insertList" class="box">
+	<div id=insertList" class="box GmarketSans">
 		<div class="form-group">
 		<form action="${pageContext.request.contextPath}/schedule/add.do" method="post">
 			<label for="scheTitle">스케쥴 제목</label>
-			<input type="text" id="scheTitle" name="scheTitle" placeholder="스케줄 제목을 입력하세요">  
+			<input type="text" class="GmarketSans" id="scheTitle" name="scheTitle" placeholder="스케줄 제목을 입력하세요">  
 		</div>
 
 					<div class="form-group">
 						<label for="scheTakeNum">하루 복약횟수</label>
-						<select name="scheTakeNum">
+						<select name="scheTakeNum" class="GmarketSans">
 							<option value=1>1회</option>
 							<option value=2 >2회</option>
 							<option value=3 selected>3회</option>
@@ -50,11 +51,11 @@
 				</div>
 					<div class="form-group">
 						<label for="scheStartDate">처방일자</label>
-						<input type="date" id="scheStartDate" name="scheStartDate">	
+						<input type="date" id="scheStartDate" name="scheStartDate" class="GmarketSans">	
 					</div>
 					<div class="form-group">
 						<label for="scheSelect">처방기간</label>
-						<select name="scheSelect">
+						<select name="scheSelect" class="GmarketSans">
 							<option value=7>1주</option>
 							<option value=14 selected>2주</option>
 							<option value=21>3주</option>
@@ -65,11 +66,11 @@
 					</div>
 					<div class="form-group">
 						<label for="scheEndDate">만료일자</label>
-						<input type="date" id="scheEndDate" name="scheEndDate">
+						<input type="date" id="scheEndDate" name="scheEndDate" class="GmarketSans">
 					</div>
 					
 				
-			<input id="button" type="submit" value="등록">
+			<input id="button" type="submit" value="등록" class="GmarketSans">
 			
 			
 		</form>

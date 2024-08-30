@@ -9,6 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 	<style>
 	 .background-element {
         position: absolute;
@@ -37,11 +38,12 @@
 </head>
 <body>
 	<div class="background-element">
+		<div class="GmarketSans">
 		<span class="text"><c:url var="mainUrl" value="/main" />
-				<a href="${mainUrl}">TimPill</a></span>
+				<a href="${mainUrl}" class="GmarketSans">TimePill</a></span>
 	
-		<span class="text1">마이페이지
-			<ul class="text1">
+		<span class="text1 GmarketSans">마이페이지
+			<ul class="text1 GmarketSans"">
 				<li>
 					<c:url var="myPageUrl" value="/myPage"/>
 					<a href="${myPageUrl}"> 나의정보변경 </a>
@@ -57,8 +59,8 @@
 			</ul>
 		</span>
 		
-		<span class="text2">내 복약 정보	
-			<ul class="text2">
+		<span class="text2 GmarketSans">내 복약 정보	
+			<ul class="text2 GmarketSans">
 				<li>
 					<c:url var="regUrl" value="/schedule/list.do" />
 					<a href="${regUrl}">스케줄 리스트</a>
@@ -73,11 +75,11 @@
 			</ul>
 		</span>
 		
-		<span class="text3">고객센터
+		<span class="text3 GmarketSans">고객센터
 			
 		</span>
 		
-		<span class="border">
+		<span class="border GmarketSans">
 		<span>
 			<c:choose>
 				<c:when test="${loginUser.userValid.toString() == 'Y'}">
@@ -91,7 +93,7 @@
 			
 		</span>	
 	</div>
-
+	</div>
 	<div class="ui-element"></div>
 </body>
 </html>
