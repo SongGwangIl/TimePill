@@ -101,28 +101,50 @@ th {
 .pagination a {
     margin: 0 5px;
     padding: 8px 16px;
-    background-color: #f2f2f2;
+    background-color: #fff;  /* 흰색 배경 */
+    color: #000;  /* 검은색 글씨 */
     border: 1px solid #ccc;
-    color: #333;
-    text-decoration: none;
     border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 부드러운 전환 효과 */
+    display: inline-block;  /* 인라인 블록으로 설정해 크기 고정 */
+    box-sizing: border-box; /* 패딩과 보더 포함한 크기 고정 */
+
 }
 
 .pagination a:hover {
-    background-color: #ddd;
+    background-color: #007bff;  /* 파란색 배경 */
+    color: white;  /* 흰색 글씨 */
 }
 
 .pagination a.active {
     background-color: #007bff;
     color: white;
     border: 1px solid #007bff;
+    box-sizing: border-box; /* 크기 고정 */
+
 }
 
 #container {
 	position: relative;
     width: 1200px;
     margin: 0 auto;
-    text-align: center; /* 이 줄 추가 - 컨테이너 내부의 콘텐츠를 가운데 정렬 */
-    top: 70px;
+    text-align: center; /* 이 줄 추가 - 컨테이너 내부의 콘텐츠를 가운데 정렬 */   
 }
-  
+ 
+ form input[type="submit"] {
+    padding: 6px 12px;
+    font-size: 16px;
+    background-color: #fff;  /* 흰색 배경 */
+    color: #000;  /* 검은색 글씨 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+form input[type="submit"]:hover {
+    background-color: #007bff;  /* 파란색 배경 */
+    color: white;  /* 흰색 글씨 */
+}
+ 
