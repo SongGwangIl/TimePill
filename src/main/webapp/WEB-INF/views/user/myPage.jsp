@@ -43,7 +43,7 @@
 		<c:choose>
 			<c:when test="${myInfo.userSelect eq 'user'}">
 		<div class="container">
-				<form action="${pageContext.request.contextPath}/myPage" method="post">
+				<form class="frm"action="${pageContext.request.contextPath}/myPage" method="post">
 					<input type="hidden" name="userId" value="${myInfo.userId}"><br>
 					<ul>
 						<li class="c1"><label class="label">이름</label> 
