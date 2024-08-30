@@ -11,7 +11,7 @@
 		.text4 {
         position: absolute;
         top: 1020px;
-        left:880px;
+        left:860px;
         width: 262px;
         height: 20px;
         text-align: left;

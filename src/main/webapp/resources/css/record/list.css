@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+ .box {
+        position: relative;
+         position: relative;
+        top: 300px;
+        left: 360px;
+        width: 1200px;
+        height: 635px;
+        background: #FFFFFF;
+        box-shadow: 5px 5px 6px #00000029;
+        opacity: 1;
+        overflow-y: scroll; /* 세로 스크롤 활성화 */
+        overflow-x: hidden; /* 가로 스크롤 비활성화 */
+		border-radius: 4%;
+    }
+    
+ .info-text {
+        position: absolute;
+        top: 200px;
+        left: 636px;
+        width: 648px;
+        height: 84px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 0px;
+        color: #000000;
+        opacity: 1;
+    }
+    
+ .GmarketSans {
+	font-family: GmarketSans;
+}
+
+.inner-container {
+        position: absolute;
+        top: 110px;
+        left: 105px;
+        width: 990px;
+        height: 457px;
+        background: transparent url('img/이미지 1.png') 0% 0% no-repeat padding-box;
+        opacity: 1;
+        padding: 20px; 
+        box-sizing: border-box;
+        position: relative;
+
+    }
+    
+    h1 {
+    position: relative;
+    font-size: 28px;
+    margin-bottom: 20px;
+	text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+table {
+     width: 90%;
+     border-collapse: collapse;
+     margin: 20px auto;
+     margin-top: 50px
+}
+
+table, th, td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    list-style:none;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+#container {
+	position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center; /* 이 줄 추가 - 컨테이너 내부의 콘텐츠를 가운데 정렬 */
+    top: 70px;
+}
+  

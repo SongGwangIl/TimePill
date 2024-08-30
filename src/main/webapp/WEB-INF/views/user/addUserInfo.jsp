@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addUserInfo.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
 
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>

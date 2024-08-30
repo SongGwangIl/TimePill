@@ -37,7 +37,7 @@
 	<div id=insertList" class="box GmarketSans">
 		<div class="form-group">
 		<form action="${pageContext.request.contextPath}/schedule/add.do" method="post">
-			<label for="scheTitle">스케쥴 제목</label>
+			<label for="scheTitle">스케줄 제목</label>
 			<input type="text" class="GmarketSans" id="scheTitle" name="scheTitle" placeholder="스케줄 제목을 입력하세요">  
 		</div>
 

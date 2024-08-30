@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/header.css">
 	<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 	<style>
 	 .background-element {

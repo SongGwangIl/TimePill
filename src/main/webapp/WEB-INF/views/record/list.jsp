@@ -3,15 +3,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/record/list.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <span class="info-text GmarketSans"> ${name} 님의 복약 상황을 확인해보세요! </span>
 
+
 <!-- 조회 날짜 선택 -->
 <div class="box GmarketSans">
+<div class="inner-contianer">
+<div id="container">
 <form action="${pageContext.request.contextPath}/record/list.do" method="get">
 	<label for="takeDate"> 조회 날짜 선택 : </label>
 	<input type="date" id="takeDate" name="takeDate" value="${takeDate}" class="GmarketSans">
@@ -19,8 +22,9 @@
 </form> <br>
 
 <!-- 차트 조회 -->
-<div style="width:600px; height:400px; margin : 0 auto" class="GmarketSans">
+<div style="width:600px; height:400px; margin : 0 auto; " class="GmarketSans">
 	<canvas id="recordChart"></canvas>
+
 </div>
 
 
@@ -76,13 +80,13 @@
 	</c:otherwise>
 </c:choose>
 
-
-<h1> 전체 복용기록 조회 </h1>
+<div>
+<h1 > 전체 복용기록 조회 </h1>
 
 <br>
 
 <!-- 검색 -->
-<div>
+
 	<form>
 	<input type="hidden" id="takeDate" name="takeDate" value="${takeDate}">
 	<div>
@@ -94,7 +98,7 @@
 			</select>
 	</div>
 	<div>
-		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}" class="GmarketSans">
+		검색 내용: <input type="text" name="searchValue" value="${recordVO.searchValue}" class="GmarketSans" id="searchQuery" placeholder="검색어를 입력하세요">
 	</div>
 	<div>
 		<button class="GmarketSans">검색</button>
@@ -137,7 +141,7 @@
 		</table>
 	</c:otherwise>
 </c:choose>
-
+	
 		<!-- 페이지네이션 인덱스 -->
 		<c:url var="listUrl" value="/record/list.do">
 			<c:param name="takeDate" value="${takeDate}"/>
@@ -145,7 +149,7 @@
 		</c:url>
 		
 		<div>
-		<ul>
+		<ul class="pagination">
 			<li> <a href = "${listUrl}1${recordVO.query}">처음</a></li>
 			<li> <a href = "${listUrl}${recordVO.prev}${recordVO.query}">이전</a></li>
 			<c:forEach var="page" items="${recordVO.list}">
@@ -155,7 +159,10 @@
 			<li> <a href = "${listUrl}${recordVO.lastPage}${recordVO.query}">마지막</a></li>
 		</ul>
 		</div>
-
+		</div>
+		</div>
+		
+	</div>
 
 
 
@@ -170,4 +177,3 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/record/chart.js"></script>
-</div>

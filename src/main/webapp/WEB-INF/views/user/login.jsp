@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/login.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <style>
 .bg { 

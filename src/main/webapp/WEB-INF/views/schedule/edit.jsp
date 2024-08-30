@@ -21,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/myPage.css" type="text/css">
 </head>
 
 <body>

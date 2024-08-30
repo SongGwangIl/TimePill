@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/myPage.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/jquery-ui.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 

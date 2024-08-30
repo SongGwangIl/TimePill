@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>복약 스케줄 리스트</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/myPage.css" type="text/css">
 </head>
 <body>
 
