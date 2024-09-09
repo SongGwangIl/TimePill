@@ -39,7 +39,7 @@
 <div class="bg"></div>
 	<div id="wrap">
 		<h1>회원가입</h1>
-		<form action="${pageContext.request.contextPath}/singup" method="post">
+		<form action="${pageContext.request.contextPath}/user/singup" method="post">
 			<ul class="input">
 				<li>
                 	<label class="label">아이디</label>
@@ -48,7 +48,7 @@
 				</li>
 				<li>
                 	<label class="label">비밀번호</label>
-                	<input type="password" name="userPwd" id="userPwd" placeholder="8-20자리 영문 대,소문자 숫자 특수문자 포함" required><br>
+                	<input type="password" name="password" id="password" placeholder="8-20자리 영문 대,소문자 숫자 특수문자 포함" required><br>
                 	<p id="userPwdMsg"></p>
 				</li>
 				<li>
@@ -58,13 +58,13 @@
 				</li>
 				<li>
                 	<label class="label">이메일</label>
-                	<input type="email" name="userEmail" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required><br>
+                	<input type="email" name="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required><br>
 				</li>
 				<li>
-                	<div class="select">
+                	<div class="userCarerAt">
                 		<label class="label">사용방법선택</label>
-	                	<label for="user" class="user">사용자</label> <input type="radio" id=user name="userSelect" value="user">
-	                	<label for="protector" class="protector">보호자</label> <input type="radio" id=protector name="userSelect" value="protector" checked>	                
+	                	<label for="user" class="user">복용자</label> <input type="radio" id=user name="userCarerAt" value="N" checked>
+	                	<label for="carer" class="carer">복용관리자</label> <input type="radio" id=carer name="userCarerAt" value="Y">	                
                 	</div>                
 				</li>
             </ul>

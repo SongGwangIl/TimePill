@@ -20,9 +20,10 @@ public interface UserService {
 	//사용자정보얻기
 	UserVO getUserInfo(UserVO vo);
 	//나의정보수정
-	String updateMyInfo(UserVO uivo);
+	void updateMyInfo(UserVO uivo);
 	//
 	String getUserValid(String userId);
 
-	String getUserSelect(String userId);
+	String getUserCarerAt(String userId);
+	
 }

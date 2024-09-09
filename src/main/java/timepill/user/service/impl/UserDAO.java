@@ -29,7 +29,7 @@ public interface UserDAO {
 
 	String getUserEmail(String userId);
 
-	String getUserSelect(String userId);
+	String getUserCarerAt(String userId);
 
 	void updateUserInfo(UserVO uivo);
 

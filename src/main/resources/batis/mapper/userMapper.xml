@@ -12,13 +12,13 @@
 		<result column="user_select" property="userSelect"/>
 	</resultMap>
   <select id="login">
-  	SELECT user_id, password, email, user_status, user_carer_at, user_name, user_phone
-    FROM users NATURAL join user_info
-    WHERE user_id = #{userId}
+  	SELECT A.user_id, password, email, user_status, user_carer_at, user_name, user_phone
+    FROM users A left join user_info B on A.user_id = B.user_id 
+    WHERE A.user_id = #{userId}
   </select>
   <insert id="add">
-  	INSERT INTO User (USER_ID, USER_PWD, USER_EMAIL, USER_VALID, DEVICE_REGIST, USER_SELECT)
-  	VALUES (#{userId}, #{userPwd}, #{userEmail}, #{userValid}, #{deviceRegist}, #{userSelect})
+  	INSERT INTO users (user_id, password, email, user_carer_at)
+  	VALUES (#{userId}, #{password}, #{email}, #{userCarerAt})
   </insert>
   <select id="checkId" resultType="String">
   	SELECT COUNT(*) FROM users WHERE user_id = #{userId}
@@ -59,9 +59,9 @@
     FROM user
     WHERE user_id = #{userId}
   </select>
-  <select id="getUserSelect">
-  	SELECT USER_SELECT
-    FROM user
+  <select id="getUserCarerAt">
+  	SELECT user_carer_at
+    FROM users
     WHERE user_id = #{userId}
   </select>
   <select id="getUserValid">

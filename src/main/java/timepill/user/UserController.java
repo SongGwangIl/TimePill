@@ -44,12 +44,9 @@ public class UserController {
 			//로그인 성공
 			session.setAttribute("loginUser", uvo);
 			//정보미입력시 입력창 이동
-			if(name == null) {
-				if(uvo.getUserCarerAt().equals("N"))				
-					return "user/addUserInfo";				
-				else 
-					return "user/addProtectorInfo";				
-			}
+			if(name == null) 				
+				return "user/addUserInfo";			
+			
 			//정보입력완료시 메인창 이동
 			else {
 				session.setAttribute("name", name);
@@ -88,7 +85,7 @@ public class UserController {
 		userService.add(vo);
 		
 		request.setAttribute("msg", "회원가입 되었습니다.");
-		request.setAttribute("url", "/kopo/cover");		
+		request.setAttribute("url", "/cover");		
 		
 		return "user/msg";			
 	}
@@ -100,26 +97,11 @@ public class UserController {
 		
 		return result;
 	}
-	//보호자 정보입력 화면요청
-	@GetMapping("/user/addProtectorInfo")
-	public String ProtectorInfo() {
-		
-		return "user/addProtectorInfo";
-	}
-	//보호자 정보입력
-	@PostMapping("/user/addProtectorInfo")
-	public String addProtectorInfo(UserVO vo, HttpServletRequest request) {
-		
-		userService.addProtectorInfo(vo);
-		
-		request.setAttribute("msg", "정보가 등록 되었습니다.");
-		request.setAttribute("url", "/kopo/main");
-		
-		return "user/msg";
-	}	
 	//사용자 정보입력 화면요청
 	@GetMapping("/user/addUserInfo")
-	public String UserInfo() {
+	public String UserInfo(@SessionAttribute("loginUser")UserVO vo, Model model) {
+		String carerAt = userService.getUserCarerAt(vo.getUserId());
+		model.addAttribute("carerAt", carerAt);
 		
 		return "user/addUserInfo";
 	}
@@ -138,15 +120,11 @@ public class UserController {
 	@GetMapping("/myPage")
 	public String myPage(@SessionAttribute("loginUser") UserVO vo, Model model) {
 		String userId = vo.getUserId();
-		String userValid = userService.getUserValid(userId);
-		String userSelect = userService.getUserSelect(userId);
+		String userName = userService.getUserName(userId);
 		//정보 미 등록시 등록화면 이동
-		if(userValid.equals("F")) {
-			if(userSelect.equals("user"))
-				return "user/addUserInfo";
-			else
-				return "user/addProtectorInfo";
-		}
+		if(!StringUtils.hasText(userName))			
+			return "user/addUserInfo";
+			
 		//정보 등록되어있는 경우 변경화면 이동
 		UserVO uivo = userService.getUserInfo(vo);
 		
@@ -155,18 +133,13 @@ public class UserController {
 		return "user/myPage";
 	}
 	//나의정보변경
-//	@PostMapping("/myPage")
-//	public String myPage(UserVO uvo, HttpSession session) {
-//		
-//		String select = userService.updateMyInfo(uvo);
-//		  
-//		String name;
-//		if(select.equals("user"))
-//			name = uvo.getUserName();
-//		else
-//			name = uvo.getProtName();
-//		session.setAttribute("name", name);
-//		
-//		return "redirect:/main";
-//	}
+	@PostMapping("/myPage")
+	public String myPage(UserVO uvo, HttpSession session) {
+		
+		userService.updateMyInfo(uvo);
+		  
+		session.setAttribute("name", uvo.getUserName());
+		
+		return "redirect:/main";
+	}
 }

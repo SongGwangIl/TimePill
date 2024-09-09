@@ -51,7 +51,7 @@
             </ul>
 	    	<input type="submit" value="로그인" class="btn">	
 		</form>
-		<a href="${pageContext.request.contextPath}/singup">회원가입</a>
+		<a href="${pageContext.request.contextPath}/user/singup">회원가입</a>
 		<a href="#">아이디를 잃어버렸습니까?</a>
 		<a href="#">비밀번호를 잃어버렸습니까?</a>
 	</div>

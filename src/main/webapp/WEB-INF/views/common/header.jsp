@@ -82,14 +82,14 @@
 		<span class="border GmarketSans">
 		<span>
 			<c:choose>
-				<c:when test="${loginUser.userValid.toString() == 'Y'}">
+				<c:when test="${not empty loginUser.userName}">
 					<c:out value="${name} 님 환영합니다."></c:out>
 				</c:when>
 				<c:otherwise>
 					<c:out value="${loginUser.userId}"/> 님 환영합니다.	
 				</c:otherwise>
 			</c:choose>
-				<a href='${pageContext.request.contextPath}/login' class="logout">  | 로그아웃</a>
+				<a href='${pageContext.request.contextPath}/user/login' class="logout">  | 로그아웃</a>
 			
 		</span>	
 	</div>

@@ -11,7 +11,7 @@ public class UserVO {
 	
 	//users 테이블
 	private String password; //유저비밀번호
-	private String emali; //유저이메일
+	private String email; //유저이메일
 	private String userStatus; //유저사용상태 가입시 Y, 탈퇴시 N
 	private String userCarerAt; //복용관리자 여부 복용관리자 Y, 복용자 N
 	

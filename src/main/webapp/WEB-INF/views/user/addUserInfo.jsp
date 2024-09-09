@@ -29,8 +29,7 @@
 					<input type="text" name="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"><br><br>
 				</li>
    
-   				<c:if test="${ }">
-   				
+   				<c:if test="${loginUser.userCarerAt eq 'N'}">   				
 					<li class="c1">
 						<label class="label">성별</label>
 						<div class="gender">

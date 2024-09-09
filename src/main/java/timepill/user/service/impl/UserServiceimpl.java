@@ -86,19 +86,9 @@ public class UserServiceimpl implements UserService{
 
 
 	@Transactional
-	public String updateMyInfo(UserVO uivo) {
-		String select = userdao.getUserSelect(uivo.getUserId());
+	public void updateMyInfo(UserVO uivo) {
 		
-		
-		if(select.equals("user"))
-			userdao.updateUserInfo(uivo);
-		else
-			userdao.updateProtectorInfo(uivo);
-		
-		userdao.updateEmail(uivo);
-		
-		return select;
-		
+		userdao.updateUserInfo(uivo);		
 	}
 
 
@@ -110,9 +100,9 @@ public class UserServiceimpl implements UserService{
 
 
 	@Override
-	public String getUserSelect(String userId) {
+	public String getUserCarerAt(String userId) {
 		
-		return userdao.getUserSelect(userId);
+		return userdao.getUserCarerAt(userId);
 	}
 
 

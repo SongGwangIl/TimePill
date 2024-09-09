@@ -74,7 +74,7 @@ form {
     text-align: center;
     width: 500px;
 }
-#userId, #userPwd, #checkUserPwd {
+#userId, #password, #checkUserPwd {
     margin-top: 20px;
     height: 30px;
 }
@@ -97,7 +97,7 @@ a {
 	text-align: center;
 	text-decoration: none;
 }
-#user, #protector {
+#user, #carer {
 	margin : 0 auto;
 	width : 15px;
 }
