@@ -39,14 +39,14 @@
 <div class="bg"></div>
 	<div id="wrap">
 		<h1>로그인</h1>
-		<form action="${pageContext.request.contextPath}/login" method="post">
+		<form action="${pageContext.request.contextPath}/user/login" method="post">
 			<ul class="input">
 				<li>
 	                <label>아이디</label>
 	                <input type="text" name="userId" id="userId" required>
 	            <li>
 	                <label>비밀번호</label>
-	                <input type="password" name="userPwd" id="userPwd">
+	                <input type="password" name="password" id="password">
 				</li>
             </ul>
 	    	<input type="submit" value="로그인" class="btn">	

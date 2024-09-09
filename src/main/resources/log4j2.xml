@@ -9,7 +9,7 @@
 	</Appenders>
   <Loggers>
 	<!-- 개발자가 작성하는 애플리케이션에서 출력하는 로그 설정 -->
-    <Logger name="kr.ac.kopo" level="trace" additivity="false">
+    <Logger name="timepill" level="trace" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
     <!-- springframework 로그 출력 -->

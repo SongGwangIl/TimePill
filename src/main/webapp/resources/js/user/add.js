@@ -5,8 +5,8 @@ userId.onchange = checkId
 function checkId(){
   let userIdVal = userId.value;
   let idFlag = false;
-  const idRegExp = /^[a-z0-9]{6,15}$/
-
+  const idRegExp = /^[a-zA-Z0-9]{6,15}$/
+	console.log(userIdVal, idRegExp.test(userIdVal));
   if(!idRegExp.test(userIdVal)){
     userId.value = null;
     idCheck.innerText = "6~15자리의 영문이나 숫자를 가져야 합니다."
@@ -19,7 +19,7 @@ function checkId(){
   
   if(idFlag == true){
     $.ajax({
-      url : "/kopo/checkId",
+      url : "/user/checkId",
       type: "post",
       data: {userId:userIdVal},
       success: function(result){

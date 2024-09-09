@@ -23,7 +23,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.ac.kopo" use-default-filters="false">
+	<context:component-scan base-package="timepill" use-default-filters="false">
 		<!-- @Controller 애노테이션이 붙은 클래스는 스프링에 등록 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
@@ -35,12 +35,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/resources/**"/>
-			<mvc:exclude-mapping path="/login"/>
-			<mvc:exclude-mapping path="/singup"/>
+			<mvc:exclude-mapping path="/user/**"/>
 			<mvc:exclude-mapping path="/cover"/>
-			<mvc:exclude-mapping path="/checkId*"/>
-			<mvc:exclude-mapping path="/terms"/>
-			<beans:bean class="kr.ac.kopo.com.LoginInterceptor"></beans:bean>
+						<beans:bean class="timepill.com.LoginInterceptor"></beans:bean>
 		</mvc:interceptor>
 	</mvc:interceptors>	
 	

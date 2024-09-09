@@ -26,14 +26,14 @@
       			<property name="mapUnderscoreToCamelCase" value="true"/>
     		</bean>
     	</property>
-    	<property name="typeAliasesPackage" value="kr.ac.kopo"></property>
+    	<property name="typeAliasesPackage" value="timepill"></property>
 		<property name="mapperLocations" value="classpath*:batis/mapper/**/*.xml" />
 	</bean>
 	
-	<mybatis-spring:scan base-package="kr.ac.kopo" annotation="org.apache.ibatis.annotations.Mapper"/>
+	<mybatis-spring:scan base-package="timepill" annotation="org.apache.ibatis.annotations.Mapper"/>
 
 	<context:component-scan
-		base-package="kr.ac.kopo">
+		base-package="timepill">
 		<!-- @Controller 애노테이션이 붙은 클래스는 스프링에 등록 제외 -->
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />

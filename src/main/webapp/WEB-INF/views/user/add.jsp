@@ -69,7 +69,7 @@
 				</li>
             </ul>
 				<button class="btn" type="submit">회원가입</button>
-				<button class="btn" type="button" onclick="location.href='cover'">취소</button>      
+				<button class="btn" type="button" onclick="location.href='/cover'">취소</button>      
 		</form>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>

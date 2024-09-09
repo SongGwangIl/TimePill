@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="kr.ac.kopo.schedule.service.impl.ScheduleDAO">
+<mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
 	<resultMap type="ScheduleVO" id="scheduleMap">
 		<id column="sche_id" property="scheId"/>
 		<result column="user_id" property="userId"/>
