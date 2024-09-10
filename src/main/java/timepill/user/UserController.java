@@ -33,10 +33,7 @@ public class UserController {
 	@PostMapping("/user/login")
 	public String login(UserVO vo, HttpSession session) {
 		UserVO uvo = userService.login(vo.getUserId());
-		String name = null;
-		//name에 사용자이름또는 보호자이름 저장
-		if(StringUtils.hasText(uvo.getUserName()))
-			name = uvo.getUserName();
+
 		//로그인
 		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
 				vo.getPassword().equals(uvo.getPassword()) ) 
@@ -44,12 +41,11 @@ public class UserController {
 			//로그인 성공
 			session.setAttribute("loginUser", uvo);
 			//정보미입력시 입력창 이동
-			if(name == null) 				
+			if(!StringUtils.hasText(uvo.getUserName())) 				
 				return "user/addUserInfo";			
 			
 			//정보입력완료시 메인창 이동
 			else {
-				session.setAttribute("name", name);
 				if (uvo.getUserCarerAt().equals("N"))
 					return "redirect:/device";
 				else 
@@ -117,8 +113,8 @@ public class UserController {
 		return "user/msg";
 	}
 	//나의정보변경 화면 요청
-	@GetMapping("/myPage")
-	public String myPage(@SessionAttribute("loginUser") UserVO vo, Model model) {
+	@GetMapping("/myinfo/edit")
+	public String infoEdit(@SessionAttribute("loginUser") UserVO vo, Model model) {
 		String userId = vo.getUserId();
 		String userName = userService.getUserName(userId);
 		//정보 미 등록시 등록화면 이동
@@ -133,8 +129,8 @@ public class UserController {
 		return "user/myPage";
 	}
 	//나의정보변경
-	@PostMapping("/myPage")
-	public String myPage(UserVO uvo, HttpSession session) {
+	@PostMapping("/myinfo/edit")
+	public String infoEdit(UserVO uvo, HttpSession session) {
 		
 		userService.updateMyInfo(uvo);
 		  

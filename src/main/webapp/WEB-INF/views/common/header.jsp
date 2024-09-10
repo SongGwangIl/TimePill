@@ -83,7 +83,7 @@
 		<span>
 			<c:choose>
 				<c:when test="${not empty loginUser.userName}">
-					<c:out value="${name} 님 환영합니다."></c:out>
+					<c:out value="${loginUser.userName} 님 환영합니다."></c:out>
 				</c:when>
 				<c:otherwise>
 					<c:out value="${loginUser.userId}"/> 님 환영합니다.	
