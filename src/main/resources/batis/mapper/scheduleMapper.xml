@@ -1,83 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
-	<resultMap type="ScheduleVO" id="scheduleMap">
-		<id column="sche_id" property="scheId"/>
-		<result column="user_id" property="userId"/>
-		<result column="sche_title" property="scheTitle"/>
-		<result column="sche_select" property="scheSelect"/>
-		<result column="sche_start_date" property="scheStartDate"/>
-		<result column="sche_end_date" property="scheEndDate"/>
-		<result column="sche_date_expires" property="scheDateExpires"/>
-		<result column="sche_take_num"  property="scheTakeNum" />
-		<result column="sche_hide" property="scheHide"  />
-		
-		<collection property="timeList" ofType="ScheTimeVO" column="sche_id" select="findAllByScheId">
-			<id property="timeId" column="timeId" />
-			<result property="scheId" column="scheId" />
-			<result property="timeName" column="timeName" />
-			<result property="timeAlarm" column="timeAlarm" />
-			<result property="timeLimit" column="timeLimit" />
-			<result property="reAlarmCount" column="reAlarmCount" />
-			<result property="reAlarmTime" column="reAlarmTime" />
-			<result property="medLocation" column="medLocation" />
-			<result property="timeHide" column="timeHide" />
-		</collection>
-	</resultMap>
-	
-	<select id="list" resultMap="scheduleMap">
-		SELECT * FROM SCHEDULE
-		WHERE USER_ID=#{userId} AND SCHE_HIDE='N'
-		ORDER BY SCHE_ID DESC
-	</select>
-	
-	<select id="findAllByScheId" resultType="ScheTimeVO">
-		SELECT * FROM SCHE_TIME
-		WHERE SCHE_ID = #{scheId} AND TIME_HIDE='N'
-	</select>
 
-	<insert id="add">
-		INSERT INTO SCHEDULE (
-			SCHE_ID
-			, USER_ID
-			, SCHE_TITLE
-			, SCHE_TAKE_NUM
-			, SCHE_SELECT
-			, SCHE_START_DATE
-			, SCHE_END_DATE
-		) VALUES (
-			CONCAT('SCHE_', LPAD(NEXT VALUE FOR SQ_SCHE, 5, '0'))
-			, #{userId}
-			, #{scheTitle}
-			, #{scheTakeNum}
-			, #{scheSelect}
-			, #{scheStartDate}
-			, #{scheEndDate}
-			)
-	</insert>
-	
-	<select id="findById">
-		SELECT * FROM SCHEDULE
-		WHERE SCHE_ID=#{scheId}
-	</select>
-	
-	<delete id="delete">
-		UPDATE SCHEDULE
-		SET SCHE_HIDE='Y'
-		WHERE SCHE_ID=#{scheId}
-	</delete>
-	
-	<update id="edit">
-		UPDATE SCHEDULE
-		SET 
-		    SCHE_TITLE = #{scheTitle},
-		    SCHE_SELECT = #{scheSelect},
-		    SCHE_START_DATE = #{scheStartDate},
-		    SCHE_END_DATE = #{scheEndDate}
-		WHERE 
-		    SCHE_ID = #{scheId}
-	</update>
+<!-- 스케줄 리스트 -->
+<select id="selectScheduleList" resultType="ScheduleVO">
+SELECT 
+	A.ALARM_REG_ID
+	, A.PRESC_MED_ID 
+	, A.ALARM_ID 
+	, B.ALARM_TYPE
+	, B.ALARM_TIME
+	, B.ALARM_INTERVAL
+	, B.RPT_INTERVAL
+	, C.PRESC_MED_NAME
+	, C.START_DATE
+	, C.END_DATE
+	, C.DURATION
+	, C.FREQUENCY
+	, C.MED_STATUS
+FROM 
+	alarm_reg A
+	JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
+	JOIN presc_med_info C ON A.PRESC_MED_ID = C.PRESC_MED_ID
+WHERE 
+	C.USER_ID = #{userId}
+	AND ALARM_USE_AT = 'Y'
+ORDER BY 
+	B.ALARM_TYPE, A.PRESC_MED_ID
+</select>
+
+<!-- 처방약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	PRESC_MED_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE
+	, DURATION
+	, FREQUENCY
+FROM 
+	presc_med_info
+WHERE 
+	USER_ID = #{userId}
+	AND PRESC_MED_ID = #{prescMedId}
+</select>
+
+<!-- 알람 리스트 -->
+<select id="selectAlarmList" resultType="ScheduleVO">
+SELECT
+	ALARM_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+	, ALARM_INTERVAL
+	, RPT_INTERVAL
+	, ALARM_USE_AT
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+</select>
+
+<!-- 알람 셋 -->
+<update id="updateAlarm">
+UPDATE 
+	alarm_set 
+SET 
+	ALARM_TIME = #{alarmTime}
+	, ALARM_INTERVAL = #{alarmInterval}
+	, RPT_INTERVAL = #{rptInterval}
+	, ALARM_USE_AT = #{alarmUseAt}
+WHERE
+	ALARM_ID = #{alarmId}
+</update>
+
+<!-- 처방약 정보 등록 -->
+<insert id="insertMedInfo">
+INSERT INTO presc_med_info(
+	USER_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE 
+	, DURATION 
+	, FREQUENCY 
+	, MED_STATUS 
+) VALUES(
+	#{userId}
+	, #{prescMedName}
+	, #{startDate}
+	, #{endDate}
+	, #{duration} 
+	, #{frequency} 
+	, 'Y'
+)
+</insert>
+
+<!-- 처방약 정보 수정 -->
+<update id="updateMedInfo">
+UPDATE 
+	presc_med_info 
+SET 
+	PRESC_MED_NAME = #{prescMedName}
+	, START_DATE = #{startDate}
+	, END_DATE = #{endDate}
+	, DURATION = #{duration}
+	, FREQUENCY = #{frequency}
+WHERE
+	PRESC_MED_ID = #{prescMedId}
+</update>
+
 </mapper>

@@ -1,10 +1,7 @@
-schedule list.jsp
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- 헤더 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -19,27 +16,53 @@ schedule list.jsp
 	position: absolute;
 	left: 590px;
 	top: 316px;
-	background-image: url(${pageContext.request.contextPath}/resources/img/image1.png);
+	background-image:
+		url(${pageContext.request.contextPath}/resources/img/image1.png);
 	background-repeat: no-repeat;
 	background-size: cover;
-	z-index: 100; /* Ensures it's on top of other elements */
+	z-index: 1; /* Ensures it's on top of other elements */
+}
+
+.med-title .med-info {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	display: none;
+	position: absolute;
+/* 	bottom: 100%; */
+	left: 0;
+	background-color: #fff;
+	z-index: 1000;
+}
+
+.med-title:hover .med-info {
+	display: block;
+}
+p, span {
+	margin: 5px;
 }
 </style>
 
 
 <span class="info-text">복약 스케줄 리스트</span>
 
-<div class="image"></div>
+<div class="image">
+</div>
 <div class="desc_text">
 	<p>복용할 알람 스케줄을 <br> 등록하고 알림을 <br> 받아보세요!</p>
 </div>
-<div>
-	<a href='${pageContext.request.contextPath}/schedule/add.do'>
-		<div class="btn1"> 
+<div style="display: none;">
+	<a href='${pageContext.request.contextPath}/medication/schedule/reg-alarm'>
+		<div class="btn1">
 			<img class="pill" src="${pageContext.request.contextPath}/resources/img/timpill.svg"></i>
-			<p>
-			신규 스케줄 등록
-			</p>
+			<p>스케줄 등록</p>
+		</div>
+	</a> 
+</div>
+<div>
+	<a href='${pageContext.request.contextPath}/medication/schedule/reg-med'>
+		<div class="btn1">
+			<img class="pill" src="${pageContext.request.contextPath}/resources/img/timpill.svg"></i>
+			<p>처방약 등록</p>
 		</div>
 	</a>
 </div>
@@ -47,93 +70,67 @@ schedule list.jsp
 
 <div class="box">
 	<div class="ab"></div>
-
-
-	<c:forEach var="vo" items="${lvo}">
-		<div class="tablewrap">
-	
-		<table>
-			<tr>
-				<td colspan="2" >
-					<strong><c:out value="${vo.scheTitle}" /></strong> 
-					(매일 <c:out value="${vo.scheTakeNum}" />회)
-				</td>
-			</tr>
-
-			<tr>
-				<td colspan="2" >
-					<span><c:out value="${vo.scheStartDate}" /></span> ~ 
-					<span class="endDate"><c:out value="${vo.scheEndDate}" /></span>
-				</td>
-			</tr>
-			<tr>
-				<c:if test="${vo.timeList.isEmpty()}">
-						<td>
-							<a class="light" href="${pageContext.request.contextPath}/schedule/time/add1.do?scheId=${vo.scheId}">
-							알림 시간을 등록해주세요!
+	<c:forEach var="resultAlarmType" items="${scheList}">
+		<c:if test="${resultAlarmType.alarmType ne previousAlarmType}">
+			<div class="tablewrap">
+				 <c:set var="previousAlarmType" value="${resultAlarmType.alarmType}" />
+				<p>
+				<c:choose>
+					<c:when test="${resultAlarmType.alarmType eq '1'}">
+						아침식전
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '2'}">
+						아침식후
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '3'}">
+						점심식전
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '4'}">
+						점심식후
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '5'}">
+						저녁식전
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '6'}">
+						저녁식후
+					</c:when>
+					<c:when test="${resultAlarmType.alarmType eq '7'}">
+						자기전
+					</c:when>
+				</c:choose>
+				<fmt:parseDate value="${resultAlarmType.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
+				<span>[알람 시간 : <fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>]</span>
+				</p>
+				<c:forEach var="result" items="${scheList}">
+					<c:if test="${result.alarmType eq resultAlarmType.alarmType}">
+						<span class="med-title">
+							<c:url var="editMedInfo" value="/medication/schedule/reg-med">
+								<c:param name="prescMedId">${result.prescMedId}</c:param>
+							</c:url>
+							<a href="${editMedInfo}">
+								<<c:out value="${result.prescMedName}"/>>
 							</a>
-						</td>
-				</c:if>
-				
-			<c:forEach var="timeVo" items="${vo.timeList}">
-				<tr>
-					<td>
-						<span class="bold">
-							<c:out value="${timeVo.timeName}" /> 
+							<div class="med-info">
+								<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
+								<p>처방기간 : ${result.duration}일</p>
+								<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
+								<p>하루 복약 횟수 : 하루 ${result.frequency}회</p>
+							</div>
 						</span>
-						<span class="light">
-							<c:out value="${timeVo.timeAlarm}" />
-						</span>
-					</td>
-
-					<td>
-						<a href='${pageContext.request.contextPath}/schedule/time/edit.do?timeId=${timeVo.timeId}'>
-							수정 
-						</a>
-					</td>
-				</tr>
-			</c:forEach>
-			</tr>
-			<tr>
-				<td colspan="2" >
-					<br>
-					<a class ="a" 
-						href='${pageContext.request.contextPath}/schedule/edit.do?scheId=${vo.scheId}'>
-						<div class="btn2">
-							수정
-						</div>
-					</a> 
-					<a class ="a" 
-						href='${pageContext.request.contextPath}/schedule/delete.do?scheId=${vo.scheId}'>
-						<div class="btn2">
-							삭제
-						</div>
-					</a>
-				</td>
-			</tr>
-		</table>
+					</c:if>
+				</c:forEach>
 			</div>
-		<br><br>
-		
+		</c:if>
 	</c:forEach>
-	
+	<c:if test="${empty scheList}">
+		<div class="tablewrap">
+			<p>등록된 알람이 없습니다.</p>
+		</div>
+	</c:if>
 </div>
 
 
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var today = new Date();
-		var dateList = document.querySelectorAll(".endDate");
-		var addTimeList = document.querySelectorAll(".addTime");
-
-		for (var i = 0; i < dateList.length; i++) {
-			var endDate = new Date(dateList[i].innerText);
-			if (endDate < today) {
-				dateList[i].innerText += " [만료]";
-				addTimeList[i].innerText = "등록된 알림이 없습니다.";
-			}
-		}
-	});
 </script>
 
 <!-- footer -->

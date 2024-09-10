@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import timepill.com.Pagination;
 import timepill.schedule.service.ScheTimeVO;
-import timepill.schedule.service.ScheduleVO;
+import timepill.schedule.service.Schedule2VO;
 
 @Getter @Setter
 public class RecordVO extends Pagination {
@@ -18,7 +18,7 @@ public class RecordVO extends Pagination {
 	private char takeSuccess;
 	private char takeUseAt;
 	
-	private List<ScheduleVO> scheduleList;
+	private List<Schedule2VO> scheduleList;
 	private List<ScheTimeVO> scheTimeList;
 	
 	private int cntTakeLog;
