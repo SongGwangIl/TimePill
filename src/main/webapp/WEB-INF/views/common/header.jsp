@@ -237,7 +237,7 @@ body {
 					</li>
 
 					<li>
-						<c:url var="recordUrl" value="/record/list.do" />
+						<c:url var="recordUrl" value="/medication/schedule/list" />
 						<form id="recordForm" action="#" method="get">
 							<input type="hidden" name="takeDate" value="${today}" /> 
 							<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;">
