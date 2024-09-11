@@ -21,10 +21,10 @@
 			<table>
 				<th><td>알람활성화</td><td>알람타입</td><td>알람시간</td><td>알람만료시간</td><td>알람간격</td></th>
 				<c:forEach var="result" items="${alarmList}" varStatus="status">
-					<tr data-no="row-${status.count}">
+					<tr data-no="row-data">
 						<td>
-							<input type="hidden" name="alarmId" value="${result.alarmId}">
-							<input type="checkbox" name="alarmUseAt" value="${result.alarmUseAt}" ${result.alarmUseAt eq 'Y' ? 'checked' : '' } data-no="${status.count}" onclick="toggleFields(this, ${status.count})">
+							<input type="hidden" name="alarmId" value="${result.alarmId}" data-no="${status.count}">
+							<input type="checkbox" name="alarmUseAt" value="${result.alarmUseAt}" ${result.alarmUseAt eq 'Y' ? 'checked' : '' } data-no="${status.count}" onclick="toggleChk(this, ${status.count})">
 						</td>
 						<td>
 						<c:choose>
@@ -51,10 +51,12 @@
 							</c:when>
 						</c:choose>
 						</td>
-						<td>
-							<!-- 알람 시간 -->
-							<input type="time" id="" name="alarmTime" value="${result.alarmTime}" data-no="${status.count}">
-						</td>
+						<c:if test="${(status.count mod 2) ne 0}">
+							<td rowspan="2">
+								<!-- 알람 시간 -->
+								<input type="time" name="alarmTime" value="${result.alarmTime}" data-no="${status.count}">
+							</td>
+						</c:if>
 						<td>
 							<!-- 알람 만료시간 -->
 							<input type="number" name="alarmInterval" min="20" max="60" step="5" value="${result.alarmInterval}" data-no="${status.count}">
@@ -79,23 +81,31 @@ function submit () {
 	// 알람정보 배열화
 	function collectData() {
         var data = [];
-        var rows = document.querySelectorAll('tr[data-no^="row-"]');
+        var rows = document.querySelectorAll('tr[data-no="row-data"]');
+        var prevAlarmTime
         rows.forEach(function(row) {
             var alarmId = row.querySelector('input[name="alarmId"]').value;
             var alarmUseAt = row.querySelector('input[name="alarmUseAt"]').value;
-            var alarmTime = row.querySelector('input[name="alarmTime"]').value;
+        	// 식전 식후 알람시간 동일화 
+        	var dataNo = row.querySelector('input[name="alarmId"]').getAttribute('data-no'); // 식전,식후 알람시간 동일화를 위한 값
+            if (parseInt(dataNo) % 2 === 0) {
+        		var alarmTime = prevAlarmTime;
+            } else {
+	            var alarmTime = row.querySelector('input[name="alarmTime"]').value;
+	            prevAlarmTime = row.querySelector('input[name="alarmTime"]').value;
+            }
             var alarmInterval = row.querySelector('input[name="alarmInterval"]').value;
-            var rptCount = row.querySelector('input[name="rptCount"]').value;
             var rptInterval = row.querySelector('input[name="rptInterval"]').value;
+            // 알람정보 배열에 삽입
             data.push({
                 alarmId: alarmId,
                 alarmUseAt: alarmUseAt,
                 alarmTime: alarmTime,
                 alarmInterval: alarmInterval,
-                rptCount: rptCount,
                 rptInterval: rptInterval
             });
         });
+//      console.log(data);
         return data;
     }
 	// 알람 저장
@@ -115,10 +125,8 @@ function submit () {
 	});
 }
 
-</script>
-<script>
-// 체크박스 동작
-function toggleFields(checkbox, count) {
+//체크박스 동작
+function toggleChk(checkbox, count) {
 	var isChecked = checkbox.checked;
 	var value = isChecked ? "Y" : "N";
 	checkbox.value = value;
@@ -129,12 +137,9 @@ function toggleFields(checkbox, count) {
 	});
 }
 
-addEventListener(change)
-
-
 </script>
 	
-	<!-- footer -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<!-- footer -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

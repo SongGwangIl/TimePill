@@ -1,8 +1,6 @@
-package timepill.schedule.service.impl;
+package timepill.schedule.service;
 
 import java.util.List;
-
-import timepill.schedule.service.ScheduleVO;
 
 public interface ScheduleService {
 	

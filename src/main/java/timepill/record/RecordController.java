@@ -21,7 +21,7 @@ import com.google.gson.JsonObject;
 
 import timepill.record.service.RecordService;
 import timepill.record.service.RecordVO;
-import timepill.schedule.service.ScheTimeVO;
+import timepill.schedule.service.ScheduleVO;
 import timepill.user.UserVO;
 
 
@@ -56,7 +56,7 @@ public class RecordController{
 	
 	//복용 로그 기록 및 수정
 	@PostMapping("/addlog.do")
-	public String addLog(ScheTimeVO stvo, Model model, HttpSession session) {
+	public String addLog(ScheduleVO stvo, Model model, HttpSession session) {
 		
 		//세션객체에 저장된 로그인 정보에서 id를 받아옴
 		UserVO uvo = (UserVO) session.getAttribute("loginUser");
@@ -67,7 +67,7 @@ public class RecordController{
 		int num2 = 0;
 		
 		//ScheTimeVO를 통해 timeId 받아옴
-		String timeId = stvo.getTimeId();
+		String timeId = stvo.getAlarmId();
 		
 		//오늘의 날짜 takeDate
 		DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
