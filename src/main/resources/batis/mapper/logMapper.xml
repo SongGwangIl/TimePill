@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timepill.schedule.service.impl.LogDAO">
+
+<!-- 스케줄 리스트 -->
+<select id="selectScheduleList" resultType="ScheduleVO">
+SELECT 
+	A.ALARM_REG_ID
+	, A.PRESC_MED_ID 
+	, A.ALARM_ID 
+	, B.ALARM_TYPE
+	, B.ALARM_TIME
+	, B.ALARM_INTERVAL
+	, B.RPT_INTERVAL
+	, C.PRESC_MED_NAME
+	, C.START_DATE
+	, C.END_DATE
+	, C.DURATION
+	, C.FREQUENCY
+	, C.MED_STATUS
+FROM 
+	alarm_reg A
+	JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
+	JOIN presc_med_info C ON A.PRESC_MED_ID = C.PRESC_MED_ID
+WHERE 
+	C.USER_ID = #{userId}
+	AND ALARM_USE_AT = 'Y'
+ORDER BY 
+	B.ALARM_TYPE, A.PRESC_MED_ID
+</select>
+
+<!-- 처방약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	PRESC_MED_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE
+	, DURATION
+	, FREQUENCY
+FROM 
+	presc_med_info
+WHERE 
+	USER_ID = #{userId}
+	AND PRESC_MED_ID = #{prescMedId}
+</select>
+
+<!-- 알람 리스트 -->
+<select id="selectAlarmList" resultType="ScheduleVO">
+SELECT
+	ALARM_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+	, ALARM_INTERVAL
+	, RPT_INTERVAL
+	, ALARM_USE_AT
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+</select>
+
+<!-- 알람 셋 -->
+<update id="updateAlarm">
+UPDATE 
+	alarm_set 
+SET 
+	ALARM_TIME = #{alarmTime}
+	, ALARM_INTERVAL = #{alarmInterval}
+	, RPT_INTERVAL = #{rptInterval}
+	, ALARM_USE_AT = #{alarmUseAt}
+WHERE
+	ALARM_ID = #{alarmId}
+</update>
+
+<!-- 처방약 정보 등록 -->
+<insert id="insertMedInfo">
+INSERT INTO presc_med_info(
+	USER_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE 
+	, DURATION 
+	, FREQUENCY 
+	, MED_STATUS 
+) VALUES(
+	#{userId}
+	, #{prescMedName}
+	, #{startDate}
+	, #{endDate}
+	, #{duration} 
+	, #{frequency} 
+	, 'Y'
+)
+</insert>
+
+<!-- 처방약 정보 수정 -->
+<update id="updateMedInfo">
+UPDATE 
+	presc_med_info 
+SET 
+	PRESC_MED_NAME = #{prescMedName}
+	, START_DATE = #{startDate}
+	, END_DATE = #{endDate}
+	, DURATION = #{duration}
+	, FREQUENCY = #{frequency}
+WHERE
+	PRESC_MED_ID = #{prescMedId}
+</update>
+
+</mapper>

@@ -6,6 +6,12 @@
 <div class="whiteBox">
 
 
+타이틀 형식
+
+TimePill - "페이지 타이틀" 
+
+ex) TimePill - 복약 기록 조회
+ex) TimePill - 메인
 
 
 

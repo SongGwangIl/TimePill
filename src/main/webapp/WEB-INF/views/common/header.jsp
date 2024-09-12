@@ -213,7 +213,7 @@ body {
 				<h3>마이페이지</h3>
 				<ul class="menu">
 					<li>
-						<c:url var="myPageUrl" value="/myPage" /> 
+						<c:url var="myPageUrl" value="/myinfo/edit" /> 
 						<a href="${myPageUrl}"> 유저정보변경 </a>
 					</li>
 					<li>
