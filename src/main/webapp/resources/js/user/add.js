@@ -41,11 +41,12 @@ function checkId(){
   
 
 let pwVal = "", pwReVal = ""
-const pw = document.querySelector('#userPwd')
+const pw = document.querySelector('#password')
 const pwMsg = document.querySelector('#userPwdMsg')
 pw.addEventListener('change', () => {
   const pwRegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
   pwVal = pw.value
+  console.log('실행')
   if(pwRegExp.test(pwVal)) { // 정규식 조건 만족 O
     pwMsg.textContent = "조건만족"
   } 
