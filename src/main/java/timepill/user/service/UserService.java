@@ -18,7 +18,7 @@ public interface UserService {
 	//사용자정보등록
 	void addUserInfo(UserVO vo);
 	//사용자정보얻기
-	UserVO getUserInfo(UserVO vo);
+	UserVO getUserInfo(String userId);
 	//나의정보수정
 	void updateMyInfo(UserVO uivo);
 	//

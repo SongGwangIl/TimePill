@@ -3,6 +3,7 @@ package timepill.user.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import timepill.user.UserVO;
 import timepill.user.service.UserService;
@@ -57,36 +58,30 @@ public class UserServiceimpl implements UserService{
 
 	@Override
 	public void addUserInfo(UserVO vo) {
-		String birthDay = vo.getYy()+"-"+vo.getMm()+"-"+vo.getDd();
-		vo.setUserBirth(birthDay);
-		
-		userdao.addUserInfo(vo);
-		userdao.hasInfo(vo.getUserId());
-		
+		if(vo.getYy() != null && vo.getMm() != null && vo.getDd() != null) {
+			String birthDay = vo.getYy()+"-"+vo.getMm()+"-"+vo.getDd();
+			vo.setUserBirth(birthDay);			
+		}
+		userdao.addUserInfo(vo);		
 	}
 	
-//	@Override
-//	public UserVO getUserInfo(UserVO vo) {
-//		
-//		UserInfoVO uivo = new UserInfoVO();
-//		
-//		if(vo.getUserSelect().equals("user"))
-//			uivo = (UserInfoVO)userdao.getUserInfo(vo.getUserId());
-//		else if(vo.getUserSelect().equals("protector"))
-//			uivo = (UserInfoVO)userdao.getProtectorInfo(vo.getUserId());
-//		
-//		String email = userdao.getUserEmail(vo.getUserId());
-//		uivo.setUserEmail(email);
-//		
-//		String select = userdao.getUserSelect(vo.getUserId());
-//		uivo.setUserSelect(select);
-//		
-//		return uivo;
-//	}
+	@Override
+	public UserVO getUserInfo(String userId) {
+		UserVO vo = userdao.getUserInfo(userId);
+		
+		if(StringUtils.hasText(vo.getUserBirth())) {			
+			vo.setYy(vo.getUserBirth().substring(0, 4));
+			vo.setMm(vo.getUserBirth().substring(5, 7));
+			vo.setDd(vo.getUserBirth().substring(8, 10));
+		}
+		
+		return vo;
+	}
 
 
 	@Transactional
 	public void updateMyInfo(UserVO uivo) {
+		uivo.setUserBirth(uivo.getYy() + "-" + uivo.getMm() + "-" + uivo.getDd());
 		
 		userdao.updateUserInfo(uivo);		
 	}
@@ -103,12 +98,5 @@ public class UserServiceimpl implements UserService{
 	public String getUserCarerAt(String userId) {
 		
 		return userdao.getUserCarerAt(userId);
-	}
-
-
-	@Override
-	public UserVO getUserInfo(UserVO vo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

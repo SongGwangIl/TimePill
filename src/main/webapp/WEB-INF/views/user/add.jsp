@@ -15,7 +15,7 @@
 	position:absolute;
 	left:0px;
 	top:80px;
-	background-image:url(resources/img/background.png);
+	background-image:url(/resources/img/background.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 }
