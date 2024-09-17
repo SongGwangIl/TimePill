@@ -275,7 +275,7 @@ body {
 			</div>
 
 			<div>
-				<p> <a href='${pageContext.request.contextPath}/user/login' class="sans"> |  로그아웃 </a> </p> 
+				<p> <a href='/user/kakao-logout' class="sans"> |  로그아웃 </a> </p> 
 			</div>
 		</div>
 		

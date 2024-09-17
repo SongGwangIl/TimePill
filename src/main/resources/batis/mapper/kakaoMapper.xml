@@ -19,8 +19,8 @@ INSERT INTO users(
 	, EMAIL
 ) VALUES(
 	#{userId}
-	, #{password}
 	, #{userName}
+	, #{password}
 	, #{email}
 )
 </insert>
