@@ -11,7 +11,7 @@
   		, email
   		, user_status
   		, user_carer_at
-  		, user_name
+  		, A.user_name
   		, user_phone
     FROM users A 
     	LEFT JOIN user_info B 
