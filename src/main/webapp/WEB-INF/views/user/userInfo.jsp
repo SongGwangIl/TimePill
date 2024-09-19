@@ -36,7 +36,7 @@
 						<form:radiobutton id="male" path="userGender" value="M"/>
 						<label for="male" class="hover">남성</label> 
 						<form:radiobutton id="female" path="userGender" value="F"/>
-						<label for="female" class="hover">여성</label>
+						<label for="female" class="hover female" >여성</label>
 					</div>
 				</li> 
    
