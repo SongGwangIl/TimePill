@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+
 @Service
 public class HttpCallService {
 
@@ -24,6 +27,16 @@ public class HttpCallService {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod(method);
 			conn.setRequestProperty("Authorization", header);
+			 try {
+				 	if (param != null) {
+				 		JsonParser.parseString(param);
+				 		conn.setRequestProperty("Content-Type", "application/json"); // Content-Type 설정
+				 		System.out.println("Content-Type 설정");
+				 		System.out.println(param);
+					}
+		        } catch (JsonSyntaxException ex) {
+		        	System.out.println("JsonSyntaxException : " + ex);
+		        }
 			if (param != null) {
 				System.out.println("param : " + param);
 				conn.setDoOutput(true);

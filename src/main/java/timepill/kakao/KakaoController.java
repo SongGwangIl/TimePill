@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
 import timepill.kakao.service.KakaoService;
 
@@ -17,29 +16,26 @@ public class KakaoController {
 	KakaoService kakaoService;
 	
 	
-	/** 카카오 로그인(회원가입) 요청 */
+	/** 카카오 로그인or회원가입 요청 */
 	@GetMapping("/user/kakao-login")
 	public String goKakaoOAuth() throws Exception {
-		return "redirect:" + kakaoService.goKakaoOAuth();
+		String resultUri = kakaoService.goKakaoOAuth("", "login-callback");
+		return "redirect:" + resultUri;
 	}
 
 	/** 카카오 로그인 콜백 */
 	@GetMapping("/user/login-callback")
 	public String loginCallback(@RequestParam("code") String code) throws Exception {
-		kakaoService.loginCallback(code);
-		String resultLogin = kakaoService.login();
-		if ("Login".equals(resultLogin) || "Join".equals(resultLogin)) {
-			return "redirect:/medication/schedule/list";
+		
+		kakaoService.callback(code, "login-callback");
+		
+		String resultLogin = kakaoService.userAuthHandler();
+		if (!"green".equals(resultLogin)) {
+			return "redirect:/user/login"; 
 		}
-		return "redirect:/user/login"; 
+		return "redirect:/medication/schedule/list";
 	}
 
-	/** 카카오 유저정보 요청 */
-	@GetMapping("/user/profile")
-	public String getProfile() throws Exception {
-		return kakaoService.getProfile();
-	}
-	
 	/** 로그아웃 */
 	@GetMapping("/user/kakao-logout")
 	public String logout() throws Exception {
@@ -50,24 +46,33 @@ public class KakaoController {
 	/** 나에게 메세지 보내기 */
 	@RequestMapping("/user/message")
 	public String message() throws Exception {
-		boolean checkMessageAuth = kakaoService.checkMessageAuth();
+		boolean checkMessageAuth = kakaoService.checkMessageAuth(); 
+		// 메세지 권한 동의 여부 체크
 		if (!checkMessageAuth) {
-			// 권한 동의 페이지로 리다이렉트
-//			kakaoService.goKakaoOAuth("talk_message", "http://localhost:8090/user/message");
-			System.out.println("권한 동의 확인");
-			return "redirect:" + kakaoService.goKakaoOAuth("talk_message", "http://localhost:8090/user/message-callback");
+			System.out.println("권한 미동의");
+			return "redirect:" + kakaoService.goKakaoOAuth("talk_message", "message-callback");
 		}
+		System.out.println("권한 동의");
 		String messageResult = kakaoService.message();
 		System.out.println("messageResult : " + messageResult);
 		return "redirect:/medication/schedule/list";
 	}
 	
+	/** 나에게 메세지 보내기 권한 동의 콜백 */
 	@RequestMapping("/user/message-callback")
 	public String messageCallback(@RequestParam("code") String code) throws Exception {
-		kakaoService.loginCallback(code);
-		return "redirect:/medication/schedule/list";
+		kakaoService.callback(code, "message-callback");
+		return "redirect:/user/message";
 	}
 
+	
+	
+	
+	
+	@GetMapping("/user/profile")
+	public String getProfile() throws Exception {
+		return kakaoService.getProfile();
+	}
 
 	@RequestMapping("/user/authorize")
 	public String goKakaoOAuth(@RequestParam("scope") String scope) throws Exception {
