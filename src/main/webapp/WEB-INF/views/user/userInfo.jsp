@@ -24,80 +24,66 @@
 					<label class="label">전화번호</label> 
 					<form:input path="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"/>
 				</li>
-   				 
-   				<c:if test="${loginUser.userCarerAt eq 'N'}">   				
-					<li class="c1">
-						<label class="label">성별</label>
-						<div class="gender">
-							<form:radiobutton id="male" path="userGender" value="M"/>
-							<label for="male" class="hover">남성</label> 
-							<form:radiobutton id="female" path="userGender" value="F"/>
-							<label for="female" class="hover">여성</label>
-						</div>
-					</li> 
-	   
-					<li class="c1"> 
-						<label class="label">키</label> 
-						<form:input type="number" path="userHeight" class="input"/>
-					</li>
-					
-					<li class="c1">
-						<label class="label">몸무게</label> 
-						<form:input type="number" path="userWeight" class="input"/>
-					</li>
-					 
-					<li class="c1">
-		                <div id="birth">
-		                    <label for="yy" class="label">생년월일</label>
-	 
-		                    <div id="bir_wrap">		                
-		                        <div id="bir_yy">
-		                            <span class="box">
-		                                <form:input type="text" id="yy"  path="yy" class="int" maxlength="4" placeholder="년(4자)"/>
-		                            </span>
-		                        </div>		                        
-		                      
-		                        <div id="bir_mm">
-		                            <span class="box">
-		                            	<form:select path="mm" id="mm">		                            		
-		                                    <form:option value="00" label="월"/>
-		                                    <form:option value="01" label="1"/>
-		                                    <form:option value="02" label="2"/>
-		                                    <form:option value="03" label="3"/>
-		                                    <form:option value="04" label="4"/>
-		                                    <form:option value="05" label="5"/>
-		                                    <form:option value="06" label="6"/>
-		                                    <form:option value="07" label="7"/>
-		                                    <form:option value="08" label="8"/>
-		                                    <form:option value="09" label="9"/>
-		                                    <form:option value="10" label="10"/>
-		                                    <form:option value="11" label="11"/>
-		                                    <form:option value="12" label="12"/>		                                    
-		                            	</form:select>		                            		
-		                            </span>
-		                        </div>
-		                        <div id="bir_dd">
-		                            <span class="box">
-		                                <form:input type="text" id="dd" path="dd" class="int" maxlength="2" placeholder="일"/>
-		                            </span>
-		                        </div>
-		                    </div>		                    
-		                </div>
-		        	</li>
-	        	</c:if>
-   				
+   				   				
+				<li class="c1">
+					<label class="label">성별</label>
+					<div class="gender">
+						<form:radiobutton id="male" path="userGender" value="M"/>
+						<label for="male" class="hover">남성</label> 
+						<form:radiobutton id="female" path="userGender" value="F"/>
+						<label for="female" class="hover">여성</label>
+					</div>
+				</li> 
+   
+				<li class="c1"> 
+					<label class="label">키</label> 
+					<form:input type="number" path="userHeight" class="input"/>
+				</li>
+				
+				<li class="c1">
+					<label class="label">몸무게</label> 
+					<form:input type="number" path="userWeight" class="input"/>
+				</li>
+				 
+				<li class="c1">
+	                <div id="birth">
+	                    <label for="yy" class="label">생년월일</label>
+ 
+	                    <div id="bir_wrap">		                
+	                        <div id="bir_yy">
+	                            <span class="box">
+	                                <form:input type="text" id="yy"  path="yy" class="int" maxlength="4" placeholder="년(4자)"/>
+	                            </span>
+	                        </div>		                        
+	                      
+	                        <div id="bir_mm">
+	                            <span class="box">
+	                            	<form:select path="mm" id="mm">		                            		
+	                                    <form:option value="00" label="월"/>
+	                                    <form:option value="01" label="1"/>
+	                                    <form:option value="02" label="2"/>
+	                                    <form:option value="03" label="3"/>
+	                                    <form:option value="04" label="4"/>
+	                                    <form:option value="05" label="5"/>
+	                                    <form:option value="06" label="6"/>
+	                                    <form:option value="07" label="7"/>
+	                                    <form:option value="08" label="8"/>
+	                                    <form:option value="09" label="9"/>
+	                                    <form:option value="10" label="10"/>
+	                                    <form:option value="11" label="11"/>
+	                                    <form:option value="12" label="12"/>		                                    
+	                            	</form:select>		                            		
+	                            </span>
+	                        </div>
+	                        <div id="bir_dd">
+	                            <span class="box">
+	                                <form:input type="text" id="dd" path="dd" class="int" maxlength="2" placeholder="일"/>
+	                            </span>
+	                        </div>
+	                    </div>		                    
+	                </div>
+	        	</li>   				
 			</ul>
-			<c:if test="${empty myInfo.userName}">
-			<ul id="buttons">			
-				<li>
-					<form:button id="add" class="btn" onclick="location.href='device'">등록</form:button>
-				</li>				
-				<li>
-					<form:button class="btn" type="button" onclick="location.href='device'">다음에 등록</form:button>
-				</li>				
-			</ul>
-			</c:if>
-			<c:if test="${not empty myInfo.userName}">
 			<ul id="buttons">			
 				<li>
 					<form:button id="update" class="btn">수정</form:button>
@@ -106,23 +92,12 @@
 					<form:button class="btn" type="button" onclick="location.href='/main'">취소</form:button>
 				</li>				
 			</ul>
-			</c:if>
 		</form:form>
 	</div>
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
 <script>
 	$(document).ready(function(){
 		let form = $("#form")
-		//정보등록
-		$("#add").click(function(){
-			if(!confirm("등록하시겠습니까?")){
-				return false;
-			}
-			form.action = "/user/addUserInfo";
-			form.submit();
-			
-		});
-		
 		//정보변경
 		$("#update").click(function(){
 			if(!confirm("변경하시겠습니까?")){

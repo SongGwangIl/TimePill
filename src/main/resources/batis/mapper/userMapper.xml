@@ -8,11 +8,7 @@
   	SELECT 
   		user_id
   		, password
-  		, email
-  		, user_status
-  		, user_carer_at
   		, user_name
-  		, user_phone
     FROM users 
     WHERE user_id = #{userId}
   </select>
@@ -47,7 +43,6 @@
   		, user_height = #{userHeight}
   		, user_weight = #{userWeight}
   		, user_birth = #{userBirth}
-  		, email = #{userEmail}
   	WHERE user_id = #{userId}
   </update>
   <select id="getUserInfo">

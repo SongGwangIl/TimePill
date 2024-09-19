@@ -41,10 +41,11 @@ public class UserController {
 
 		// 로그인
 		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
-				uvo.getPassword().equals(vo.getPassword()) ) 
+				uvo.getPassword().equals(vo.getPassword()) )
 		
 			// 로그인 성공
 			{
+				uvo.setPassword(null);
 				session.setAttribute("loginUser", uvo);
 				// 정보미입력시 입력창 이동
 				if(!StringUtils.hasText(uvo.getUserName())) 				
@@ -53,7 +54,7 @@ public class UserController {
 				
 				// 정보입력완료시 디바이스메서드 호출
 				else 					
-					return "redirect:/device";
+					return "redirect:/medication/schedule/list";
 			}
 		
 		// 로그인 실패
@@ -110,11 +111,8 @@ public class UserController {
 	 * carer인 경우의 조건판단을 위해 정보등록후 등록폼 이동
 	 * */
 	@GetMapping("/addUserInfo")
-	public String UserInfo(@SessionAttribute("loginUser")UserVO vo, Model model) {
-		
-		String carerAt = userService.getUserCarerAt(vo.getUserId());
-		model.addAttribute("carerAt", carerAt);
-		
+	public String UserInfo() {
+
 		return "user/addUserInfo";
 	}
 	
@@ -125,14 +123,16 @@ public class UserController {
 	 * 메인페이지로 연결
 	 * */
 	@PostMapping("/addUserInfo")
-	public String addUserInfo(UserVO vo, HttpServletRequest request) {
+	public String addUserInfo(UserVO vo, HttpServletRequest request, HttpSession session) {
 		
 		userService.addUserInfo(vo);
+		UserVO uvo = userService.login(vo.getUserId());
+		uvo.setPassword(null);
+		session.setAttribute("loginUser", uvo);
+		
 		
 		request.setAttribute("msg", "정보가 등록 되었습니다.");
-		
-		//조건문 작성 필요, 디바이스 서비스 변경필요
-		request.setAttribute("url", "/device");
+		request.setAttribute("url", "/medication/schedule/list");
 		
 		return "common/msg";
 	}
@@ -161,6 +161,6 @@ public class UserController {
 		userService.updateMyInfo(uvo);		  
 		session.setAttribute("name", uvo.getUserName());
 		
-		return "redirect:/main";
+		return "redirect:/medication/schedule/list";
 	}
 }
