@@ -70,6 +70,11 @@ p, span {
 					<p>알람 등록</p>
 				</a> 
  			</div>
+
+			<form action="/user/message" method="post">
+				<input type="submit" value="메세지 보내기 테스트">
+			</form>
+
 		</div>
 		
 		<div style="width: 20%;"></div>
