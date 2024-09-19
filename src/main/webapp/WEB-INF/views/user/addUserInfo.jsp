@@ -25,74 +25,72 @@
 					<input name="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"/>
 				</li>
    				 
-   				<c:if test="${loginUser.userCarerAt eq 'N'}">   				
-					<li class="c1">
-						<label class="label">성별</label>
-						<div class="gender">
-							<input type="radio" id="male" name="userGender" value="M">
-							<label for="male" class="hover">남성</label> 
-							<input type="radio" id="female" name="userGender" value="F">
-							<label for="female" class="hover">여성</label>
-						</div>
-					</li> 
-	   
-					<li class="c1"> 
-						<label class="label">키</label> 
-						<input type="number" name="userHeight" class="input"/>
-					</li>
-					
-					<li class="c1">
-						<label class="label">몸무게</label> 
-						<input type="number" name="userWeight" class="input"/>
-					</li>
-					 
-					<li class="c1">
-		                <div id="birth">
-		                    <label for="yy" class="label">생년월일</label>
-	 
-		                    <div id="bir_wrap">		                
-		                        <div id="bir_yy">
-		                            <span class="box">
-		                                <input type="text" id="yy"  name="yy" class="int" maxlength="4" placeholder="년(4자)"/>
-		                            </span>
-		                        </div>		                        
-		                      
-		                        <div id="bir_mm">
-		                            <span class="box">
-		                            	<select name="mm" id="mm">		                            		
-		                                    <option label="월"/>
-		                                    <option value="01" label="1"/>
-		                                    <option value="02" label="2"/>
-		                                    <option value="03" label="3"/>
-		                                    <option value="04" label="4"/>
-		                                    <option value="05" label="5"/>
-		                                    <option value="06" label="6"/>
-		                                    <option value="07" label="7"/>
-		                                    <option value="08" label="8"/>
-		                                    <option value="09" label="9"/>
-		                                    <option value="10" label="10"/>
-		                                    <option value="11" label="11"/>
-		                                    <option value="12" label="12"/>		                                    
-		                            	</select>		                            		
-		                            </span>
-		                        </div>
-		                        <div id="bir_dd">
-		                            <span class="box">
-		                                <input type="text" id="dd" name="dd" class="int" maxlength="2" placeholder="일"/>
-		                            </span>
-		                        </div>
-		                    </div>		                    
-		                </div>
-		        	</li>
-	        	</c:if>
-   				
+   							
+				<li class="c1">
+					<label class="label">성별</label>
+					<div class="gender">
+						<input type="radio" id="male" name="userGender" value="M">
+						<label for="male" class="hover">남성</label> 
+						<input type="radio" id="female" name="userGender" value="F">
+						<label for="female" class="hover">여성</label>
+					</div>
+				</li> 
+   
+				<li class="c1"> 
+					<label class="label">키</label> 
+					<input type="number" name="userHeight" class="input"/>
+				</li>
+				
+				<li class="c1">
+					<label class="label">몸무게</label> 
+					<input type="number" name="userWeight" class="input"/>
+				</li>
+				 
+				<li class="c1">
+	                <div id="birth">
+	                    <label for="yy" class="label">생년월일</label>
+ 
+	                    <div id="bir_wrap">		                
+	                        <div id="bir_yy">
+	                            <span class="box">
+	                                <input type="text" id="yy"  name="yy" class="int" maxlength="4" placeholder="년(4자)"/>
+	                            </span>
+	                        </div>		                        
+	                      
+	                        <div id="bir_mm">
+	                            <span class="box">
+	                            	<select name="mm" id="mm">		                            		
+	                                    <option label="월"/>
+	                                    <option value="01" label="1"/>
+	                                    <option value="02" label="2"/>
+	                                    <option value="03" label="3"/>
+	                                    <option value="04" label="4"/>
+	                                    <option value="05" label="5"/>
+	                                    <option value="06" label="6"/>
+	                                    <option value="07" label="7"/>
+	                                    <option value="08" label="8"/>
+	                                    <option value="09" label="9"/>
+	                                    <option value="10" label="10"/>
+	                                    <option value="11" label="11"/>
+	                                    <option value="12" label="12"/>		                                    
+	                            	</select>		                            		
+	                            </span>
+	                        </div>
+	                        <div id="bir_dd">
+	                            <span class="box">
+	                                <input type="text" id="dd" name="dd" class="int" maxlength="2" placeholder="일"/>
+	                            </span>
+	                        </div>
+	                    </div>		                    
+	                </div>
+	        	</li>   				
 			</ul>
 			<ul id="buttons">			
 				<li>
 					<button id="add" class="btn">등록</button>
 				</li>				
 				<li>
-					<button class="btn" type="button" onclick="location.href='device'">다음에 등록</button>
+					<button class="btn" type="button" onclick="location.href='/main'">다음에 등록</button>
 				</li>				
 			</ul>
 			

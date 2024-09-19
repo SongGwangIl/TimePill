@@ -6,17 +6,15 @@
 
   <select id="login">
   	SELECT 
-  		A.user_id
+  		user_id
   		, password
   		, email
   		, user_status
   		, user_carer_at
-  		, A.user_name
+  		, user_name
   		, user_phone
-    FROM users A 
-    	LEFT JOIN user_info B 
-    	ON A.user_id = B.user_id 
-    WHERE A.user_id = #{userId}
+    FROM users 
+    WHERE user_id = #{userId}
   </select>
   <insert id="add">
   	INSERT INTO users (
@@ -37,27 +35,21 @@
   </select>
   <select id="getUserName">
   	SELECT user_name
-  	FROM user_info
+  	FROM users
   	WHERE user_id = #{userId}
   </select>
-  <insert id="addUserInfo">
-  	INSERT INTO user_info(
-  		user_id
-  		, user_name
-  		, user_phone
-  		, user_gender
-  		, user_height
-  		, user_weight
-  		, user_birth)
-  	values(
-  		#{userId}
-  		, #{userName}
-  		, #{userPhone}
-  		, #{userGender}
-  		, #{userHeight}
-  		, #{userWeight}
-  		, #{userBirth})
-  </insert>
+  <update id="addUserInfo">
+  	UPDATE users 
+  	SET
+  		user_name = #{userName}
+  		, user_phone = #{userPhone}
+  		, user_gender = #{userGender}
+  		, user_height = #{userHeight}
+  		, user_weight = #{userWeight}
+  		, user_birth = #{userBirth}
+  		, email = #{userEmail}
+  	WHERE user_id = #{userId}
+  </update>
   <select id="getUserInfo">
   	SELECT user_id
 	  	, user_name
@@ -66,7 +58,7 @@
 	  	, user_height
 	  	, user_weight
 	  	, user_birth
-  	FROM user_info
+  	FROM users
   	WHERE user_id = #{userId}
   </select>
   <select id="getUserCarerAt">
@@ -75,7 +67,7 @@
     WHERE user_id = #{userId}
   </select>
   <update id="updateUserInfo">
-  	UPDATE user_info 
+  	UPDATE users 
   	SET user_name = #{userName}
 	  	, user_phone = #{userPhone}
 	  	, user_gender = #{userGender}
@@ -85,7 +77,7 @@
   	WHERE user_id = #{userId}
   </update>
   <update id="updateCarerInfo">
-  	UPDATE user_info 
+  	UPDATE users 
   	SET user_name = #{userName}, user_phone = #{userPhone} 
   	WHERE user_id = #{userId}
   </update>

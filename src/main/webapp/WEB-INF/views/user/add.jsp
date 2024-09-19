@@ -60,13 +60,7 @@
                 	<label class="label">이메일</label>
                 	<input type="email" name="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required><br>
 				</li>
-				<li>
-                	<div class="userCarerAt">
-                		<label class="label">사용방법선택</label>
-	                	<label for="user" class="user">복용자</label> <input type="radio" id=user name="userCarerAt" value="N" checked>
-	                	<label for="carer" class="carer">복용관리자</label> <input type="radio" id=carer name="userCarerAt" value="Y">	                
-                	</div>                
-				</li>
+				
             </ul>
 				<button class="btn" type="submit">회원가입</button>
 				<button class="btn" type="button" onclick="location.href='/cover'">취소</button>      
