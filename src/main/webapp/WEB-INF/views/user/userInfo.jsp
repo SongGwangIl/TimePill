@@ -3,15 +3,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/jquery-ui.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/addUserInfo.css" type="text/css">
 
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 
-	<div id="wrap"> 
+	<div id="wrap-from"> 
 	  
-		<h1 class="title">사용자 정보 입력</h1>
+		<h1 class="subTitle">사용자 정보 입력</h1>
 		<form:form id="form" modelAttribute="myInfo" method="post">
 			<input type="hidden" name="userId" value="${myInfo.userId}">
 			<ul>
@@ -99,6 +100,7 @@
 		</form:form>
 	</div>
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/jquery-ui.min.js"></script>
 <script>
 	$(document).ready(function(){
 		let form = $("#form")
@@ -111,6 +113,7 @@
 			form.submit();			
 		});
 		
+	});
 		function autoEmail(a,b){
 			  
 			  const mailId = b.split('@'); // 메일계정의 ID만 받아와서 처리하기 위함
@@ -147,7 +150,6 @@
 			    email.focus();    
 			  }
 			}
-	});
 </script>
 </body>
 </html>
