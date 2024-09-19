@@ -32,5 +32,5 @@ public interface KakaoService {
 	public String friendMessage(String uuids) throws Exception;
 
 	/** 카카오 API를 호출해 로그아웃 */
-	public String logout() throws Exception;
+	public void logout() throws Exception;
 }

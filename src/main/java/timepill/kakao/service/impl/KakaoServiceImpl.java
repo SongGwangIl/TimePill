@@ -118,15 +118,12 @@ public class KakaoServiceImpl implements KakaoService {
 
 	/** 카카오 API를 호출해 로그아웃 */
 	@Override
-	public String logout() throws Exception {
+	public void logout() throws Exception {
 		String uri = KAKAO_API_HOST + "/v1/user/logout";
-		if (StringUtils.hasText(httpSession.getAttribute("token").toString())) {
-			String callwithToken = httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString());
-			httpSession.invalidate();
-			return callwithToken;
-		}
 		httpSession.invalidate();
-		return "";
+		if (httpSession.getAttribute("token") != null) {
+			httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString());
+		}
 	}
 
 	/** 카카오 메세지 권한 동의 여부 체크 */
