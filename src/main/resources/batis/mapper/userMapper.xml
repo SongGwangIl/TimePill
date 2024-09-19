@@ -53,6 +53,7 @@
 	  	, user_height
 	  	, user_weight
 	  	, user_birth
+	  	, email
   	FROM users
   	WHERE user_id = #{userId}
   </select>

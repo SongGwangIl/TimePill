@@ -24,6 +24,10 @@
 					<label class="label">전화번호</label> 
 					<form:input path="userPhone" class="input" placeholder="-를 제외한 숫자만 입력"/>
 				</li>
+				<li class="c1">
+                	<label class="label">이메일</label>
+                	<input type="email" name="email" value="${myInfo.email}" class="input" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required><br>
+				</li>
    				   				
 				<li class="c1">
 					<label class="label">성별</label>
@@ -106,6 +110,43 @@
 			form.action = "/myinfo/edit";
 			form.submit();			
 		});
+		
+		function autoEmail(a,b){
+			  
+			  const mailId = b.split('@'); // 메일계정의 ID만 받아와서 처리하기 위함
+			  const mailList = ['naver.com','gmail.com','daum.net','hanmail.net','yahoo.com','outlook.com','nate.com','kakao.com']; // 메일목록
+			  let availableCity = new Array; // 자동완성 키워드 리스트
+			  
+			  if(b.includes("@")){  
+
+			    for(let i=0; i < mailList.length; i++ ){
+			      availableCity.push( mailId[0] +'@'+ mailList[i] ); // 입력되는 텍스트와 메일목록을 조합
+			    }
+			    $("#"+a).autocomplete({
+			      source: availableCity // jQuery 자동완성에 목록을 넣어줌
+			    });
+			  }
+			  else{
+			    availableCity = new Array;
+			    $("#"+a).autocomplete({    
+			      source: availableCity      
+			    });
+			  }
+			}
+			  
+			const email = document.querySelector("#email")
+			const emailMsg = document.querySelector('#userPwdMsg')
+			let emailVal;
+			email.onchange = emailCheck 
+
+			function emailCheck(){
+			  const eamilRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i
+			  emailVal = email.value
+			  if(!eamilRegExp.test(emailVal)) { // 정규식 조건 만족 X
+			    email.value = null;
+			    email.focus();    
+			  }
+			}
 	});
 </script>
 </body>
