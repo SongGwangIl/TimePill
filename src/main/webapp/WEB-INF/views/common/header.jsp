@@ -220,10 +220,6 @@ body {
 						<c:url var="searchUrl" value="/member/search" /> 
 						<a href="${searchUrl}"> 복용자관계등록 </a>
 					</li>
-					<li>
-						<c:url var="mydeviceUrl" value="/mydevice" /> 
-						<a href="${mydeviceUrl}"> 기기정보변경 </a>
-					</li>
 				</ul>
 			</div>
 
@@ -252,7 +248,8 @@ body {
 				<h3>고객센터</h3>
 				<ul class="menu">
 					<li>
-						<a href="#">공지사항 게시판</a>
+						<c:url var="noticeUrl" value="/notice" />
+						<a href="${noticeUrl}">공지사항 게시판</a>
 					</li>
 					<li>
 						<a href="#">일대일 문의</a>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timepill.customer.service.Impl.CustomerDAO">
+
+	<resultMap type="CustomerVO" id="CustomerMap">
+		<id column="ntc_id" property="id"/>
+		<result column="ntc_title" property="title"/>
+		<result column="ntc_content" property="content"/>
+		<result column="ntc_date" property="date"/>
+	</resultMap>
+	
+	<select id="getAllnoticeList" resultMap="CustomerMap">
+		SELECT ntc_id, ntc_title, ntc_date
+		FROM notice
+	</select>
+	
+</mapper>
