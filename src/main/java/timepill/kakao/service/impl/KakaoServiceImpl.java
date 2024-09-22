@@ -150,7 +150,7 @@ public class KakaoServiceImpl implements KakaoService {
 	public String message() throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
 		System.out.println("메세지 서비스 시작");
-		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(), KakaoMessageTemplate.default_msg_param);
+		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(), KakaoMessageTemplate.getDefaultMessageParam());
 	}
 
 	/** 카카오 API를 호출해 친구 목록을 가져옴 */
@@ -165,7 +165,7 @@ public class KakaoServiceImpl implements KakaoService {
 	public String friendMessage(String uuids) throws Exception {
 		String uri = KAKAO_API_HOST + "/v1/api/talk/friends/message/default/send";
 		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(),
-				KakaoMessageTemplate.default_msg_param + "&receiver_uuids=[" + uuids + "]");
+				KakaoMessageTemplate.getDefaultMessageParam() + "&receiver_uuids=[" + uuids + "]");
 	}
 
 }

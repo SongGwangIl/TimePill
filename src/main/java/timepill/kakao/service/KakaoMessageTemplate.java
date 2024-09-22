@@ -1,71 +1,63 @@
 package timepill.kakao.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class KakaoMessageTemplate {
 
-	public static String default_msg_param = ""
-    		+ "template_object={\n"
-    		+ "        \"object_type\": \"feed\",\n"
-    		+ "        \"content\": {\n"
-    		+ "            \"title\": \"복약 알림\",\n"
-    		+ "            \"description\": \"약먹을 시간입니다.\",\n"
-    		+ "            \"link\": {\n"
-    		+ "                \"web_url\": \"http://daum.net\",\n"
-    		+ "                \"mobile_web_url\": \"http://dev.kakao.com\"\n"
-    		+ "            }\n"
-    		+ "        },\n"
-    	    + "    \"buttons\": [\n"
-    	    + "        {\n"
-    	    + "            \"title\": \"바로 확인\",\n"
-    	    + "            \"link\": {\n"
-    	    + "                \"web_url\": \"http://daum.net\",\n"
-    	    + "                \"mobile_web_url\": \"http://dev.kakao.com\"\n"
-    	    + "            }\n"
-    	    + "        }\n"
-    	    + "    ]\n"
-    		+ "    }"
-    		+ "";		
+	/* 카카오 피드 메세지 템플릿 참고 형태
+	 	{
+		    "object_type": "feed",
+		    "content": {
+		        "title": "복약 알림",
+		        "description": "약먹을 시간이에요.",
+		        "image_url": "http://115.10.156.136/image/c687a0f4-713e-4c03-a6ea-b09d0c004d0d",
+		        "image_width": 640,
+		        "image_height": 640,
+		        "link": {
+		            "web_url": "http://115.10.156.136/board/69"
+		        }
+		    },
+		    "buttons": [
+		        {
+		            "title": "복약체크",
+		            "link": {
+		                "web_url": "http://115.10.156.136/board/69",
+		                "mobile_web_url": "http://115.10.156.136/board/69"
+		            }
+		        }
+		    ]
+		}
+	 */
+	
+	/** 카카오 피드 메세지 템플릿 */
+	public static String getDefaultMessageParam() {
+		JsonObject link = new JsonObject();
+		link.addProperty("web_url", "http://115.10.156.136/board/69");
+		link.addProperty("mobile_web_url", "http://115.10.156.136/board/69");
 
-	public static JsonObject getDefaultMessageParam() {
-		Gson gson = new Gson();
+		JsonObject content = new JsonObject();
+		content.addProperty("title", "복약 알림");
+		content.addProperty("description", "약먹을 시간이에요.");
+		content.addProperty("image_url", "http://115.10.156.136/image/c687a0f4-713e-4c03-a6ea-b09d0c004d0d");
+		content.addProperty("image_width", "640");
+		content.addProperty("image_height", "640");
+		content.add("link", link);
 
-        Map<String, Object> link = new HashMap<>();
-        link.put("web_url", "https://www.google.co.kr/search?q=drone&source=lnms&tbm=nws");
-        link.put("mobile_web_url", "https://www.google.co.kr/search?q=drone&source=lnms&tbm=nws");
+		JsonObject button = new JsonObject();
+		button.addProperty("title", "복약체크");
+		button.add("link", link);
 
-        Map<String, Object> templateObject = new HashMap<>();
-        templateObject.put("object_type", "text");
-        templateObject.put("text", "Google 뉴스: drone");
-        templateObject.put("link", link);
+		JsonArray buttons = new JsonArray();
+		buttons.add(button);
 
-        JsonObject data = new JsonObject();
-        data.add("template_object", JsonParser.parseString(gson.toJson(templateObject)).getAsJsonObject());
+		JsonObject templateObject = new JsonObject();
+		templateObject.addProperty("object_type", "feed");
+		templateObject.add("content", content);
+		templateObject.add("buttons", buttons);
 
-        return data;
-		
-		
-//		JsonObject link = new JsonObject();
-//		link.addProperty("web_url", "https://src.hidoc.co.kr/image/lib/2016/12/23/20161223184952714_0.jpg");
-//		link.addProperty("mobile_web_url", "https://src.hidoc.co.kr/image/lib/2016/12/23/20161223184952714_0.jpg");
-//
-//		JsonObject content = new JsonObject();
-//		content.addProperty("text", "약먹을 시간입니다.");
-//		content.add("link", link);
-//
-//		JsonObject templateObject = new JsonObject();
-//		templateObject.addProperty("object_type", "text");
-//		templateObject.add("content", content);
-//		templateObject.addProperty("button_title", "복약 체크");
-//
-//		JsonObject messageParam = new JsonObject();
-//		messageParam.add("template_object", templateObject);
-//
-//		return messageParam;
+		return "template_object=" + templateObject.toString();
 	}
+	
+	
 }

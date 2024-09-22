@@ -12,9 +12,6 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-
 @Service
 public class HttpCallService {
 
@@ -24,34 +21,24 @@ public class HttpCallService {
 		try {
 			String response = "";
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod(method);
-			conn.setRequestProperty("Authorization", header);
-			 try {
-				 	if (param != null) {
-				 		JsonParser.parseString(param);
-				 		conn.setRequestProperty("Content-Type", "application/json"); // Content-Type 설정
-				 		System.out.println("Content-Type 설정");
-				 		System.out.println(param);
-					}
-		        } catch (JsonSyntaxException ex) {
-		        	System.out.println("JsonSyntaxException : " + ex);
-		        }
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 요청 URL
+			conn.setRequestMethod(method); // 요청 method 타입
+			conn.setRequestProperty("Authorization", header); // 인증 방식 ex)액세스 토큰으로 인증 요청
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			if (param != null) {
 				System.out.println("param : " + param);
 				conn.setDoOutput(true);
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 				bw.write(param);
 				bw.flush();
-
 			}
-			int responseCode = conn.getResponseCode();
+			int responseCode = conn.getResponseCode(); // 응답 코드 반환
 			System.out.println("responseCode : " + responseCode);
-
 			System.out.println("reqURL : " + reqURL);
 			System.out.println("method : " + method);
 			System.out.println("Authorization : " + header);
-			InputStream stream = conn.getErrorStream();
+
+			InputStream stream = conn.getErrorStream(); // 에러 체크
 			if (stream != null) {
 				try (Scanner scanner = new Scanner(stream)) {
 					scanner.useDelimiter("\\Z");
@@ -59,6 +46,7 @@ public class HttpCallService {
 				}
 				System.out.println("error response : " + response);
 			}
+
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
 			while ((line = br.readLine()) != null) {
