@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"		uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<sec:csrfMetaTags/>
+<title>TimePill - 회원가입</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common/jquery-ui.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addFrm.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
@@ -62,8 +64,9 @@
 				</li>
 				
             </ul>
-				<button class="btn" type="submit">회원가입</button>
-				<button class="btn" type="button" onclick="location.href='/cover'">취소</button>      
+			<button class="btn" type="submit">회원가입</button>
+			<button class="btn" type="button" onclick="location.href='/cover'">취소</button>    
+			<sec:csrfInput />  
 		</form>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>

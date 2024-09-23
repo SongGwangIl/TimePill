@@ -28,48 +28,51 @@ public class UserController {
 	public String cover() {
 		return "cover";
 	}
+	
 	/** 로그인 화면요청 */
 	@GetMapping("/user/login")
 	public String loginForm() {
 		
 		return "user/login";
 	}
-	/** 로그인 요청 */
-	@PostMapping("/user/login")
-	public String login(UserVO vo, HttpSession session) {
-		UserVO uvo = userService.login(vo.getUserId());
-
-		// 로그인
-		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
-				uvo.getPassword().equals(vo.getPassword()) )
-		
-			// 로그인 성공
-			{
-				uvo.setPassword(null);
-				session.setAttribute("loginUser", uvo);
-				// 정보미입력시 입력창 이동
-				if(!StringUtils.hasText(uvo.getUserName())) 				
-					
-					return "redirect:/addUserInfo";			
-				
-				// 정보입력완료시 디바이스메서드 호출
-				else 					
-					return "redirect:/medication/schedule/list";
-			}
-		
-		// 로그인 실패
-		
-		return "redirect:/user/login";
-	}
+	
+	
+//	/** 로그인 요청 */
+//	@PostMapping("/user/login")
+//	public String login(UserVO vo, HttpSession session) {
+//		UserVO uvo = userService.login(vo.getUserId());
+//
+//		// 로그인
+//		if ( uvo != null && vo.getUserId().equals(uvo.getUserId()) && 
+//				uvo.getPassword().equals(vo.getPassword()) )
+//		
+//			// 로그인 성공
+//			{
+//				uvo.setPassword(null);
+//				session.setAttribute("loginUser", uvo);
+//				// 정보미입력시 입력창 이동
+//				if(!StringUtils.hasText(uvo.getNickName())) 				
+//					
+//					return "redirect:/addUserInfo";			
+//				
+//				// 정보입력완료시 디바이스메서드 호출
+//				else 					
+//					return "redirect:/medication/schedule/list";
+//			}
+//		
+//		// 로그인 실패
+//		
+//		return "redirect:/user/login";
+//	}
 	
 	/** 로그아웃 요청 */
-	@GetMapping("/user/logout")
-	public String logout(HttpSession session) {
-		
-		session.invalidate();
-		
-		return "redirect:/cover";
-	}
+//	@GetMapping("/user/logout")
+//	public String logout(HttpSession session) {
+//		
+//		session.invalidate();
+//		
+//		return "redirect:/cover";
+//	}
 	
 	/** 약관동의 화면요청 */
 	@GetMapping("/user/terms")
@@ -126,9 +129,9 @@ public class UserController {
 	public String addUserInfo(UserVO vo, HttpServletRequest request, HttpSession session) {
 		
 		userService.addUserInfo(vo);
-		UserVO uvo = userService.login(vo.getUserId());
-		uvo.setPassword(null);
-		session.setAttribute("loginUser", uvo);
+		String userNickname = userService.getUserNickame(vo.getUserId());
+		vo.setNickname(userNickname);
+		session.setAttribute("loginUser", vo);
 		
 		
 		request.setAttribute("msg", "정보가 등록 되었습니다.");
@@ -136,12 +139,13 @@ public class UserController {
 		
 		return "common/msg";
 	}
+	
 	/** 나의정보변경 화면 요청 */
 	@GetMapping("/myinfo/edit")
 	public String infoEdit(@SessionAttribute("loginUser") UserVO vo, Model model) {
 		
 		String userId = vo.getUserId();
-		String userName = userService.getUserName(userId);
+		String userName = userService.getUserNickame(userId);
 		
 		// 정보 미 등록시 등록화면 이동
 		if(!StringUtils.hasText(userName))			
@@ -159,7 +163,7 @@ public class UserController {
 	public String infoEdit(UserVO uvo, HttpSession session) {
 		
 		userService.updateMyInfo(uvo);		  
-		session.setAttribute("name", uvo.getUserName());
+		session.setAttribute("name", uvo.getNickname());
 		
 		return "redirect:/medication/schedule/list";
 	}

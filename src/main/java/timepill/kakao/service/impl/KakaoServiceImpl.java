@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonArray;
@@ -104,11 +106,15 @@ public class KakaoServiceImpl implements KakaoService {
 
 		UserVO vo = new UserVO();
 		vo.setUserId("KAKAO_" + kakaoId);
-		vo.setUserName(nickname);
+		vo.setNickname(nickname);
 
 		// 회원가입 여부 체크
-		if (kakaoDAO.duplicateCheckUser(vo) > 0) {
-			httpSession.setAttribute("loginUser", vo);
+		UserVO userInfoResult = kakaoDAO.duplicateCheckUser(vo);
+		if (userInfoResult != null) {
+			// 시큐리티 로그인
+			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+//			httpSession.setAttribute("loginUser", vo);
 			httpSession.setAttribute("message", "로그인 완료");
 		} else {
 			kakaoDAO.insertUser(vo);

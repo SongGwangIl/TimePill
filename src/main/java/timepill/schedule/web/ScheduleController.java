@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import timepill.schedule.service.ScheduleService;
 import timepill.schedule.service.ScheduleVO;
-import timepill.user.UserVO;
 
 @Controller
 public class ScheduleController {
@@ -28,7 +28,7 @@ public class ScheduleController {
 	@GetMapping("/medication/schedule/list")
 	public String selectScheduleList(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 
-		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 
 		List<ScheduleVO> resultList = scheduleService.selectScheduleList(vo);
@@ -40,7 +40,7 @@ public class ScheduleController {
 	@GetMapping("/medication/schedule/reg-alarm")
 	public String registAlarm(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
-		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
 		List<ScheduleVO> resultList = scheduleService.selectAlarmList(vo);
@@ -62,7 +62,7 @@ public class ScheduleController {
 	@GetMapping("/medication/schedule/reg-med")
 	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
-		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
 		ScheduleVO result = new ScheduleVO();
@@ -76,7 +76,7 @@ public class ScheduleController {
 	@PostMapping("/medication/schedule/add-med")
 	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
-		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
 		scheduleService.insertMedInfo(vo);

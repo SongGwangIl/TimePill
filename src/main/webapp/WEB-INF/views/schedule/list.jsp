@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%-- header --%>
-<c:import url="/WEB-INF/views/common/header.jsp" charEncoding="utf-8">
+<c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="TimePill - 스케줄 관리"/>
 </c:import>
 

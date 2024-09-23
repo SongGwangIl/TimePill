@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- header --%>
-<c:import url="/WEB-INF/views/common/header.jsp" charEncoding="utf-8">
+<c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="TimePill - 메인"/>
 </c:import>
 
@@ -13,7 +13,7 @@
 
 
 <span class="info-text GmarketSans" >
-	${loginUser.userName} 님!<br>
+	${loginUser.nickname} 님!<br>
 	오늘 복용 처방약 목록을 확인하세요! 
 </span> 
 	<div id="clock" class="clock"></div>

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"		uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/login.css" type="text/css">
+<title>TimePill - 로그인</title>
+<link rel="stylesheet" href="/resources/css/user/login.css" type="text/css">
 <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
 <style>
 .bg { 
@@ -39,7 +40,7 @@
 <div class="bg"></div>
 	<div id="wrap">
 		<h1>로그인</h1>
-		<form action="${pageContext.request.contextPath}/user/login" method="post">
+		<form action="/user/login" method="post">
 			<ul class="input">
 				<li>
 	                <label>아이디</label>
@@ -49,7 +50,8 @@
 	                <input type="password" name="password" id="password">
 				</li>
             </ul>
-	    	<input type="submit" value="로그인" class="btn">	
+	    	<input type="submit" value="로그인" class="btn">
+	    	<sec:csrfInput />
 		</form>
 		<a href="${pageContext.request.contextPath}/user/kakao-login">카카오로그인</a>
 		<a href="${pageContext.request.contextPath}/user/singup">회원가입</a>
@@ -59,5 +61,12 @@
 	<div id="footer" class="text4">
 	<h3>copyrightⓒtimePill</h3>
 </div>
+
+<script>
+<c:if test="${not empty sessionScope.message}">
+	alert("<c:out value='${sessionScope.message}'/>");
+	<c:remove var="message" scope="session"/>
+</c:if>
+</script>
 </body>
 </html>

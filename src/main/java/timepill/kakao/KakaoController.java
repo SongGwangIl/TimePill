@@ -3,6 +3,7 @@ package timepill.kakao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,7 +38,7 @@ public class KakaoController {
 	}
 
 	/** 로그아웃 */
-	@GetMapping("/user/kakao-logout")
+	@PostMapping("/user/logout")
 	public String logout() throws Exception {
 		kakaoService.logout();
 		return "redirect:/medication/schedule/list";

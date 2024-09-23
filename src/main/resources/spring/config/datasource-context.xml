@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<!-- 프로퍼티 등록 -->
-	<context:property-placeholder location="classpath:properties/*.properties"/>
-	
-	
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+                           http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="${db.DriverClass}"/>
         <property name="url" value="${db.DbUrl}"></property>
@@ -32,10 +24,4 @@
 	
 	<mybatis-spring:scan base-package="timepill" annotation="org.apache.ibatis.annotations.Mapper"/>
 
-	<context:component-scan
-		base-package="timepill">
-		<!-- @Controller 애노테이션이 붙은 클래스는 스프링에 등록 제외 -->
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
 </beans>

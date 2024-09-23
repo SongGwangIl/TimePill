@@ -2,10 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec"		uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
 <head>
+<sec:csrfMetaTags/>
+<sec:authorize access="isAuthenticated()" var="auth">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <meta charset="UTF-8">
 
 <title><c:out value="${param.title}"/></title>
@@ -258,22 +263,22 @@ body {
 			</div>
 
 		<div class="userStatus sans">
-			<div>
-				<c:choose>
-					<c:when test="${not empty loginUser.userName}">
-						<!-- 이름정보 있음 -->
-						<p class="sans"> <c:out value="${loginUser.userName}"/> 님 환영합니다. </p>
-					</c:when>
-					<c:otherwise>
-						<!-- 이름정보 없음 -->
-						<p class="sans"> <c:out value="${loginUser.userId}"/> 님 환영합니다. </p>	
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div>
-				<p> <a href='/user/kakao-logout' class="sans"> |  로그아웃 </a> </p> 
-			</div>
+			<c:choose>
+				<c:when test="${auth eq true}">
+					<div>
+						<p class="sans"> <c:out value="${loginUser.nickname}"/> 님 환영합니다. </p>
+					</div>
+					<div>
+						<a href="#" onclick="document.getElementById('logoutForm').submit();">로그아웃</a>
+						<form id="logoutForm" method="POST" action="/user/logout" style="display: none;">
+							<sec:csrfInput/>
+						</form>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<a href="/user/login"><p class="sans">로그인</p></a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		
 		</nav>

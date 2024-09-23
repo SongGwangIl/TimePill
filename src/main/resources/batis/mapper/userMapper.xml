@@ -8,7 +8,9 @@
   	SELECT 
   		user_id
   		, password
-  		, user_name
+  		, role
+  		, user_status
+  		, user_name AS NICKNAME
     FROM users 
     WHERE user_id = #{userId}
   </select>
@@ -16,13 +18,13 @@
   	INSERT INTO users (
   		user_id
   		, password
-  		, email
-  		, user_carer_at)
+  		, role
+  		, email)
   	VALUES (
   		#{userId}
   		, #{password}
-  		, #{email}
-  		, #{userCarerAt})
+  		, 'USER'
+  		, #{email})
   </insert>
   <select id="checkId" resultType="String">
   	SELECT COUNT(*) 
@@ -30,14 +32,14 @@
   	WHERE user_id = #{userId}
   </select>
   <select id="getUserName">
-  	SELECT user_name
+  	SELECT user_name AS NICKNAME
   	FROM users
   	WHERE user_id = #{userId}
   </select>
   <update id="addUserInfo">
   	UPDATE users 
   	SET
-  		user_name = #{userName}
+  		user_name = #{nickname}
   		, user_phone = #{userPhone}
   		, user_gender = #{userGender}
   		, user_height = #{userHeight}
@@ -47,7 +49,7 @@
   </update>
   <select id="getUserInfo">
   	SELECT user_id
-	  	, user_name
+	  	, user_name AS NICKNAME
 	  	, user_phone
 	  	, user_gender
 	  	, user_height
@@ -64,7 +66,7 @@
   </select>
   <update id="updateUserInfo">
   	UPDATE users 
-  	SET user_name = #{userName}
+  	SET user_name = #{nickname}
 	  	, user_phone = #{userPhone}
 	  	, user_gender = #{userGender}
 	  	, user_height = #{userHeight}
@@ -74,7 +76,7 @@
   </update>
   <update id="updateCarerInfo">
   	UPDATE users 
-  	SET user_name = #{userName}, user_phone = #{userPhone} 
+  	SET user_name = #{nickname}, user_phone = #{userPhone} 
   	WHERE user_id = #{userId}
   </update>
 </mapper>

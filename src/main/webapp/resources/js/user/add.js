@@ -1,3 +1,6 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 let userId = document.querySelector("#userId");
 let idCheck = document.querySelector("#idCheck");
 userId.onchange = checkId
@@ -22,6 +25,10 @@ function checkId(){
       url : "/user/checkId",
       type: "post",
       data: {userId:userIdVal},
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(header, token);
+			xhr.setRequestHeader("Accept", "application/json");
+		},
       success: function(result){
         if(result == 1){
           idCheck.innerText = "이미 사용중인 아이디입니다."
