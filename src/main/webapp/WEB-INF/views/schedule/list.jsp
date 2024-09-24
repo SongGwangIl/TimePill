@@ -71,7 +71,7 @@ p, span {
 				</a> 
  			</div>
 
-			<form action="/user/message" method="post">
+			<form action="/kakao/message" method="post">
 				<input type="submit" value="메세지 보내기 테스트">
 			</form>
 

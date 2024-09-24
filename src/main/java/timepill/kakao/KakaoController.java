@@ -45,7 +45,7 @@ public class KakaoController {
 	}
 	
 	/** 나에게 메세지 보내기 */
-	@RequestMapping("/user/message")
+	@RequestMapping("/kakao/message")
 	public String message() throws Exception {
 		boolean checkMessageAuth = kakaoService.checkMessageAuth(); 
 		// 메세지 권한 동의 여부 체크
@@ -60,10 +60,10 @@ public class KakaoController {
 	}
 	
 	/** 나에게 메세지 보내기 권한 동의 콜백 */
-	@RequestMapping("/user/message-callback")
+	@RequestMapping("/kakao/message-callback")
 	public String messageCallback(@RequestParam("code") String code) throws Exception {
 		kakaoService.callback(code, "message-callback");
-		return "redirect:/user/message";
+		return "redirect:/kakao/message";
 	}
 
 	
