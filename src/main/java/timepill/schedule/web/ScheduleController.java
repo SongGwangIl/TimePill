@@ -29,7 +29,41 @@ public class ScheduleController {
 	public String main() {
 		return "/main";
 	}
-
+	
+	/** 처방약 정보 등록 or 수정 폼 */
+	@GetMapping("/medication/schedule/reg-med")
+	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
+		
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
+		// 수정여부 체크
+		ScheduleVO result = new ScheduleVO();
+		if (vo.getPrescMedId() != null)
+			result = scheduleService.selectMedInfo(vo);
+		
+		model.addAttribute("result", result);
+		return "/schedule/registMed";
+	}
+	
+	/** 처방약 정보 등록*/
+	@PostMapping("/medication/schedule/add-med")
+	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
+		
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
+		scheduleService.insertMedInfo(vo);
+		return "redirect:/medication/schedule/list";
+	}
+	
+	/** 처방약 정보 수정*/
+	@PostMapping("/medication/schedule/edit-med")
+	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
+		
+		scheduleService.updateMedInfo(vo);
+		return "redirect:/medication/schedule/list";
+	}
 	
 	/** 알람 스케줄 리스트 */
 	@GetMapping("/medication/schedule/list")
@@ -63,38 +97,5 @@ public class ScheduleController {
 		for (ScheduleVO vo : resultList) {
 			scheduleService.updateAlarm(vo);
 		}
-	}
-	
-	/** 처방약 정보 등록 or 수정 폼 */
-	@GetMapping("/medication/schedule/reg-med")
-	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
-		
-		ScheduleVO result = new ScheduleVO();
-		if (vo.getPrescMedId() != null)
-			result = scheduleService.selectMedInfo(vo);
-		model.addAttribute("result", result);
-		return "/schedule/registMed";
-	}
-	
-	/** 처방약 정보 등록*/
-	@PostMapping("/medication/schedule/add-med")
-	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
-		
-		scheduleService.insertMedInfo(vo);
-		return "redirect:/medication/schedule/list";
-	}
-	
-	/** 처방약 정보 수정*/
-	@PostMapping("/medication/schedule/edit-med")
-	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
-		
-		scheduleService.updateMedInfo(vo);
-		return "redirect:/medication/schedule/list";
 	}
 }

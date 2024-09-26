@@ -41,13 +41,6 @@
 		<input type="hidden" name="prescMedId" value="${result.prescMedId}">
 		<label for="prescMedName">처방약 이름</label> 
 		<input type="text" name="prescMedName"placeholder="처방약 이름" value="${result.prescMedName}" required> <br>
-		<label for="frequency">하루 복약횟수</label> 
-		<select name="frequency">
-			<option value=1 ${result.frequency eq '1' ? 'selected' : '' }>1회</option>
-			<option value=2 ${result.frequency eq '2' ? 'selected' : '' }>2회</option>
-			<option value=3 ${result.frequency eq '3' ? 'selected' : '' }>3회</option>
-			<option value=4 ${result.frequency eq '4' ? 'selected' : '' }>4회</option>
-		</select> <br>
 		<label for="startDate">처방일자</label> 
 		<input type="date" name="startDate" id="startDate" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/>" required> <br>
 		<label for="duration">처방기간</label> 

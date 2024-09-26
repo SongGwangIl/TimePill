@@ -25,6 +25,53 @@ INSERT INTO alarm_set(
 )
 </insert>
 
+<!-- 처방약 정보 등록 -->
+<insert id="insertMedInfo">
+INSERT INTO presc_med_info(
+	USER_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE 
+	, DURATION 
+	, MED_STATUS
+) VALUES(
+	#{userId}
+	, #{prescMedName}
+	, #{startDate}
+	, #{endDate}
+	, #{duration} 
+	, 'Y'
+)
+</insert>
+
+<!-- 처방약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	PRESC_MED_ID
+	, PRESC_MED_NAME
+	, START_DATE
+	, END_DATE
+	, DURATION
+FROM 
+	presc_med_info
+WHERE 
+	USER_ID = #{userId}
+	AND PRESC_MED_ID = #{prescMedId}
+</select>
+
+<!-- 처방약 정보 수정 -->
+<update id="updateMedInfo">
+UPDATE 
+	presc_med_info 
+SET 
+	PRESC_MED_NAME = #{prescMedName}
+	, START_DATE = #{startDate}
+	, END_DATE = #{endDate}
+	, DURATION = #{duration}
+WHERE
+	PRESC_MED_ID = #{prescMedId}
+</update>
+
 <!-- 스케줄 리스트 -->
 <select id="selectScheduleList" resultType="ScheduleVO">
 SELECT 
@@ -33,13 +80,10 @@ SELECT
 	, A.ALARM_ID 
 	, B.ALARM_TYPE
 	, B.ALARM_TIME
-	, B.ALARM_INTERVAL
-	, B.RPT_INTERVAL
 	, C.PRESC_MED_NAME
 	, C.START_DATE
 	, C.END_DATE
 	, C.DURATION
-	, C.FREQUENCY
 	, C.MED_STATUS
 FROM 
 	alarm_reg A
@@ -50,22 +94,6 @@ WHERE
 	AND ALARM_USE_AT = 'Y'
 ORDER BY 
 	B.ALARM_TYPE, A.PRESC_MED_ID
-</select>
-
-<!-- 처방약 정보 -->
-<select id="selectMedInfo" resultType="ScheduleVO">
-SELECT
-	PRESC_MED_ID
-	, PRESC_MED_NAME
-	, START_DATE
-	, END_DATE
-	, DURATION
-	, FREQUENCY
-FROM 
-	presc_med_info
-WHERE 
-	USER_ID = #{userId}
-	AND PRESC_MED_ID = #{prescMedId}
 </select>
 
 <!-- 알람 리스트 -->
@@ -94,41 +122,6 @@ SET
 	, ALARM_USE_AT = #{alarmUseAt}
 WHERE
 	ALARM_ID = #{alarmId}
-</update>
-
-<!-- 처방약 정보 등록 -->
-<insert id="insertMedInfo">
-INSERT INTO presc_med_info(
-	USER_ID
-	, PRESC_MED_NAME
-	, START_DATE
-	, END_DATE 
-	, DURATION 
-	, FREQUENCY 
-	, MED_STATUS 
-) VALUES(
-	#{userId}
-	, #{prescMedName}
-	, #{startDate}
-	, #{endDate}
-	, #{duration} 
-	, #{frequency} 
-	, 'Y'
-)
-</insert>
-
-<!-- 처방약 정보 수정 -->
-<update id="updateMedInfo">
-UPDATE 
-	presc_med_info 
-SET 
-	PRESC_MED_NAME = #{prescMedName}
-	, START_DATE = #{startDate}
-	, END_DATE = #{endDate}
-	, DURATION = #{duration}
-	, FREQUENCY = #{frequency}
-WHERE
-	PRESC_MED_ID = #{prescMedId}
 </update>
 
 </mapper>
