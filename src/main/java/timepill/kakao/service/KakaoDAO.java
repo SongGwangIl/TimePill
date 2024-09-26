@@ -2,7 +2,7 @@ package timepill.kakao.service;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import timepill.user.UserVO;
+import timepill.user.service.UserVO;
 
 @Mapper
 public interface KakaoDAO {

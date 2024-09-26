@@ -22,6 +22,13 @@ public class ScheduleController {
 	/** scheduleService DI */
 	@Autowired
 	ScheduleService scheduleService;
+	
+	
+	/** 임시 메인 */
+	@GetMapping("/")
+	public String main() {
+		return "/main";
+	}
 
 	
 	/** 알람 스케줄 리스트 */

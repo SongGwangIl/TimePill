@@ -17,8 +17,8 @@ import timepill.kakao.service.KakaoDAO;
 import timepill.kakao.service.KakaoService;
 import timepill.schedule.service.ScheduleService;
 import timepill.schedule.service.ScheduleVO;
+import timepill.user.service.UserVO;
 import timepill.kakao.service.KakaoMessageTemplate;
-import timepill.user.UserVO;
 
 @RequiredArgsConstructor
 @Service("kakaoService")

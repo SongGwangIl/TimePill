@@ -1,4 +1,4 @@
-package timepill.kakao;
+package timepill.kakao.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class KakaoController {
 		if (!"green".equals(resultLogin)) {
 			return "redirect:/user/login"; 
 		}
-		return "redirect:/medication/schedule/list";
+		return "redirect:/";
 	}
 
 	/** 로그아웃 */

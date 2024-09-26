@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import timepill.customer.service.CustomerService;
-import timepill.user.UserVO;
+import timepill.user.service.UserVO;
 
 @Controller
 public class CustomerController {

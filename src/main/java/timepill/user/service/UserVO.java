@@ -1,4 +1,4 @@
-package timepill.user;
+package timepill.user.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,26 +18,14 @@ public class UserVO implements UserDetails {
 
 	// users테이블
 	private String userId; // 유저아이디
+	private String nickname; // 유저이름
 	private String role; // 유저권한
 	private String password; // 유저비밀번호
 	private String email; // 유저이메일
 	private String userStatus; // 유저사용상태 가입시 Y, 탈퇴시 N
-	private String nickname; // 유저이름
-	private String userPhone; // 유저전화번호
-	private String userGender; // 유저성별
-	private String userHeight; // 유저신장
-	private String userWeight; // 유저체중
-	private String userBirth; // 유저생년월일
 	
 	private String kakaoToken; //카카오 엑세스 토큰
 
-	// 생년월일 셋팅
-	private String yy;
-	private String mm;
-	private String dd;
-	
-	
-	
 	// 스프링 시큐리티 메소드
 	
 	@Override
