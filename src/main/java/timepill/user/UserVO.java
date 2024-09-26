@@ -28,6 +28,8 @@ public class UserVO implements UserDetails {
 	private String userHeight; // 유저신장
 	private String userWeight; // 유저체중
 	private String userBirth; // 유저생년월일
+	
+	private String kakaoToken; //카카오 엑세스 토큰
 
 	// 생년월일 셋팅
 	private String yy;

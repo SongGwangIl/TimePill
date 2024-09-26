@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import timepill.device.service.DeviceService;
 import timepill.user.service.UserService;
 
 @Controller
@@ -19,9 +18,6 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-	DeviceService deviceService;
 	
 	/** 초기화면요청 */
 	@GetMapping("/cover")
@@ -90,7 +86,7 @@ public class UserController {
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
-	public String add(UserVO vo, HttpServletRequest request) {
+	public String add(UserVO vo, HttpServletRequest request) throws Exception {
 		
 		userService.add(vo);
 		

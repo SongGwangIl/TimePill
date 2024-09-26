@@ -106,7 +106,7 @@ p, span {
 								저녁식후
 							</c:when>
 							<c:when test="${resultAlarmType.alarmType eq '7'}">
-								자기전
+								취침전
 							</c:when>
 						</c:choose>
 						<fmt:parseDate value="${resultAlarmType.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>

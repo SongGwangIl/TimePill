@@ -15,6 +15,8 @@ import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import timepill.kakao.service.KakaoDAO;
 import timepill.kakao.service.KakaoService;
+import timepill.schedule.service.ScheduleService;
+import timepill.schedule.service.ScheduleVO;
 import timepill.kakao.service.KakaoMessageTemplate;
 import timepill.user.UserVO;
 
@@ -31,6 +33,10 @@ public class KakaoServiceImpl implements KakaoService {
 	/** kakaoDAO DI */
 	@Autowired
 	private KakaoDAO kakaoDAO;
+
+	/** scheduleService DI */
+	@Autowired
+	ScheduleService scheduleService;
 
 	@Value("${rest-api-key}")
 	private String REST_API_KEY;
@@ -53,7 +59,6 @@ public class KakaoServiceImpl implements KakaoService {
 	@Value("${kakao-api-host}")
 	private String KAKAO_API_HOST;
 
-	
 	/** 인가코드 요청 주소 */
 	@Override
 	public String goKakaoOAuth(String scope, String rediUri) throws Exception {
@@ -84,6 +89,7 @@ public class KakaoServiceImpl implements KakaoService {
 		String rtn = httpCallService.Call("POST", TOKEN_URI, "", param);
 		JsonObject element = JsonParser.parseString(rtn).getAsJsonObject();
 		String accessToken = element.get("access_token").getAsString();
+		System.out.println("accessToken : " + accessToken);
 		httpSession.setAttribute("token", accessToken); // 세션에 액세스 토큰 저장
 	}
 
@@ -112,12 +118,23 @@ public class KakaoServiceImpl implements KakaoService {
 		UserVO userInfoResult = kakaoDAO.duplicateCheckUser(vo);
 		if (userInfoResult != null) {
 			// 시큐리티 로그인
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
+			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "",
+					userInfoResult.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 //			httpSession.setAttribute("loginUser", vo);
 			httpSession.setAttribute("message", "로그인 완료");
 		} else {
+			vo.setKakaoToken(httpSession.getAttribute("token").toString());
 			kakaoDAO.insertUser(vo);
+			// 신규 유저 알람 생성
+			ScheduleVO scheduleVO = new ScheduleVO();
+			String[] hours = {"08", "12", "18", "22"};
+			for (int i = 0; i < 4; i++) {
+				scheduleVO.setUserId(vo.getUserId());
+				scheduleVO.setAlarmType(i+1);
+				scheduleVO.setAlarmTime(hours[i] + ":00");
+				scheduleService.insertAlarm(scheduleVO);
+			}
 			httpSession.setAttribute("message", "회원가입 완료");
 		}
 		return "green";

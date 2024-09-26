@@ -36,7 +36,7 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 			errorMessage = "로그인 중 문제가 발생했습니다.";
 
 		HttpSession session = req.getSession();
-		session.setAttribute("errorMessage", errorMessage);
+		session.setAttribute("message", errorMessage);
 		setDefaultFailureUrl("/user/login");
 		super.onAuthenticationFailure(req, resp, e);
 	}

@@ -10,6 +10,9 @@ public interface ScheduleService {
 	/** 알람 리스트 */
 	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
 	
+	/** 알람 생성 */
+	public int insertAlarm(ScheduleVO vo) throws Exception;
+	
 	/** 알람 정보 설정 */
 	public int updateAlarm(ScheduleVO vo) throws Exception;
 	

@@ -6,7 +6,7 @@ import timepill.user.UserVO;
 
 public interface UserService extends UserDetailsService {
 	// 회원등록
-	int add(UserVO vo);
+	public void add(UserVO vo) throws Exception;
 
 	// 로그인
 //	UserVO login(String userId);

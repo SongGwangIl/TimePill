@@ -28,6 +28,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return scheduleDAO.selectAlarmList(vo);
 	}
 	
+	/** 알람 생성(회원가입) */
+	@Override
+	public int insertAlarm(ScheduleVO vo) throws Exception {
+		// 알람 아이디 생성 로직
+		String lastAlarmId = scheduleDAO.selectLastAlarmId();
+		int nextIdNum = 1;
+		if (lastAlarmId != null && lastAlarmId.startsWith("ALARM_")) {
+			nextIdNum = Integer.parseInt(lastAlarmId.substring("ALARM_".length())) + 1;
+		}
+		String nextId = String.format("ALARM_%011d", nextIdNum);
+		vo.setAlarmId(nextId);
+		return scheduleDAO.insertAlarmSet(vo);
+	}
+	
 	/** 알람 정보 설정 */
 	@Override
 	public int updateAlarm(ScheduleVO vo) throws Exception {

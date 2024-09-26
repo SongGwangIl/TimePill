@@ -15,6 +15,12 @@ public interface ScheduleDAO {
 	/** 알람 리스트 */
 	List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
 	
+	/** 마지막 알람ID 가져오기 */
+	String selectLastAlarmId() throws Exception;
+	
+	/** 알람 생성(회원가입) */
+	int insertAlarmSet(ScheduleVO vo) throws Exception;
+	
 	/** 알람 정보 설정 */
 	int updateAlarm(ScheduleVO vo) throws Exception;
 	
@@ -26,5 +32,6 @@ public interface ScheduleDAO {
 	
 	/** 처방약 정보 수정 */
 	int updateMedInfo(ScheduleVO vo) throws Exception;
+
 	
 }

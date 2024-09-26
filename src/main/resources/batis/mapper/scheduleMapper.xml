@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
 
+<!-- 마지막 알람 아이디 가져오기 -->
+<select id="selectLastAlarmId" resultType="java.lang.String">
+SELECT 
+	MAX(ALARM_ID) 
+FROM alarm_set
+WHERE ALARM_ID NOT LIKE 'ALARM_X%'
+</select>
+
+<!-- 알람 생성(회원가입) -->
+<insert id="insertAlarmSet">
+INSERT INTO alarm_set(
+	ALARM_ID
+	, USER_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+) VALUES(
+	#{alarmId}
+	, #{userId}
+	, #{alarmType}
+	, #{alarmTime}
+)
+</insert>
+
 <!-- 스케줄 리스트 -->
 <select id="selectScheduleList" resultType="ScheduleVO">
 SELECT 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import timepill.schedule.service.ScheduleService;
+import timepill.schedule.service.ScheduleVO;
 import timepill.user.UserVO;
 import timepill.user.service.UserService;
 
@@ -16,22 +18,38 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDAO userdao;
+	
+	/** scheduleService DI */
+	@Autowired
+	ScheduleService scheduleService;
 
 	/** 스프링시큐리티 bCryptPasswordEncoder DI */
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
-	public int add(UserVO vo) {
+	public void add(UserVO vo) throws Exception {
 		String encodedPwd = bCryptPasswordEncoder.encode(vo.getPassword());
 		vo.setPassword(encodedPwd);
-		return userdao.add(vo);
+		userdao.add(vo);
+		
+		// 신규 유저 알람 생성
+		ScheduleVO scheduleVO = new ScheduleVO();
+		String[] hours = {"08", "12", "18", "22"};
+		for (int i = 0; i < 4; i++) {
+			scheduleVO.setUserId(vo.getUserId());
+			scheduleVO.setAlarmType(i+1);
+			scheduleVO.setAlarmTime(hours[i] + ":00");
+			scheduleService.insertAlarm(scheduleVO);
+		}
+		
 	}
 
 	/** 스프링 시큐리티 로그인 메서드 */
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		UserVO userInfo = userdao.login(userId);
+		System.out.println("유저 정보 존재 여부 : " + userInfo);
 		if (userInfo == null) {
 			throw new UsernameNotFoundException("사용자 정보를 찾을 수 없음");
 		}
