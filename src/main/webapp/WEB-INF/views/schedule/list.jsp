@@ -88,24 +88,15 @@ p, span {
 						<p>
 						<c:choose>
 							<c:when test="${resultAlarmType.alarmType eq '1'}">
-								아침식전
+								아침
 							</c:when>
 							<c:when test="${resultAlarmType.alarmType eq '2'}">
-								아침식후
+								점심
 							</c:when>
 							<c:when test="${resultAlarmType.alarmType eq '3'}">
-								점심식전
+								저녁
 							</c:when>
 							<c:when test="${resultAlarmType.alarmType eq '4'}">
-								점심식후
-							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '5'}">
-								저녁식전
-							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '6'}">
-								저녁식후
-							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '7'}">
 								취침전
 							</c:when>
 						</c:choose>
@@ -116,16 +107,15 @@ p, span {
 							<c:if test="${result.alarmType eq resultAlarmType.alarmType}">
 								<span class="med-title">
 									<c:url var="editMedInfo" value="/medication/schedule/reg-med">
-										<c:param name="prescMedId">${result.prescMedId}</c:param>
+										<c:param name="medId">${result.medId}</c:param>
 									</c:url>
 									<a href="${editMedInfo}">
-										<<c:out value="${result.prescMedName}"/>>
+										<<c:out value="${result.medName}"/>>
 									</a>
 									<div class="med-info">
 										<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
 										<p>처방기간 : ${result.duration}일</p>
 										<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
-										<p>하루 복약 횟수 : 하루 ${result.frequency}회</p>
 									</div>
 								</span>
 							</c:if>

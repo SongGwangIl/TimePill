@@ -25,77 +25,6 @@ INSERT INTO alarm_set(
 )
 </insert>
 
-<!-- 처방약 정보 등록 -->
-<insert id="insertMedInfo">
-INSERT INTO presc_med_info(
-	USER_ID
-	, PRESC_MED_NAME
-	, START_DATE
-	, END_DATE 
-	, DURATION 
-	, MED_STATUS
-) VALUES(
-	#{userId}
-	, #{prescMedName}
-	, #{startDate}
-	, #{endDate}
-	, #{duration} 
-	, 'Y'
-)
-</insert>
-
-<!-- 처방약 정보 -->
-<select id="selectMedInfo" resultType="ScheduleVO">
-SELECT
-	PRESC_MED_ID
-	, PRESC_MED_NAME
-	, START_DATE
-	, END_DATE
-	, DURATION
-FROM 
-	presc_med_info
-WHERE 
-	USER_ID = #{userId}
-	AND PRESC_MED_ID = #{prescMedId}
-</select>
-
-<!-- 처방약 정보 수정 -->
-<update id="updateMedInfo">
-UPDATE 
-	presc_med_info 
-SET 
-	PRESC_MED_NAME = #{prescMedName}
-	, START_DATE = #{startDate}
-	, END_DATE = #{endDate}
-	, DURATION = #{duration}
-WHERE
-	PRESC_MED_ID = #{prescMedId}
-</update>
-
-<!-- 스케줄 리스트 -->
-<select id="selectScheduleList" resultType="ScheduleVO">
-SELECT 
-	A.ALARM_REG_ID
-	, A.PRESC_MED_ID 
-	, A.ALARM_ID 
-	, B.ALARM_TYPE
-	, B.ALARM_TIME
-	, C.PRESC_MED_NAME
-	, C.START_DATE
-	, C.END_DATE
-	, C.DURATION
-	, C.MED_STATUS
-FROM 
-	alarm_reg A
-	JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
-	JOIN presc_med_info C ON A.PRESC_MED_ID = C.PRESC_MED_ID
-WHERE 
-	C.USER_ID = #{userId}
-	AND ALARM_USE_AT = 'Y'
-ORDER BY 
-	B.ALARM_TYPE, A.PRESC_MED_ID
-</select>
-
 <!-- 알람 리스트 -->
 <select id="selectAlarmList" resultType="ScheduleVO">
 SELECT
@@ -111,6 +40,18 @@ WHERE
 	USER_ID = #{userId}
 </select>
 
+<!-- 알람 아이디 가져오기 -->
+<select id="selectAlarm" resultType="java.lang.String">
+SELECT
+	ALARM_ID
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+	AND ALARM_TYPE = #{alarmType}
+</select>
+
+
 <!-- 알람 셋 -->
 <update id="updateAlarm">
 UPDATE 
@@ -123,5 +64,98 @@ SET
 WHERE
 	ALARM_ID = #{alarmId}
 </update>
+
+
+
+<!-- 마지막 처방약 아이디 가져오기 -->
+<select id="selectLastMedId" resultType="java.lang.String">
+SELECT 
+	MAX(MED_ID) 
+FROM med_info
+WHERE MED_ID NOT LIKE 'MED_X%'
+</select>
+
+<!-- 처방약 정보 등록 -->
+<insert id="insertMedInfo">
+INSERT INTO med_info(
+	MED_ID
+	, USER_ID
+	, MED_NAME
+	, START_DATE
+	, END_DATE 
+	, DURATION 
+	, MED_STATUS
+) VALUES(
+	#{medId}
+	, #{userId}
+	, #{medName}
+	, #{startDate}
+	, #{endDate}
+	, #{duration} 
+	, 'Y'
+)
+</insert>
+
+<!-- 처방약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	MED_ID
+	, MED_NAME
+	, START_DATE
+	, END_DATE
+	, DURATION
+FROM med_info
+WHERE 
+	USER_ID = #{userId}
+	AND MED_ID = #{medId}
+</select>
+
+<!-- 처방약 정보 수정 -->
+<update id="updateMedInfo">
+UPDATE 
+	med_info 
+SET 
+	MED_NAME = #{medName}
+	, START_DATE = #{startDate}
+	, END_DATE = #{endDate}
+	, DURATION = #{duration}
+WHERE
+	MED_ID = #{medId}
+</update>
+
+
+<!-- 스케줄 등록 -->
+<insert id="insertSchedule">
+INSERT INTO alarm_reg(
+	MED_ID
+	, ALARM_ID
+) VALUES(
+	#{medId}
+	, #{alarmId}
+)
+</insert>
+
+<!-- 스케줄 리스트 -->
+<select id="selectScheduleList" resultType="ScheduleVO">
+SELECT 
+	A.MED_ID 
+	, A.ALARM_ID 
+	, B.ALARM_TYPE
+	, B.ALARM_TIME
+	, C.MED_NAME
+	, C.START_DATE
+	, C.END_DATE
+	, C.DURATION
+	, C.MED_STATUS
+FROM 
+	alarm_reg A
+	JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
+	JOIN med_info C ON A.MED_ID = C.MED_ID
+WHERE 
+	C.USER_ID = #{userId}
+	AND ALARM_USE_AT = 'Y'
+ORDER BY 
+	B.ALARM_TYPE, A.MED_ID
+</select>
 
 </mapper>

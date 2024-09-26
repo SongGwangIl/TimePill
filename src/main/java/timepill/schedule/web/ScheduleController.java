@@ -30,7 +30,7 @@ public class ScheduleController {
 		return "/main";
 	}
 	
-	/** 처방약 정보 등록 or 수정 폼 */
+	/** 복약 정보 등록 or 수정 폼 */
 	@GetMapping("/medication/schedule/reg-med")
 	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
@@ -39,14 +39,14 @@ public class ScheduleController {
 		
 		// 수정여부 체크
 		ScheduleVO result = new ScheduleVO();
-		if (vo.getPrescMedId() != null)
+		if (vo.getMedId() != null)
 			result = scheduleService.selectMedInfo(vo);
 		
 		model.addAttribute("result", result);
 		return "/schedule/registMed";
 	}
 	
-	/** 처방약 정보 등록*/
+	/** 복약 정보 등록*/
 	@PostMapping("/medication/schedule/add-med")
 	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
@@ -57,7 +57,7 @@ public class ScheduleController {
 		return "redirect:/medication/schedule/list";
 	}
 	
-	/** 처방약 정보 수정*/
+	/** 복약 정보 수정*/
 	@PostMapping("/medication/schedule/edit-med")
 	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
 		

@@ -45,7 +45,7 @@ FROM
 	users A
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID
 		JOIN alarm_reg C ON B.ALARM_ID = C.ALARM_ID
-		JOIN presc_med_info D ON C.PRESC_MED_ID = D.PRESC_MED_ID
+		JOIN presc_med_info D ON C.MED_ID = D.MED_ID
 </select>
  
 </mapper>

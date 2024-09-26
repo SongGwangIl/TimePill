@@ -2,6 +2,7 @@ package timepill.schedule.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,14 +22,17 @@ public class ScheduleVO {
 	private String alarmUseAt;		// 알람 사용여부
 	
 	
-	private String prescMedId; 		// 처방약 PK
-	private String userId; 			// 유저아이디
-	private String prescMedName;	// 처방약이름
-	private Date startDate;			// 복약 시작 일자
-	private Date endDate;			// 복약 만료 일자
-	private String duration;		// 처방 기간
-	private String frequency;		// 하루 복약 횟수
-	private String medStatus;		// 처방약 정보 상태
+	private String medId; 		// 복용약 PK
+	private String userId; 		// 유저아이디
+	private String medName;		// 약이름
+	private Date startDate;		// 복약 시작 일자
+	private Date endDate;		// 복약 만료 일자
+	private String duration;	// 처방 기간
+	private String medStatus;	// 처방약 정보 상태
+	
+	
+	private List<String> alarms;	// 복용약 등록 알람 리스트
+	
 	
 	// 시작일자 타입 변환
 	public void setStartDate(String startDate) throws Exception {
