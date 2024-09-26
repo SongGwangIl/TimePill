@@ -16,4 +16,27 @@
 		FROM notice
 	</select>
 	
+	<select id="getnoticeList" resultMap="CustomerMap">
+		SELECT ntc_id, ntc_title, ntc_content
+		FROM notice
+		WHERE ntc_id = #{id}
+	</select>
+	
+	<insert id="updateWrite">
+		INSERT INTO notice (ntc_title, ntc_content) 
+		VALUES(#{title}, #{content});
+	</insert>
+	
+	<update id="updateNotice">
+		UPDATE notice SET ntc_title = #{title}, ntc_content = #{content}
+		WHERE ntc_id = #{id}
+	</update>
+	
+	<delete id="deleteNotice">
+		DELETE FROM notice 
+		WHERE ntc_id = #{id}
+	</delete>
+	
+	
+	
 </mapper>

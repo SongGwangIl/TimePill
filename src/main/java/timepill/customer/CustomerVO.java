@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class CustomerVO {
 
-	private String userId;
+	private String userId; 
 	
 	private String id;
 	private String title;

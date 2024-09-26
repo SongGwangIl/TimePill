@@ -10,5 +10,14 @@ import timepill.customer.CustomerVO;
 public interface CustomerDAO{
 
 	List<CustomerVO> getAllnoticeList(CustomerVO cvo);
+
+	CustomerVO getnoticeList(CustomerVO cvo);
+
+	int updateWrite(CustomerVO cvo);
 	
+	int updateNotice(CustomerVO cvo);
+
+	int deleteNotice(CustomerVO cvo);
+
+
 }

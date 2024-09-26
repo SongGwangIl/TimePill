@@ -18,7 +18,7 @@
 			<ul>
 				<li class="c1">
 					<label class="label">이름</label> 
-					<form:input path="userName" class="input"/>					
+					<form:input path="nickname" class="input"/>					
 				</li>
 				
 				<li class="c1">

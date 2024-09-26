@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"		uri="http://www.springframework.org/security/tags" %>
 
 <%-- header --%>
 <c:import url="/WEB-INF/views/common/header.jsp" charEncoding="utf-8">
@@ -56,30 +57,25 @@ p, span {
 	<h2 class="single-line">공지사항</h2>
 	<div class="same-line">
 	
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성일시</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="getAllnoticeList" items="${noticeList}">
-				<tr>
-					<td>${getAllnoticeList.id}</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/detail/${getAllnoticeList.id}" >
-						${getAllnoticeList.title}</a>
-					</td>
-					<td>${getAllnoticeList.date}</td>
-				</tr>
-				</c:forEach>
-				<tr>
-					<td><a href="${pageContext.request.contextPath}/write">글쓰기</a></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="container">
+				<form class="frm" action="/write" method="post">
+					<ul>
+						<li class="c1"><label class="label">제목</label> 
+						 <input type="text" name="title" class="input"><br></li>
+						<li class="c1"><label class="label">내용</label> <input type="text"
+							name="content" class="input"><br></li>
+					</ul>
+					<ul>
+						<li>
+							<a href="/notice">목록</a>
+						</li>
+						<li>
+							<button type="submit">글쓰기</button>
+						</li>
+					</ul>
+				<sec:csrfInput/>
+				</form>
+				
 	</div>
 		</div>
 	</div>

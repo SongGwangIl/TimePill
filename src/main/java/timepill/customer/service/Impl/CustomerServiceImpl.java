@@ -19,4 +19,27 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDAO.getAllnoticeList(cvo);
 	}
 
+	@Override
+	public CustomerVO getnoticeList(CustomerVO cvo) {
+		return customerDAO.getnoticeList(cvo);
+	}
+	
+	@Override
+	public int updateWrite(CustomerVO cvo) {
+		return customerDAO.updateWrite(cvo);
+	}
+
+	@Override
+	public int updateNotice(CustomerVO cvo) {
+		return customerDAO.updateNotice(cvo);
+		
+	}
+
+	@Override
+	public int deleteNotice(CustomerVO cvo) {
+		return customerDAO.deleteNotice(cvo);
+		
+	}
+
+	
 }
