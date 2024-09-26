@@ -7,11 +7,11 @@
 <!-- 계정 체크 -->
 <select id="duplicateCheckUser" resultType="UserVO">
 SELECT
-	user_id
-	, password
-	, role
-	, user_status
-	, user_name AS NICKNAME
+	USER_ID
+	, PASSWORD
+	, ROLE
+	, USER_STATUS
+	, NICKNAME
 FROM users
 WHERE USER_ID = #{userId}
 </select>
@@ -21,13 +21,13 @@ WHERE USER_ID = #{userId}
 <insert id="insertUser">
 INSERT INTO users(
 	USER_ID
-	, USER_NAME
 	, PASSWORD
+	, NICKNAME
 	, EMAIL
 	, ACCESS_TOKEN
 ) VALUES(
 	#{userId}
-	, #{userName}
+	, #{nickname}
 	, #{password}
 	, #{email}
 	, #{kakaoToken}
