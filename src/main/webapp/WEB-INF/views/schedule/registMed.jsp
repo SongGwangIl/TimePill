@@ -42,22 +42,36 @@
 		<input type="hidden" name="medId" value="${result.medId}">
 		<input type="text" name="medName"placeholder="복약이름" value="${result.medName}" required> <br>
 		
-		<input type="checkbox" id="alarm1" name="alarms" value="1">
+		<c:forEach var="resultAlarmType" items="${result.alarmTypes}">
+			<c:choose>
+				<c:when test="${resultAlarmType eq '1'}">
+					<c:set var="alarmOn1" value="true"/>
+				</c:when>
+				<c:when test="${resultAlarmType eq '2'}">
+					<c:set var="alarmOn2" value="true"/>
+				</c:when>
+				<c:when test="${resultAlarmType eq '3'}">
+					<c:set var="alarmOn3" value="true"/>
+				</c:when>
+				<c:when test="${resultAlarmType eq '4'}">
+					<c:set var="alarmOn4" value="true"/>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
 		<label for="alarm1">아침</label>
-		<input type="checkbox" id="alarm2" name="alarms" value="2">
+		<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
 		<label for="alarm2">점심</label>
-		<input type="checkbox" id="alarm3" name="alarms" value="3">
+		<input type="checkbox" id="alarm3" name="alarmTypes" value="3" ${not empty alarmOn3 ? 'checked' : ''}>
 		<label for="alarm3">저녁</label>
-		<input type="checkbox" id="alarm4" name="alarms" value="4">
+		<input type="checkbox" id="alarm4" name="alarmTypes" value="4" ${not empty alarmOn4 ? 'checked' : ''}>
 		<label for="alarm4">취침전</label>
 		<br>
 		
 		<label for="startDate">처방일자</label> 
 		<input type="date" name="startDate" id="startDate" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/>" required> <br>
-		<label for="duration">처방기간</label> 
-		<input type="number" name="duration" id="duration" min="1" value="${not empty result.duration ? result.duration : 1}" onclick="clearInput()" required>일 <br>
 		<label for="endDate">만료일자</label> 
-		<input type="date" name="endDate" id="endDate" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/>" readonly> <br>
+		<input type="date" name="endDate" id="endDate" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/>" required> <br>
 		
 		<input type="submit" id="button" value="${empty result.medName ? '등록' : '수정'}">
 		<button type="button" onclick="location.href='/medication/schedule/list'">취소</button>
@@ -68,28 +82,6 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
 <script>
-// 시작일자 설정(수정이 아닌 경우 오늘날짜로 셋)
-if (document.getElementById('startDate').value === "") {
-	var date = new Date();
-	var offset = date.getTimezoneOffset() * 60000; // 한국 시간 오프셋
-	var localDate = new Date(date.getTime() - offset);
-	var today = localDate.toISOString().substring(0, 10);
-       document.getElementById('startDate').value = today;
-	updateEndDate();
-}
-
-// 만료일자 계산
-function updateEndDate() {
-	var startDate = new Date(document.getElementById('startDate').value);
-	var duration = parseInt(document.getElementById('duration').value);
-	startDate.setDate(startDate.getDate() + duration);
-	var endDate = startDate.toISOString().substring(0, 10);
-	document.getElementById('endDate').value = endDate;
-}
-
-document.getElementById('duration').addEventListener('input', updateEndDate);
-
-
 //공백제거
 $('input').on('input', function() {
 	$(this).val($(this).val().replace(/\s/g, ''));

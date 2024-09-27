@@ -44,90 +44,63 @@ table * {
 				<table style="text-align: center;">
 					<thead>
 						<tr>
-							<th>알람활성화</th>
 							<th>알람타입</th>
 							<th>알람시간</th>
-							<th>알람만료시간</th>
-							<th>알람간격</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="result" items="${alarmList}" varStatus="status">
 							<tr data-no="row-data">
 								<td>
-									<input type="hidden" name="alarmId" value="${result.alarmId}" data-no="${status.count}">
-									<input type="checkbox" name="alarmUseAt" value="${result.alarmUseAt}" ${result.alarmUseAt eq 'Y' ? 'checked' : '' } 
-											data-no="${status.count}" onclick="toggleChk(this, ${status.count})" required>
-								</td>
-								<td>
 								<c:choose>
 									<c:when test="${result.alarmType eq '1'}">
-										아침식전
+										아침
 									</c:when>
 									<c:when test="${result.alarmType eq '2'}">
-										아침식후
+										점심
 									</c:when>
 									<c:when test="${result.alarmType eq '3'}">
-										점심식전
+										저녁
 									</c:when>
 									<c:when test="${result.alarmType eq '4'}">
-										점심식후
-									</c:when>
-									<c:when test="${result.alarmType eq '5'}">
-										저녁식전
-									</c:when>
-									<c:when test="${result.alarmType eq '6'}">
-										저녁식후
-									</c:when>
-									<c:when test="${result.alarmType eq '7'}">
-										자기전
+										취침전
 									</c:when>
 								</c:choose>
 								</td>
-								<c:if test="${(status.count mod 2) ne 0}">
-									<td rowspan="2">
-										<!-- 알람 시간 -->
-										<c:choose>
-											<c:when test="${status.count <= 2}">
-												<select name="alarmHour" required>
-												<c:forEach begin="05" end="11" step="1" varStatus="time">
-													<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' } >${time.index}</option>
-												</c:forEach>
-												</select>
-											</c:when>
-											<c:when test="${status.count <= 4}">
-												<select name="alarmHour" required>
-												<c:forEach begin="11" end="16" step="1" varStatus="time">
-													<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
-												</c:forEach>
-												</select>
-											</c:when>
-											<c:when test="${status.count <= 6}">
-												<select name="alarmHour" required>
-												<c:forEach begin="16" end="20" step="01" varStatus="time">
-													<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
-												</c:forEach>
-												</select>
-											</c:when>
-											<c:when test="${status.count == 7}">
-												<select name="alarmHour" required>
-												<c:forEach begin="20" end="23" step="01" varStatus="time">
-													<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
-												</c:forEach>
-												</select>
-											</c:when>
-										</c:choose>시
-										<input type="number" name="alarmMin" min="0" max="59" step="1" value="${fn:split(result.alarmTime,':')[1]}" data-no="${status.count}" required>
-										분
-									</td>
-								</c:if>
 								<td>
-									<!-- 알람 만료시간 -->
-									<input type="number" name="alarmInterval" min="20" max="60" step="5" value="${result.alarmInterval}" data-no="${status.count}" required>
-								</td>
-								<td>
-									<!-- 알람 간격 -->
-									<input type="number" name="rptInterval" min="1" max="20" step="1" value="${result.rptInterval}" data-no="${status.count}" required>
+									<!-- 알람 시간 -->
+									<c:choose>
+										<c:when test="${status.count <= 1}">
+											<select name="alarmHour" required>
+											<c:forEach begin="05" end="11" step="1" varStatus="time">
+												<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' } >${time.index}</option>
+											</c:forEach>
+											</select>
+										</c:when>
+										<c:when test="${status.count <= 2}">
+											<select name="alarmHour" required>
+											<c:forEach begin="11" end="16" step="1" varStatus="time">
+												<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
+											</c:forEach>
+											</select>
+										</c:when>
+										<c:when test="${status.count <= 3}">
+											<select name="alarmHour" required>
+											<c:forEach begin="16" end="20" step="01" varStatus="time">
+												<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
+											</c:forEach>
+											</select>
+										</c:when>
+										<c:when test="${status.count == 4}">
+											<select name="alarmHour" required>
+											<c:forEach begin="20" end="23" step="01" varStatus="time">
+												<option value="${time.index}" ${fn:split(result.alarmTime,':')[0] eq time.index ? 'selected' : '' }>${time.index}</option>
+											</c:forEach>
+											</select>
+										</c:when>
+									</c:choose>시
+									<input type="number" name="alarmMin" min="0" max="59" step="1" value="${fn:split(result.alarmTime,':')[1]}" data-no="${status.count}" required>
+									분
 								</td>
 							</tr>
 						</c:forEach>
@@ -153,26 +126,15 @@ function submit () {
         var prevAlarmTime
         rows.forEach(function(row) {
             var alarmId = row.querySelector('input[name="alarmId"]').value;
-            var alarmUseAt = row.querySelector('input[name="alarmUseAt"]').value;
-        	// 식전 식후 알람시간 동일화 
-        	var dataNo = row.querySelector('input[name="alarmId"]').getAttribute('data-no'); // 식전,식후 알람시간 동일화를 위한 값
-            if (parseInt(dataNo) % 2 === 0) {
-        		var alarmTime = prevAlarmTime;
-            } else {
-				var alarmHour = row.querySelector('select[name="alarmHour"]').value; // 시간
-				var alarmMin = row.querySelector('input[name="alarmMin"]').value; // 분
-	            var alarmTime = alarmHour + ':' + alarmMin; // 알람시간
-	            prevAlarmTime = alarmTime;
-            }
-            var alarmInterval = row.querySelector('input[name="alarmInterval"]').value;
-            var rptInterval = row.querySelector('input[name="rptInterval"]').value;
+            
+			var alarmHour = row.querySelector('select[name="alarmHour"]').value; // 시간
+			var alarmMin = row.querySelector('input[name="alarmMin"]').value; // 분
+            var alarmTime = alarmHour + ':' + alarmMin; // 알람시간
+            
             // 알람정보 배열에 삽입
             data.push({
                 alarmId: alarmId,
-                alarmUseAt: alarmUseAt,
                 alarmTime: alarmTime,
-                alarmInterval: alarmInterval,
-                rptInterval: rptInterval
             });
         });
     	console.log(data);
@@ -192,18 +154,6 @@ function submit () {
 			console.error('Error occurred: ' + error);
 			alert('오류가 발생했습니다.');
 		}
-	});
-}
-
-//체크박스 동작
-function toggleChk(checkbox, count) {
-	var isChecked = checkbox.checked;
-	var value = isChecked ? "Y" : "N";
-	checkbox.value = value;
-
-	var fields = document.querySelectorAll('[data-no="'+count+'"]');
-	fields.forEach(function(field) {
-		field.readOnly = !isChecked;
 	});
 }
 

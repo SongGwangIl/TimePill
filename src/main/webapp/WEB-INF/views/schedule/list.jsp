@@ -114,7 +114,6 @@ p, span {
 									</a>
 									<div class="med-info">
 										<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
-										<p>처방기간 : ${result.duration}일</p>
 										<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
 									</div>
 								</span>

@@ -4,28 +4,28 @@ import java.util.List;
 
 public interface ScheduleService {
 	
-	/** 스케줄 리스트 */
-	public List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception;
-	
-	/** 스케줄 등록 */
-	public int insertSchedule(ScheduleVO vo) throws Exception;
-	
-	/** 알람 리스트 */
-	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
-	
-	/** 알람 생성 */
-	public int insertAlarm(ScheduleVO vo) throws Exception;
-	
-	/** 알람 정보 설정 */
-	public int updateAlarm(ScheduleVO vo) throws Exception;
-	
-	/** 복약 정보 */
+	/** 복약 정보 조회 */
 	public ScheduleVO selectMedInfo(ScheduleVO vo) throws Exception;
 	
 	/** 복약 정보 등록 */
 	public void insertMedInfo(ScheduleVO vo) throws Exception;
 	
 	/** 복약 정보 수정 */
-	public int updateMedInfo(ScheduleVO vo) throws Exception;
+	public void updateMedInfo(ScheduleVO vo) throws Exception;
+	
+	/** 알람 리스트 */
+	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
+	
+	/** 알람 생성(회원가입) */
+	public void insertAlarm(ScheduleVO vo) throws Exception;
+	
+	/** 알람 시간 변경 */
+	public void updateAlarm(ScheduleVO vo) throws Exception;
+	
+	/** 스케줄 리스트 */
+	public List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception;
+	
+	/** 스케줄 등록 */
+	public void handleSchedule(ScheduleVO vo) throws Exception;
 	
 }

@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
 
+<!-- 알람 리스트 -->
+<select id="selectAlarmList" resultType="ScheduleVO">
+SELECT
+	ALARM_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+	, ALARM_USE_AT
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+</select>
+
+<!-- 알람 아이디 가져오기 -->
+<select id="selectAlarm" resultType="java.lang.String">
+SELECT
+	ALARM_ID
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+	AND ALARM_TYPE = #{alarmType}
+</select>
+
 <!-- 마지막 알람 아이디 가져오기 -->
 <select id="selectLastAlarmId" resultType="java.lang.String">
 SELECT 
@@ -25,34 +49,7 @@ INSERT INTO alarm_set(
 )
 </insert>
 
-<!-- 알람 리스트 -->
-<select id="selectAlarmList" resultType="ScheduleVO">
-SELECT
-	ALARM_ID
-	, ALARM_TYPE
-	, ALARM_TIME
-	, ALARM_INTERVAL
-	, RPT_INTERVAL
-	, ALARM_USE_AT
-FROM 
-	alarm_set
-WHERE 
-	USER_ID = #{userId}
-</select>
-
-<!-- 알람 아이디 가져오기 -->
-<select id="selectAlarm" resultType="java.lang.String">
-SELECT
-	ALARM_ID
-FROM 
-	alarm_set
-WHERE 
-	USER_ID = #{userId}
-	AND ALARM_TYPE = #{alarmType}
-</select>
-
-
-<!-- 알람 셋 -->
+<!-- 알람 수정 -->
 <update id="updateAlarm">
 UPDATE 
 	alarm_set 
@@ -67,7 +64,7 @@ WHERE
 
 
 
-<!-- 마지막 처방약 아이디 가져오기 -->
+<!-- 마지막 복약 아이디 가져오기 -->
 <select id="selectLastMedId" resultType="java.lang.String">
 SELECT 
 	MAX(MED_ID) 
@@ -75,7 +72,35 @@ FROM med_info
 WHERE MED_ID NOT LIKE 'MED_X%'
 </select>
 
-<!-- 처방약 정보 등록 -->
+
+<!-- 복약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	MED_ID
+	, MED_NAME
+	, START_DATE
+	, END_DATE
+FROM 
+	med_info
+WHERE 
+	USER_ID = #{userId}
+	AND MED_ID = #{medId}
+</select>
+
+<!-- 복약 알람 타입 리스트 -->
+<select id="selectMedAlarmTypes" resultType="java.lang.String">
+SELECT
+	C.ALARM_TYPE
+FROM 
+	med_info A
+	LEFT JOIN alarm_reg B ON A.med_id = B.med_id
+	LEFT JOIN alarm_set C ON B.alarm_id = C.alarm_id
+WHERE 
+	A.USER_ID = #{userId}
+	AND A.MED_ID = #{medId}
+</select>
+
+<!-- 복약 정보 등록 -->
 <insert id="insertMedInfo">
 INSERT INTO med_info(
 	MED_ID
@@ -83,7 +108,6 @@ INSERT INTO med_info(
 	, MED_NAME
 	, START_DATE
 	, END_DATE 
-	, DURATION 
 	, MED_STATUS
 ) VALUES(
 	#{medId}
@@ -91,26 +115,11 @@ INSERT INTO med_info(
 	, #{medName}
 	, #{startDate}
 	, #{endDate}
-	, #{duration} 
 	, 'Y'
 )
 </insert>
 
-<!-- 처방약 정보 -->
-<select id="selectMedInfo" resultType="ScheduleVO">
-SELECT
-	MED_ID
-	, MED_NAME
-	, START_DATE
-	, END_DATE
-	, DURATION
-FROM med_info
-WHERE 
-	USER_ID = #{userId}
-	AND MED_ID = #{medId}
-</select>
-
-<!-- 처방약 정보 수정 -->
+<!-- 복약 정보 수정 -->
 <update id="updateMedInfo">
 UPDATE 
 	med_info 
@@ -123,17 +132,6 @@ WHERE
 	MED_ID = #{medId}
 </update>
 
-
-<!-- 스케줄 등록 -->
-<insert id="insertSchedule">
-INSERT INTO alarm_reg(
-	MED_ID
-	, ALARM_ID
-) VALUES(
-	#{medId}
-	, #{alarmId}
-)
-</insert>
 
 <!-- 스케줄 리스트 -->
 <select id="selectScheduleList" resultType="ScheduleVO">
@@ -157,5 +155,46 @@ WHERE
 ORDER BY 
 	B.ALARM_TYPE, A.MED_ID
 </select>
+
+<!-- 스케줄 정보 -->
+<select id="selectSchedule" resultType="ScheduleVO">
+SELECT
+	A.MED_ID
+	, A.ALARM_ID
+FROM alarm_reg A JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
+WHERE (A.MED_ID, B.ALARM_TYPE) IN (
+		(#{medId}, #{alarmType})
+	)
+</select>
+
+<!-- 스케줄 등록 -->
+<insert id="insertSchedule">
+INSERT INTO alarm_reg(
+	MED_ID
+	, ALARM_ID
+) VALUES(
+	#{medId}
+	, #{alarmId}
+)
+</insert>
+
+<!-- 스케줄 삭제 -->
+<delete id="deleteSchedule">
+DELETE FROM alarm_reg
+WHERE (MED_ID, ALARM_ID) IN (
+	SELECT 
+		A.MED_ID
+		, A.ALARM_ID
+	FROM 
+		alarm_reg A
+		LEFT JOIN med_info B ON A.MED_ID = B.MED_ID
+		LEFT JOIN alarm_set C ON A.ALARM_ID = C.ALARM_ID
+	WHERE C.ALARM_TYPE NOT IN (
+		<foreach item="resultAlarmType" index="index" collection="alarmTypes" separator=",">
+			#{resultAlarmType}
+		</foreach>
+	)
+)
+</delete>
 
 </mapper>

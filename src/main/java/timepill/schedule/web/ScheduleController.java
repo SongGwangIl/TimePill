@@ -37,12 +37,13 @@ public class ScheduleController {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
-		// 수정여부 체크
 		ScheduleVO result = new ScheduleVO();
-		if (vo.getMedId() != null)
-			result = scheduleService.selectMedInfo(vo);
 		
+		// 수정폼 여부 체크
+		if (vo.getMedId() != null) 
+			result = scheduleService.selectMedInfo(vo);
 		model.addAttribute("result", result);
+		
 		return "/schedule/registMed";
 	}
 	
@@ -54,6 +55,7 @@ public class ScheduleController {
 		vo.setUserId(userId);
 		
 		scheduleService.insertMedInfo(vo);
+		
 		return "redirect:/medication/schedule/list";
 	}
 	
@@ -61,11 +63,15 @@ public class ScheduleController {
 	@PostMapping("/medication/schedule/edit-med")
 	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
 		
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
 		scheduleService.updateMedInfo(vo);
+		
 		return "redirect:/medication/schedule/list";
 	}
 	
-	/** 알람 스케줄 리스트 */
+	/** 스케줄 리스트 */
 	@GetMapping("/medication/schedule/list")
 	public String selectScheduleList(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 
@@ -74,10 +80,11 @@ public class ScheduleController {
 
 		List<ScheduleVO> resultList = scheduleService.selectScheduleList(vo);
 		model.addAttribute("scheList", resultList);
+		
 		return "/schedule/list";
 	}
 	
-	/** 알람 정보 설정 폼 */
+	/** 알람 시간 변경 폼 */
 	@GetMapping("/medication/schedule/reg-alarm")
 	public String registAlarm(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
@@ -86,14 +93,14 @@ public class ScheduleController {
 		
 		List<ScheduleVO> resultList = scheduleService.selectAlarmList(vo);
 		model.addAttribute("alarmList", resultList);
+		
 		return "/schedule/registAlarm";
 	}
 	
-	/** 알람 정보 설정 */
+	/** 알람 시간 변경 */
 	@ResponseBody
 	@PostMapping("/medication/schedule/set-alarm")
 	public void setAlarm(@RequestBody List<ScheduleVO> resultList) throws Exception {
-		
 		for (ScheduleVO vo : resultList) {
 			scheduleService.updateAlarm(vo);
 		}
