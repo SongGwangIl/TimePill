@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 <style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-		font-family: sans-serif;
-		box-sizing: border-box;
+
+	cBody * {
+		clear: both;
 	}
 	
-	body{
+	cBody{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 100vh;
 	}
 	
 	.calendar{
@@ -25,7 +25,7 @@
 		margin: 50px;
 	}
 	
-	.header{
+	.calHeader{
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -68,14 +68,14 @@
 		display: flex;
 		flex-flow: row wrap;
 		height: 300px;
-		overflow: visible;
+		align-items: center;
+		
 		
 	}
 	
 	.date{
 		width: calc(100% / 7);
-		padding: 15px;
-		text-align: right;
+		text-align: center;
 		
 	}
 	
@@ -93,11 +93,6 @@
 		opacity: 0.3;
 	}
 	
-	.today{
-		position: relative;
-		color: #fff;
-	}
-	
 	.today::before{
 		position: absolute;
 		top: 50%;
@@ -111,10 +106,11 @@
 		border-radius: 50%;
 		content: '';
 	}
-	
-	.sel{
-		background: blue;
+	.today{
+		position: relative;
+ 		color: #e84;
 	}
+	
 
 	.startDay{
 		background: yellowgreen;
@@ -125,22 +121,17 @@
 		
 </style>
 </head>
-<body>
-	<section class="duration">
-		<input type="text" id="start" placeholder="시작일" readonly>
-		<input type="text" id="end" placeholder="종료일" readonly>
-		<button onclick="reset()">초기화</button>
-	</section>
+<cBody>
 	<section class='calendar'>
-		<div class='header'>
+		<div class='calHeader'>
 			<div class="year-month"></div>
 			<div class="nav">
-				<button class="nav-btn go-prev" onclick='prevMonth()'>&lt;</button>
-				<button class="nav-btn go-today" onclick='goToday()'>Today</button>
-				<button class="nav-btn go-next" onclick='nextMonth()'>&gt;</button>
+				<button type="button" class="nav-btn go-prev" onclick='prevMonth()'>&lt;</button>
+				<button type="button" class="nav-btn go-today" onclick='goToday()'>Today</button>
+				<button type="button" class="nav-btn go-next" onclick='nextMonth()'>&gt;</button>
 			</div>
 		</div>
-		<div class='main'>
+		<div class='calMain'>
 			<div class="days">
 				<div class="day">일</div>
 				<div class="day">월</div>
@@ -386,5 +377,4 @@
 	}
 
 </script>
-</body>
-</html>
+</cBody>

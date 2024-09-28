@@ -69,9 +69,11 @@
 		<br>
 		
 		<label for="startDate">처방일자</label> 
-		<input type="date" name="startDate" id="startDate" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/>" required> <br>
+		<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" />" required readonly> <br>
 		<label for="endDate">만료일자</label> 
-		<input type="date" name="endDate" id="endDate" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/>" required> <br>
+		<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}"/>" required readonly> <br>
+		
+		<c:import url="/WEB-INF/views/calendar/calendar.jsp" charEncoding="utf-8"></c:import>
 		
 		<input type="submit" id="button" value="${empty result.medName ? '등록' : '수정'}">
 		<button type="button" onclick="location.href='/medication/schedule/list'">취소</button>
