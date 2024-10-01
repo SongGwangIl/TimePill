@@ -41,7 +41,7 @@ public class KakaoController {
 	@PostMapping("/user/logout")
 	public String logout() throws Exception {
 		kakaoService.logout();
-		return "redirect:/medication/schedule/list";
+		return "redirect:/schedule/list";
 	}
 	
 	/** 나에게 메세지 보내기 */
@@ -56,7 +56,7 @@ public class KakaoController {
 		System.out.println("권한 동의");
 		String messageResult = kakaoService.message();
 		System.out.println("messageResult : " + messageResult);
-		return "redirect:/medication/schedule/list";
+		return "redirect:/schedule/list";
 	}
 	
 	/** 나에게 메세지 보내기 권한 동의 콜백 */

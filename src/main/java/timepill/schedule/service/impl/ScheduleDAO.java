@@ -9,21 +9,6 @@ import timepill.schedule.service.ScheduleVO;
 @Mapper
 public interface ScheduleDAO {
 	
-	/** 복약 정보 조회 */
-	ScheduleVO selectMedInfo(ScheduleVO vo) throws Exception;
-	
-	/** 복약 알람타입 리스트 */
-	List<String> selectMedAlarmTypes(ScheduleVO vo) throws Exception;
-	
-	/** 마지막 복약 아이디 조회 */
-	String selectLastMedId(ScheduleVO vo) throws Exception;
-	
-	/** 복약 정보 등록 */
-	int insertMedInfo(ScheduleVO vo) throws Exception;
-	
-	/** 복약 정보 수정 */
-	int updateMedInfo(ScheduleVO vo) throws Exception;
-	
 	/** 알람 리스트 */
 	List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
 	

@@ -30,49 +30,8 @@ public class ScheduleController {
 		return "/main";
 	}
 	
-	/** 복약 정보 등록 or 수정 폼 */
-	@GetMapping("/medication/schedule/reg-med")
-	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
-		
-		ScheduleVO result = new ScheduleVO();
-		
-		// 수정폼 여부 체크
-		if (vo.getMedId() != null) 
-			result = scheduleService.selectMedInfo(vo);
-		model.addAttribute("result", result);
-		
-		return "/schedule/registMed";
-	}
-	
-	/** 복약 정보 등록*/
-	@PostMapping("/medication/schedule/add-med")
-	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
-		
-		scheduleService.insertMedInfo(vo);
-		
-		return "redirect:/medication/schedule/list";
-	}
-	
-	/** 복약 정보 수정*/
-	@PostMapping("/medication/schedule/edit-med")
-	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
-		
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
-		
-		scheduleService.updateMedInfo(vo);
-		
-		return "redirect:/medication/schedule/list";
-	}
-	
 	/** 스케줄 리스트 */
-	@GetMapping("/medication/schedule/list")
+	@GetMapping("/schedule/list")
 	public String selectScheduleList(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -84,8 +43,8 @@ public class ScheduleController {
 		return "/schedule/list";
 	}
 	
-	/** 알람 시간 변경 폼 */
-	@GetMapping("/medication/schedule/reg-alarm")
+	/** 알람 시간 변경 폼(임시) */
+	@GetMapping("/schedule/reg-alarm")
 	public String registAlarm(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 		
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -99,9 +58,11 @@ public class ScheduleController {
 	
 	/** 알람 시간 변경 */
 	@ResponseBody
-	@PostMapping("/medication/schedule/set-alarm")
+	@PostMapping("/schedule/set-alarm")
 	public void setAlarm(@RequestBody List<ScheduleVO> resultList) throws Exception {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		for (ScheduleVO vo : resultList) {
+			vo.setUserId(userId);
 			scheduleService.updateAlarm(vo);
 		}
 	}

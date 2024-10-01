@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timepill.medication.service.impl.MedicationDAO">
+
+<!-- 복약 리스트 -->
+<select id="selectMedList" resultType="ScheduleVO">
+SELECT 
+	MED_ID
+	, MED_NAME 
+FROM med_info
+WHERE USER_ID = #{userId}
+	AND MED_STATUS = 'Y'
+</select>
+
+<!-- 마지막 복약 아이디 가져오기 -->
+<select id="selectLastMedId" resultType="java.lang.String">
+SELECT 
+	MAX(MED_ID) 
+FROM med_info
+WHERE MED_ID NOT LIKE 'MED_X%'
+</select>
+
+<!-- 복약 정보 -->
+<select id="selectMedInfo" resultType="ScheduleVO">
+SELECT
+	MED_ID
+	, MED_NAME
+	, START_DATE
+	, END_DATE
+FROM 
+	med_info
+WHERE 
+	USER_ID = #{userId}
+	AND MED_ID = #{medId}
+</select>
+
+<!-- 복약 알람 타입 리스트 -->
+<select id="selectMedAlarmTypes" resultType="java.lang.String">
+SELECT
+	C.ALARM_TYPE
+FROM 
+	med_info A
+	LEFT JOIN alarm_reg B ON A.med_id = B.med_id
+	LEFT JOIN alarm_set C ON B.alarm_id = C.alarm_id
+WHERE 
+	A.USER_ID = #{userId}
+	AND A.MED_ID = #{medId}
+</select>
+
+<!-- 복약 정보 등록 -->
+<insert id="insertMedInfo">
+INSERT INTO med_info(
+	MED_ID
+	, USER_ID
+	, MED_NAME
+	, START_DATE
+	, END_DATE 
+	, MED_STATUS
+) VALUES(
+	#{medId}
+	, #{userId}
+	, #{medName}
+	, #{startDate}
+	, #{endDate}
+	, 'Y'
+)
+</insert>
+
+<!-- 복약 정보 수정 -->
+<update id="updateMedInfo">
+UPDATE 
+	med_info 
+SET 
+	MED_NAME = #{medName}
+	, START_DATE = #{startDate}
+	, END_DATE = #{endDate}
+WHERE
+	MED_ID = #{medId}
+</update>
+
+</mapper>

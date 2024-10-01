@@ -15,45 +15,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	ScheduleDAO scheduleDAO;
 	
-	/** 복약 정보 조회 */
-	@Override
-	public ScheduleVO selectMedInfo(ScheduleVO vo) throws Exception {
-		
-		ScheduleVO resultMedInfo = scheduleDAO.selectMedInfo(vo);
-		
-		List<String> resultMedAlarmTypes = scheduleDAO.selectMedAlarmTypes(vo); // 복약 알람 가져오기
-		resultMedInfo.setAlarmTypes(resultMedAlarmTypes);
-		
-		return resultMedInfo;
-	}
-
-	/** 복약 정보 등록 */
-	@Override
-	public void insertMedInfo(ScheduleVO vo) throws Exception {
-		// 복약 아이디 생성 로직
-		String lastMedId = scheduleDAO.selectLastMedId(vo); // 마지막 복약아이디 조회
-		int nextIdNum = 1;
-		if (lastMedId != null && lastMedId.startsWith("MED_")) {
-			nextIdNum = Integer.parseInt(lastMedId.substring("MED_".length())) + 1;
-		}
-		String nextId = String.format("MED_%010d", nextIdNum);
-		vo.setMedId(nextId); // 생성 아이디
-
-		scheduleDAO.insertMedInfo(vo);
-
-		handleSchedule(vo); // 복약 스케줄 등록
-	}
-
-	/** 복약 정보 수정 */
-	@Override
-	public void updateMedInfo(ScheduleVO vo) throws Exception {
-		
-		scheduleDAO.updateMedInfo(vo);
-
-		handleSchedule(vo); // 스케줄 등록 or 삭제
-	}
-
-	/** 알람 리스트 */
+	/** 알람 리스트(임시) */
 	@Override
 	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception {
 		return scheduleDAO.selectAlarmList(vo);

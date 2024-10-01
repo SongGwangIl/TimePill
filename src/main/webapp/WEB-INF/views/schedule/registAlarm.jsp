@@ -107,7 +107,7 @@ table * {
 					</tbody>
 				</table>
 				<button type="button" onclick="submit();">등록</button>
-				<button type="button" onclick="location.href='/medication/schedule/list'">취소</button>
+				<button type="button" onclick="location.href='/schedule/list'">취소</button>
 			</div>
 	</div>
 	
@@ -143,7 +143,7 @@ function submit () {
 	// 알람 저장
 	var resultList = collectData();
 	$.ajax({
-		url: '/medication/schedule/set-alarm',
+		url: '/schedule/set-alarm',
 		type: 'post',
 		contentType: 'application/json',
 		data: JSON.stringify(resultList),

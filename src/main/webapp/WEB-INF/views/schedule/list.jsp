@@ -61,14 +61,14 @@ p, span {
 				<p>받아보세요!</p>
 			</div>
 			<div style="text-align: center;">
-				<a href='/medication/schedule/reg-med'>
+				<a href='/medication/list'>
 					<img class="pill" src="/resources/img/timpill.svg">
-					<p>처방약 등록</p>
+					<p>복약 리스트</p>
 				</a>
-				<a href='/medication/schedule/reg-alarm'>
+				<a href='/medication/reg-alarm'>
 					<img class="pill" src="/resources/img/timpill.svg">
 					<p>알람 등록</p>
-				</a> 
+				</a>
  			</div>
 
 			<form action="/kakao/message" method="post">
@@ -83,8 +83,8 @@ p, span {
 		<div>
 			<c:forEach var="resultAlarmType" items="${scheList}">
 				<c:if test="${resultAlarmType.alarmType ne previousAlarmType}">
+					<c:set var="previousAlarmType" value="${resultAlarmType.alarmType}" />
 					<div class="tablewrap">
-						 <c:set var="previousAlarmType" value="${resultAlarmType.alarmType}" />
 						<p>
 						<c:choose>
 							<c:when test="${resultAlarmType.alarmType eq '1'}">
@@ -101,17 +101,13 @@ p, span {
 							</c:when>
 						</c:choose>
 						<fmt:parseDate value="${resultAlarmType.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
-						<span>[알람 시간 : <fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>]</span>
+<%-- 						<span>[알람 시간 : <fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>]</span> --%> 
+    					<input type="time" name="alarmTime" value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>">
 						</p>
 						<c:forEach var="result" items="${scheList}">
-							<c:if test="${result.alarmType eq resultAlarmType.alarmType}">
+							<c:if test="${result.alarmType eq  resultAlarmType.alarmType}">
 								<span class="med-title">
-									<c:url var="editMedInfo" value="/medication/schedule/reg-med">
-										<c:param name="medId">${result.medId}</c:param>
-									</c:url>
-									<a href="${editMedInfo}">
-										<<c:out value="${result.medName}"/>>
-									</a>
+									${result.medName}
 									<div class="med-info">
 										<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
 										<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
@@ -120,7 +116,7 @@ p, span {
 							</c:if>
 						</c:forEach>
 					</div>
-				</c:if>
+					</c:if>
 			</c:forEach>
 			<c:if test="${empty scheList}">
 				<div class="tablewrap">

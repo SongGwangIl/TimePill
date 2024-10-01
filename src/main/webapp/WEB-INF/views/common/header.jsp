@@ -209,7 +209,7 @@ body {
 			<div class="title">
 				<div class="logo"></div>
 				<h1 class="main">
-					<c:url var="mainUrl" value="/main" />
+					<c:url var="mainUrl" value="/" />
 					<a href="${mainUrl}">TimePill</a>
 				</h1>
 			</div>
@@ -233,12 +233,12 @@ body {
 				<h3>내 복약 정보</h3>
 				<ul class="menu">
 					<li>
-						<c:url var="regUrl" value="/medication/schedule/list" />
+						<c:url var="regUrl" value="/schedule/list" />
 						<a href="${regUrl}"> 알람 스케줄 등록 </a>
 					</li>
 
 					<li>
-						<c:url var="recordUrl" value="/medication/schedule/list" />
+						<c:url var="recordUrl" value="/schedule/list" />
 						<form id="recordForm" action="#" method="get">
 							<input type="hidden" name="takeDate" value="${today}" /> 
 							<a href="#" onclick="document.querySelector('#recordForm').submit(); return false;">

@@ -4,15 +4,6 @@ import java.util.List;
 
 public interface ScheduleService {
 	
-	/** 복약 정보 조회 */
-	public ScheduleVO selectMedInfo(ScheduleVO vo) throws Exception;
-	
-	/** 복약 정보 등록 */
-	public void insertMedInfo(ScheduleVO vo) throws Exception;
-	
-	/** 복약 정보 수정 */
-	public void updateMedInfo(ScheduleVO vo) throws Exception;
-	
 	/** 알람 리스트 */
 	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
 	

@@ -36,8 +36,15 @@
 <div class="whiteBox">
 
 <div class="content-wrapper">
-	<h2 class="single-line">처방약 등록</h2>
-	<form action="/medication/schedule${not empty result.medId ? '/edit-med' : '/add-med'}" method="post">
+	<c:choose>
+		<c:when test="${empty result.medId}">
+			<h2 class="single-line">처방약 등록</h2>
+		</c:when>
+		<c:otherwise>
+			<h2 class="single-line">처방약 수정</h2>
+		</c:otherwise>
+	</c:choose>
+	<form action="/medication${not empty result.medId ? '/edit-med' : '/add-med'}" method="post">
 		<div style="display: block;">
 		<input type="hidden" name="medId" value="${result.medId}">
 		<input type="text" name="medName"placeholder="복약이름" value="${result.medName}" required> <br>
@@ -69,14 +76,14 @@
 		<br>
 		
 		<label for="startDate">처방일자</label> 
-		<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" />" required readonly> <br>
+		<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" required readonly> <br>
 		<label for="endDate">만료일자</label> 
-		<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}"/>" required readonly> <br>
+		<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" required readonly> <br>
 		
 		<c:import url="/WEB-INF/views/calendar/calendar.jsp" charEncoding="utf-8"></c:import>
 		
 		<input type="submit" id="button" value="${empty result.medName ? '등록' : '수정'}">
-		<button type="button" onclick="location.href='/medication/schedule/list'">취소</button>
+		<button type="button" onclick="location.href='/medication/list'">취소</button>
 		</div>
 		<sec:csrfInput/>
 	</form>
