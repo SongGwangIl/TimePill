@@ -3,7 +3,6 @@ package timepill.kakao.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,14 +17,14 @@ public class KakaoController {
 	
 	
 	/** 카카오 로그인or회원가입 요청 */
-	@GetMapping("/user/kakao-login")
+	@GetMapping("/kakao/login")
 	public String goKakaoOAuth() throws Exception {
 		String resultUri = kakaoService.goKakaoOAuth("", "login-callback");
 		return "redirect:" + resultUri;
 	}
 
 	/** 카카오 로그인 콜백 */
-	@GetMapping("/user/login-callback")
+	@GetMapping("/kakao/login-callback")
 	public String loginCallback(@RequestParam("code") String code) throws Exception {
 		
 		kakaoService.callback(code, "login-callback");
@@ -36,13 +35,7 @@ public class KakaoController {
 		}
 		return "redirect:/";
 	}
-
-	/** 로그아웃 */
-	@PostMapping("/user/logout")
-	public String logout() throws Exception {
-		kakaoService.logout();
-		return "redirect:/schedule/list";
-	}
+	
 	
 	/** 나에게 메세지 보내기 */
 	@RequestMapping("/kakao/message")
@@ -66,30 +59,4 @@ public class KakaoController {
 		return "redirect:/kakao/message";
 	}
 
-	
-	
-	
-	
-	@GetMapping("/user/profile")
-	public String getProfile() throws Exception {
-		return kakaoService.getProfile();
-	}
-
-	@RequestMapping("/user/authorize")
-	public String goKakaoOAuth(@RequestParam("scope") String scope) throws Exception {
-		return "redirect:" + kakaoService.goKakaoOAuth(scope, "");
-	}
-
-	@RequestMapping("/user/friends")
-	public String getFriends() throws Exception {
-		return kakaoService.getFriends();
-	}
-	
-
-	@RequestMapping("/user/friends-message")
-	public String friends_message(@RequestParam("uuids") String uuids) throws Exception {
-		return kakaoService.friendMessage(uuids);
-	}
-
-	
 }

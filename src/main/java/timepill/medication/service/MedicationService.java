@@ -18,4 +18,6 @@ public interface MedicationService {
 	/** 복약 정보 수정 */
 	public void updateMedInfo(ScheduleVO vo) throws Exception;
 		
+	/** 복약 정보 삭제 */
+	public void deleteMedInfo(ScheduleVO vo) throws Exception;
 }

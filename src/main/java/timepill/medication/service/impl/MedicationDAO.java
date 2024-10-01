@@ -27,5 +27,6 @@ public interface MedicationDAO {
 	/** 복약 정보 수정 */
 	int updateMedInfo(ScheduleVO vo) throws Exception;
 	
-	
+	/** 복약 정보 삭제 */
+	int deleteMedInfo(ScheduleVO vo) throws Exception;
 }

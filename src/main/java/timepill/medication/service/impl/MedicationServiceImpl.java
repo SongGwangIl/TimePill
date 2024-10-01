@@ -69,5 +69,11 @@ public class MedicationServiceImpl implements MedicationService {
 		scheduleService.handleSchedule(vo); // 복약 스케줄 수정(등록 or 삭제)
 	}
 
+	/** 복약 정보 삭제 */
+	public void deleteMedInfo(ScheduleVO vo) throws Exception {
+		medicationDAO.deleteMedInfo(vo);
+		
+		scheduleService.handleSchedule(vo); // 복약 스케줄 삭제
+	}
 
 }

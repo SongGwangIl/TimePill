@@ -17,7 +17,7 @@ WHERE USER_ID = #{userId}
 </select>
 
 
-<!-- 회원가입 -->
+<!-- 카카오 회원가입 -->
 <insert id="insertUser">
 INSERT INTO users(
 	USER_ID
@@ -38,14 +38,14 @@ INSERT INTO users(
 <select id="selectSchejuleList" resultType="UserVO">
 SELECT 
 	A.KAKAO_TOKEN
-	, B.ALARM_TIM
+	, B.ALARM_TIME
 	, D.START_DATE
 	, D.END_DATE
 FROM
 	users A
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID
-		JOIN alarm_reg C ON B.ALARM_ID = C.ALARM_ID
-		JOIN presc_med_info D ON C.MED_ID = D.MED_ID
+		JOIN schedule C ON B.ALARM_ID = C.ALARM_ID
+		JOIN med_info D ON C.MED_ID = D.MED_ID
 </select>
  
 </mapper>

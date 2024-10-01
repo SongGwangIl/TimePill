@@ -7,6 +7,8 @@
 SELECT 
 	MED_ID
 	, MED_NAME 
+	, START_DATE
+	, END_DATE
 FROM med_info
 WHERE USER_ID = #{userId}
 	AND MED_STATUS = 'Y'
@@ -30,8 +32,8 @@ SELECT
 FROM 
 	med_info
 WHERE 
-	USER_ID = #{userId}
-	AND MED_ID = #{medId}
+	MED_ID = #{medId}
+	AND USER_ID = #{userId}
 </select>
 
 <!-- 복약 알람 타입 리스트 -->
@@ -40,11 +42,11 @@ SELECT
 	C.ALARM_TYPE
 FROM 
 	med_info A
-	LEFT JOIN alarm_reg B ON A.med_id = B.med_id
+	LEFT JOIN schedule B ON A.med_id = B.med_id
 	LEFT JOIN alarm_set C ON B.alarm_id = C.alarm_id
 WHERE 
-	A.USER_ID = #{userId}
-	AND A.MED_ID = #{medId}
+	A.MED_ID = #{medId}
+	AND A.USER_ID = #{userId}
 </select>
 
 <!-- 복약 정보 등록 -->
@@ -76,6 +78,18 @@ SET
 	, END_DATE = #{endDate}
 WHERE
 	MED_ID = #{medId}
+	AND USER_ID = #{userId}
+</update>
+
+<!-- 복약 정보 삭제 -->
+<update id="deleteMedInfo">
+UPDATE 
+	med_info 
+SET 
+	med_status = #{medStatus}
+WHERE
+	MED_ID = #{medId}
+	AND USER_ID = #{userId}
 </update>
 
 </mapper>

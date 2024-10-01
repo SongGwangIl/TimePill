@@ -2,19 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
 
-<!-- 알람 리스트 -->
-<select id="selectAlarmList" resultType="ScheduleVO">
-SELECT
-	ALARM_ID
-	, ALARM_TYPE
-	, ALARM_TIME
-	, ALARM_USE_AT
-FROM 
-	alarm_set
-WHERE 
-	USER_ID = #{userId}
-</select>
-
 <!-- 알람 아이디 가져오기 -->
 <select id="selectAlarm" resultType="java.lang.String">
 SELECT
@@ -41,11 +28,13 @@ INSERT INTO alarm_set(
 	, USER_ID
 	, ALARM_TYPE
 	, ALARM_TIME
+	, ALARM_USE_AT
 ) VALUES(
 	#{alarmId}
 	, #{userId}
 	, #{alarmType}
 	, #{alarmTime}
+	, 'Y'
 )
 </insert>
 
@@ -55,9 +44,6 @@ UPDATE
 	alarm_set 
 SET 
 	ALARM_TIME = #{alarmTime}
-	, ALARM_INTERVAL = #{alarmInterval}
-	, RPT_INTERVAL = #{rptInterval}
-	, ALARM_USE_AT = #{alarmUseAt}
 WHERE
 	ALARM_ID = #{alarmId}
 	AND USER_ID = #{userId}
@@ -74,17 +60,29 @@ SELECT
 	, C.MED_NAME
 	, C.START_DATE
 	, C.END_DATE
-	, C.DURATION
 	, C.MED_STATUS
+	, D.SCHE_CHK
 FROM 
-	alarm_reg A
-	JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
-	JOIN med_info C ON A.MED_ID = C.MED_ID
+	schedule A
+JOIN
+	alarm_set B ON A.ALARM_ID = B.ALARM_ID
+JOIN
+	med_info C ON A.MED_ID = C.MED_ID
+LEFT JOIN (
+	SELECT
+		ALARM_TYPE
+		, SCHE_CHK
+	FROM sche_log 
+	WHERE 
+		LOG_STATUS = 'Y'
+		AND USER_ID = #{userId}
+) AS D ON D.ALARM_TYPE  = B.ALARM_TYPE
 WHERE 
 	C.USER_ID = #{userId}
 	AND ALARM_USE_AT = 'Y'
 ORDER BY 
-	B.ALARM_TYPE, A.MED_ID
+	B.ALARM_TYPE
+	, A.MED_ID
 </select>
 
 <!-- 스케줄 정보 -->
@@ -92,15 +90,21 @@ ORDER BY
 SELECT
 	A.MED_ID
 	, A.ALARM_ID
-FROM alarm_reg A JOIN alarm_set B ON A.ALARM_ID = B.ALARM_ID
-WHERE (A.MED_ID, B.ALARM_TYPE) IN (
-		(#{medId}, #{alarmType})
-	)
+FROM 
+	schedule A 
+JOIN 
+	alarm_set B ON A.ALARM_ID = B.ALARM_ID
+WHERE(
+	A.MED_ID
+	, B.ALARM_TYPE
+) IN(
+	(#{medId}, #{alarmType})
+)
 </select>
 
 <!-- 스케줄 등록 -->
 <insert id="insertSchedule">
-INSERT INTO alarm_reg(
+INSERT INTO schedule(
 	MED_ID
 	, ALARM_ID
 ) VALUES(
@@ -111,23 +115,19 @@ INSERT INTO alarm_reg(
 
 <!-- 스케줄 삭제 -->
 <delete id="deleteSchedule">
-DELETE FROM alarm_reg
-WHERE (MED_ID, ALARM_ID) IN (
-	SELECT 
-		A.MED_ID
-		, A.ALARM_ID
-	FROM 
-		alarm_reg A
-		LEFT JOIN med_info B ON A.MED_ID = B.MED_ID
-		LEFT JOIN alarm_set C ON A.ALARM_ID = C.ALARM_ID
-	WHERE 
-		A.MED_ID = #{medId}
-		AND C.ALARM_TYPE NOT IN (
-		<foreach item="resultAlarmType" index="index" collection="alarmTypes" separator=",">
-			#{resultAlarmType}
-		</foreach>
+DELETE FROM schedule
+WHERE MED_ID = #{medId}
+	<if test='medStatus != "N" and alarmTypes != null'>
+	AND ALARM_ID NOT IN (
+	    SELECT ALARM_ID
+	    FROM alarm_set
+	    WHERE ALARM_TYPE IN (
+	        <foreach item="resultAlarmType" index="index" collection="alarmTypes" separator=",">
+	            #{resultAlarmType}
+	        </foreach>
+	    )
 	)
-)
+	</if>
 </delete>
 
 </mapper>

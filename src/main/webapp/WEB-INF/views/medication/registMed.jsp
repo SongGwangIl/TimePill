@@ -44,7 +44,7 @@
 			<h2 class="single-line">처방약 수정</h2>
 		</c:otherwise>
 	</c:choose>
-	<form action="/medication${not empty result.medId ? '/edit-med' : '/add-med'}" method="post">
+	<form id="frm" action="/medication/${result.medId}${empty result.medId ? 'add' : '/edit'}" method="post">
 		<div style="display: block;">
 		<input type="hidden" name="medId" value="${result.medId}">
 		<input type="text" name="medName"placeholder="복약이름" value="${result.medName}" required> <br>
@@ -82,18 +82,37 @@
 		
 		<c:import url="/WEB-INF/views/calendar/calendar.jsp" charEncoding="utf-8"></c:import>
 		
-		<input type="submit" id="button" value="${empty result.medName ? '등록' : '수정'}">
-		<button type="button" onclick="location.href='/medication/list'">취소</button>
+		<button type="submit" id="btn-reg" >${empty result.medId ? '등록' : '수정'}</button> <br>
+		<c:if test="${not empty result.medId}">
+			<button type="submit" id="btn-del">삭제</button> <br>
+		</c:if>
+		<button type="button" onclick="location.href='/medication'">취소</button>
 		</div>
 		<sec:csrfInput/>
 	</form>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-//공백제거
-$('input').on('input', function() {
-	$(this).val($(this).val().replace(/\s/g, ''));
+$(document).ready(function () {
+	let medId = "${result.medId}";
+	
+	console.log(medId);
+	
+	//공백제거
+	$('input').on('input', function() {
+		$(this).val($(this).val().replace(/\s/g, ''));
+	});
+	
+	// 삭제버튼
+	$('#btn-del').on('click', function () {
+		event.preventDefault();
+		if (!confirm("삭제하시겠습니까?")) {
+			return false;
+		}
+		$('#frm').attr('action', '/medication/'+medId+'/del');
+		$('#frm').submit();
+	});
 });
 </script>
 	

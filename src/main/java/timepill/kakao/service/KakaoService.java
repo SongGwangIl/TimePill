@@ -23,9 +23,4 @@ public interface KakaoService {
 	/** 카카오 메세지 보내기 */
 	public String message() throws Exception;
 
-	/** 카카오 API를 호출해 친구 목록을 가져옴 */
-	public String getFriends() throws Exception;
-
-	/** 액세스 토큰을 사용하여 특정 친구에게 메시지를 보냄 */
-	public String friendMessage(String uuids) throws Exception;
 }

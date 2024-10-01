@@ -4,9 +4,6 @@ import java.util.List;
 
 public interface ScheduleService {
 	
-	/** 알람 리스트 */
-	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
-	
 	/** 알람 생성(회원가입) */
 	public void insertAlarm(ScheduleVO vo) throws Exception;
 	

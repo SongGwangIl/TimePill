@@ -27,6 +27,8 @@ public class ScheduleVO {
 	
 	private List<String> alarmTypes;	// 복용약 알람 리스트
 	
+	private String scheChk; // 복용여부(스케줄) 체크
+	
 	
 	/** 시작일자 타입 변환 */
 	public void setStartDate(String startDate) throws Exception {

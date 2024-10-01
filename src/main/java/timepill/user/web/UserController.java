@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import timepill.com.RandomCharacterGenerator;
+import timepill.kakao.service.KakaoService;
 import timepill.user.service.MailService;
 import timepill.user.service.UserService;
 import timepill.user.service.UserVO;
@@ -25,6 +26,10 @@ public class UserController {
 	@Autowired
 	MailService mailService;
 	
+	/** kakaoService DI */
+	@Autowired
+	KakaoService kakaoService;
+	
 	/** 초기화면요청 */
 	@GetMapping("/cover")
 	public String cover() {
@@ -36,6 +41,13 @@ public class UserController {
 	public String loginForm() {
 		
 		return "user/login";
+	}
+	
+	/** 로그아웃(시큐리티 처리) */
+	@PostMapping("/user/logout")
+	public String logout() throws Exception {
+		kakaoService.logout();
+		return "redirect:/schedule/list";
 	}
 	
 	/** 약관동의 화면요청 */
@@ -58,10 +70,9 @@ public class UserController {
 		
 		userService.add(vo);
 		
-		request.setAttribute("msg", "회원가입 되었습니다.");
-		request.setAttribute("url", "/cover");		
+		request.getSession().setAttribute("message", "회원가입 되었습니다.");
 		
-		return "common/msg";			
+		return "/user/login";			
 	}
 	
 	/** 아이디 사용유무확인 ajax 요청,응답 */

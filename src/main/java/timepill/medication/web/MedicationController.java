@@ -20,59 +20,72 @@ public class MedicationController {
 	/** medicationService DI */
 	@Autowired
 	MedicationService medicationService;
-	
+
 	/** 복약 리스트 */
-	@GetMapping("/medication/list")
-	public String selectScheduleList(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
+	@GetMapping("/medication")
+	public String selectMedInfoList(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
 
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 
 		List<ScheduleVO> resultList = medicationService.selectMedList(vo);
 		model.addAttribute("medList", resultList);
-		
+
 		return "/medication/medList";
 	}
-	
-	
+
 	/** 복약 정보 등록 or 수정 폼 */
-	@GetMapping(value = {"/medication/reg-med", "/medication/reg-med/{medId}"})
+	@GetMapping(value = { "/medication/reg", "/medication/{medId}" })
 	public String registMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
+
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
-		
+
 		ScheduleVO result = new ScheduleVO();
-		
+
 		// 수정폼 여부 체크
-		if (vo.getMedId() != null) 
+		if (vo.getMedId() != null)
 			result = medicationService.selectMedInfo(vo);
 		model.addAttribute("result", result);
-		
+
 		return "/medication/registMed";
 	}
-	
-	/** 복약 정보 등록*/
-	@PostMapping("/medication/add-med")
+
+	/** 복약 정보 등록 */
+	@PostMapping("/medication/add")
 	public String addMedInfo(ScheduleVO vo, ModelMap model, HttpSession session) throws Exception {
-		
+
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
-		
+
 		medicationService.insertMedInfo(vo);
-		
-		return "redirect:/medication/list";
+
+		return "redirect:/medication";
 	}
-	
-	/** 복약 정보 수정*/
-	@PostMapping("/medication/edit-med")
+
+	/** 복약 정보 수정 */
+	@PostMapping("/medication/{medId}/edit")
 	public String editMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
-		
+
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+
+		medicationService.updateMedInfo(vo);
+
+		return "redirect:/medication";
+	} 
+
+	/** 복약 정보 삭제 */
+	@PostMapping("/medication/{medId}/del")
+	public String delMedInfo(ScheduleVO vo, ModelMap model) throws Exception {
+
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
-		medicationService.updateMedInfo(vo);
-		
-		return "redirect:/medication/list";
+		vo.setMedStatus("N");
+
+		medicationService.deleteMedInfo(vo);
+
+		return "redirect:/medication";
 	}
 }

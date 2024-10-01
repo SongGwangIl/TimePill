@@ -58,8 +58,10 @@ p, span {
 					<c:forEach var="resultMed" items="${medList}">
 						<tr>
 							<td>${resultMed.medName}</td>
-							<td><button onclick="location.href='/medication/reg-med/${resultMed.medId}'">수정</button></td>
-							<td><button>삭제</button></td>
+							
+							<td><fmt:formatDate value="${resultMed.startDate}" pattern="yyyy-MM-dd"/>
+							~ <fmt:formatDate value="${resultMed.endDate}" pattern="yyyy-MM-dd"/></td>
+							<td><img alt="수정" src="/resources/img/ico-edit.png" width="14px" height="14px" onclick="location.href='/medication/${resultMed.medId}'"/></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -71,8 +73,8 @@ p, span {
 			</c:if>
 		</div>
 		<div>
-			<button onclick="location.href='/medication/reg-med'">
-				처방약 등록
+			<button onclick="location.href='/medication/reg'">
+				복약 추가
 			</button>
 		</div>
 	</div>

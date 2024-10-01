@@ -12,6 +12,7 @@
     		<intercept-url pattern="/resources/**" access="permitAll"/>
     		<intercept-url pattern="/user/**" access="permitAll"/>
     		<intercept-url pattern="/cover" access="permitAll"/>
+    		<intercept-url pattern="/alarm" access="isAuthenticated()"/>
     		<intercept-url pattern="/medication/**" access="isAuthenticated()"/>
     		<intercept-url pattern="/schedule/**" access="isAuthenticated()"/>
     		<intercept-url pattern="/myinfo/**" access="isAuthenticated()"/>

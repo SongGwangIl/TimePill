@@ -121,7 +121,6 @@ public class KakaoServiceImpl implements KakaoService {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "",
 					userInfoResult.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-//			httpSession.setAttribute("loginUser", vo);
 			httpSession.setAttribute("message", "로그인 완료");
 		} else {
 			vo.setKakaoToken(httpSession.getAttribute("token").toString());
@@ -144,7 +143,6 @@ public class KakaoServiceImpl implements KakaoService {
 	@Override
 	public void logout() throws Exception {
 		String uri = KAKAO_API_HOST + "/v1/user/logout";
-		httpSession.invalidate();
 		if (httpSession.getAttribute("token") != null) {
 			httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString());
 		}
@@ -174,21 +172,6 @@ public class KakaoServiceImpl implements KakaoService {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
 		System.out.println("메세지 서비스 시작");
 		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(), KakaoMessageTemplate.getDefaultMessageParam());
-	}
-
-	/** 카카오 API를 호출해 친구 목록을 가져옴 */
-	@Override
-	public String getFriends() throws Exception {
-		String uri = KAKAO_API_HOST + "/v1/api/talk/friends";
-		return httpCallService.CallwithToken("GET", uri, httpSession.getAttribute("token").toString());
-	}
-
-	/** 액세스 토큰을 사용하여 특정 친구에게 메시지를 보냄 */
-	@Override
-	public String friendMessage(String uuids) throws Exception {
-		String uri = KAKAO_API_HOST + "/v1/api/talk/friends/message/default/send";
-		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(),
-				KakaoMessageTemplate.getDefaultMessageParam() + "&receiver_uuids=[" + uuids + "]");
 	}
 
 }
