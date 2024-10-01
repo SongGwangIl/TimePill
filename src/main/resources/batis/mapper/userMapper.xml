@@ -34,4 +34,10 @@
   	WHERE user_id = #{userId}
   </select>
   
+  <select id="findId" resultType="String">
+  	SELECT user_id
+  	FROM users
+  	WHERE email = #{email}
+  </select>
+  
 </mapper>

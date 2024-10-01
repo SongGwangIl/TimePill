@@ -90,7 +90,7 @@
 					<button id="add" class="btn">등록</button>
 				</li>				
 				<li>
-					<button class="btn" type="button" onclick="location.href='/medication/schedule/list'">다음에 등록</button>
+					<button class="btn" type="button" onclick="location.href='/schedule/list'">다음에 등록</button>
 				</li>				
 			</ul>
 			

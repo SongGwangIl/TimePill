@@ -22,26 +22,26 @@ function checkId(){
   
   if(idFlag == true){
     $.ajax({
-      url : "/user/checkId",
-      type: "post",
-      data: {userId:userIdVal},
+		url : "/user/checkId",
+		type: "post",
+		data: {userId:userIdVal},
 		beforeSend: function(xhr){
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-      success: function(result){
-        if(result == 1){
-          idCheck.innerText = "이미 사용중인 아이디입니다."
-          idCheck.style.color = "#dc3545"
-        }
-        else if(result == 0){
-          idCheck.innerText = "사용할 수 있는 아이디입니다."
-          idCheck.style.color = "#2fb380"    
-        }
-      },
-      error: function(){
-        alert("서버요청실패")
-      }
+		success: function(result){
+        	if(result == 1){
+          		idCheck.innerText = "이미 사용중인 아이디입니다."
+          		idCheck.style.color = "#dc3545"
+        	}
+        	else if(result == 0){
+          		idCheck.innerText = "사용할 수 있는 아이디입니다."
+          		idCheck.style.color = "#2fb380"    
+        	}
+		},
+      	error: function(){
+        	alert("서버요청실패")
+      	}
     });
   }
 }

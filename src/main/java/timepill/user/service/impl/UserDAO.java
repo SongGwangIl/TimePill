@@ -12,4 +12,6 @@ public interface UserDAO {
 	UserVO login(String userId);
 
 	String checkId(String userId);
+
+	String findId(String email);
 }

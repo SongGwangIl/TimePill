@@ -9,4 +9,6 @@ public interface UserService extends UserDetailsService {
 	// 사용가능한 아이디 확인
 	String checkId(String userId);
 
+	String findId(String email);
+
 }
