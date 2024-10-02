@@ -10,6 +10,6 @@ public interface MailService {
 	Session mailSetting(Properties props);
 	
 	//메일보내기
-	String sendMail(Session session, String title, String content, String receiver);
+	void sendMail(Session session, String title, String content, String receiver);
 	
 }

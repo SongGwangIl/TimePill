@@ -65,6 +65,10 @@
 					if(result === ''){
 						msgSp.innerText = "등록되지 않은 이메일 입니다.";
 					}else{
+						let rPBtn = document.querySelector('#resetPasswordBtn');
+						if(rPBtn)
+							rPBtn.remove();
+							
 						msgSp.textContent = "";
 						viewIdSp.innerText = result;
 						let resetPwBtn = document.createElement('button');
@@ -81,7 +85,7 @@
 		}
 		
 		function goResetPw(){
-			window.location.href = "/user/resetPassword";
+			window.location.href = "/user/authEmail";
 		}
 		
 		function goLogin(){

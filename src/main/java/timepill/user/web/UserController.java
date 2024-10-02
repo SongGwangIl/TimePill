@@ -1,9 +1,12 @@
 package timepill.user.web;
 
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import net.sf.json.JSONObject;
 import timepill.com.RandomCharacterGenerator;
 import timepill.kakao.service.KakaoService;
 import timepill.user.service.MailService;
@@ -100,44 +104,52 @@ public class UserController {
 		return result;
 	}
 	
-	@GetMapping("/user/resetPassword")
-	public String resetPassword() {
+	@GetMapping("/user/authEmail")
+	public String authEmail() {
 		
-		return "user/resetPassword";
+		return "user/authEmail";
 	}
 	
 	
 	@PostMapping("/user/authEmail")
-	public String resetPassword(UserVO vo, RandomCharacterGenerator random, String email, Model model) throws Exception {
+	public void authEmail(UserVO vo, HttpServletResponse response, RandomCharacterGenerator random, Model model) throws Exception {
 		
-		//임시 비밀번호를 생성(영+영+숫+영+영+숫=6자리)
-		String authNumber = "";
-		for(int i=1; i<=6; i++) {
-			//영자
-			if(i % 3 != 0)
-				authNumber += random.getRandomCharacter();
-			//숫자
-			else
-				authNumber += random.getRandomNumber();
+		System.out.println(vo.getUserId()+vo.getEmail());
+		
+		String successYn = "Y";
+		String message = "이메일로 인증번호를 전송하였습니다.";
+		
+		JSONObject jo = new JSONObject();
+		response.setContentType("application/json; charset=utf-8");
+		
+		if(vo.getEmail().isEmpty()) {
+			successYn = "N";
+			message = "ID가 없습니다.";
+		}else {
+			//임시 비밀번호를 생성(영+영+숫+영+영+숫=6자리)
+			String authNumber = "";
+			for(int i=1; i<=6; i++) {
+				//영자
+				if(i % 3 != 0)
+					authNumber += random.getRandomCharacter();
+				//숫자
+				else
+					authNumber += random.getRandomNumber();
+			}
+		
+			//메일전송
+			String title = "비밀번호변경";
+			String content = "인증번호는 (" + authNumber + ") 입니다.";
+			//javax.mail.Session
+			Session session = mailService.mailSetting(new Properties());
+			mailService.sendMail(session, title, content, vo.getEmail());
 		}
+		jo.put("successYn", successYn);
+		jo.put("message", message);
 		
-		//메일전송
-		String title = "비밀번호변경";
-		String content = "인증번호는 (" + authNumber + ") 입니다.";
-		//javax.mail.Session
-		Session session = mailService.mailSetting(new Properties());
-		String result = mailService.sendMail(session, title, content, email);
-		
-		if(result.equals("Y")) {
-			model.addAttribute("message", "메일주소로 인증번호가 발송되었습니다.");
-			
-			return "user/resetPassword";
-		}
-		else{
-			model.addAttribute("message", "인증번호 발송에 실패했습니다.");
-			
-			return "user/findId";
-		}		
-	}
-	
+		PrintWriter printwriter = response.getWriter();
+		printwriter.println(jo.toString());
+		printwriter.flush();
+		printwriter.close();
+	}	
 }

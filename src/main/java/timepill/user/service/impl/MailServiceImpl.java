@@ -65,7 +65,7 @@ public class MailServiceImpl implements MailService{
 	
 	//메일 보내기
 	@Override
-	public String sendMail(Session session, String title, String content, String receiver){
+	public void sendMail(Session session, String title, String content, String receiver){
 		
 		Message msg = new MimeMessage(session);
 		
@@ -78,12 +78,8 @@ public class MailServiceImpl implements MailService{
 			
 			Transport.send(msg);
 			
-			return "Y";
-			
 		} catch (Exception e) {
 			System.out.println(e);
-			
-			return "N";
 		}		
 	}	
 }
