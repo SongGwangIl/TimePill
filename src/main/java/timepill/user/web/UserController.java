@@ -114,18 +114,14 @@ public class UserController {
 	@PostMapping("/user/authEmail")
 	public void authEmail(UserVO vo, HttpServletResponse response, RandomCharacterGenerator random, Model model) throws Exception {
 		
-		System.out.println(vo.getUserId()+vo.getEmail());
-		
-		String successYn = "Y";
 		String message = "이메일로 인증번호를 전송하였습니다.";
 		
 		JSONObject jo = new JSONObject();
 		response.setContentType("application/json; charset=utf-8");
 		
-		if(vo.getEmail().isEmpty()) {
-			successYn = "N";
-			message = "ID가 없습니다.";
-		}else {
+		if(vo.getUserId().isEmpty() || vo.getEmail().isEmpty()) {
+			message = "아이디와 이메일을 모두 입력해주세요";
+		}else{
 			//임시 비밀번호를 생성(영+영+숫+영+영+숫=6자리)
 			String authNumber = "";
 			for(int i=1; i<=6; i++) {
@@ -136,6 +132,7 @@ public class UserController {
 				else
 					authNumber += random.getRandomNumber();
 			}
+			userService.setAuthNumber(vo);
 		
 			//메일전송
 			String title = "비밀번호변경";
@@ -144,12 +141,17 @@ public class UserController {
 			Session session = mailService.mailSetting(new Properties());
 			mailService.sendMail(session, title, content, vo.getEmail());
 		}
-		jo.put("successYn", successYn);
 		jo.put("message", message);
 		
 		PrintWriter printwriter = response.getWriter();
 		printwriter.println(jo.toString());
 		printwriter.flush();
 		printwriter.close();
-	}	
+	}
+	
+	@PostMapping("/user/resetPassword")
+	public String resetPassword() {
+		
+		return "";
+	}
 }

@@ -14,4 +14,6 @@ public interface UserDAO {
 	String checkId(String userId);
 
 	String findId(String email);
+
+	void setAuthNumber(UserVO vo);
 }

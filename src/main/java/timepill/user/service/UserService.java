@@ -9,6 +9,10 @@ public interface UserService extends UserDetailsService {
 	// 사용가능한 아이디 확인
 	String checkId(String userId);
 
+	// 이메일주소로 아이디 확인
 	String findId(String email);
+
+	// 인증번호 등록
+	public void setAuthNumber(UserVO vo);
 
 }

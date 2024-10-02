@@ -65,4 +65,12 @@ public class UserServiceImpl implements UserService {
 		return userdao.findId(email);
 	}
 
+	@Override
+	public void setAuthNumber(UserVO vo) {
+		
+		userdao.setAuthNumber(vo);
+		
+		
+	}
+
 }

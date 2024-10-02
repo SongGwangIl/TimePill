@@ -9,15 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>이메일 인증</h1>	
-	<label>아이디</label>
-	<input type="text" id="userId"><br>
-	<label>이메일</label>
-	<input type="text" id="email">
-	<button type="button" id="reqAuthNumBtn">인증번호요청</button><br>
-	<label>인증번호: </label>
-	<input type="text" name="authEmail">
-	<button type="button">인증</button>	
+	<h1>이메일 인증</h1>
+	<form action="/user/resetPassword">
+		<label>아이디</label>
+		<input type="text" id="userId"><br>
+		<label>이메일</label>
+		<input type="text" id="email">
+		<button type="button" id="reqAuthNumBtn">인증번호요청</button><br>
+		<label>인증번호</label>
+		<input type="text" name="authEmail">
+		<button type="button">인증</button>	
+	</form>
 	<p id="authCount"></p>
 
 	<script src="${pageContext.request.contextPath}/resources/js/common/jquery-3.7.1.min.js"></script>
@@ -42,12 +44,9 @@
 				xhr.setRequestHeader("Accept", "application/json");
 			},
 			success: function(result){
-				if(result.successYn == "Y")
-					alert("이메일로 인증번호를 전송하였습니다.");
-				else
-					alert(result.message);
+				alert(result.message);
 			}, error: function(){
-				alret("error");
+				alret("인증번호 발송을 실패했습니다.");
 			}
 		});		
 	}
