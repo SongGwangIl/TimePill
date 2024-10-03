@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import timepill.alarm.service.impl.AlarmDAO;
 import timepill.schedule.service.ScheduleService;
 import timepill.schedule.service.ScheduleVO;
 
@@ -15,26 +16,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	ScheduleDAO scheduleDAO;
 	
-	/** 알람 생성(회원가입) */
-	@Override
-	public void insertAlarm(ScheduleVO vo) throws Exception {
-		// 알람 아이디 생성 로직
-		String lastAlarmId = scheduleDAO.selectLastAlarmId(); // 마지막 알람 아이디 조회
-		int nextIdNum = 1;
-		if (lastAlarmId != null && lastAlarmId.startsWith("ALARM_")) {
-			nextIdNum = Integer.parseInt(lastAlarmId.substring("ALARM_".length())) + 1;
-		}
-		String nextId = String.format("ALARM_%010d", nextIdNum);
-		vo.setAlarmId(nextId); // 생성 아이디
-		
-		scheduleDAO.insertAlarmSet(vo);
-	}
-
-	/** 알람 시간 변경 */
-	@Override
-	public void updateAlarm(ScheduleVO vo) throws Exception {
-		scheduleDAO.updateAlarm(vo);
-	}
+	/** alarmDAO DI */
+	@Autowired
+	AlarmDAO alarmDAO;
 	
 	/** 스케줄 리스트 */
 	@Override
@@ -53,7 +37,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 					vo.setAlarmType(Integer.parseInt(resultAlarmType));
 					ScheduleVO resultSchedule = scheduleDAO.selectSchedule(vo);
 					if (resultSchedule == null) {
-						String selectAlarm = scheduleDAO.selectAlarm(vo); // 스케줄에 등록할 알람 아이디 가져오기
+						String selectAlarm = alarmDAO.selectAlarm(vo); // 스케줄에 등록할 알람 아이디 가져오기
 						vo.setAlarmId(selectAlarm);
 						scheduleDAO.insertSchedule(vo); // 스케줄 등록
 					}

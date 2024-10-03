@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timepill.alarm.service.impl.AlarmDAO">
+
+<!-- 알람 아이디 가져오기 -->
+<select id="selectAlarm" resultType="java.lang.String">
+SELECT
+	ALARM_ID
+FROM 
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+	AND ALARM_TYPE = #{alarmType}
+</select>
+
+<!-- 마지막 알람 아이디 가져오기 -->
+<select id="selectLastAlarmId" resultType="java.lang.String">
+SELECT 
+	MAX(ALARM_ID) 
+FROM alarm_set
+WHERE ALARM_ID NOT LIKE 'ALARM_X%'
+</select>
+
+<!-- 알람 생성(회원가입) -->
+<insert id="insertAlarmSet">
+INSERT INTO alarm_set(
+	ALARM_ID
+	, USER_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+	, ALARM_USE_AT
+) VALUES(
+	#{alarmId}
+	, #{userId}
+	, #{alarmType}
+	, #{alarmTime}
+	, 'Y'
+)
+</insert>
+
+<!-- 알람 수정 -->
+<update id="updateAlarm">
+UPDATE 
+	alarm_set 
+SET 
+	ALARM_TIME = #{alarmTime}
+WHERE
+	ALARM_ID = #{alarmId}
+	AND USER_ID = #{userId}
+</update>
+
+</mapper>

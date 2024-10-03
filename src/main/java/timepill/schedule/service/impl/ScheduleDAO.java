@@ -9,18 +9,6 @@ import timepill.schedule.service.ScheduleVO;
 @Mapper
 public interface ScheduleDAO {
 	
-	/** 알람 아이디 조회 */
-	String selectAlarm(ScheduleVO vo) throws Exception;
-	
-	/** 마지막 알람 아이디 조회 */
-	String selectLastAlarmId() throws Exception;
-	
-	/** 알람 생성(회원가입) */
-	int insertAlarmSet(ScheduleVO vo) throws Exception;
-	
-	/** 알람 시간 변경 */
-	int updateAlarm(ScheduleVO vo) throws Exception;
-	
 	/** 스케줄 리스트 */
 	List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception;
 	

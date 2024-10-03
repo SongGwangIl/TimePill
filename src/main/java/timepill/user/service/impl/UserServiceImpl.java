@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import timepill.schedule.service.ScheduleService;
+import timepill.alarm.service.AlarmService;
 import timepill.schedule.service.ScheduleVO;
 import timepill.user.service.UserService;
 import timepill.user.service.UserVO;
@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDAO userdao;
 	
-	/** scheduleService DI */
+	/** alarmService DI */
 	@Autowired
-	ScheduleService scheduleService;
+	AlarmService alarmService;
 
 	/** 스프링시큐리티 bCryptPasswordEncoder DI */
 	@Autowired
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 			scheduleVO.setUserId(vo.getUserId());
 			scheduleVO.setAlarmType(i+1);
 			scheduleVO.setAlarmTime(hours[i] + ":00");
-			scheduleService.insertAlarm(scheduleVO);
+			alarmService.insertAlarm(scheduleVO);
 		}
 		
 	}

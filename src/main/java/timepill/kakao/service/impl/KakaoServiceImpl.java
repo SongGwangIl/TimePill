@@ -13,12 +13,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import lombok.RequiredArgsConstructor;
+import timepill.alarm.service.AlarmService;
 import timepill.kakao.service.KakaoDAO;
+import timepill.kakao.service.KakaoMessageTemplate;
 import timepill.kakao.service.KakaoService;
-import timepill.schedule.service.ScheduleService;
 import timepill.schedule.service.ScheduleVO;
 import timepill.user.service.UserVO;
-import timepill.kakao.service.KakaoMessageTemplate;
 
 @RequiredArgsConstructor
 @Service("kakaoService")
@@ -34,9 +34,9 @@ public class KakaoServiceImpl implements KakaoService {
 	@Autowired
 	private KakaoDAO kakaoDAO;
 
-	/** scheduleService DI */
+	/** alarmService DI */
 	@Autowired
-	ScheduleService scheduleService;
+	AlarmService alarmService;
 
 	@Value("${rest-api-key}")
 	private String REST_API_KEY;
@@ -132,7 +132,7 @@ public class KakaoServiceImpl implements KakaoService {
 				scheduleVO.setUserId(vo.getUserId());
 				scheduleVO.setAlarmType(i+1);
 				scheduleVO.setAlarmTime(hours[i] + ":00");
-				scheduleService.insertAlarm(scheduleVO);
+				alarmService.insertAlarm(scheduleVO);
 			}
 			httpSession.setAttribute("message", "회원가입 완료");
 		}
