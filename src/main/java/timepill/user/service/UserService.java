@@ -14,5 +14,8 @@ public interface UserService extends UserDetailsService {
 
 	// 인증번호 등록
 	public void setAuthNumber(UserVO vo);
+	
+	// 비밀번호 변경
+	public void resetPassword(UserVO vo);
 
 }

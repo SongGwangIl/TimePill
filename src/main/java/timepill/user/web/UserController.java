@@ -1,11 +1,8 @@
 package timepill.user.web;
 
-import java.io.PrintWriter;
-import java.util.Properties;
-
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import net.sf.json.JSONObject;
-import timepill.com.RandomCharacterGenerator;
 import timepill.kakao.service.KakaoService;
-import timepill.user.service.MailService;
+import timepill.user.service.AuthService;
+import timepill.user.service.AuthVO;
 import timepill.user.service.UserService;
 import timepill.user.service.UserVO;
 
@@ -28,7 +24,7 @@ public class UserController {
 	UserService userService;
 	
 	@Autowired
-	MailService mailService;
+	AuthService authService;
 	
 	/** kakaoService DI */
 	@Autowired
@@ -110,48 +106,52 @@ public class UserController {
 		return "user/authEmail";
 	}
 	
-	
+	@ResponseBody
 	@PostMapping("/user/authEmail")
-	public void authEmail(UserVO vo, HttpServletResponse response, RandomCharacterGenerator random, Model model) throws Exception {
+	public String authEmail(AuthVO vo, HttpServletResponse response, Model model) throws Exception {
 		
-		String message = "이메일로 인증번호를 전송하였습니다.";
+		String message = authService.authEmail(vo);
 		
-		JSONObject jo = new JSONObject();
-		response.setContentType("application/json; charset=utf-8");
+		return message;
+	}
+	
+	@PostMapping("/user/authAtmp")
+	public String authAtmp(AuthVO vo, HttpSession session, Model model) {
 		
-		if(vo.getUserId().isEmpty() || vo.getEmail().isEmpty()) {
-			message = "아이디와 이메일을 모두 입력해주세요";
-		}else{
-			//임시 비밀번호를 생성(영+영+숫+영+영+숫=6자리)
-			String authNumber = "";
-			for(int i=1; i<=6; i++) {
-				//영자
-				if(i % 3 != 0)
-					authNumber += random.getRandomCharacter();
-				//숫자
-				else
-					authNumber += random.getRandomNumber();
-			}
-			userService.setAuthNumber(vo);
+		String result = authService.authAtmp(vo);
 		
-			//메일전송
-			String title = "비밀번호변경";
-			String content = "인증번호는 (" + authNumber + ") 입니다.";
-			//javax.mail.Session
-			Session session = mailService.mailSetting(new Properties());
-			mailService.sendMail(session, title, content, vo.getEmail());
+		if(result.equals("Y")) {
+			session.setAttribute("authOK", vo);
+			
+			return "redirect:/user/resetPassword";
+		}			
+		else {
+			model.addAttribute("message", "인증에 실패했습니다.");
+			
+			return "user/authEmail";
 		}
-		jo.put("message", message);
 		
-		PrintWriter printwriter = response.getWriter();
-		printwriter.println(jo.toString());
-		printwriter.flush();
-		printwriter.close();
+		
+	}
+	
+	@GetMapping("/user/resetPassword")
+	public String resetPassword(HttpSession session) {
+		
+		if(session.getAttribute("authOK") == null)			
+			return "redirect:/user/authEmail";
+				
+		return "user/resetPassword";
 	}
 	
 	@PostMapping("/user/resetPassword")
-	public String resetPassword() {
+	public String resetPassword(UserVO vo, HttpSession session) {
 		
-		return "";
+		AuthVO avo = (AuthVO)session.getAttribute("authOK");
+		vo.setUserId(avo.getUserId());
+		vo.setEmail(avo.getEmail());
+		
+		userService.resetPassword(vo);
+		
+		return "redirect:/user/login";		
 	}
 }

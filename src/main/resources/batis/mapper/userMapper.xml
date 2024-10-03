@@ -40,4 +40,10 @@
   	WHERE email = #{email}
   </select>
   
+  <update id="resetPassword">
+  	UPDATE users
+  	SET password = #{password}  		
+  	WHERE user_id = #{userId} AND email = #{email}
+  </update>
+  
 </mapper>
