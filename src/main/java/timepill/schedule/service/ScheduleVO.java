@@ -27,7 +27,10 @@ public class ScheduleVO {
 	
 	private List<String> alarmTypes;	// 복용약 알람 리스트
 	
-	private String scheChk; // 복용여부(스케줄) 체크
+	private String logId;		// 스케줄 로그 PK
+	private String scheDate;	// 스케줄 일자
+	private String scheChk; 	// 복용여부(스케줄) 체크
+	private String logStatus;	// 스케줄 로그 사용여부
 	
 	
 	/** 시작일자 타입 변환 */

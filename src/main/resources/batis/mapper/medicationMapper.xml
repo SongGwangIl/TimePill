@@ -19,7 +19,6 @@ WHERE USER_ID = #{userId}
 SELECT 
 	MAX(MED_ID) 
 FROM med_info
-WHERE MED_ID NOT LIKE 'MED_X%'
 </select>
 
 <!-- 복약 정보 -->

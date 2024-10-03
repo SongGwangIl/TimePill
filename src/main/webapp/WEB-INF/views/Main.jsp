@@ -56,56 +56,55 @@ p, span {
 <div class="whiteBox">
 
 <div class="content-wrapper">
-	<h2 class="single-line">복약 스케줄 리스트</h2>
-	<div class="same-line">
-		<div style="margin-right: 20px;">
+	<h2 class="single-line" style="margin: 0;">복약 스케줄 리스트</h2>
+	<div class="single-line" style="margin: 0;">
+		<div style="margin-bottom: 10px;">
 			<div style="text-align: center;">
-				<a href='/medication'>
-					<p>복약 리스트</p>
-				</a>
+				<a href='/medication'>복약 리스트</a>
  			</div>
 
 			<form action="/kakao/message" method="post">
 				<input type="submit" value="메세지 보내기 테스트">
 			</form>
-
 		</div>
 		
 		<div>
-			<c:forEach var="resultAlarmType" items="${scheList}">
-				<c:if test="${resultAlarmType.alarmType ne previousAlarmType}">
-					<c:set var="previousAlarmType" value="${resultAlarmType.alarmType}" />
-					<div class="tablewrap">
-						<p>
+			<c:forEach var="resultAlarm" items="${scheList}">
+				<c:if test="${resultAlarm.alarmType ne previousAlarmType}">
+					<c:set var="previousAlarmType" value="${resultAlarm.alarmType}" />
+					<div class="tablewrap" style="display: inline-block; vertical-align: top; border: 1px solid #ccc">
+						
 						<c:choose>
-							<c:when test="${resultAlarmType.alarmType eq '1'}">
+							<c:when test="${resultAlarm.alarmType eq '1'}">
 								아침
 							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '2'}">
+							<c:when test="${resultAlarm.alarmType eq '2'}">
 								점심
 							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '3'}">
+							<c:when test="${resultAlarm.alarmType eq '3'}">
 								저녁
 							</c:when>
-							<c:when test="${resultAlarmType.alarmType eq '4'}">
+							<c:when test="${resultAlarm.alarmType eq '4'}">
 								취침전
 							</c:when>
 						</c:choose>
-						<fmt:parseDate value="${resultAlarmType.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
+						<br>
 						
-    					<input type="time" class="timepick" name="alarmTime" value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarmType.alarmId}" required>
-						</p>
+						<fmt:parseDate value="${resultAlarm.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
+    					<input type="time" class="timepick" step="300" name="alarmTime" value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required>
+						<br>
+						
 						<c:forEach var="result" items="${scheList}">
-							<c:if test="${result.alarmType eq  resultAlarmType.alarmType}">
+							<c:if test="${result.alarmType eq  resultAlarm.alarmType}">
 								<c:choose>
 									<c:when test="${result.scheChk eq 'Y'}">
-										<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/>
+										<c:set var="icoUrl" value="/resources/img/ico-checked.png"/>
 									</c:when>
 									<c:otherwise>
 										<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/>
 									</c:otherwise>
 								</c:choose>
-								<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px">
+								<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px" data-med-id="${result.medId}" data-alarm-id="${resultAlarm.alarmId}">
 								<span class="med-title">
 									${result.medName}
 									<div class="med-info">
@@ -140,9 +139,10 @@ $(document).ready(function () {
 	
 	// 알람 시간 변경
 	$('.timepick').on('focusout', function () {
-		let alarmTime = $(this).val();
-		let alarmId = $(this).data('alarm');
-		console.log(alarmTime, alarmId);
+		const timepick = $(this);
+		const alarmTime = timepick.val();
+		const alarmId = timepick.data('alarm');
+
 		$.ajax({
 			url: '/alarm',
 			type: 'post',
@@ -164,14 +164,40 @@ $(document).ready(function () {
 		});
 	});
 	
-	
-	$('.sche-chk').on('click', function () {
-		let icoSrc = $(this).attr('src');
-		if (icoSrc == '/resources/img/ico-checked.png') {
-			$(this).attr('src', '/resources/img/ico-unchecked.png');
-		} else {
-			$(this).attr('src', '/resources/img/ico-checked.png');
-		}
+	// 복약 스케줄 완료 체크 동작
+	$(document).on('click', '.sche-chk', function () {
+		const chk = $(this);
+		const icoSrc = chk.attr('src');
+		const medId = chk.data('med-id');
+		const alarmId = chk.data('alarm-id');
+		const scheChk = icoSrc === '/resources/img/ico-checked.png' ? 'N' : 'Y';
+		
+		$.ajax({
+			url: '/log',
+			type: 'post',
+			data: {
+				medId: medId
+				, alarmId: alarmId
+				, scheChk: scheChk
+			},
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(header, token);
+				xhr.setRequestHeader("Accept", "application/json");
+			},
+			success: function(response) {
+				if (response.scheChk === 'Y') {
+					chk.attr('src', '/resources/img/ico-checked.png');
+				} else if (response.scheChk === 'N') {
+					chk.attr('src', '/resources/img/ico-unchecked.png');
+				} else {
+					alert('처리 중 문제가 발생했습니다.');
+				}
+			},
+			error: function(error) {
+				console.error('Error occurred: ' + error);
+				alert('오류가 발생했습니다.');
+			}
+		});
 		
 	});
 });

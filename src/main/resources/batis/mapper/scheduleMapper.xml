@@ -22,13 +22,14 @@ JOIN
 	med_info C ON A.MED_ID = C.MED_ID
 LEFT JOIN (
 	SELECT
-		ALARM_TYPE
+		MED_ID
+		, ALARM_ID
 		, SCHE_CHK
 	FROM sche_log 
 	WHERE 
 		LOG_STATUS = 'Y'
 		AND USER_ID = #{userId}
-) AS D ON D.ALARM_TYPE  = B.ALARM_TYPE
+) AS D ON D.MED_ID = C.MED_ID AND D.ALARM_ID  = B.ALARM_ID
 WHERE 
 	C.USER_ID = #{userId}
 	AND ALARM_USE_AT = 'Y'
@@ -81,5 +82,79 @@ WHERE MED_ID = #{medId}
 	)
 	</if>
 </delete>
+
+
+<!-- 스케줄 로그 조회 -->
+<select id="selectScheduleLog" resultType="ScheduleVO">
+SELECT 
+	MED_ID
+	, ALARM_ID
+FROM sche_log
+WHERE
+	MED_ID = #{medId}
+	AND ALARM_ID = #{alarmId}
+	AND USER_ID = #{userId}
+	<choose>
+		<when test="scheDate != null">
+			AND SCHE_DATE = #{scheDate}
+		</when>
+		<otherwise>
+			AND SCHE_DATE = CURDATE()
+		</otherwise>
+	</choose>
+</select>
+
+<!-- 스케줄 로그 등록 -->
+<insert id="insertScheduleLog">
+INSERT INTO sche_log (
+	MED_ID
+	, ALARM_ID 
+	, USER_ID
+	, SCHE_DATE 
+	, SCHE_CHK 
+	, LOG_STATUS 
+) VALUES(
+	#{medId}
+	, #{alarmId}
+	, #{userId}
+	<choose>
+		<when test="scheDate != null">
+			, #{scheDate}
+		</when>
+		<otherwise>
+			, CURDATE()
+		</otherwise>
+	</choose>
+	, 'Y'
+	, 'Y'
+)
+</insert>
+
+
+<!-- 스케줄 로그 수정 -->
+<update id="updateScheduleLog">
+UPDATE sche_log SET
+	<choose>
+		<when test="logStatus != null">
+			LOG_STATUS = #{logStatus}
+		</when>
+		<otherwise>
+			SCHE_CHK = #{scheChk}
+		</otherwise>
+	</choose>
+WHERE 
+	MED_ID = #{medId}
+	AND ALARM_ID = #{alarmId}
+	AND USER_ID = #{userId}
+	<choose>
+		<when test="scheDate != null">
+			AND SCHE_DATE = #{scheDate}
+		</when>
+		<otherwise>
+			AND SCHE_DATE = CURDATE()
+		</otherwise>
+	</choose>
+</update>
+
 
 </mapper>

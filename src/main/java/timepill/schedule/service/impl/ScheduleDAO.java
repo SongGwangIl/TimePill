@@ -21,4 +21,17 @@ public interface ScheduleDAO {
 	/** 스케줄 삭제 */
 	int deleteSchedule(ScheduleVO vo) throws Exception;
 	
+	
+	/** 스케줄 로그 조회 */
+	ScheduleVO selectScheduleLog(ScheduleVO vo) throws Exception;
+	
+	/** 마지막 스케줄 로그 아이디 가져오기 */
+	String selectLastLogId(ScheduleVO vo) throws Exception;
+	
+	/** 스케줄 로그 등록 */
+	int insertScheduleLog(ScheduleVO vo) throws Exception;
+	
+	/** 스케줄 로그 수정 */
+	int updateScheduleLog(ScheduleVO vo) throws Exception;
+
 }

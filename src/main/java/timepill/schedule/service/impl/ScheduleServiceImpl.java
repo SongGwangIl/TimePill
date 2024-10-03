@@ -15,11 +15,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	/** scheduleDAO DI */
 	@Autowired
 	ScheduleDAO scheduleDAO;
-	
+
 	/** alarmDAO DI */
 	@Autowired
 	AlarmDAO alarmDAO;
-	
+
 	/** 스케줄 리스트 */
 	@Override
 	public List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception {
@@ -45,5 +45,19 @@ public class ScheduleServiceImpl implements ScheduleService {
 			}
 		}
 		scheduleDAO.deleteSchedule(vo); // 등록 스케줄을 제외하고 삭제
+	}
+
+	/** 스케줄 로그 생성, 수정 */
+	@Override
+	public void handleScheduleLog(ScheduleVO vo) throws Exception {
+
+		ScheduleVO resultLog = scheduleDAO.selectScheduleLog(vo);
+
+		if (resultLog != null) { // 스케줄 로그 생성, 수정여부 체크
+			scheduleDAO.updateScheduleLog(vo);
+		} else {
+			scheduleDAO.insertScheduleLog(vo);
+		}
+
 	}
 }
