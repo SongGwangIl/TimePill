@@ -1,5 +1,7 @@
 package timepill.kakao.service.impl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -152,6 +155,7 @@ public class KakaoServiceImpl implements KakaoService {
 	@Override
 	public boolean checkMessageAuth() throws Exception {
 		String checkScopeUrl = KAKAO_API_HOST + "/v2/user/scopes";
+		System.out.println(httpSession.getAttribute("token").toString());
 		String response = httpCallService.CallwithToken("GET", checkScopeUrl, httpSession.getAttribute("token").toString(), null);
 		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
 		JsonArray scopes = element.get("scopes").getAsJsonArray();
@@ -165,13 +169,25 @@ public class KakaoServiceImpl implements KakaoService {
 		}
 		return false;
 	}
+	
+	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
+	@Override
+	public List<ScheduleVO> selectKakaoScheList() throws Exception {
+		return kakaoDAO.selectKakaoScheList();
+	}
 
 	/** 카카오 메세지 보내기 */
 	@Override
-	public String message() throws Exception {
+	public String message(String token) throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
+		String accessToken = "";
+		if (!StringUtils.hasText(token)) {
+			accessToken = httpSession.getAttribute("token").toString();
+		} else {
+			accessToken = token;
+		}
 		System.out.println("메세지 서비스 시작");
-		return httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString(), KakaoMessageTemplate.getDefaultMessageParam());
+		return httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
 	}
 
 }

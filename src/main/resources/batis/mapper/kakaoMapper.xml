@@ -35,7 +35,7 @@ INSERT INTO users(
 </insert>
 
 <!-- 카카오 유저들 알람 가져오기 -->
-<select id="selectSchejuleList" resultType="UserVO">
+<select id="selectKakaoScheList" resultType="ScheduleVO">
 SELECT 
 	A.KAKAO_TOKEN
 	, B.ALARM_TIME
@@ -46,6 +46,11 @@ FROM
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID
 		JOIN schedule C ON B.ALARM_ID = C.ALARM_ID
 		JOIN med_info D ON C.MED_ID = D.MED_ID
+WHERE 
+	A.USER_STATUS = 'Y'
+	AND A.KAKAO_TOKEN IS NOT NULL
+	AND CURDATE() BETWEEN D.START_DATE AND D.END_DATE
+	AND B.ALARM_TIME BETWEEN CURTIME() - INTERVAL 2 MINUTE AND CURTIME() + INTERVAL 2 MINUTE
 </select>
  
 </mapper>

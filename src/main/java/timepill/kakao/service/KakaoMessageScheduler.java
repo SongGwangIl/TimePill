@@ -19,6 +19,6 @@ public class KakaoMessageScheduler {
 	// 카카오 메세지 알람 스케줄
 	@Scheduled(fixedRate = 300000) // 1시간 3600.000 간격으로 실행 
 	public void kakaoMessage() throws Exception {
-		
+		kakaoService.selectKakaoScheList();
 	}
 }

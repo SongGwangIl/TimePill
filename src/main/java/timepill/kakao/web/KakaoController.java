@@ -47,9 +47,9 @@ public class KakaoController {
 			return "redirect:" + kakaoService.goKakaoOAuth("talk_message", "message-callback");
 		}
 		System.out.println("권한 동의");
-		String messageResult = kakaoService.message();
+		String messageResult = kakaoService.message("");
 		System.out.println("messageResult : " + messageResult);
-		return "redirect:/schedule/list";
+		return "redirect:/";
 	}
 	
 	/** 나에게 메세지 보내기 권한 동의 콜백 */

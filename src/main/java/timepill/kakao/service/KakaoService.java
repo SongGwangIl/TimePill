@@ -1,5 +1,9 @@
 package timepill.kakao.service;
 
+import java.util.List;
+
+import timepill.schedule.service.ScheduleVO;
+
 public interface KakaoService {
 
 	/** 인가코드 요청 주소 */
@@ -19,8 +23,11 @@ public interface KakaoService {
 
 	/** 카카오 메세지 권한 동의 여부 체크 */
 	public boolean checkMessageAuth() throws Exception;
+	
+	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
+	public List<ScheduleVO> selectKakaoScheList() throws Exception;
 
 	/** 카카오 메세지 보내기 */
-	public String message() throws Exception;
+	public String message(String token) throws Exception;
 
 }

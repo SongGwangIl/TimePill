@@ -65,6 +65,7 @@ p, span {
 
 			<form action="/kakao/message" method="post">
 				<input type="submit" value="메세지 보내기 테스트">
+				<sec:csrfInput />
 			</form>
 		</div>
 		
@@ -124,6 +125,7 @@ p, span {
 				</div>
 			</c:if>
 			<c:import url="/calendar"/>
+			<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
 		</div>
 	</div>
 	
