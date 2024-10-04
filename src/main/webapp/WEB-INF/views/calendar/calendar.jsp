@@ -272,8 +272,8 @@
 	let startTime;
 	let endTime;
 	
-	
-	let selectedDay;
+
+	let selectedDay = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
 	
 	//이벤트 등록
 	function addEvent(){
