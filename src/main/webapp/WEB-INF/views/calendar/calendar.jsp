@@ -118,10 +118,18 @@
 	.endDay{
 		background: pink;
 	}
+	.selectedDay{
+		background: blue;
+	}
 		
 </style>
 </head>
+
 <cBody>
+<!-- 	<section> -->
+<!-- 		<input id="start" readonly> -->
+<!-- 		<input id="end" readonly> -->
+<!-- 	</section> -->
 	<section class='calendar'>
 		<div class='calHeader'>
 			<div class="year-month"></div>
@@ -264,6 +272,9 @@
 	let startTime;
 	let endTime;
 	
+	
+	let selectedDay;
+	
 	//이벤트 등록
 	function addEvent(){
 		let dates = document.querySelectorAll('.dates > div');
@@ -272,46 +283,71 @@
 			//현재달에 포함된 날짜에만 이벤트 등록
 			if(d.classList.contains('this')){
 				d.onclick = (e)=>{
-					//시작날짜와 끝날짜가 등록되어있으면 초기화
-					if(startDate !== null && endDate !== null){
-						removeStartDay();
-						removeEndDay();					
-					}				
-					//시작날짜 입력
-					if(startFlag){				
-						setStartDate(e);
-						setStartDay(e);
-						startFlag = false;
-					}
-					//시작날짜 입력시 실행
-					else{
-						setEndDate(e);
-						//시작날짜와 끝날짜를 비교하여 시작날짜로 표시하는 경우
-						if(reValue()){
-							removeStartDay();
-							setStartDate(e);
-							removeEndDay();
-							setStartDay(e);
-						}
-						//끝날짜로 표시하는 경우
-						else{
-							setEndDay(e);
-							startFlag = true;					
-						}
-					}
+					let selectedDay = document.querySelector('.selectedDay');
+					if(selectedDay)	
+						selectedDay.classList.remove('selectedDay');
+					setSelectedDay(e);
+					
+// 					<시작끝날등록 이벤트 시작>
+// 					//시작날짜와 끝날짜가 등록되어있으면 초기화
+// 					if(startDate !== null && endDate !== null){
+// 						removeStartDay();
+// 						removeEndDay();					
+// 					}				
+// 					//시작날짜 입력
+// 					if(startFlag){				
+// 						setStartDate(e);
+// 						setStartDay(e);
+// 						startFlag = false;
+// 					}
+// 					//시작날짜 입력시 실행
+// 					else{
+// 						setEndDate(e);
+// 						//시작날짜와 끝날짜를 비교하여 시작날짜로 표시하는 경우
+// 						if(reValue()){
+// 							removeStartDay();
+// 							setStartDate(e);
+// 							removeEndDay();
+// 							setStartDay(e);
+// 						}
+// 						//끝날짜로 표시하는 경우
+// 						else{
+// 							setEndDay(e);
+// 							startFlag = true;					
+// 						}
+// 					}
+// 					<시작끝날 이벤트 종료>
 					
 				}
 			}	
 		}
 	}
 	
+	//선택날짜 달력에 등록
+	function setSelectedDay(e){
+		
+		if(e.target.tagName === 'SPAN'){
+			e.target.parentElement.classList.add('selectedDay');					
+		}
+		else{
+			e.target.classList.add('selectedDay');			
+		}		
+
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let ym = year + '-' + month;
+		selectedDay = ym + '-' + e.target.textContent;
+	}
+	
+	//선택날짜 달력에서 제거
+	function removeSelectedDay(){
+		document.querySelector('.selectedDay').remove(); 
+	}
+	
 	//시작날짜등록
 	function setStartDate(e){
 		startDate = e.target.textContent;
 		startTime =	new Date(date.getFullYear(), date.getMonth(), e.target.textContent);		
-	}
-
-	function setStartText(e){
 	}
 	
 	//시작날짜 달력에 등록

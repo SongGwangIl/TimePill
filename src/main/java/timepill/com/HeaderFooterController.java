@@ -30,5 +30,10 @@ public class HeaderFooterController {
 	public String footer() throws Exception {
 		return "cmm/Footer";
 	}
+	
+	@GetMapping("/calendar")
+	public String calendar() throws Exception {
+		return "calendar/calendar";
+	}
 
 }

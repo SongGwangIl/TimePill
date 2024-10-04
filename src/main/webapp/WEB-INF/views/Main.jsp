@@ -123,6 +123,7 @@ p, span {
 					<p>등록된 알람이 없습니다.</p>
 				</div>
 			</c:if>
+			<c:import url="/calendar"/>
 		</div>
 	</div>
 	

@@ -46,4 +46,10 @@
   	WHERE user_id = #{userId} AND email = #{email}
   </update>
   
+  <select id="checkUser">
+  	SELECT user_id, email
+  	FROM users
+  	WHERE user_id = #{userId} AND email = #{email}
+  </select>
+  
 </mapper>

@@ -21,7 +21,10 @@ import timepill.user.service.MailService;
 public class AuthServiceImpl extends RandomCharacterGenerator implements AuthService {
 	
 	@Autowired
-	MailService mailService;	
+	MailService mailService;
+	
+	@Autowired
+	UserDAO userdao;
 	
 	//HashMap을 사용하여 인증정보 저장
 	private final Map<String, AuthVO> AuthMap = new HashMap<>();
@@ -34,10 +37,16 @@ public class AuthServiceImpl extends RandomCharacterGenerator implements AuthSer
 	@Override
 	public String authEmail(AuthVO vo) {
 		
-		String message = "이메일로 인증번호를 전송하였습니다.";
-			
+		String message = "Y";
+		
+		//유저정보체크
+		if(userdao.checkUser(vo) == null) {
+			return "N";
+		}		
+		
+		
 		if(vo.getUserId().isEmpty() || vo.getEmail().isEmpty()) {
-			message = "아이디와 이메일을 모두 입력해주세요";
+			message = "N";
 		}else{
 			//임시 비밀번호를 생성(영+영+숫+영+영+숫=6자리)
 			String authNumber = "";
@@ -50,8 +59,8 @@ public class AuthServiceImpl extends RandomCharacterGenerator implements AuthSer
 					authNumber += getRandomNumber();
 			}
 			//인증정보셋팅
-			AuthVO avo = new AuthVO();
-			setAuthInfo(avo);
+			vo.setAuthNum(authNumber);
+			setAuthInfo(vo);
 		
 			//메일전송
 			String title = "비밀번호변경";

@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public class RandomCharacterGenerator {
 	
-	private final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	private final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	private final String NUMBERS = "0123456789";
 	

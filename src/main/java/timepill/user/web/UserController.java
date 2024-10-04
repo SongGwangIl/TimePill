@@ -110,9 +110,9 @@ public class UserController {
 	@PostMapping("/user/authEmail")
 	public String authEmail(AuthVO vo, HttpServletResponse response, Model model) throws Exception {
 		
-		String message = authService.authEmail(vo);
+		String result = authService.authEmail(vo);
 		
-		return message;
+		return result;
 	}
 	
 	@PostMapping("/user/authAtmp")
@@ -123,7 +123,7 @@ public class UserController {
 		if(result.equals("Y")) {
 			session.setAttribute("authOK", vo);
 			
-			return "redirect:/user/resetPassword";
+			return "/user/resetPassword";
 		}			
 		else {
 			model.addAttribute("message", "인증에 실패했습니다.");
@@ -137,8 +137,11 @@ public class UserController {
 	@GetMapping("/user/resetPassword")
 	public String resetPassword(HttpSession session) {
 		
-		if(session.getAttribute("authOK") == null)			
-			return "redirect:/user/authEmail";
+		if(session.getAttribute("authOK") == null) {
+			session.setAttribute("message", "인증정보가 없습니다.");
+			
+			return "/user/authEmail";
+		}
 				
 		return "user/resetPassword";
 	}
@@ -151,6 +154,7 @@ public class UserController {
 		vo.setEmail(avo.getEmail());
 		
 		userService.resetPassword(vo);
+		session.setAttribute("message", "변경되었습니다.");
 		
 		return "redirect:/user/login";		
 	}
