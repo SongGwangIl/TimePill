@@ -133,6 +133,7 @@ p, span {
 </div>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/calendar/mainCalendar.js"></script>
 <<script>
 $(document).ready(function () {
 	var token = $("meta[name='_csrf']").attr("content");

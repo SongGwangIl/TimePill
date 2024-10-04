@@ -93,6 +93,7 @@
 </div>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/calendar/medCalendar.js"></script>
 <script>
 $(document).ready(function () {
 	let medId = "${result.medId}";
