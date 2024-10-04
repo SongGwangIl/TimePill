@@ -10,7 +10,7 @@ import timepill.schedule.service.ScheduleVO;
 public interface MedicationDAO {
 	
 	/** 복약 리스트 */
-	public List<ScheduleVO> selectMedList(ScheduleVO vo) throws Exception;
+	List<ScheduleVO> selectMedList(ScheduleVO vo) throws Exception;
 	
 	/** 복약 정보 조회 */
 	ScheduleVO selectMedInfo(ScheduleVO vo) throws Exception;

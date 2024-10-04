@@ -76,9 +76,9 @@
 		<br>
 		
 		<label for="startDate">처방일자</label> 
-		<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" required readonly> <br>
+		<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" required> <br>
 		<label for="endDate">만료일자</label> 
-		<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" required readonly> <br>
+		<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" required> <br>
 		
 		<c:import url="/WEB-INF/views/calendar/calendar.jsp" charEncoding="utf-8"></c:import>
 		

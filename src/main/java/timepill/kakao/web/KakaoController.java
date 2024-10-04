@@ -42,8 +42,7 @@ public class KakaoController {
 	public String message() throws Exception {
 		boolean checkMessageAuth = kakaoService.checkMessageAuth(); 
 		// 메세지 권한 동의 여부 체크
-		if (!checkMessageAuth) {
-			System.out.println("권한 미동의");
+		if (!checkMessageAuth) { // 미동의
 			return "redirect:" + kakaoService.goKakaoOAuth("talk_message", "message-callback");
 		}
 		System.out.println("권한 동의");

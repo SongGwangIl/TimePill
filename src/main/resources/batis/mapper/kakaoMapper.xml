@@ -21,26 +21,29 @@ WHERE USER_ID = #{userId}
 <insert id="insertUser">
 INSERT INTO users(
 	USER_ID
-	, PASSWORD
+	, ROLE
 	, NICKNAME
 	, EMAIL
-	, ACCESS_TOKEN
+	, USER_STATUS
 ) VALUES(
 	#{userId}
+	, 'USER'
 	, #{nickname}
-	, #{password}
-	, #{email}
-	, #{kakaoToken}
+	, '카카오유저'
+	, 'Y'
 )
 </insert>
 
+<update id="updateAccessToken">
+UPDATE users SET
+	kakao_token = #{kakaoToken}
+WHERE USER_ID = #{userId}
+</update>
+
 <!-- 카카오 유저들 알람 가져오기 -->
-<select id="selectKakaoScheList" resultType="ScheduleVO">
+<select id="selectKakaoScheList" resultType="UserVO">
 SELECT 
 	A.KAKAO_TOKEN
-	, B.ALARM_TIME
-	, D.START_DATE
-	, D.END_DATE
 FROM
 	users A
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID

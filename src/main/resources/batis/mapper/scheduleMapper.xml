@@ -4,22 +4,22 @@
 
 <!-- 스케줄 리스트 -->
 <select id="selectScheduleList" resultType="ScheduleVO">
-SELECT 
-	A.MED_ID 
-	, A.ALARM_ID 
-	, B.ALARM_TYPE
-	, B.ALARM_TIME
+SELECT
+	A.ALARM_ID
+	, A.ALARM_TYPE
+	, A.ALARM_TIME
+	, B.MED_ID
 	, C.MED_NAME
 	, C.START_DATE
 	, C.END_DATE
 	, C.MED_STATUS
 	, D.SCHE_CHK
-FROM 
-	schedule A
-JOIN
-	alarm_set B ON A.ALARM_ID = B.ALARM_ID
-JOIN
-	med_info C ON A.MED_ID = C.MED_ID
+FROM
+	alarm_set A
+LEFT JOIN
+	schedule B ON A.ALARM_ID = B.ALARM_ID
+LEFT JOIN
+	med_info C ON B.MED_ID = C.MED_ID
 LEFT JOIN (
 	SELECT
 		MED_ID
@@ -29,13 +29,14 @@ LEFT JOIN (
 	WHERE 
 		LOG_STATUS = 'Y'
 		AND USER_ID = #{userId}
-) AS D ON D.MED_ID = C.MED_ID AND D.ALARM_ID  = B.ALARM_ID
+) AS D ON C.MED_ID = D.MED_ID 
+			AND A.ALARM_ID  = D.ALARM_ID
 WHERE 
-	C.USER_ID = #{userId}
-	AND ALARM_USE_AT = 'Y'
+	A.USER_ID = #{userId}
+	AND A.ALARM_USE_AT = 'Y'
 ORDER BY 
-	B.ALARM_TYPE
-	, A.MED_ID
+	A.ALARM_TYPE
+	, B.MED_ID
 </select>
 
 <!-- 스케줄 정보 -->

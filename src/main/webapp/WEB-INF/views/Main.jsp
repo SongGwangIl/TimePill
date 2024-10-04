@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%-- header --%>
 <c:import url="/header" charEncoding="utf-8">
@@ -96,34 +97,31 @@ p, span {
 						<br>
 						
 						<c:forEach var="result" items="${scheList}">
-							<c:if test="${result.alarmType eq  resultAlarm.alarmType}">
-								<c:choose>
-									<c:when test="${result.scheChk eq 'Y'}">
-										<c:set var="icoUrl" value="/resources/img/ico-checked.png"/>
-									</c:when>
-									<c:otherwise>
-										<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/>
-									</c:otherwise>
-								</c:choose>
-								<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px" data-med-id="${result.medId}" data-alarm-id="${resultAlarm.alarmId}">
-								<span class="med-title">
-									${result.medName}
-									<div class="med-info">
-										<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
-										<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
-									</div>
-								</span>
-								<br>
+							<c:if test="${not empty result.medId}">
+								<c:if test="${result.alarmType eq resultAlarm.alarmType}">
+									<c:choose>
+										<c:when test="${result.scheChk eq 'Y'}">
+											<c:set var="icoUrl" value="/resources/img/ico-checked.png"/>
+										</c:when>
+										<c:otherwise>
+											<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/>
+										</c:otherwise>
+									</c:choose>
+									<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px" data-med-id="${result.medId}" data-alarm-id="${resultAlarm.alarmId}">
+									<span class="med-title">
+										${result.medName}
+										<div class="med-info">
+											<p>처방일 : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/></p>
+											<p>복약만료일자 : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/></p>
+										</div>
+									</span>
+									<br>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</div>
 					</c:if>
 			</c:forEach>
-			<c:if test="${empty scheList}">
-				<div class="tablewrap">
-					<p>등록된 알람이 없습니다.</p>
-				</div>
-			</c:if>
 			<c:import url="/calendar"/>
 			<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
 		</div>

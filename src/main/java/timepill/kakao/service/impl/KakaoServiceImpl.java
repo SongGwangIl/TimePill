@@ -81,14 +81,14 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 액세스 토큰 요청 및 저장 */
 	@Override
 	public void callback(String code, String rediUri) throws Exception {
-		String param = "";
+		String callbackUri = "";
 		if ("login-callback".equals(rediUri)) { // 로그인 요청
-			param = "grant_type=authorization_code&client_id=" + REST_API_KEY + "&redirect_uri=" + LOGIN_CALLBACK_URI + "&client_secret=" + CLIENT_SECRET + "&code="
-					+ code;
+			callbackUri = LOGIN_CALLBACK_URI;
 		} else if ("message-callback".equals(rediUri)) { // 메세지 권한 요청
-			param = "grant_type=authorization_code&client_id=" + REST_API_KEY + "&redirect_uri=" + MESSAGE_CALLBACK_URI + "&client_secret=" + CLIENT_SECRET + "&code="
-					+ code;
+			callbackUri = MESSAGE_CALLBACK_URI;
 		}
+		String param = "grant_type=authorization_code&client_id=" + REST_API_KEY + "&redirect_uri=" + callbackUri + "&client_secret=" + CLIENT_SECRET + "&code=" + code;
+		
 		String rtn = httpCallService.Call("POST", TOKEN_URI, "", param);
 		JsonObject element = JsonParser.parseString(rtn).getAsJsonObject();
 		String accessToken = element.get("access_token").getAsString();
@@ -124,7 +124,6 @@ public class KakaoServiceImpl implements KakaoService {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "",
 					userInfoResult.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-			httpSession.setAttribute("message", "로그인 완료");
 		} else {
 			vo.setKakaoToken(httpSession.getAttribute("token").toString());
 			kakaoDAO.insertUser(vo);
@@ -137,7 +136,7 @@ public class KakaoServiceImpl implements KakaoService {
 				scheduleVO.setAlarmTime(hours[i] + ":00");
 				alarmService.insertAlarm(scheduleVO);
 			}
-			httpSession.setAttribute("message", "회원가입 완료");
+			httpSession.setAttribute("message", "회원가입이 완료되었습니다. 로그인을 해주세요.");
 		}
 		return "green";
 	}
@@ -154,16 +153,21 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 카카오 메세지 권한 동의 여부 체크 */
 	@Override
 	public boolean checkMessageAuth() throws Exception {
+		String token = httpSession.getAttribute("token").toString();
 		String checkScopeUrl = KAKAO_API_HOST + "/v2/user/scopes";
-		System.out.println(httpSession.getAttribute("token").toString());
-		String response = httpCallService.CallwithToken("GET", checkScopeUrl, httpSession.getAttribute("token").toString(), null);
+		String response = httpCallService.CallwithToken("GET", checkScopeUrl, token, null); // 카카오 요청
 		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
 		JsonArray scopes = element.get("scopes").getAsJsonArray();
 
 		System.out.println("체크 메세지 권한");
 		for (int i = 0; i < scopes.size(); i++) {
 			JsonObject scope = scopes.get(i).getAsJsonObject();
-			if (scope.get("id").getAsString().equals("talk_message") && scope.get("agreed").getAsBoolean()) {
+			if (scope.get("id").getAsString().equals("talk_message") && scope.get("agreed").getAsBoolean()) { // 메세지 권한 동의 여부 체크
+				UserVO vo = new UserVO();
+				String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+				vo.setUserId(userId);
+				vo.setKakaoToken(token);
+				kakaoDAO.updateAccessToken(vo);
 				return true;
 			}
 		}
@@ -172,7 +176,7 @@ public class KakaoServiceImpl implements KakaoService {
 	
 	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
 	@Override
-	public List<ScheduleVO> selectKakaoScheList() throws Exception {
+	public List<UserVO> selectKakaoScheList() throws Exception {
 		return kakaoDAO.selectKakaoScheList();
 	}
 
@@ -181,7 +185,7 @@ public class KakaoServiceImpl implements KakaoService {
 	public String message(String token) throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
 		String accessToken = "";
-		if (!StringUtils.hasText(token)) {
+		if (!StringUtils.hasText(token)) { // 세션에 저장된 토큰 사용
 			accessToken = httpSession.getAttribute("token").toString();
 		} else {
 			accessToken = token;
