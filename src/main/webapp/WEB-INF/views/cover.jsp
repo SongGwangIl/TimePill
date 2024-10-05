@@ -53,7 +53,7 @@
 				<div class="e3_16"></div>
 				</a>
 				
-				<a href="${pageContext.request.contextPath}/user/singup">
+				<a href="${pageContext.request.contextPath}/user/terms">
 				<span class="btn2">회원가입</span>
 				<div class="e3_19"></div>
 				</a>
