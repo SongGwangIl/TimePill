@@ -52,7 +52,7 @@
 	    	<sec:csrfInput />
 		</form>
 		<a href="${pageContext.request.contextPath}/kakao/login">카카오로그인</a>
-		<a href="${pageContext.request.contextPath}/user/singup">회원가입</a>
+		<a href="${pageContext.request.contextPath}/user/terms">회원가입</a>
 		<a href="/user/findId">아이디를 잃어버렸습니까?</a>
 		<a href="/user/authEmail">비밀번호를 잃어버렸습니까?</a>
 	</div>

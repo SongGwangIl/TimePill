@@ -49,6 +49,10 @@
                 	<p id="idCheck"></p>
 				</li>
 				<li>
+                	<label class="label">이름</label>
+                	<input type="text" name="nickname" id="nickname" required><br>
+				</li>
+				<li>
                 	<label class="label">비밀번호</label>
                 	<input type="password" name="password" id="password" placeholder="8-20자리 영문 대,소문자 숫자 특수문자 포함" required><br>
                 	<p id="userPwdMsg"></p>

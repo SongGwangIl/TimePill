@@ -150,6 +150,7 @@ public class UserController {
 	public String resetPassword(UserVO vo, HttpSession session) {
 		
 		AuthVO avo = (AuthVO)session.getAttribute("authOK");
+		session.removeAttribute("authOK");
 		vo.setUserId(avo.getUserId());
 		vo.setEmail(avo.getEmail());
 		
