@@ -19,6 +19,18 @@ public class ScheduleServiceImpl implements ScheduleService {
 	/** alarmDAO DI */
 	@Autowired
 	AlarmDAO alarmDAO;
+	
+	/** 한달 총 스케줄 리스트 */
+	@Override
+	public List<ScheduleVO> selectMthScheList(ScheduleVO vo) throws Exception {
+		return scheduleDAO.selectMthScheList(vo);
+	}
+	
+	/** 한달 완료된 스케줄 리스트 */
+	@Override
+	public List<ScheduleVO> selectMthComplScheList(ScheduleVO vo) throws Exception {
+		return scheduleDAO.selectMthComplScheList(vo);
+	}
 
 	/** 스케줄 리스트 */
 	@Override

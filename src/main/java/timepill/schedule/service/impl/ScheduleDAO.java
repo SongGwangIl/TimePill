@@ -9,7 +9,14 @@ import timepill.schedule.service.ScheduleVO;
 @Mapper
 public interface ScheduleDAO {
 	
-	/** 스케줄 리스트 */
+	/** 한달 총 스케줄 리스트 */
+	List<ScheduleVO> selectMthScheList(ScheduleVO vo) throws Exception;
+	
+	/** 한달 완료된 스케줄 리스트 */
+	List<ScheduleVO> selectMthComplScheList(ScheduleVO vo) throws Exception;
+	
+	
+	/** 오늘의 스케줄 리스트 */
 	List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception;
 	
 	/** 스케줄 정보 조회 */

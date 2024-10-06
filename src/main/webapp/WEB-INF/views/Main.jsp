@@ -124,6 +124,18 @@ p, span {
 			</c:forEach>
 			<c:import url="/calendar"/>
 			<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
+			
+			<!-- 이번달 총 스케줄 -->
+			<c:forEach var="result" items="${mthScheList}">
+			${result.medId} : <fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd" type="date"/> : <fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd" type="date"/> : ${result.totalDayTodo}
+			<br>
+			</c:forEach>
+			<hr>
+			<!-- 이번달 완료된 스케줄 -->
+			<c:forEach var="result" items="${mthCompScheList}">
+			${result.medId} : ${result.scheDate} : ${result.completedDayTodo}
+			<br>
+			</c:forEach>
 		</div>
 	</div>
 	

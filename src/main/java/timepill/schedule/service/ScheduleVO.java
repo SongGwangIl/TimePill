@@ -32,6 +32,10 @@ public class ScheduleVO {
 	private String scheChk; 	// 복용여부(스케줄) 체크
 	private String logStatus;	// 스케줄 로그 사용여부
 	
+	private Integer totalDayTodo; // 하루 총 스케줄
+	private Integer completedDayTodo; // 하루 완료된 스케줄
+	
+	
 	
 	/** 시작일자 타입 변환 */
 	public void setStartDate(String startDate) throws Exception {

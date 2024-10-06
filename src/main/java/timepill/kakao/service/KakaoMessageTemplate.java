@@ -33,13 +33,13 @@ public class KakaoMessageTemplate {
 	/** 카카오 피드 메세지 템플릿 */
 	public static String getDefaultMessageParam() {
 		JsonObject link = new JsonObject();
-		link.addProperty("web_url", "http://115.10.156.136/board/69");
-		link.addProperty("mobile_web_url", "http://115.10.156.136/board/69");
+		link.addProperty("web_url", "http://www.friendlycommunity.xyz/board/69");
+		link.addProperty("mobile_web_url", "http://www.friendlycommunity.xyz/board/69");
 
 		JsonObject content = new JsonObject();
 		content.addProperty("title", "복약 알림");
 		content.addProperty("description", "약먹을 시간이에요.");
-		content.addProperty("image_url", "http://115.10.156.136/image/c687a0f4-713e-4c03-a6ea-b09d0c004d0d");
+		content.addProperty("image_url", "http://www.friendlycommunity.xyz/image/d2f4c5bd-640f-4cd5-b342-57dae1225434");
 		content.addProperty("image_width", "640");
 		content.addProperty("image_height", "640");
 		content.add("link", link);
