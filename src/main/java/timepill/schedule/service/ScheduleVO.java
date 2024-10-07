@@ -28,13 +28,15 @@ public class ScheduleVO {
 	private List<String> alarmTypes;	// 복용약 알람 리스트
 	
 	private String logId;		// 스케줄 로그 PK
-	private String scheDate;	// 스케줄 일자
+	private Date scheDate;		// 스케줄 일자
 	private String scheChk; 	// 복용여부(스케줄) 체크
 	private String logStatus;	// 스케줄 로그 사용여부
 	
 	private Integer totalDayTodo; // 하루 총 스케줄
 	private Integer completedDayTodo; // 하루 완료된 스케줄
 	
+	private Date mthStartDate;		// 복약 시작 일자
+	private Date mthEndDate;		// 복약 만료 일자
 	
 	
 	/** 시작일자 타입 변환 */
@@ -47,6 +49,24 @@ public class ScheduleVO {
 	public void setEndDate(String endDate) throws Exception {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		this.endDate = formatter.parse(endDate);
+	}
+	
+	/** 스케줄 일자 타입 변환 */
+	public void setScheDate(String scheDate) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		this.scheDate = formatter.parse(scheDate);
+	}
+	
+	/** 한달 시작일자 타입 변환 */
+	public void setMthStartDate(String mthStartDate) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		this.mthStartDate = formatter.parse(mthStartDate);
+	}
+	
+	/** 한달 만료일자 타입 변환 */
+	public void setMthEndDate(String mthEndDate) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		this.mthEndDate = formatter.parse(mthEndDate);
 	}
 	
 }

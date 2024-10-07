@@ -18,11 +18,11 @@ public class KakaoMessageScheduler {
 	KakaoService kakaoService;
 
 	// 카카오 메세지 알람 스케줄
-	@Scheduled(fixedRate = 300000) // 5분, 300.000 간격으로 실행 
+	@Scheduled(fixedRate = 60000) // 5분, 300.000 간격으로 실행 
 	public void kakaoMessage() throws Exception {
 		List<UserVO> tokenList = kakaoService.selectKakaoScheList();
 		for (UserVO token : tokenList) {
-			String kakaoToken = token.getKakaoToken();
+			String kakaoToken = token.getRefreshToken();
 			kakaoService.message(kakaoToken);
 		}
 	}

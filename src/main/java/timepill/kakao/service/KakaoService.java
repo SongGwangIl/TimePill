@@ -11,6 +11,9 @@ public interface KakaoService {
 
 	/** 액세스 토큰 요청 및 저장 */
 	public void callback(String code, String rediUri) throws Exception;
+	
+	/** 액세스 토큰 재발급 */
+	public String getNewAccessToken (String code, String refreshToken) throws Exception;
 
 	/** 사용자 정보 가져오기 */
 	public String getProfile() throws Exception;

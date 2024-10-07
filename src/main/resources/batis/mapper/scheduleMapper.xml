@@ -17,11 +17,11 @@ WHERE
 	AND A.MED_STATUS = 'Y'
 	<![CDATA[
 	AND (
-        (A.START_DATE >= DATE_FORMAT(CURRENT_DATE, '%Y-%m-01') 
-        AND A.START_DATE < DATE_FORMAT(LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY, '%Y-%m-01'))
+        (A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
+        AND A.START_DATE < DATE_FORMAT(LAST_DAY(#{mthStartDate}) + INTERVAL 1 DAY, '%Y-%m-01'))
         OR
-        (A.END_DATE >= DATE_FORMAT(CURRENT_DATE, '%Y-%m-01') 
-        AND A.END_DATE < DATE_FORMAT(LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY, '%Y-%m-01'))
+        (A.END_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
+        AND A.END_DATE < DATE_FORMAT(LAST_DAY(#{mthStartDate}) + INTERVAL 1 DAY, '%Y-%m-01'))
     )
     ]]>
 GROUP BY A.MED_ID , A.START_DATE , A.END_DATE 
@@ -43,11 +43,11 @@ WHERE
 	AND A.MED_STATUS = 'Y'
 	<![CDATA[
 	AND (
-        (A.START_DATE >= DATE_FORMAT(CURRENT_DATE, '%Y-%m-01') 
-        AND A.START_DATE < DATE_FORMAT(LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY, '%Y-%m-01'))
+        (A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
+        AND A.START_DATE < DATE_FORMAT(LAST_DAY(#{mthStartDate}) + INTERVAL 1 DAY, '%Y-%m-01'))
         OR
-        (A.END_DATE >= DATE_FORMAT(CURRENT_DATE, '%Y-%m-01') 
-        AND A.END_DATE < DATE_FORMAT(LAST_DAY(CURRENT_DATE) + INTERVAL 1 DAY, '%Y-%m-01'))
+        (A.END_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
+        AND A.END_DATE < DATE_FORMAT(LAST_DAY(#{mthStartDate}) + INTERVAL 1 DAY, '%Y-%m-01'))
     )
     ]]>
 GROUP BY A.MED_ID , B.SCHE_DATE

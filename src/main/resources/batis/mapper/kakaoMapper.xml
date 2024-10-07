@@ -12,6 +12,7 @@ SELECT
 	, ROLE
 	, USER_STATUS
 	, NICKNAME
+	, TOKEN_USE_AT
 FROM users
 WHERE USER_ID = #{userId}
 </select>
@@ -25,25 +26,28 @@ INSERT INTO users(
 	, NICKNAME
 	, EMAIL
 	, USER_STATUS
+	, TOKEN_USE_AT
 ) VALUES(
 	#{userId}
 	, 'USER'
 	, #{nickname}
 	, '카카오유저'
 	, 'Y'
+	, 'N'
 )
 </insert>
 
 <update id="updateAccessToken">
 UPDATE users SET
-	kakao_token = #{kakaoToken}
+	TOKEN_USE_AT = #{tokenUseAt}
+	, REFRESH_TOKEN = #{refreshToken}
 WHERE USER_ID = #{userId}
 </update>
 
 <!-- 카카오 유저들 알람 가져오기 -->
 <select id="selectKakaoScheList" resultType="UserVO">
 SELECT 
-	A.KAKAO_TOKEN
+	A.REFRESH_TOKEN
 FROM
 	users A
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID
@@ -51,7 +55,7 @@ FROM
 		JOIN med_info D ON C.MED_ID = D.MED_ID
 WHERE 
 	A.USER_STATUS = 'Y'
-	AND A.KAKAO_TOKEN IS NOT NULL
+	AND A.TOKEN_USE_AT = 'Y'
 	AND CURDATE() BETWEEN D.START_DATE AND D.END_DATE
 	AND B.ALARM_TIME BETWEEN CURTIME() - INTERVAL 2 MINUTE AND CURTIME() + INTERVAL 2 MINUTE
 </select>

@@ -24,7 +24,8 @@ public class UserVO implements UserDetails {
 	private String email; // 유저이메일
 	private String userStatus; // 유저사용상태 가입시 Y, 탈퇴시 N
 	
-	private String kakaoToken; //카카오 엑세스 토큰
+	private String tokenUseAt; 		// 카카오 토큰 사용 여부
+	private String refreshToken; 	//카카오 리프레시 토큰
 
 	// 스프링 시큐리티 메소드
 	

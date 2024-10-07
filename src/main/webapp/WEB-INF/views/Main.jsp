@@ -122,8 +122,40 @@ p, span {
 					</div>
 					</c:if>
 			</c:forEach>
+			<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+			<script type="text/javascript">
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				let uncompTodoCntList;
+				function getUncompTodoCntList () {
+					$.ajax({
+						url: '/mthSchedule',
+						type: 'post',
+						data: {
+							mthStartDate: firstDate
+							, mthEndDate: lastDate
+						},
+						beforeSend: function(xhr){
+							xhr.setRequestHeader(header, token);
+							xhr.setRequestHeader("Accept", "application/json");
+						},
+						success: function (response) {
+							console.log(response.mthScheList);
+							uncompTodoCntList = response.mthScheList; // 날짜별 미완료 스케줄 리스트
+							
+						},
+						error: function (error) {
+							console.error('Error occurred: ' + error);
+							alert('오류가 발생했습니다.');
+						}
+					});
+				}
+			</script>
+			
 			<c:import url="/calendar"/>
 			<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
+			
+			<button type="button" id="chk">체크</button>
 			
 			<!-- 이번달 총 스케줄 -->
 			<c:forEach var="result" items="${mthScheList}">
@@ -144,12 +176,12 @@ p, span {
 
 </div>
 
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/calendar/mainCalendar.js"></script>
 <<script>
+
+
+
 $(document).ready(function () {
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	// 알람 시간 변경
 	$('.timepick').on('focusout', function () {
@@ -214,6 +246,13 @@ $(document).ready(function () {
 		});
 		
 	});
+	
+	
+	
+	// 날짜별 미완료 스케줄 리스트 가져오기
+	$(document).on('click', '#chk', getUncompTodoCntList);
+	
+
 });
 </script>
 
