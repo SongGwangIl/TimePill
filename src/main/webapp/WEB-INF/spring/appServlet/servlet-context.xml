@@ -40,5 +40,7 @@
 <!-- 						<beans:bean class="timepill.com.LoginInterceptor"></beans:bean> -->
 <!-- 		</mvc:interceptor> -->
 <!-- 	</mvc:interceptors>	 -->
-	
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="errmsg"></beans:property>
+	</beans:bean>
 </beans:beans>

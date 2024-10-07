@@ -8,11 +8,11 @@ userId.onchange = checkId
 function checkId(){
   let userIdVal = userId.value;
   let idFlag = false;
-  const idRegExp = /^[a-zA-Z0-9]{6,15}$/
+  const idRegExp = /^[a-zA-Z0-9]{4,15}$/
 	console.log(userIdVal, idRegExp.test(userIdVal));
   if(!idRegExp.test(userIdVal)){
     userId.value = null;
-    idCheck.innerText = "6~15자리의 영문이나 숫자를 가져야 합니다."
+    idCheck.innerText = "4~15자리의 영문이나 숫자를 가져야 합니다."
     idCheck.style.color = "#dc3545";
     userId.focus();  
   }
@@ -58,7 +58,7 @@ pw.addEventListener('change', () => {
     pwMsg.textContent = "조건만족"
   } 
   else { // 정규식 조건 만족 X
-    pwMsg.textContent = "8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
+    pwMsg.textContent = "8~20자 영문 대문자, 소문자, 숫자, 특수문자를 사용하세요."
     pw.value = null;
     pw.focus();
   }

@@ -3,10 +3,12 @@ package timepill.user.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,14 +61,16 @@ public class UserController {
 	
 	/** 회원가입 화면요청 */
 	@GetMapping("/user/singup")
-	public String addForm() {
+	public String addForm(UserVO vo) {
 		
 		return "user/add";
 	}
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
-	public String add(UserVO vo, HttpServletRequest request) throws Exception {
+	public String add(@Valid UserVO vo, HttpServletRequest request, BindingResult result) throws Exception {
+		if(result.hasErrors())
+			return "user/add";
 		
 		userService.add(vo);
 		
