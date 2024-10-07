@@ -13,7 +13,7 @@ public interface KakaoService {
 	public void callback(String code, String rediUri) throws Exception;
 	
 	/** 액세스 토큰 재발급 */
-	public String getNewAccessToken (String code, String refreshToken) throws Exception;
+	public String getNewAccessToken (String refreshToken) throws Exception;
 
 	/** 사용자 정보 가져오기 */
 	public String getProfile() throws Exception;

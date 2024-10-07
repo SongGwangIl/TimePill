@@ -37,15 +37,25 @@ INSERT INTO users(
 )
 </insert>
 
-<update id="updateAccessToken">
+<!-- 리프레시 토큰 저장 -->
+<update id="updateRefreshToken">
 UPDATE users SET
 	TOKEN_USE_AT = #{tokenUseAt}
 	, REFRESH_TOKEN = #{refreshToken}
-WHERE USER_ID = #{userId}
+WHERE 
+	<choose>
+		<when test='oldRefreshToken != null'>
+			REFRESH_TOKEN = #{oldRefreshToken}
+		</when>
+		<otherwise>
+			USER_ID = #{userId}
+		</otherwise>
+	</choose>
+	
 </update>
 
-<!-- 카카오 유저들 알람 가져오기 -->
-<select id="selectKakaoScheList" resultType="UserVO">
+<!-- 카카오 유저 리프레시 토큰 가져오기 -->
+<select id="selectKakaoRefreshTokenList" resultType="UserVO">
 SELECT 
 	A.REFRESH_TOKEN
 FROM

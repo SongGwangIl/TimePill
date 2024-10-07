@@ -127,8 +127,8 @@ p, span {
 				var token = $("meta[name='_csrf']").attr("content");
 				var header = $("meta[name='_csrf_header']").attr("content");
 				let uncompTodoCntList;
-				function getUncompTodoCntList () {
-					$.ajax({
+				async function getUncompTodoCntList () {
+					await $.ajax({
 						url: '/mthSchedule',
 						type: 'post',
 						data: {
@@ -140,7 +140,7 @@ p, span {
 							xhr.setRequestHeader("Accept", "application/json");
 						},
 						success: function (response) {
-							console.log(response.mthScheList);
+// 							console.log(response.mthScheList);
 							uncompTodoCntList = response.mthScheList; // 날짜별 미완료 스케줄 리스트
 							
 						},
@@ -175,7 +175,6 @@ p, span {
 
 
 </div>
-
 <script src="${pageContext.request.contextPath}/resources/js/calendar/mainCalendar.js"></script>
 <<script>
 

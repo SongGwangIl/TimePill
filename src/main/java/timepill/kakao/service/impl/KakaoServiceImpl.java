@@ -96,10 +96,10 @@ public class KakaoServiceImpl implements KakaoService {
 
 		String param = "grant_type=authorization_code&client_id=" + REST_API_KEY + "&redirect_uri=" + callbackUri + "&client_secret=" + CLIENT_SECRET + "&code=" + code;
 
-		// http 요청 진행
+		// HTTP 요청
 		String rtn = httpCallService.Call("POST", TOKEN_URI, "", param);
 		
-		// 파싱
+		// JSON 응답 파싱
 		JsonObject element = JsonParser.parseString(rtn).getAsJsonObject();
 		String accessToken = element.get("access_token").getAsString();
 		String refreshToken = element.get("refresh_token").getAsString();
@@ -113,10 +113,27 @@ public class KakaoServiceImpl implements KakaoService {
 
 	/** 액세스 토큰 재발급 */
 	@Override
-	public String getNewAccessToken(String code, String refreshToken) throws Exception {
+	public String getNewAccessToken(String refreshToken) throws Exception {
 		String param = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + REST_API_KEY + "&client_secret=" + CLIENT_SECRET;
-		String newAccessToken = httpCallService.Call("POST", "https://kauth.kakao.com/oauth/token", "", param);
-		System.out.println("새로운 토큰 : " + newAccessToken);
+		
+		// HTTP 요청
+		String response = httpCallService.Call("POST", "https://kauth.kakao.com/oauth/token", "", param);
+		    
+		// JSON 응답 파싱
+		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
+		String newAccessToken = element.get("access_token").getAsString();
+		
+		// 리프레시토큰 갱신 여부 체크
+		if (element.has("refresh_token")) {
+			UserVO vo = new UserVO();
+			vo.setTokenUseAt("Y");
+			vo.setRefreshToken(element.get("refresh_token").getAsString());
+			vo.setOldRefreshToken(refreshToken);
+			// 리프레시 토큰 갱신
+			kakaoDAO.updateRefreshToken(vo);
+			
+		}
+		
 		return newAccessToken;
 	}
 
@@ -144,26 +161,33 @@ public class KakaoServiceImpl implements KakaoService {
 		// 회원가입 여부 체크
 		UserVO userInfoResult = kakaoDAO.duplicateCheckUser(vo);
 		if (userInfoResult != null) {
+			
 			// 시큐리티 로그인
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfoResult, "",
-					userInfoResult.getAuthorities());
-			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-			if ("Y".equals(userInfoResult.getTokenUseAt())) { // 메세지 알람을 위한 리프레시 토큰 사용 여부 체크
+			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(authToken);
+			
+			// 메세지 알람을 위한 리프레시 토큰 사용 여부 확인
+			if ("Y".equals(userInfoResult.getTokenUseAt())) { 
 				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
 			}
-		} else {
-			kakaoDAO.insertUser(vo);
-			// 신규 유저 알람 생성
-			ScheduleVO scheduleVO = new ScheduleVO();
-			String[] hours = { "08", "12", "18", "22" };
-			for (int i = 0; i < 4; i++) {
-				scheduleVO.setUserId(vo.getUserId());
-				scheduleVO.setAlarmType(i + 1);
-				scheduleVO.setAlarmTime(hours[i] + ":00");
-				alarmService.insertAlarm(scheduleVO);
-			}
-			httpSession.setAttribute("message", "회원가입이 완료되었습니다. 로그인을 해주세요.");
+			
+			return "green";
+		} 
+		
+		// 카카오 소셜 회원가입 진행
+		kakaoDAO.insertUser(vo);
+		
+		// 신규 유저 알람 생성 (아침, 점심, 저녁, 취침전)
+		ScheduleVO scheduleVO = new ScheduleVO();
+		String[] hours = { "08", "12", "18", "22" };
+		for (int i = 0; i < 4; i++) {
+			scheduleVO.setUserId(vo.getUserId());
+			scheduleVO.setAlarmType(i + 1);
+			scheduleVO.setAlarmTime(hours[i] + ":00");
+			alarmService.insertAlarm(scheduleVO);
 		}
+		httpSession.setAttribute("message", "회원가입이 완료되었습니다. 로그인을 해주세요.");
+		
 		return "green";
 	}
 
@@ -179,20 +203,30 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 카카오 메세지 권한 동의 여부 체크 */
 	@Override
 	public boolean checkMessageAuth() throws Exception {
+		
 		String token = httpSession.getAttribute("token").toString();
 		String checkScopeUrl = KAKAO_API_HOST + "/v2/user/scopes";
-		String response = httpCallService.CallwithToken("GET", checkScopeUrl, token, null); // 카카오 요청
+		
+		// HTTP 요청 (메세지 권한 확인)
+		String response = httpCallService.CallwithToken("GET", checkScopeUrl, token, null); 
+		
+		// JSON 응답 파싱
 		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
 		JsonArray scopes = element.get("scopes").getAsJsonArray();
 
-		System.out.println("체크 메세지 권한");
+		// 스콥에서 메세지 권한 찾기
 		for (int i = 0; i < scopes.size(); i++) {
 			JsonObject scope = scopes.get(i).getAsJsonObject();
-			if (scope.get("id").getAsString().equals("talk_message") && scope.get("agreed").getAsBoolean()) { // 메세지 권한 동의 여부 체크
+			// 메세지 권한 동의 여부 확인
+			if (scope.get("id").getAsString().equals("talk_message") && scope.get("agreed").getAsBoolean()) {
+				
 				UserVO vo = new UserVO();
 				String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 				vo.setUserId(userId);
 				vo.setTokenUseAt("Y");
+				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
+				
+				// 리프레시 토큰 저장
 				kakaoDAO.updateRefreshToken(vo);
 				return true;
 			}
@@ -203,7 +237,7 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
 	@Override
 	public List<UserVO> selectKakaoScheList() throws Exception {
-		return kakaoDAO.selectKakaoScheList();
+		return kakaoDAO.selectKakaoRefreshTokenList();
 	}
 
 	/** 카카오 메세지 보내기 */
@@ -211,11 +245,13 @@ public class KakaoServiceImpl implements KakaoService {
 	public String message(String token) throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
 		String accessToken = "";
+		
 		if (!StringUtils.hasText(token)) { // 세션에 저장된 토큰 사용
 			accessToken = httpSession.getAttribute("token").toString();
 		} else {
 			accessToken = token;
 		}
+		
 		System.out.println("메세지 서비스 시작");
 		return httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
 	}

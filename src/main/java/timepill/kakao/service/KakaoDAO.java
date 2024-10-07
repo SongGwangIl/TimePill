@@ -17,6 +17,6 @@ public interface KakaoDAO {
 	/** 카카오 토큰 설정 */
 	int updateRefreshToken(UserVO vo) throws Exception;
 	
-	/** 카카오 메세지 스케줄 조회 */
-	List<UserVO> selectKakaoScheList() throws Exception;
+	/** 카카오 리프레시 토큰 조회 */
+	List<UserVO> selectKakaoRefreshTokenList() throws Exception;
 }
