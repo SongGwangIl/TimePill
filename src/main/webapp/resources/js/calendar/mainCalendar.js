@@ -82,3 +82,4 @@ function setSelectedDay(e){
 function removeSelectedDay(){
 	document.querySelector('.selectedDay').remove(); 
 }
+

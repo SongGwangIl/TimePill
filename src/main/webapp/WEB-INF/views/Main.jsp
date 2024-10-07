@@ -149,6 +149,7 @@ p, span {
 							alert('오류가 발생했습니다.');
 						}
 					});
+					setTodoList();
 				}
 			</script>
 			
@@ -253,6 +254,22 @@ $(document).ready(function () {
 	
 
 });
+function setTodoList(){
+	let keys = Object.keys(uncompTodoCntList).map(key=>+key.substring(8));
+	let values = Object.values(uncompTodoCntList);
+	let thisSpans = document.querySelectorAll('.this>span');
+	
+	for(let i=0; i<keys.length; i++){
+		for(thisSpan of thisSpans){
+			if(keys[i] == thisSpan.textContent){
+				let p = document.createElement('p');
+				p.textContent = values[i];
+				thisSpan.after(p);
+			}
+		}
+	}
+	
+}
 </script>
 
 

@@ -168,7 +168,7 @@
 	let lastDate;
 
 	//달력을 보여주는 함수
-	function renderCalendar(){
+	async function renderCalendar(){
 		const viewYear = date.getFullYear();
 		const viewMonth= date.getMonth();
 		
@@ -233,7 +233,7 @@
 				}
 			}
 		}
-		getUncompTodoCntList();
+		await getUncompTodoCntList();
 	}
 	
 </script>
