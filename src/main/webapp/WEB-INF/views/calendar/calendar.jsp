@@ -233,6 +233,7 @@
 				}
 			}
 		}
+		getUncompTodoCntList();
 	}
 	
 </script>
