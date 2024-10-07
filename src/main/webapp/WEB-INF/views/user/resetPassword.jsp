@@ -14,9 +14,9 @@
 	
 	<form action="/user/resetPassword" method="post">
 		<label>새비밀번호</label>
-		<input type="text" name="password"><br>
+		<input type="password" name="password"><br>
 		<label>비밀번호확인</label>
-		<input type="text" name="checkPassword">
+		<input type="password" name="checkPassword">
 		<button type="submit">변경</button>	
 		<sec:csrfInput/>	
 	</form>

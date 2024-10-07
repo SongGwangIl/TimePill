@@ -41,7 +41,7 @@ public class AuthServiceImpl extends RandomCharacterGenerator implements AuthSer
 		
 		//유저정보체크
 		if(userdao.checkUser(vo) == null) {
-			return "N";
+			message = "입력정보가 입력되지 않았습니다.";
 		}		
 		
 		

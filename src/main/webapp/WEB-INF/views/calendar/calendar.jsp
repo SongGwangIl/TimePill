@@ -164,6 +164,8 @@
 	}
 	//현재 날짜를 저장
 	let date = new Date();
+	let firstDate;
+	let lastDate;
 
 	//달력을 보여주는 함수
 	function renderCalendar(){
@@ -184,6 +186,9 @@
 		//이번달 마지막날의 날짜와 요일
 		const TLDate = thisLast.getDate();
 		const TLDay = thisLast.getDay();
+		
+		firstDate = viewYear + "-" + (viewMonth+1) + "-01";
+		lastDate = viewYear + "-" + (viewMonth+1) + "-" + TLDate;
 
 		//달력합치기
 		const prevDates = [];
