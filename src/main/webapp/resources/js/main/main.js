@@ -76,5 +76,5 @@ $(document).ready(function() {
 	});
 	
 	// 하루 일정 가져오기
-	getDaySche();
+	// getDaySche();
 });

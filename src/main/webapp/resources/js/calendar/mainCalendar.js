@@ -1,6 +1,9 @@
 //달력그리기 & 클릭이벤트 등록
 renderCalendar();
-document.addEventListener('DOMContentLoaded', addEvent);
+document.addEventListener('DOMContentLoaded', function() {
+	addEvent();
+	getDaySche();
+});
 
 //달력날짜 초기화
 function clearCalendar(){
@@ -55,7 +58,7 @@ function addEvent(){
 					selectedDay.classList.remove('selectedDay');
 				setSelectedDay(e);
 				
-
+				getDaySche(); // 하루 일정 가져오기 함수
 				
 			}
 		}	

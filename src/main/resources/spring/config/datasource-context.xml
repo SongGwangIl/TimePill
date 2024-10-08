@@ -12,14 +12,14 @@
         <property name="password" value="${db.Password}"/>
     </bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="typeAliasesPackage" value="timepill"/>
+		<property name="mapperLocations" value="classpath*:batis/mapper/**/*.xml" />
 		<property name="configuration">
     		<bean class="org.apache.ibatis.session.Configuration">
       			<property name="mapUnderscoreToCamelCase" value="true"/>
     		</bean>
     	</property>
-    	<property name="typeAliasesPackage" value="timepill"></property>
-		<property name="mapperLocations" value="classpath*:batis/mapper/**/*.xml" />
 	</bean>
 	
 	<mybatis-spring:scan base-package="timepill" annotation="org.apache.ibatis.annotations.Mapper"/>

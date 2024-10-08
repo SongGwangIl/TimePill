@@ -53,10 +53,17 @@ function getDaySche () {
 	
 // Todo 리스트 생성
 function getTodo (dayScheList) {
+	
+	// 선택 날짜 표시
+	document.querySelector('#selectedDay').textContent = selectedDay;
+	
 	for (const daySchedule of dayScheList) {
 	    
 		// 담을 박스 선택
-		let alarmDiv = $('div[data-alarm-id="'+ daySchedule.alarmId +'"]');
+		let alarmDiv = document.querySelectorAll('div.card[data-alarm-id="'+ daySchedule.alarmId +'"]');
+		
+		// 초기화
+		alarmDiv.innerHTML = '';
 
 		// 체크박스 생성
 	    let newImg = document.createElement('img');
@@ -80,8 +87,16 @@ function getTodo (dayScheList) {
 	    let br = document.createElement('br');
 	
 		// 생성된 element 담기
-		alarmDiv.find('.daySchedule').get(0).appendChild(newImg);
-	    alarmDiv.find('.daySchedule').get(0).appendChild(newSpan);
-	    alarmDiv.find('.daySchedule').get(0).appendChild(br);
+//		console.log(alarmDiv);
+
+		for(result of alarmDiv) {
+			if(!result.classList.contains('bx-clone')) {
+				console.log(result);
+				result.querySelector('.daySchedule').append(newImg);
+			    result.querySelector('.daySchedule').append(newSpan);
+			    result.querySelector('.daySchedule').append(br);
+			}
+		}		
+		
 	}
 }
