@@ -36,14 +36,6 @@ public class ScheduleController {
 		List<ScheduleVO> resultList = scheduleService.selectScheduleList(vo);
 		model.addAttribute("scheList", resultList);
 
-		// 한달 총 스케줄
-		List<ScheduleVO> selectMthScheList = scheduleService.selectMthScheList(vo);
-		model.addAttribute("mthScheList", selectMthScheList);
-
-		// 한달 완료된 스케줄
-		List<ScheduleVO> selectMthComplScheList = scheduleService.selectMthComplScheList(vo);
-		model.addAttribute("mthCompScheList", selectMthComplScheList);
-
 		return "/Main";
 	}
 
@@ -56,11 +48,9 @@ public class ScheduleController {
 
 		// 한달 총 스케줄
 		List<ScheduleVO> selectMthScheList = scheduleService.selectMthScheList(vo);
-//		map.put("mthScheList", selectMthScheList);
 
 		// 한달 완료된 스케줄
 		List<ScheduleVO> selectMthComplScheList = scheduleService.selectMthComplScheList(vo);
-//		map.put("mthCompScheList", selectMthComplScheList);
 
 		Map<String, String> mthScheList = new HashMap<String, String>();
 		

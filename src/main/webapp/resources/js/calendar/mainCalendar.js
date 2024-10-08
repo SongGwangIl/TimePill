@@ -83,3 +83,20 @@ function removeSelectedDay(){
 	document.querySelector('.selectedDay').remove(); 
 }
 
+
+// todo 리스트 캘린터에 추가
+function setTodoList(){
+	let keys = Object.keys(uncompTodoCntList).map(key=>+key.substring(8));
+	let values = Object.values(uncompTodoCntList);
+	let thisSpans = document.querySelectorAll('.this>span');
+	
+	for(let i=0; i<keys.length; i++){
+		for(thisSpan of thisSpans){
+			if(keys[i] == thisSpan.textContent){
+				let p = document.createElement('p');
+				p.textContent = values[i];
+				thisSpan.after(p);
+			}
+		}
+	}	
+}

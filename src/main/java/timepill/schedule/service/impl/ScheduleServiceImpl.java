@@ -41,18 +41,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 	/** 스케줄 등록, 삭제 */
 	@Override
 	public void handleSchedule(ScheduleVO vo) throws Exception {
-		if (!"N".equals(vo.getMedStatus())) { // 복약정보 삭제여부 확인
-			// 체크된 알람타입 꺼내기
-			if (vo.getAlarmTypes() != null) {
-				for (String resultAlarmType : vo.getAlarmTypes()) {
-					// 스케줄 등록여부 확인
-					vo.setAlarmType(Integer.parseInt(resultAlarmType));
-					ScheduleVO resultSchedule = scheduleDAO.selectSchedule(vo);
-					if (resultSchedule == null) {
-						String selectAlarm = alarmDAO.selectAlarm(vo); // 스케줄에 등록할 알람 아이디 가져오기
-						vo.setAlarmId(selectAlarm);
-						scheduleDAO.insertSchedule(vo); // 스케줄 등록
-					}
+		if (!"N".equals(vo.getMedStatus()) && vo.getAlarmTypes() != null) { // 복약정보 삭제 여부 및 체크된 알람타입 여부 확인
+			for (String resultAlarmType : vo.getAlarmTypes()) {
+				vo.setAlarmType(Integer.parseInt(resultAlarmType));
+				
+				// 스케줄 등록여부 확인
+				ScheduleVO resultSchedule = scheduleDAO.selectSchedule(vo);
+				if (resultSchedule == null) {
+					
+					vo.setAlarmId(alarmDAO.selectAlarm(vo)); // 스케줄에 등록할 알람 아이디
+					scheduleDAO.insertSchedule(vo); // 스케줄 등록
 				}
 			}
 		}
@@ -64,8 +62,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public void handleScheduleLog(ScheduleVO vo) throws Exception {
 
 		ScheduleVO resultLog = scheduleDAO.selectScheduleLog(vo);
-
-		if (resultLog != null) { // 스케줄 로그 생성, 수정여부 체크
+		
+		// 스케줄 로그 생성, 수정여부 체크
+		if (resultLog != null) {
 			scheduleDAO.updateScheduleLog(vo);
 		} else {
 			scheduleDAO.insertScheduleLog(vo);
