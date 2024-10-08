@@ -243,17 +243,13 @@ $(document).ready(function () {
 				console.error('Error occurred: ' + error);
 				alert('오류가 발생했습니다.');
 			}
-		});
-		
-	});
-	
-	
+		});		
+	});	
 	
 	// 날짜별 미완료 스케줄 리스트 가져오기
 	$(document).on('click', '#chk', getUncompTodoCntList);
-	
-
 });
+
 function setTodoList(){
 	let keys = Object.keys(uncompTodoCntList).map(key=>+key.substring(8));
 	let values = Object.values(uncompTodoCntList);
@@ -267,8 +263,7 @@ function setTodoList(){
 				thisSpan.after(p);
 			}
 		}
-	}
-	
+	}	
 }
 </script>
 
