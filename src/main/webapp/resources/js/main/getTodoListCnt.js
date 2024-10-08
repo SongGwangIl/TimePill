@@ -57,13 +57,16 @@ function getTodo (dayScheList) {
 	// 선택 날짜 표시
 	document.querySelector('#selectedDay').textContent = selectedDay;
 	
+	// Todo 초기화
+	let alarmDiv = document.querySelectorAll('div.card');
+	for(result of alarmDiv) {
+			result.querySelector('.daySchedule').innerHTML = '';
+		}
+	
+	// 생성 시작
 	for (const daySchedule of dayScheList) {
-	    
 		// 담을 박스 선택
 		let alarmDiv = document.querySelectorAll('div.card[data-alarm-id="'+ daySchedule.alarmId +'"]');
-		
-		// 초기화
-		alarmDiv.innerHTML = '';
 
 		// 체크박스 생성
 	    let newImg = document.createElement('img');

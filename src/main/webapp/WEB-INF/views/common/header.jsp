@@ -6,25 +6,24 @@
 <html>
 <head>
 	
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMPLE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title}</title>
 
-	<sec:csrfMetaTags/>
-	<sec:authorize access="isAuthenticated()" var="auth">
-		<sec:authentication property="principal" var="principal"/>
-	</sec:authorize>
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<sec:csrfMetaTags/>
+<sec:authorize access="isAuthenticated()" var="auth">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <!-- Gmarket Sans SDK -->
-    <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
-    <!-- Noto Sans Kor SDK-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <!-- bxSlider SDK -->
-    <link rel="stylesheet" href="/resources/css/template.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+<!-- Gmarket Sans SDK -->
+<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
+<!-- Noto Sans Kor SDK-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<!-- bxSlider SDK -->
+<link rel="stylesheet" href="/resources/css/template.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
 
 </head>
 <body>

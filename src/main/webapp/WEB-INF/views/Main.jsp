@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -10,6 +9,27 @@
 	<c:param name="title" value="TimePill - 스케줄 관리"/>
 </c:import>
 
+<style>
+	.input-container {
+	    position: relative;
+	    display: inline-block;
+	}
+	.input-container input {
+	    position: relative;
+	    z-index: 1;
+	}
+	.input-container::after {
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 80%;
+	    height: 100%;
+	    background: rgba(255, 255, 255, 0.0); /* 반투명 막 */
+	    pointer-events: auto; /* 클릭 불가 */
+	    z-index: 2;
+	}
+</style>
 
 <div id="contents">
 
@@ -44,14 +64,14 @@
 					
 					<%-- 알람시간 --%>
 					<fmt:parseDate value="${resultAlarm.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
-   					<input type="time" class="timepick" step="300" name="alarmTime" value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px;">
+   					<div class="input-container">
+   					<input type="time" class="timepick" step="300" name="alarmTime" 
+   						value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px;">
+					</div>
 					<br>
 					
 					<%-- 복약 일정 --%>
-					<div class="daySchedule">
-					
-					</div>
-					
+					<div class="daySchedule"></div>
 				</div>
 			</c:forEach>
 		</div>
@@ -76,8 +96,11 @@
 	    $('.bxslider').bxSlider({
 	        mode: 'horizontal',
 	        slideWidth: 300,
-	        touchEnabled: true,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
+	        touchEnabled: false,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
 	    });
+	});
+	$('.bxslider').on('click', 'input', function(event) {
+	    event.stopPropagation();
 	});
 </script>
 <%-- footer --%>
