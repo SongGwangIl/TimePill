@@ -1,17 +1,15 @@
 package timepill.schedule.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ScheduleService {
 	
-	/** 한달 총 스케줄 리스트 */
-	public List<ScheduleVO> selectMthScheList(ScheduleVO vo) throws Exception;
+	/** 한달 일정 카운트 가져오기 */
+	public Map<String, String> getTodoCntList(ScheduleVO vo) throws Exception;
 	
-	/** 한달 완료된 스케줄 리스트 */
-	public List<ScheduleVO> selectMthComplScheList(ScheduleVO vo) throws Exception;
-	
-	/** 스케줄 리스트 */
-	public List<ScheduleVO> selectScheduleList(ScheduleVO vo) throws Exception;
+	/** 하루 스케줄 */
+	public List<ScheduleVO> selectDayScheList(ScheduleVO vo) throws Exception;
 	
 	/** 스케줄 등록 */
 	public void handleSchedule(ScheduleVO vo) throws Exception;

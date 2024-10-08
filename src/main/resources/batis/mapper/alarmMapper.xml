@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.alarm.service.impl.AlarmDAO">
 
+<!-- 알람 리스트 가져오기 -->
+<select id="selectAlarmList" resultType="ScheduleVO">
+SELECT
+	ALARM_ID
+	, ALARM_TYPE
+	, ALARM_TIME
+FROM
+	alarm_set
+WHERE 
+	USER_ID = #{userId}
+	AND ALARM_USE_AT = 'Y'
+ORDER BY
+	ALARM_TYPE
+</select>
+
 <!-- 알람 아이디 가져오기 -->
 <select id="selectAlarm" resultType="java.lang.String">
 SELECT

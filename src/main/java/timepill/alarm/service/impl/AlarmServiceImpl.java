@@ -1,5 +1,7 @@
 package timepill.alarm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,12 @@ public class AlarmServiceImpl implements AlarmService {
 	/** alarmDAO DI */
 	@Autowired
 	AlarmDAO alarmDAO;
+	
+	/** 알람 리스트 조회 */
+	@Override
+	public List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception {
+		return alarmDAO.selectAlarmList(vo);
+	}
 
 	/** 알람 생성(회원가입) */
 	@Override

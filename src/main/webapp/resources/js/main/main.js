@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	// 알람 시간 변경
 	$('.timepick').on('focusout', function() {
 		const timepick = $(this);
@@ -73,6 +74,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	// 하루 일정 가져오기
+	getDaySche();
 });
-
-

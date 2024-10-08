@@ -35,8 +35,10 @@ public class ScheduleVO {
 	private Integer totalDayTodo; // 하루 총 스케줄
 	private Integer completedDayTodo; // 하루 완료된 스케줄
 	
-	private Date mthStartDate;		// 복약 시작 일자
-	private Date mthEndDate;		// 복약 만료 일자
+
+	private Date selectedDay;		// 캘린더 선택 일자
+	private Date mthStartDate;		// 한달 시작 일자
+	private Date mthEndDate;		// 한달 끝 일자
 	
 	
 	/** 시작일자 타입 변환 */
@@ -57,13 +59,19 @@ public class ScheduleVO {
 		this.scheDate = formatter.parse(scheDate);
 	}
 	
+	/** 스케줄 일자 타입 변환 */
+	public void setSelectedDay(String selectedDay) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		this.selectedDay = formatter.parse(selectedDay);
+	}
+	
 	/** 한달 시작일자 타입 변환 */
 	public void setMthStartDate(String mthStartDate) throws Exception {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		this.mthStartDate = formatter.parse(mthStartDate);
 	}
 	
-	/** 한달 만료일자 타입 변환 */
+	/** 한달 끝 일자 타입 변환 */
 	public void setMthEndDate(String mthEndDate) throws Exception {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		this.mthEndDate = formatter.parse(mthEndDate);

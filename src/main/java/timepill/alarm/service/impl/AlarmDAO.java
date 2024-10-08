@@ -1,11 +1,16 @@
 package timepill.alarm.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import timepill.schedule.service.ScheduleVO;
 
 @Mapper
 public interface AlarmDAO {
+	
+	/** 알람 아이디 조회 */
+	List<ScheduleVO> selectAlarmList(ScheduleVO vo) throws Exception;
 
 	/** 알람 아이디 조회 */
 	String selectAlarm(ScheduleVO vo) throws Exception;

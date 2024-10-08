@@ -22,11 +22,11 @@
 	
 	<div class="slider-container">
 		<div class="bxslider center">
-			<c:forEach var="resultAlarm" items="${scheList}">
+			<c:forEach var="resultAlarm" items="${alarmList}">
 				<c:if test="${resultAlarm.alarmType ne previousAlarmType}">
 					<c:set var="previousAlarmType" value="${resultAlarm.alarmType}" />
-					<div class="card">
-						
+					<div class="card" data-alarm-id="${resultAlarm.alarmId}">
+						<%-- 알람타입 --%>
 						<c:choose>
 							<c:when test="${resultAlarm.alarmType eq '1'}">
 								아침
@@ -42,32 +42,35 @@
 							</c:when>
 						</c:choose>
 						<br>
-						
+						<%-- 알람시간 --%>
 						<fmt:parseDate value="${resultAlarm.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
 	   					<input type="time" class="timepick" step="300" name="alarmTime" value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px;">
 						<br>
+						<div class="daySchedule">
 						
-						<c:forEach var="result" items="${scheList}">
-							<c:if test="${not empty result.medId}">
-								<c:if test="${result.alarmType eq resultAlarm.alarmType}">
-									<c:choose>
-										<c:when test="${result.scheChk eq 'Y'}">
-											<c:set var="icoUrl" value="/resources/img/ico-checked.png"/>
-										</c:when>
-										<c:otherwise>
-											<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/>
-										</c:otherwise>
-									</c:choose>
-									<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px" data-med-id="${result.medId}" data-alarm-id="${resultAlarm.alarmId}" style="display: inline-block;">
-									<span class="med-title">
-										${result.medName}
-									</span>
-									<br>
-								</c:if>
-							</c:if>
-						</c:forEach>
+						</div>
+<%-- 						<c:forEach var="result" items="${scheList}"> --%>
+<%-- 							<c:if test="${not empty result.medId}"> --%>
+<%-- 								<c:if test="${result.alarmType eq resultAlarm.alarmType}"> --%>
+<%-- 									<c:choose> --%>
+<%-- 										<c:when test="${result.scheChk eq 'Y'}"> --%>
+<%-- 											<c:set var="icoUrl" value="/resources/img/ico-checked.png"/> --%>
+<%-- 										</c:when> --%>
+<%-- 										<c:otherwise> --%>
+<%-- 											<c:set var="icoUrl" value="/resources/img/ico-unchecked.png"/> --%>
+<%-- 										</c:otherwise> --%>
+<%-- 									</c:choose> --%>
+<%-- 									<img class="sche-chk" alt="체크" src="${icoUrl}" width="14px" height="14px" data-med-id="${result.medId}" data-alarm-id="${resultAlarm.alarmId}" style="display: inline-block;"> --%>
+<!-- 									<span class="med-title"> -->
+<%-- 										${result.medName} --%>
+<!-- 									</span> -->
+<!-- 									<br> -->
+<%-- 								</c:if> --%>
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+						
 					</div>
-					</c:if>
+				</c:if>
 			</c:forEach>
 		</div>
 	</div>
