@@ -68,7 +68,7 @@ public class UserController {
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
-	public String add(@Valid UserVO vo, HttpServletRequest request, BindingResult result) throws Exception {
+	public String add(@Valid UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
 		if(result.hasErrors())
 			return "user/add";
 		
