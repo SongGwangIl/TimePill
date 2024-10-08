@@ -59,7 +59,7 @@ pw.addEventListener('change', () => {
   } 
   else { // 정규식 조건 만족 X
     pwMsg.textContent = "8~20자 영문 대문자, 소문자, 숫자, 특수문자를 사용하세요."
-    pw.value = null;
+//    pw.value = null;
     pw.focus();
   }
   

@@ -18,7 +18,7 @@
                 <a href="#">
                     <div class="boxv">
                         <img id="logo" src="/resources/img/timpill.svg">
-                        <a href="#"> 내 정보 </a>
+                        <a href="/myPage"> 내 정보 </a>
                     </div>
                 </a>
             </li>

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +21,14 @@ import lombok.Setter;
 public class UserVO implements UserDetails {
 
 	// users테이블
+	@NotBlank @Pattern(regexp = "^[a-zA-Z0-9]{4,15}$")
 	private String userId; // 유저아이디
+	@NotBlank
 	private String nickname; // 유저이름
 	private String role; // 유저권한
+	@NotBlank @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$")
 	private String password; // 유저비밀번호
+	@NotBlank @Email
 	private String email; // 유저이메일
 	private String userStatus; // 유저사용상태 가입시 Y, 탈퇴시 N
 	
