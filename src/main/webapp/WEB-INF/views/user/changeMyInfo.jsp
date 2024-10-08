@@ -16,15 +16,8 @@
 		modelAttribute="userVO" method="post">
 		<ul class="input">
 			<li>
-				<label class="label">아이디</label> 
-				<form:input type="text" path="userId" id="userId" 
-					placeholder="4-15자리 영문과 숫자로 입력" required="required" /><br>
-				<p id="idCheck"></p> 
-				<form:errors path="userId"></form:errors>
-			</li>
-			<li>
-				<label class="label">이름</label> <form:input type="text" path="nickname" 
-					id="nickname" required="required" /><br> 
+				<label class="label">이름</label> 
+				<form:input type="text" path="nickname" id="nickname" required="required" /><br> 
 				<form:errors path="nickname"></form:errors>
 			</li>
 			<li>
@@ -35,26 +28,20 @@
 				<form:errors path="password"></form:errors>
 			</li>
 			<li>
-				<label class="label">비밀번호 확인</label> 
-				<input type="password" name="checkUserPwd" id="checkUserPwd" 
-					required="required" /><br>
-				<p id="checkUserPwdMsg"></p>
-			</li>
-			<li>
-				<label class="label">이메일</label> <form:input type="email" path="email" 
-					placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' 
-					required="required" /><br>
+				<label class="label">이메일</label> 
+				<form:input type="email" path="email" placeholder="이메일 입력" id="email" 
+					onkeyup='autoEmail("email",this.value)' required="required" /><br>
 				<form:errors path="email"></form:errors>
 			</li>
 		</ul>
 		<button class="btn" id="change">변경</button>
-		<button class="btn" type="button" onclick="location.href='/cover'">취소</button>
+		<button class="btn" type="button" onclick="location.href='/'">취소</button>
 		<sec:csrfInput />
 	</form:form>
 </div>
 <script src="/resources/js/common/jquery-3.7.1.min.js"></script>
 <script src="/resources/js/common/jquery-ui.min.js"></script>
-<script src="/resources/js/user/frontValidation.js"></script>
+<script src="/resources/js/user/myInfoValidation.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -68,5 +55,4 @@
 		});
 	});
 </script>
-</body>
-</html>
+<c:import url="/WEB-INF/views/common/footer.jsp" charEncoding="utf-8"/>

@@ -15,6 +15,17 @@
     WHERE user_id = #{userId}
   </select>
   
+  <select id="getMyInfo">
+  	SELECT
+  		nickname
+  		, password
+  		, email
+    FROM users 
+    WHERE user_id = #{userId}
+  </select>
+  
+  
+  
   <insert id="add">
   	INSERT INTO users (
   		user_id
@@ -53,5 +64,13 @@
   	FROM users
   	WHERE user_id = #{userId} AND email = #{email}
   </select>
+  
+  <update id="changeMyInfo">
+  	UPDATE users
+  	SET nickname = #{nickname}
+  		, password = #{password}
+  		, email = #{email}
+  	WHERE user_id = #{userId} 
+  </update>
   
 </mapper>

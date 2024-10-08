@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -162,5 +163,33 @@ public class UserController {
 		session.setAttribute("message", "변경되었습니다.");
 		
 		return "redirect:/user/login";		
+	}
+	@GetMapping("/myPage")
+	public String myPage() {
+		
+		return "user/myPage";
+	}
+	
+	@GetMapping("changeMyInfo")
+	public String changeMyInfo(UserVO vo, Model model) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
+		UserVO uvo = userService.getMyInfo(vo);
+		model.addAttribute("userVO", uvo);
+		
+		return "user/changeMyInfo";
+	}
+	
+	@PostMapping("changeMyInfo")
+	public String chageMyInfo(UserVO vo, BindingResult result, Model model) {
+		
+		if(result.hasErrors())
+			return "changeMyInfo";
+		
+		userService.changeMyInfo(vo);
+		model.addAttribute("message", "변경되었습니다.");
+		
+		return "redirect:/";
 	}
 }

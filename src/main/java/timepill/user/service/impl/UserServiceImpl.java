@@ -1,6 +1,7 @@
 package timepill.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -80,6 +81,23 @@ public class UserServiceImpl implements UserService {
 		vo.setPassword(encodedPwd);		
 		userdao.resetPassword(vo);
 		
+	}
+
+	@Override
+	public void changeMyInfo(UserVO vo) {
+		
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);		
+		String encodedPwd = bCryptPasswordEncoder.encode(vo.getPassword());
+		vo.setPassword(encodedPwd);		
+		userdao.changeMyInfo(vo);
+		
+	}
+
+	@Override
+	public UserVO getMyInfo(UserVO vo) {
+		
+		return userdao.getMyInfo(vo);
 	}
 
 }

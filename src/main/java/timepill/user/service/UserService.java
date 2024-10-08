@@ -18,4 +18,10 @@ public interface UserService extends UserDetailsService {
 	// 비밀번호 변경
 	public void resetPassword(UserVO vo);
 
+	// 내정보 변경
+	public void changeMyInfo(UserVO vo);
+
+	// 내정보 가져오기
+	public UserVO getMyInfo(UserVO vo);
+
 }

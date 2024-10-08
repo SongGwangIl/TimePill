@@ -57,6 +57,7 @@ public class MainController {
 		return "cmm/Footer";
 	}
 	
+	/** 캘린더 */
 	@GetMapping("/calendar")
 	public String calendar() throws Exception {
 		return "calendar/calendar";

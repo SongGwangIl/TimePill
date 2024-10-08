@@ -21,4 +21,8 @@ public interface UserDAO {
 	void resetPassword(UserVO vo);
 	
 	AuthVO checkUser(AuthVO vo);
+
+	void changeMyInfo(UserVO vo);
+
+	UserVO getMyInfo(UserVO vo);
 }
