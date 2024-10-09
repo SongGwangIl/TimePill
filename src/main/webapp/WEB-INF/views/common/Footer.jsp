@@ -3,7 +3,6 @@
 
 
     <!-- 푸터 : nav -->
-
     <nav id="mainmenu">
         <ul class="menu">
             <li>

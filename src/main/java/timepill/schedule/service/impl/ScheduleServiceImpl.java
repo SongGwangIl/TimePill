@@ -46,23 +46,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 		while (calendar.getTime().before(mthEndDate) || calendar.getTime().equals(mthEndDate)) {
 			Date currentDate = calendar.getTime();
 			Integer uncompletedTodo = 0;
+			
 
 			// 한달 총 스케줄에서 일정 꺼내기
 			for (ScheduleVO result : selectMthScheList) {
-				if (currentDate.compareTo(result.getStartDate()) > 0 && currentDate.compareTo(result.getEndDate()) <= 0) { // 복약날짜가 선택된 달의 범위 안에 있는 경우
+				if (currentDate.compareTo(result.getStartDate()) >= 0 && currentDate.compareTo(result.getEndDate()) <= 0) { // 복약날짜가 선택된 달의 범위 안에 있는 경우
 					uncompletedTodo += result.getTotalDayTodo();
-
-					// 완료 일정 꺼내기 및 현재날짜와 같은지 체크
+					// 완료 일정 꺼내기
 					for (ScheduleVO result2 : selectMthComplScheList) {
-						if (result2.getScheDate().compareTo(currentDate) == 0)
+						// 일정 완료 날짜가 현재날짜와 같고, 복약 아이디가 같은지 체크
+						if (result2.getScheDate().compareTo(currentDate) == 0 && result2.getMedId().equals(result.getMedId()))
 							uncompletedTodo -= result2.getCompletedDayTodo(); // 완료된 일정 카운트 빼기
 					}
 					// 맵에 추가
 					mthScheList.put(dateFormat.format(currentDate), uncompletedTodo.toString());
 				}
-				// 하루를 더함
-				calendar.add(Calendar.DATE, 1);
 			}
+			
+			// 하루를 더함
+			calendar.add(Calendar.DATE, 1);
 		}
 
 		return mthScheList;

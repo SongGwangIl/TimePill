@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -32,19 +31,20 @@
 	}
 </style>
 
-<h1>설정</h1>
-<button id="changeBtn">내 정보 변경</button><br>
-<form id="pwFrm" class="modal" action="/mypage" method="post">
-	<label>비밀번호확인</label>
-	<input name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
-	<button type="button" id="submitBtn">확인</button><button type="button" id="cancelBtn">취소</button>
-	<sec:csrfInput/>
-</form>
-<button id="changePwBtn">비밀번호변경</button><br>
-<span>카카오톡 알림설정</span><button>토클버튼</button>
+<div id="contents">
 
-<%-- footer --%>
-<c:import url="/footer" charEncoding="utf-8"/>
+	<h1>설정</h1>
+	<button id="changeBtn">내 정보 변경</button><br>
+	<form id="pwFrm" class="modal" action="/mypage" method="post">
+		<label>비밀번호확인</label>
+		<input name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
+		<button type="button" id="submitBtn">확인</button><button type="button" id="cancelBtn">취소</button>
+		<sec:csrfInput/>
+	</form>
+	<button id="changePwBtn">비밀번호변경</button><br>
+
+</div>
+
 <script type="text/javascript">
 	let pwFrm = document.querySelector('#pwFrm');
 	let cancelBtn = document.querySelector('#cancelBtn');
@@ -72,9 +72,6 @@
 		pwFrm.classList.remove('active');
 	}
 </script>
-<script>
-<c:if test="${not empty sessionScope.message}">
-	alert("<c:out value='${sessionScope.message}'/>");
-	<c:remove var="message" scope="session"/>
-</c:if>
-</script>
+
+<%-- footer --%>
+<c:import url="/footer" charEncoding="utf-8"/>

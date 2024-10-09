@@ -77,6 +77,10 @@
 		</div>
 	</div>
 	
+	<span>카카오톡 알림설정</span>
+	<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
+	
+	
 <script src="/resources/js/main/mainFunc.js"></script>
 <c:import url="/calendar"/><!-- 캘린터 선택한 날짜 변수 : selectedDay -->
 <script src="/resources/js/calendar/mainCalendar.js"></script>
@@ -86,16 +90,29 @@
 	<sec:csrfInput/>
 </form>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 </div>
 
 
 
 <script>
 $(document).ready(function() {
-	//알람 시간 변경
+	// 카카오 알림설정 로드
+	kakaoAlarmToggle();
+	
+	// 알람 시간 변경
 	$('.timepick').on('focusout', updateAlarm);
 	// 복약 스케줄 완료 체크 동작
 	$(document).on('click', '.sche-chk', chkTodo);
+	
+	// 카카오 알림설정 동작
+	$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
 });
 
 $(function () {
@@ -104,9 +121,6 @@ $(function () {
         slideWidth: 300,
         touchEnabled: false,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
     });
-});
-$('.bxslider').on('click', 'input', function(event) {
-    event.stopPropagation();
 });
 </script>
 

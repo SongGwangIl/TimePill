@@ -18,9 +18,9 @@ async function getUncompScheCntList() {
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-		success: function(response) {
-			// console.log(response.mthScheList);
-			uncompTodoCntList = response.mthScheList; // 날짜별 미완료 스케줄 리스트
+		success: function(mthScheList) {
+//			 console.log(mthScheList);
+			uncompTodoCntList = mthScheList; // 날짜별 미완료 스케줄 리스트
 		},
 		error: function(error) {
 			console.error('Error occurred: ' + error);
@@ -45,9 +45,9 @@ function getDaySche() {
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-		success: function(response) {
-//			console.log(response.dayScheList);
-			createTodo(response.dayScheList);
+		success: function(dayScheList) {
+//			console.log(dayScheList);
+			createTodo(dayScheList);
 		},
 		error: function(error) {
 			console.error('Error occurred: ' + error);
@@ -95,8 +95,6 @@ function createTodo(dayScheList) {
 		let br = document.createElement('br');
 
 		// 생성된 element 담기
-		//		console.log(alarmDiv);
-
 		for (let result of alarmDiv) {
 			if (!result.classList.contains('bx-clone')) {
 //				console.log(result);
@@ -167,17 +165,73 @@ function chkTodo(e) {
 			alarmId: alarmId,
 			scheChk: scheChk
 		},
+		dataType: 'text',
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-		success: function(response) {
-			if (response.scheChk === 'Y') {
+		success: function(scheChk) {
+			if (scheChk === 'Y') {
 				chk.attr('src', '/resources/img/ico-checked.png');
-			} else if (response.scheChk === 'N') {
+			} else if (scheChk === 'N') {
 				chk.attr('src', '/resources/img/ico-unchecked.png');
 			} else {
 				alert('처리 중 문제가 발생했습니다.');
+			}
+			chk.removeClass('disabled');
+		},
+		error: function(error) {
+			console.error('Error occurred: ' + error);
+			alert('오류가 발생했습니다.');
+			chk.removeClass('disabled');
+		}
+	});
+}
+
+
+
+// 카카오톡 알림설정
+function kakaoAlarmToggle() {
+	event.stopPropagation();
+	const chk = $('#kakaoAlarmToggle');
+
+	// 클릭 이벤트 중복 방지
+	if (chk.hasClass('disabled')) {
+		return false;
+	}
+
+	// 클릭 이벤트 방지 클래스 추가
+	chk.addClass('disabled');
+
+	// 변수 정의
+	const icoSrc = chk.attr('src');
+	let tokenUseAt = '';
+	if (icoSrc === '/resources/img/ico-off.png') {
+		tokenUseAt = 'Y'
+	} else if (icoSrc === '/resources/img/ico-on.png') {
+		tokenUseAt = 'N'
+	}
+	
+
+	// ajax 요청
+	$.ajax({
+		url: '/kakao/message',
+		type: 'post',
+		data: {
+			tokenUseAt: tokenUseAt
+		},
+		dataType: 'text',
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+			xhr.setRequestHeader("Accept", "application/json");
+		},
+		success: function(result) {
+			if (result === 'Y') {
+				chk.attr('src', '/resources/img/ico-on.png');
+			} else if (result === 'N') {
+				chk.attr('src', '/resources/img/ico-off.png');
+			} else {
+				window.location.href = result;
 			}
 			chk.removeClass('disabled');
 		},

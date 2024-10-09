@@ -186,7 +186,7 @@ public class UserController {
 	
 	@GetMapping("/mypage/change-Password")
 	public String changePw() {
-		return "user/resetPassword";
+		return "user/ResetPassword";
 	}
 	
 	@GetMapping("/mypage/change-myinfo")

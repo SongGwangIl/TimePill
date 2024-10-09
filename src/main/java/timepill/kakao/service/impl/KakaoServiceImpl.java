@@ -137,11 +137,17 @@ public class KakaoServiceImpl implements KakaoService {
 		return newAccessToken;
 	}
 
-	/** 사용자 정보 가져오기 */
+	/** 카카오 사용자 정보 가져오기 */
 	@Override
 	public String getProfile() throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/user/me";
 		return httpCallService.CallwithToken("GET", uri, httpSession.getAttribute("token").toString());
+	}
+	
+	/** 카카오 유저정보 가져오기 */
+	@Override
+	public UserVO selectUserInfo(UserVO vo) throws Exception {
+		return kakaoDAO.selectUserInfo(vo);
 	}
 
 	/** 카카오 가입&로그인 핸들러 */
@@ -159,7 +165,7 @@ public class KakaoServiceImpl implements KakaoService {
 		vo.setNickname(nickname);
 
 		// 회원가입 여부 체크
-		UserVO userInfoResult = kakaoDAO.duplicateCheckUser(vo);
+		UserVO userInfoResult = kakaoDAO.selectUserInfo(vo);
 		if (userInfoResult != null) {
 			
 			// 시큐리티 로그인
@@ -233,6 +239,43 @@ public class KakaoServiceImpl implements KakaoService {
 		}
 		return false;
 	}
+	
+	/** 카카오 메세지 권한 동의 철회 */
+	@Override
+	public boolean revokeMessageAuth() throws Exception {
+		String refeshToken = httpSession.getAttribute("refreshToken").toString();
+		String newAccessToken = getNewAccessToken(refeshToken);
+	    String revokeScopeUrl = KAKAO_API_HOST + "/v2/user/revoke/scopes";
+	    
+	    // 권한 동의 철회 요청 본문 설정
+	    String scope = "scopes=[\"talk_message\"]";
+	    
+	    // HTTP 요청 (메세지 권한 철회)
+	    String response = httpCallService.CallwithToken("POST", revokeScopeUrl, newAccessToken, scope);
+	    
+	    // JSON 응답 파싱
+	    JsonObject element = JsonParser.parseString(response).getAsJsonObject();
+	    JsonArray scopes = element.get("scopes").getAsJsonArray();
+	    
+	    // 스콥에서 메세지 권한 찾기
+		for (int i = 0; i < scopes.size(); i++) {
+			JsonObject resultScope = scopes.get(i).getAsJsonObject();
+			// 메세지 권한 비동의 여부 확인
+			if (resultScope.get("id").getAsString().equals("talk_message") && !resultScope.get("agreed").getAsBoolean()) {
+				
+				UserVO vo = new UserVO();
+		        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		        vo.setUserId(userId);
+		        vo.setTokenUseAt("N");
+		        vo.setRefreshToken("");
+		        
+		        // 리프레시 토큰 초기화
+		        kakaoDAO.updateRefreshToken(vo);
+		        return true;
+			}
+		}
+        return false;
+	}
 
 	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
 	@Override
@@ -244,15 +287,15 @@ public class KakaoServiceImpl implements KakaoService {
 	@Override
 	public String message(String token) throws Exception {
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
-		String accessToken = "";
 		
-		if (!StringUtils.hasText(token)) { // 세션에 저장된 토큰 사용
+		String accessToken = token;
+		
+		// 파라미터로 받은 토큰이 비어있는 경우
+		if (!StringUtils.hasText(accessToken)) {
 			accessToken = httpSession.getAttribute("token").toString();
-		} else {
-			accessToken = token;
 		}
 		
-		System.out.println("메세지 서비스 시작");
+		// HTTP 요청 (메세지 보내기)
 		return httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
 	}
 
