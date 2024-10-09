@@ -21,13 +21,6 @@
 				<form:errors path="nickname"></form:errors>
 			</li>
 			<li>
-				<label class="label">비밀번호</label> 
-				<form:input type="password" path="password" id="password"
-					placeholder="8-20자리 영문 대,소문자 숫자 특수문자 포함" required="required" /><br>
-				<p id="userPwdMsg"></p> 
-				<form:errors path="password"></form:errors>
-			</li>
-			<li>
 				<label class="label">이메일</label> 
 				<form:input type="email" path="email" placeholder="이메일 입력" id="email" 
 					onkeyup='autoEmail("email",this.value)' required="required" /><br>

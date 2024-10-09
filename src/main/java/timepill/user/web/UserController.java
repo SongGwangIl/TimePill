@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,11 +34,8 @@ public class UserController {
 	@Autowired
 	KakaoService kakaoService;
 	
-	/** 초기화면요청 */
-	@GetMapping("/cover")
-	public String cover() {
-		return "cover";
-	}
+	@Autowired
+	BCryptPasswordEncoder encoder;
 	
 	/** 로그인(시큐리티 처리) */
 	@GetMapping("/user/login")
@@ -170,12 +168,33 @@ public class UserController {
 		return "user/myPage";
 	}
 	
-	@GetMapping("changeMyInfo")
-	public String changeMyInfo(UserVO vo, Model model) {
+	@PostMapping("/myPage")
+	public String myPage(String password, UserVO vo, HttpSession session) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		
 		UserVO uvo = userService.getMyInfo(vo);
+		boolean isMatch = encoder.matches(password, uvo.getPassword());
+		
+		if(isMatch)
+			return "redirect:/changeMyInfo";
+		else
+			session.setAttribute("message", "비밀번호가 일치하지 않습니다.");
+		return "user/myPage";
+	}
+	
+	@GetMapping("/myPage/changePw")
+	public String changePw() {
+		return "user/resetPassword";
+	}
+	
+	@GetMapping("changeMyInfo")
+	public String changeMyInfo(UserVO vo, Model model) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		System.out.println(vo.getPassword());
+		UserVO uvo = userService.getMyInfo(vo);
+		
 		model.addAttribute("userVO", uvo);
 		
 		return "user/changeMyInfo";
