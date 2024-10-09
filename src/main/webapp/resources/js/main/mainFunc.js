@@ -60,7 +60,7 @@ function getDaySche() {
 function createTodo(dayScheList) {
 
 	// 선택 날짜 표시
-	document.querySelector('#selectedDay').textContent = selectedDay;
+	document.querySelector('#selectedDay').textContent = selectedDaySpan;
 
 	// Todo 초기화
 	let alarmDiv = document.querySelectorAll('div.card');

@@ -46,6 +46,7 @@ let startTime;
 let endTime;
 
 let selectedDay = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+let selectedDaySpan = date.getFullYear() + '.' + String(date.getMonth()+1).padStart(2,'0') + '.' + String(date.getDate()).padStart(2,'0');
 //이벤트 등록
 function addEvent(){
 	let dates = document.querySelectorAll('.dates > div');
@@ -53,16 +54,16 @@ function addEvent(){
 	for(d of dates){
 		//현재달에 포함된 날짜에만 이벤트 등록
 		if(d.classList.contains('this')){
-			d.onclick = (e)=>{
-				let selectedDay = document.querySelector('.selectedDay');
-				if(selectedDay)	
-					selectedDay.classList.remove('selectedDay');
-				setSelectedDay(e);
-				
-				// mainFunc.js 하루 일정 가져오기 함수
-				getDaySche(); 
-				
-			}
+			d.querySelector('span').addEventListener('click', (e)=>{
+					
+					let selectedDay = document.querySelector('.selectedDay');
+					if(selectedDay)	
+						selectedDay.classList.remove('selectedDay');
+					setSelectedDay(e);
+					
+					// mainFunc.js 하루 일정 가져오기 함수
+					getDaySche();				
+			});
 		}	
 	}
 }
@@ -81,6 +82,7 @@ function setSelectedDay(e){
 	let month = date.getMonth() + 1;
 	let ym = year + '-' + month;
 	selectedDay = ym + '-' + e.target.textContent;
+	selectedDaySpan = year + '.' + String(month).padStart(2,'0') + '.' + e.target.textContent.padStart(2,'0');
 }
 
 //선택날짜 달력에서 제거
@@ -98,9 +100,7 @@ function setTodoList(){
 	for(let i=0; i<keys.length; i++){
 		for(thisSpan of thisSpans){
 			if(keys[i] == thisSpan.textContent){
-				let p = document.createElement('p');
-				p.textContent = values[i];
-				thisSpan.after(p);
+				thisSpan.nextElementSibling.textContent = values[i];				
 			}
 		}
 	}	

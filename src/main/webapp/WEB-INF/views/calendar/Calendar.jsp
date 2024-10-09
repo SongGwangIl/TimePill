@@ -69,14 +69,24 @@
 		flex-flow: row wrap;
 		height: 300px;
 		align-items: center;
-		
-		
 	}
 	
 	.date{
 		width: calc(100% / 7);
 		text-align: center;
-		
+		height: calc(100%/7);
+		position: relative;	
+	}
+	.date>p{
+		position: absolute;
+		top: 10px;
+		left: 10px;		
+	}
+	.date>span{
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
 	}
 	
 	.day:nth-child(7n + 1),
@@ -119,7 +129,7 @@
 		background: pink;
 	}
 	.selectedDay{
-		background: blue;
+		background: olive;
 	}
 		
 </style>
@@ -216,7 +226,9 @@
 			el.setAttribute('class', 'date ' + condition);
 			let sp = document.createElement('span');
 			sp.textContent = date;
+			let p = document.createElement('p');
 			el.append(sp);
+			el.append(p);
 
 			dateEl.append(el);
 			
