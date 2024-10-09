@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import timepill.customer.service.CustomerService;
-import timepill.user.service.UserVO;
 
 @Controller
 public class CustomerController {
@@ -24,22 +24,22 @@ public class CustomerController {
 	@RequestMapping("/notice")
 	public String notice(HttpSession session, CustomerVO cvo, Model model) {
 
-		String userId = ((UserVO) session.getAttribute("loginUser")).getUserId();
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		cvo.setUserId(userId);
 
 		List<CustomerVO> noticeList = customerService.getAllnoticeList(cvo);
 		model.addAttribute("noticeList", noticeList);
 
-		return "customer/notice";
+		return "customer/Notice";
 	}
 
 	//공지사항 글쓰기
-	@GetMapping("/write")
+	@GetMapping("/notice/write")
 	public String write(CustomerVO cvo) {
-		return "customer/write";
+		return "customer/Write";
 	}
 	
-	@PostMapping("/write")
+	@PostMapping("/notice/write")
 	public String updatewrite(CustomerVO cvo) {
 		
 		customerService.updateWrite(cvo);
@@ -49,17 +49,17 @@ public class CustomerController {
 	
 	
 	// 공지사항 내용
-	@GetMapping("/detail/{id}")
+	@GetMapping("/notice/detail/{id}")
 	public String detail(Model model, CustomerVO cvo) {
 
 		CustomerVO notice = customerService.getnoticeList(cvo);
 		model.addAttribute("notice", notice);
 
-		return "customer/detail";
+		return "customer/Detail";
 	}
 	
 	// 공지사항 변경
-	@PostMapping("/detail/{id}")
+	@PostMapping("/notice/detail/{id}")
 	public String updateNotice(CustomerVO cvo) {
 
 		customerService.updateNotice(cvo);
@@ -68,7 +68,7 @@ public class CustomerController {
 	}
 	
 	// 공지사항 삭제
-	@GetMapping("/delete/{id}")
+	@GetMapping("/notice/delete/{id}")
 	public String delete(CustomerVO cvo) {
 		
 		customerService.deleteNotice(cvo);

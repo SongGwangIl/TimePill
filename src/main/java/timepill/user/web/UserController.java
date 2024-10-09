@@ -41,46 +41,45 @@ public class UserController {
 	@GetMapping("/user/login")
 	public String loginForm() {
 		
-		return "user/login";
+		return "user/Login";
 	}
 	
 	/** 로그아웃(시큐리티 처리) */
 	@PostMapping("/user/logout")
-	public String logout() throws Exception {
+	public void logout() throws Exception {
 		kakaoService.logout();
-		return "redirect:/schedule/list";
 	}
 	
 	/** 약관동의 화면요청 */
 	@GetMapping("/user/terms")
 	public String terms() {
 		
-		return "user/terms";
+		return "user/Terms";
 	}
 	
 	/** 회원가입 화면요청 */
 	@GetMapping("/user/singup")
 	public String addForm(UserVO vo) {
 		
-		return "user/add";
+		return "user/Add";
 	}
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
 	public String add(@Valid UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
 		if(result.hasErrors())
-			return "user/add";
+			return "user/Add";
 		
 		userService.add(vo);
 		
 		request.getSession().setAttribute("message", "회원가입 되었습니다.");
 		
-		return "/user/login";			
+		return "user/Login";			
 	}
 	
 	/** 아이디 사용유무확인 ajax 요청,응답 */
 	@ResponseBody
-	@PostMapping("/user/checkId")
+	@PostMapping("/user/check-id")
 	public String checkId(String userId) {
 		
 		String result = userService.checkId(userId);
@@ -88,14 +87,14 @@ public class UserController {
 		return result;
 	}
 	
-	@GetMapping("/user/findId")
+	@GetMapping("/user/find-id")
 	public String findId() {
 		
 		return "user/findId";
 	}
 	
 	@ResponseBody
-	@PostMapping("/user/findId")
+	@PostMapping("/user/find-id")
 	public String findId(String email) {
 		
 		String result = userService.findId(email);
@@ -103,14 +102,14 @@ public class UserController {
 		return result;
 	}
 	
-	@GetMapping("/user/authEmail")
+	@GetMapping("/user/auth-email")
 	public String authEmail() {
 		
-		return "user/authEmail";
+		return "user/AuthEmail";
 	}
 	
 	@ResponseBody
-	@PostMapping("/user/authEmail")
+	@PostMapping("/user/auth-email")
 	public String authEmail(AuthVO vo, HttpServletResponse response, Model model) throws Exception {
 		
 		String result = authService.authEmail(vo);
@@ -118,7 +117,7 @@ public class UserController {
 		return result;
 	}
 	
-	@PostMapping("/user/authAtmp")
+	@PostMapping("/user/auth-atmp")
 	public String authAtmp(AuthVO vo, HttpSession session, Model model) {
 		
 		String result = authService.authAtmp(vo);
@@ -126,30 +125,30 @@ public class UserController {
 		if(result.equals("Y")) {
 			session.setAttribute("authOK", vo);
 			
-			return "/user/resetPassword";
+			return "user/ResetPassword";
 		}			
 		else {
 			model.addAttribute("message", "인증에 실패했습니다.");
 			
-			return "user/authEmail";
+			return "user/AuthEmail";
 		}
 		
 		
 	}
 	
-	@GetMapping("/user/resetPassword")
+	@GetMapping("/user/reset-password")
 	public String resetPassword(HttpSession session) {
 		
 		if(session.getAttribute("authOK") == null) {
 			session.setAttribute("message", "인증정보가 없습니다.");
 			
-			return "/user/authEmail";
+			return "/user/Auth-email";
 		}
 				
-		return "user/resetPassword";
+		return "user/ResetPassword";
 	}
 	
-	@PostMapping("/user/resetPassword")
+	@PostMapping("/user/reset-password")
 	public String resetPassword(UserVO vo, HttpSession session) {
 		
 		AuthVO avo = (AuthVO)session.getAttribute("authOK");
@@ -162,13 +161,15 @@ public class UserController {
 		
 		return "redirect:/user/login";		
 	}
-	@GetMapping("/myPage")
+	
+	
+	@GetMapping("/mypage")
 	public String myPage() {
 		
-		return "user/myPage";
+		return "user/MyPage";
 	}
 	
-	@PostMapping("/myPage")
+	@PostMapping("/mypage")
 	public String myPage(String password, UserVO vo, HttpSession session) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
@@ -180,15 +181,15 @@ public class UserController {
 			return "redirect:/changeMyInfo";
 		else
 			session.setAttribute("message", "비밀번호가 일치하지 않습니다.");
-		return "user/myPage";
+		return "user/Mypage";
 	}
 	
-	@GetMapping("/myPage/changePw")
+	@GetMapping("/mypage/change-Password")
 	public String changePw() {
 		return "user/resetPassword";
 	}
 	
-	@GetMapping("changeMyInfo")
+	@GetMapping("/mypage/change-myinfo")
 	public String changeMyInfo(UserVO vo, Model model) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
@@ -197,10 +198,10 @@ public class UserController {
 		
 		model.addAttribute("userVO", uvo);
 		
-		return "user/changeMyInfo";
+		return "user/ChangeMyInfo";
 	}
 	
-	@PostMapping("changeMyInfo")
+	@PostMapping("/mypage/change-myinfo")
 	public String chageMyInfo(UserVO vo, BindingResult result, Model model) {
 		
 		if(result.hasErrors())

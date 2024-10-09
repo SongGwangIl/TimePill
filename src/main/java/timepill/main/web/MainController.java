@@ -23,6 +23,13 @@ public class MainController {
 	@Autowired
 	AlarmService alarmService;
 	
+	
+	/** 커버 */
+	@GetMapping("/cover")
+	public String cover() throws Exception {
+		return "Cover";
+	}
+	
 	/** 메인페이지 */
 	@GetMapping("/")
 	public String main(ScheduleVO vo, ModelMap model) throws Exception {
@@ -35,7 +42,7 @@ public class MainController {
 		// 알람 가져오기
 		model.addAttribute("alarmList", selectAlarmList);
 
-		return "/Main";
+		return "Main";
 	}
 	
 	/** 헤더 */
@@ -48,19 +55,19 @@ public class MainController {
 			UserVO user = (UserVO) authentication.getPrincipal();
 			session.setAttribute("loginUser", user);
 		}
-		return "common/header";
+		return "common/Header";
 	}
 
 	/** 푸터 */
 	@GetMapping("/footer")
 	public String footer() throws Exception {
-		return "cmm/Footer";
+		return "common/Footer";
 	}
 	
 	/** 캘린더 */
 	@GetMapping("/calendar")
 	public String calendar() throws Exception {
-		return "calendar/calendar";
+		return "calendar/Calendar";
 	}
 
 }

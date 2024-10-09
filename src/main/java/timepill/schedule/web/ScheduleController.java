@@ -6,14 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import timepill.schedule.service.ScheduleService;
 import timepill.schedule.service.ScheduleVO;
 
-@Controller
+@RestController
 public class ScheduleController {
 
 	/** scheduleService DI */
@@ -21,8 +20,7 @@ public class ScheduleController {
 	ScheduleService scheduleService;
 	
 	/** 하루 스케줄 */
-	@ResponseBody
-	@PostMapping("/daySchedule")
+	@PostMapping("/day-schedule")
 	public Map<String, List<ScheduleVO>> daySchedule(ScheduleVO vo) throws Exception {
 		
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -40,8 +38,7 @@ public class ScheduleController {
 	}
 
 	/** 한달 스케줄 */
-	@ResponseBody
-	@PostMapping("/mthSchedule")
+	@PostMapping("/month-schedule")
 	public Map<String, Map<String, String>> mthSchedule(ScheduleVO vo) throws Exception {
 		
 		Map<String, Map<String, String>> map = new HashMap<String, Map<String, String>>();
@@ -54,7 +51,6 @@ public class ScheduleController {
 	}
 
 	/** 스케줄 로그 생성, 수정 */
-	@ResponseBody
 	@PostMapping("/log")
 	public Map<String, String> handleScheduleLog(ScheduleVO vo) throws Exception {
 

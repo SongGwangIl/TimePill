@@ -77,10 +77,9 @@
 		</div>
 	</div>
 	
-<script src="/resources/js/main/getTodoListCnt.js"></script>
+<script src="/resources/js/main/mainFunc.js"></script>
 <c:import url="/calendar"/><!-- 캘린터 선택한 날짜 변수 : selectedDay -->
-<script src="${pageContext.request.contextPath}/resources/js/calendar/mainCalendar.js"></script>
-<script src="/resources/js/main/main.js"></script>
+<script src="/resources/js/calendar/mainCalendar.js"></script>
 
 <form action="/kakao/message" method="post">
 	<input type="submit" value="메세지 보내기 테스트">
@@ -92,17 +91,25 @@
 
 
 <script>
-	$(function () {
-	    $('.bxslider').bxSlider({
-	        mode: 'horizontal',
-	        slideWidth: 300,
-	        touchEnabled: false,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
-	    });
-	});
-	$('.bxslider').on('click', 'input', function(event) {
-	    event.stopPropagation();
-	});
+$(document).ready(function() {
+	//알람 시간 변경
+	$('.timepick').on('focusout', updateAlarm);
+	// 복약 스케줄 완료 체크 동작
+	$(document).on('click', '.sche-chk', chkTodo);
+});
+
+$(function () {
+    $('.bxslider').bxSlider({
+        mode: 'horizontal',
+        slideWidth: 300,
+        touchEnabled: false,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
+    });
+});
+$('.bxslider').on('click', 'input', function(event) {
+    event.stopPropagation();
+});
 </script>
+
 <%-- footer --%>
-<c:import url="/WEB-INF/views/common/footer.jsp" charEncoding="utf-8"/>
+<c:import url="/footer" charEncoding="utf-8"/>
 

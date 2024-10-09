@@ -31,7 +31,7 @@ public class MedicationController {
 		List<ScheduleVO> resultList = medicationService.selectMedList(vo);
 		model.addAttribute("medList", resultList);
 
-		return "/medication/medList";
+		return "medication/MedList";
 	}
 
 	/** 복약 정보 등록 or 수정 폼 */
@@ -48,7 +48,7 @@ public class MedicationController {
 			result = medicationService.selectMedInfo(vo);
 		model.addAttribute("result", result);
 
-		return "/medication/registMed";
+		return "medication/RegistMed";
 	}
 
 	/** 복약 정보 등록 */

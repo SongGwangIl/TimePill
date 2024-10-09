@@ -22,7 +22,7 @@ function checkId(){
   
   if(idFlag == true){
     $.ajax({
-		url : "/user/checkId",
+		url : "/user/check-id",
 		type: "post",
 		data: {userId:userIdVal},
 		beforeSend: function(xhr){

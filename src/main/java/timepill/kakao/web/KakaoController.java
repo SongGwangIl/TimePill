@@ -24,7 +24,7 @@ public class KakaoController {
 	}
 
 	/** 카카오 로그인 콜백 */
-	@GetMapping("/kakao/login-callback")
+	@GetMapping("/kakao/login/callback")
 	public String loginCallback(@RequestParam("code") String code) throws Exception {
 		
 		kakaoService.callback(code, "login-callback");
@@ -52,7 +52,7 @@ public class KakaoController {
 	}
 	
 	/** 나에게 메세지 보내기 권한 동의 콜백 */
-	@RequestMapping("/kakao/message-callback")
+	@RequestMapping("/kakao/message/callback")
 	public String messageCallback(@RequestParam("code") String code) throws Exception {
 		kakaoService.callback(code, "message-callback");
 		return "redirect:/kakao/message";
