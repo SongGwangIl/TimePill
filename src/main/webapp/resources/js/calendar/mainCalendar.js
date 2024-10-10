@@ -3,7 +3,7 @@ renderCalendar();
 document.addEventListener('DOMContentLoaded', function() {
 	addEvent();
 	// mainFunc.js 하루 일정 가져오기 함수
-	//getDaySche();
+	getDaySche();
 });
 
 //달력날짜 초기화
