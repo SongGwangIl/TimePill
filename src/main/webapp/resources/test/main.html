@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPLATE</title>
+
+    <!-- jQuery 3.7.1-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Gmarket Sans SDK -->
+    <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
+    <!-- Noto Sans Kor SDK-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <!-- bxSlider SDK -->
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+    <!-- 기본 템플릿 CSS -->
+    <link rel="stylesheet" href="css/template.css">
+    
+
+</head>
+
+<body>
+
+<div id="backcontainer" class="boxv">
+
+<!-- 헤더 : main logo, user status -->
+
+<header id="header" class="">
+    <a href="#">
+        <div class="boxh title">
+            <img id="logo" src="img/logo.svg">
+            <h1> TimePill </h1>
+        </div>
+    </a>
+    <div class="boxh logout">
+        <a href="#">
+            <div class="boxh userstatus">
+                <h3> 로그아웃 </h1>
+            </div>
+        </a>
+    </div>
+</header>
+
+
+<!-- 컨텐츠 -->
+
+<div id="contents" class="checkline">
+    
+    <!-- 안내 박스-->
+    <div class="greeting boxh checkline">
+        <h3 class="greetingdesc"> 
+            <span class="hilightdesc">오석영</span> 님, <br>
+            오늘의 복약정보를 확인하세요!
+        </h3>
+        <img class="fadein" src="img/pill.png" style="width: 70px; margin-left: 5%;">
+    </div>
+
+    <!-- 날짜 표기 -->
+    <div class="datebox boxh" style="height: 100px;">
+        <h3 class="hilightdesc" style="margin-right: 3%;"> 2024.10.10 </h3>
+        <div class="round-btn boxh" style="margin: 0;">
+            <img class="calender" src="img/calender.png" style="width: 20px;"> 
+        </div>
+    </div>
+
+    <!-- 모달 창 -->
+    <div class="modal">
+        <div class="modal_body">
+            <h2>제목</h2>
+            <p>내용 </p>
+        </div>
+    </div>
+
+
+    <div class="slider-container checkline boxh">
+
+        <!-- 이전 버튼 -->
+        <div class="prev">
+        </div>
+
+        
+        <div class="bxslider checkline">
+
+            <div class="card">
+                <div class="boxv">
+                    <h1 class="checkline">취침전</h1>
+                    <div class="checkline boxh"> 
+                        <input name="time" type="time" value="12:00">
+                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    </div>
+                    <div class="checkline">
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 당뇨약 </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 혈압약 </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="boxv">
+                    <h1 class="checkline">취침전</h1>
+                    <div class="checkline boxh"> 
+                        <input name="time" type="time" value="12:00">
+                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    </div>
+                    <div class="checkline">
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 당뇨약 </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 혈압약 </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="boxv">
+                    <h1 class="checkline">취침전</h1>
+                    <div class="checkline boxh"> 
+                        <input name="time" type="time" value="12:00">
+                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    </div>
+                    <div class="checkline">
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 당뇨약 </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 혈압약 </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="boxv">
+                    <h1 class="checkline">취침전</h1>
+                    <div class="checkline boxh"> 
+                        <input name="time" type="time" value="12:00">
+                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    </div>
+                    <div class="checkline">
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 당뇨약 </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" value="">
+                                <label> 혈압약 </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 다음 버튼-->
+        <div class="next">
+        </div>
+
+
+    </div>
+</div>
+
+    
+    
+    <!-- 푸터 : nav -->
+    <nav id="mainmenu" class="">
+        <ul class="menu">
+            <li>
+                <a href="#">
+                    <div class="boxv">
+                        <img id="logo" src="img/sched.png" style="width: 50px;">
+                        <a href="#"> 스케줄 </a>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="boxv">
+                        <img id="logo" src="img/medmng.png" style="width: 50px;">
+                        <a href="#"> 복약관리 </a>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="boxv">
+                        <img id="logo" src="img/myinfo.png" style="width: 50px;">
+                        <a href="#"> 내 정보 </a>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="boxv">
+                        <img id="logo" src="img/notice.png" style="width: 50px;">
+                        <a href="#"> 공지사항 </a>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<script>
+    $(function () {
+        $('.bxslider').bxSlider({
+            mode: 'horizontal',
+            slideWidth: 300,
+            infiniteLoop: true, // next를 눌렀을 때 처음으로 넘어옴 
+            nextSelector: '.next',
+            prevSelector: '.prev',
+            // wrapperClass: 'wrapper',
+            onSliderLoad: function () {
+                // prev 버튼 처리
+                const prevLink = document.querySelector('.prev .bx-prev');
+                if (prevLink) {
+                    prevLink.textContent = ''; // Prev 텍스트 제거
+                    const prevImgElement = document.createElement('img');
+                    prevImgElement.src = 'img/left.png'; // prev 이미지 경로
+                    prevImgElement.style.width = '50px';
+                    prevLink.appendChild(prevImgElement);
+                }
+
+                // next 버튼 처리
+                const nextLink = document.querySelector('.next .bx-next');
+                if (nextLink) {
+                    nextLink.textContent = ''; // Next 텍스트 제거
+                    const nextImgElement = document.createElement('img');
+                    nextImgElement.src = 'img/right.png'; // next 이미지 경로
+                    nextImgElement.style.width = '50px';
+                    nextLink.appendChild(nextImgElement);
+                }
+
+                // 클래스가 'bx-pager bx-default-pager'인 요소를 선택
+                const element = document.querySelector('.bx-pager.bx-default-pager');
+                // 클래스에 'boxh'를 추가
+                if (element) {
+                    element.classList.add('boxh');
+                }
+            },
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        // btn-spring 클래스를 가진 이미지들에 대해 클릭 이벤트 리스너 추가
+        const timePickImages = document.querySelectorAll('.btn-spring');
+        
+        // 각 이미지에 대해 클릭 이벤트 리스너 추가
+        timePickImages.forEach((img) => {
+            img.addEventListener('click', function(event) {
+                // 이미지를 클릭했을 때, 같은 부모 요소 내에 있는 input[type="time"] 요소를 찾음
+                const timeInput = this.closest('.boxh').querySelector('input[type="time"]');
+                
+                // time input이 존재하면 시간을 선택할 수 있는 팝업을 띄움
+                if (timeInput) {
+                    timeInput.showPicker();  // 시간 선택 팝업 띄우기
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+ // 페이지가 로드되었을 때
+ window.onload = function() {
+            const fadeInElement = document.querySelector('.fadein');
+            fadeInElement.style.opacity = '1'; 
+        };
+</script>
+
+<script>
+    // 모달 열기 
+    const modal = document.querySelector('.modal');
+    const btnOpenModal=document.querySelector('.round-btn');
+
+    btnOpenModal.addEventListener("click", ()=>{
+        modal.style.display="flex";
+    });
+
+    // 모달 외부를 클릭했을 때 모달 닫기
+    modal.addEventListener("click", (event) => {
+    // 클릭한 요소가 모달 바디가 아닌 경우
+    if (event.target === modal) {
+            modal.style.display = "none"; // 모달 닫기
+        }   
+    });
+</script>
+
+</body>
+</html>
