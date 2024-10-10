@@ -13,7 +13,7 @@ FROM
 	med_info A
 	JOIN schedule B ON A.MED_ID = B.MED_ID
 WHERE
-	A.USER_ID = 'q001'
+	A.USER_ID = #{userId}
 	AND A.MED_STATUS = 'Y'
 	<![CDATA[
 	AND (
@@ -39,7 +39,7 @@ FROM
 							AND B.SCHE_CHK = 'Y' 
 							AND B.LOG_STATUS != 'N'
 WHERE
-	A.USER_ID = 'q001'
+	A.USER_ID = #{userId}
 	AND A.MED_STATUS = 'Y'
 	<![CDATA[
 	AND (

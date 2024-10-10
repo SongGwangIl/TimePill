@@ -20,7 +20,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	/* 미인증 처리 */
 	@Override
 	public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException authException) throws IOException, ServletException {
-		System.out.println("미인증 핸들러 실행");
 		
 		// 미인증 사용자 리다이렉트 Url
 		String deniedUrl = "/cover";

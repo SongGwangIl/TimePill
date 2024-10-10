@@ -26,9 +26,7 @@ public class ScheduleController {
 		vo.setUserId(userId);
 		
 		// 하루 스케줄 가져오기
-		System.out.println("하루 스케줄 가져오기 시작");
 		List<ScheduleVO> selectDayScheList = scheduleService.selectDayScheList(vo);
-		System.out.println("하루 스케줄 가져오기 끝");
 		
 		return selectDayScheList;
 	}
@@ -37,6 +35,9 @@ public class ScheduleController {
 	@PostMapping("/month-schedule")
 	public Map<String, String> mthSchedule(ScheduleVO vo) throws Exception {
 
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
 		// 한달 일정 카운트 가져오기
 		Map<String, String> todoCntList = scheduleService.getTodoCntList(vo);
 		
