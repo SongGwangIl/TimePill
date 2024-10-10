@@ -8,9 +8,10 @@
     <!-- jQuery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Gmarket Sans SDK -->
-    <link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-face.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-family.css" />
     <!-- Noto Sans Kor SDK-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff" rel="stylesheet">
     <!-- bxSlider SDK -->
     <link rel="stylesheet" href="css/jquery.bxslider.css">
     <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
@@ -26,20 +27,25 @@
 
 <!-- 헤더 : main logo, user status -->
 
-<header id="header" class="">
-    <a href="#">
-        <div class="boxh title">
-            <img id="logo" src="img/logo.svg">
-            <h1> TimePill </h1>
-        </div>
-    </a>
-    <div class="boxh logout">
+<header id="header" class="boxh">
+
+    <div class="boxh headerbar">
+
         <a href="#">
-            <div class="boxh userstatus">
-                <h3> 로그아웃 </h1>
+            <div class="boxh title">
+                <img id="logo" src="img/logo.svg">
+                <h1> TimePill </h1>
             </div>
         </a>
+        
+        <div class="boxh logout">
+            <a href="#">
+                <img src="img/logout.png" alt="로그아웃" style="width: 40px;">
+            </a>
+        </div>
+
     </div>
+
 </header>
 
 
@@ -58,7 +64,7 @@
 
     <!-- 날짜 표기 -->
     <div class="datebox boxh" style="height: 100px;">
-        <h3 class="hilightdesc" style="margin-right: 3%;"> 2024.10.10 </h3>
+        <h3 class="hilightdesc" style="margin-right: 3%;"> 2024. 10. 10 </h3>
         <div class="round-btn boxh" style="margin: 0;">
             <img class="calender" src="img/calender.png" style="width: 20px;"> 
         </div>
@@ -230,7 +236,6 @@
             infiniteLoop: true, // next를 눌렀을 때 처음으로 넘어옴 
             nextSelector: '.next',
             prevSelector: '.prev',
-            // wrapperClass: 'wrapper',
             onSliderLoad: function () {
                 // prev 버튼 처리
                 const prevLink = document.querySelector('.prev .bx-prev');
@@ -251,12 +256,11 @@
                     nextImgElement.style.width = '50px';
                     nextLink.appendChild(nextImgElement);
                 }
+                // viewport  처리
+                const wid = document.querySelector('.bx-viewport');
+                if (wid) {
+                    wid.style.width = '310px';
 
-                // 클래스가 'bx-pager bx-default-pager'인 요소를 선택
-                const element = document.querySelector('.bx-pager.bx-default-pager');
-                // 클래스에 'boxh'를 추가
-                if (element) {
-                    element.classList.add('boxh');
                 }
             },
         });

@@ -1,8 +1,7 @@
 
 /* body 파트, 전체폰트 및  margin 초기화, 배경 */
 body {
-    font-family: "GmarketSans";
-    letter-spacing: -0.8px;
+    letter-spacing: -1.5px;
     margin: 0;
     background-color: #f8f8f8;
 }
@@ -29,9 +28,12 @@ body {
     display: flex;
     align-items: center;
 }
+.headerbar {
+    margin: 0;
+
+}
 .title {
     width: 200px;
-    margin-left: 30px;
     text-align: center;
 }
 #logo {
@@ -39,12 +41,7 @@ body {
     margin: 0 auto;
 }
 .logout {
-    margin-right: 50px;
-}
-.userstatus {
-    width: 120px;
-    border: 1px solid black;
-    border-radius: 15px;
+    padding-left: 75%;
 }
 
 
@@ -90,11 +87,15 @@ a {
 
 /* slider */
 .slider-container {
-    width: 310px;
+    width: 400px;
     margin: 0 auto;
 }
 .card {
     height: 300px;
+    background-color: rgb(63, 142, 252);
+    border-radius: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 /* time picker icon*/
@@ -118,14 +119,15 @@ input[type='time'] {
 }
 
 .hilightdesc {
+    font-family: 'GmarketSans';
     font-size: 26px;
     font-weight: 800;
 }
 
 /* 체크용 line */
-.checkline {
+/* .checkline {
     border: 1px solid black;
-}
+} */
 
 /* box horizon*/
 .boxh {
@@ -154,7 +156,7 @@ input[type='time'] {
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    background-color: rgb(107, 189, 255);
+    background-color: rgb(63, 142, 252);
 }
 
 /* 모달 */
