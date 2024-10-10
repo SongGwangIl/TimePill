@@ -77,8 +77,18 @@
 		</div>
 	</div>
 	
+	<sec:authorize access="principal.username.contains('KAKAO_')">
 	<span>카카오톡 알림설정</span>
 	<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// 카카오 알림설정 로드
+			kakaoAlarmToggle();
+			// 카카오 알림설정 동작
+			$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
+		});
+	</script>
+	</sec:authorize>
 	
 	
 <script src="/resources/js/main/mainFunc.js"></script>
@@ -103,16 +113,12 @@
 
 <script>
 $(document).ready(function() {
-	// 카카오 알림설정 로드
-	kakaoAlarmToggle();
 	
 	// 알람 시간 변경
 	$('.timepick').on('focusout', updateAlarm);
 	// 복약 스케줄 완료 체크 동작
 	$(document).on('click', '.sche-chk', chkTodo);
 	
-	// 카카오 알림설정 동작
-	$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
 });
 
 $(function () {
