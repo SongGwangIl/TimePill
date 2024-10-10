@@ -80,7 +80,9 @@
 	.date>p{
 		position: absolute;
 		top: 10px;
-		left: 10px;		
+		left: 18px;
+		font-size: 10px;
+		color: black;
 	}
 	.date>span{
 		display: inline-block;
