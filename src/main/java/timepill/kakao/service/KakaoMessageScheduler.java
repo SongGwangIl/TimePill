@@ -18,7 +18,7 @@ public class KakaoMessageScheduler {
 	KakaoService kakaoService;
 
 	// 카카오 메세지 알람 스케줄
-	@Scheduled(fixedRate = 60000) // 1분, 60.000 간격으로 실행 
+	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
 		
 		// 메세지 알람 사용자 리프레시 토큰 가져오기

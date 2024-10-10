@@ -82,10 +82,10 @@
 	<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// 카카오 알림설정 로드
-			kakaoAlarmToggle();
 			// 카카오 알림설정 동작
 			$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
+			// 카카오 알림설정 로드
+			$('#kakaoAlarmToggle').click();
 		});
 	</script>
 	</sec:authorize>

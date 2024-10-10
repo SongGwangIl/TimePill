@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.schedule.service.impl.ScheduleDAO">
 
+<sql id="mthScheWhere">
+	<where>
+		A.USER_ID = #{userId}
+		AND A.MED_STATUS = 'Y'
+		<![CDATA[
+		AND (
+	        A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
+	        	AND A.START_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
+	        OR
+	        A.END_DATE >= DATE_FORMAT(#{mthEndDate}, '%Y-%m-01') 
+	        	AND A.END_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
+	    )
+	    ]]>
+	</where>
+</sql>
+
 <!-- 한달 총 스케줄 리스트 -->
 <select id="selectMthScheList" resultType="ScheduleVO">
 SELECT
@@ -12,18 +28,7 @@ SELECT
 FROM 
 	med_info A
 	JOIN schedule B ON A.MED_ID = B.MED_ID
-WHERE
-	A.USER_ID = #{userId}
-	AND A.MED_STATUS = 'Y'
-	<![CDATA[
-	AND (
-        (A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
-        AND A.START_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d'))
-        OR
-        (A.END_DATE >= DATE_FORMAT(#{mthEndDate}, '%Y-%m-01') 
-        AND A.END_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d'))
-    )
-    ]]>
+	<include refid="mthScheWhere"/>
 GROUP BY A.MED_ID , A.START_DATE , A.END_DATE 
 </select>
 
@@ -36,20 +41,9 @@ SELECT
 FROM 
 	med_info A
 	JOIN sche_log B ON A.MED_ID = B.MED_ID 
-							AND B.SCHE_CHK = 'Y' 
-							AND B.LOG_STATUS != 'N'
-WHERE
-	A.USER_ID = #{userId}
-	AND A.MED_STATUS = 'Y'
-	<![CDATA[
-	AND (
-        A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
-        	AND A.START_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
-        OR
-        A.END_DATE >= DATE_FORMAT(#{mthEndDate}, '%Y-%m-01') 
-        	AND A.END_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
-    )
-    ]]>
+						AND B.SCHE_CHK = 'Y' 
+						AND B.LOG_STATUS != 'N'
+<include refid="mthScheWhere"/>
 GROUP BY A.MED_ID , B.SCHE_DATE
 </select>
 

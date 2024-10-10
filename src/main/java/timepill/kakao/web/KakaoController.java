@@ -49,7 +49,7 @@ public class KakaoController {
 	@PostMapping("/kakao/message")
 	public String message(UserVO vo, HttpServletResponse resp) throws Exception {
 		
-		// 카카오 유저인지 확인
+		// 카카오 유저 체크
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		if (!userId.startsWith("KAKAO_")) {
 			return null;
@@ -66,6 +66,7 @@ public class KakaoController {
 		// 알람 비활성화
 		if ("N".equals(vo.getTokenUseAt())) {
 			boolean result = kakaoService.revokeMessageAuth();
+			// 메세지 권한에 관한 정보를 찾을 수 없는 경우
 			if (!result) {
 				return null;
 			} 

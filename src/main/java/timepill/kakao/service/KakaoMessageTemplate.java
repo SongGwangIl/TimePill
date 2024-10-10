@@ -40,8 +40,8 @@ public class KakaoMessageTemplate {
 		content.addProperty("title", "복약 알림");
 		content.addProperty("description", "약먹을 시간이에요.");
 		content.addProperty("image_url", "http://www.friendlycommunity.xyz/image/d2f4c5bd-640f-4cd5-b342-57dae1225434");
-		content.addProperty("image_width", "640");
-		content.addProperty("image_height", "640");
+		content.addProperty("image_width", "500");
+		content.addProperty("image_height", "500");
 		content.add("link", link);
 
 		JsonObject button = new JsonObject();
