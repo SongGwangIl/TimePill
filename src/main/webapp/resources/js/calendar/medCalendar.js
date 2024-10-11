@@ -135,7 +135,7 @@ function addEvent(){
 		//현재달에 포함된 날짜에만 이벤트 등록
 		if(d.classList.contains('this')){
 			d.onclick = (e)=>{
-				
+				removeCalendarDuration()
 				
 				//<시작끝날등록 이벤트 시작>
 				//시작날짜와 끝날짜가 등록되어있으면 초기화
@@ -144,7 +144,7 @@ function addEvent(){
 					removeEndDay();					
 				}				
 				//시작날짜 입력
-				if(startFlag){				
+				if(startFlag){
 					setStartDate(e);
 					setStartDay(e);
 					setStartText();
@@ -165,6 +165,7 @@ function addEvent(){
 					else{
 						setEndDay(e);
 						setEndText();
+						setCalendarDuration()
 						startFlag = true;					
 					}
 				}
@@ -200,13 +201,13 @@ function setStartDay(e){
 //시작일 달력에 표시
 function setStartText(){
 	let startD = +String(startInp.value).substring(8);
-	document.querySelector('[data-id="' + startD + '"]').textContent = '시작일';
+	document.querySelector('.this [data-id="' + startD + '"]').textContent = '시작일';
 }
 
 //종료일 달력에 표시
 function setEndText(){
 	let endD = +String(endInp.value).substring(8);
-	document.querySelector('[data-id="' + endD + '"]').textContent = '종료일';
+	document.querySelector('.this [data-id="' + endD + '"]').textContent = '종료일';
 }
 
 //시작날짜 달력에서 제거
@@ -316,16 +317,20 @@ function setCalendarDuration(){
 		let dataTime = new Date(time.getAttribute('data-time'));
 		let startTime = new Date(startInp.value);
 		let endTime = new Date(endInp.value);
-		console.log(dataTime);
+		
 		if(dataTime > startTime && dataTime < endTime){
-			time.classList.add('period');
+			if(!time.classList.contains('endDay'))
+				time.classList.add('period');
 		}
 	}
 }
 
 //처방기간 달력에서 제거
 function removeCalendarDuration(){
-	document.querySelectorAll('.period').classList.remove('period');
+	let selectsPeriod = document.querySelectorAll('.period');
+	if(selectsPeriod)
+		for(period of selectsPeriod)
+		period.classList.remove('period');
 }
 
 setCalendarText();
