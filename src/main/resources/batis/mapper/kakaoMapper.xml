@@ -55,7 +55,7 @@ WHERE
 
 <!-- 카카오 유저 리프레시 토큰 가져오기 -->
 <select id="selectKakaoRefreshTokenList" resultType="UserVO">
-SELECT 
+SELECT
 	A.REFRESH_TOKEN
 FROM
 	users A
@@ -67,6 +67,7 @@ WHERE
 	AND A.TOKEN_USE_AT = 'Y'
 	AND CURDATE() BETWEEN D.START_DATE AND D.END_DATE
 	AND B.ALARM_TIME BETWEEN CURTIME() - INTERVAL 10 SECOND AND CURTIME() + INTERVAL 10 SECOND
+GROUP BY A.REFRESH_TOKEN
 </select>
  
 </mapper>
