@@ -137,16 +137,16 @@
 	.startDay{
 		background: yellowgreen;
 	}
+	.period{
+		background: yellow;
+	}
+		
 	.endDay{
 		background: pink;
 	}
 	.selectedDay{
 		background: olive;
 	}
-	.period{
-		background: yellow;
-	}
-		
 </style>
 </head>
 
