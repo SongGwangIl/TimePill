@@ -1,3 +1,88 @@
+//리셋버튼동작
+function reset(){
+	document.querySelector('#start').value = '';
+	document.querySelector('#end').value = '';
+	removeStartDay();
+	removeEndDay();
+	goToday();
+}
+//현재 날짜를 저장
+let date = new Date();
+let firstDate;
+let lastDate;
+
+//달력을 보여주는 함수
+async function renderCalendar(){
+	const viewYear = date.getFullYear();
+	const viewMonth= date.getMonth();
+	
+	//현재 연도와 월 표시
+	document.querySelector('.year-month').textContent = viewYear+ "년 " + (viewMonth + 1) +"월";
+
+	//지난달과 이번달의 마지막 날
+	const prevLast = new Date(viewYear, viewMonth, 0);
+	const thisLast = new Date(viewYear, viewMonth + 1, 0); 
+	
+	//지난달 마지막날의 날짜와 요일
+	const PLDate = prevLast.getDate(); 
+	const PLDay = prevLast.getDay(); 
+
+	//이번달 마지막날의 날짜와 요일
+	const TLDate = thisLast.getDate();
+	const TLDay = thisLast.getDay();
+	
+	firstDate = viewYear + "-" + (viewMonth+1) + "-01";
+	lastDate = viewYear + "-" + (viewMonth+1) + "-" + TLDate;
+
+	//달력합치기
+	const prevDates = [];
+	const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+	const nextDates = [];
+
+	// 지난달 날짜 추가
+	if(PLDate !== 6)
+		for(let i=0; i<PLDay+1; i++)
+			prevDates.unshift(PLDate - i);
+	
+	// 다음달 날짜 추가
+	for(let i=1; i<7-TLDay; i++)
+		nextDates.push(i);
+
+	const dates = prevDates.concat(thisDates, nextDates);
+	const firstDateIndex = dates.indexOf(1);
+	const lastDateIndex = dates.lastIndexOf(TLDate);
+	const dateEl = document.querySelector('.dates');
+
+	//날짜를 달력에 추가
+	dates.forEach((date, i)=> {
+		const condition = (i >= firstDateIndex && i < lastDateIndex + 1) ? 'this' : 'other';
+		let el = document.createElement('div');
+		el.setAttribute('class', 'date ' + condition);
+		if(condition === 'this')
+		el.setAttribute('data-time', viewYear+'-'+(viewMonth+1)+'-'+date);
+		let sp = document.createElement('span');
+		sp.textContent = date;
+		let p = document.createElement('p');
+		p.setAttribute('data-id', date);
+		el.append(sp);
+		el.append(p);
+
+		dateEl.append(el);
+		
+	});
+
+	//오늘날짜 표시하기
+	const today = new Date();
+
+	if(viewMonth === today.getMonth() && viewYear === today.getFullYear()){
+		for(let date of document.querySelectorAll('.this>span')){
+			if(Number(date.innerHTML) === today.getDate()){
+				date.classList.add('today');
+				break;
+			}
+		}
+	}
+}	
 //달력그리기 & 클릭이벤트 등록
 renderCalendar();
 document.addEventListener('DOMContentLoaded', addEvent);
@@ -17,6 +102,9 @@ function prevMonth(){
 	date.setMonth(date.getMonth()-1);	
 	renderCalendar();
 	addEvent();
+	setCalendarText();
+	removeCalendarDuration();
+	setCalendarDuration();
 }
 
 //다음 달로 이동
@@ -25,14 +113,9 @@ function nextMonth(){
 	date.setMonth(date.getMonth()+1);
 	renderCalendar();
 	addEvent();
-}
-
-//현재날짜로이동
-function goToday(){
-	clearCalendar();
-	date = new Date();
-	renderCalendar();
-	addEvent();
+	setCalendarText();
+	removeCalendarDuration();
+	setCalendarDuration();
 }
 
 let startFlag = true;
@@ -64,6 +147,7 @@ function addEvent(){
 				if(startFlag){				
 					setStartDate(e);
 					setStartDay(e);
+					setStartText();
 					startFlag = false;
 				}
 				//시작날짜 입력시 실행
@@ -75,15 +159,16 @@ function addEvent(){
 						setStartDate(e);
 						removeEndDay();
 						setStartDay(e);
+						setStartText();
 					}
 					//끝날짜로 표시하는 경우
 					else{
 						setEndDay(e);
+						setEndText();
 						startFlag = true;					
 					}
 				}
-				//<시작끝날 이벤트 종료>
-				
+				//<시작끝날 이벤트 종료>				
 			}
 		}	
 	}
@@ -106,9 +191,22 @@ function setStartDay(e){
 	}		
 
 	let year = date.getFullYear();
-	let month = date.getMonth() + 1;
+	let month = String(date.getMonth() + 1).padStart(2,'0');
 	let ym = year + '-' + month;
-	document.querySelector('#start').value = ym + '-' + startDate;
+	
+	document.querySelector('#start').value = ym + '-' + startDate.padStart(2,'0');
+	
+}
+//시작일 달력에 표시
+function setStartText(){
+	let startD = +String(startInp.value).substring(8);
+	document.querySelector('[data-id="' + startD + '"]').textContent = '시작일';
+}
+
+//종료일 달력에 표시
+function setEndText(){
+	let endD = +String(endInp.value).substring(8);
+	document.querySelector('[data-id="' + endD + '"]').textContent = '종료일';
 }
 
 //시작날짜 달력에서 제거
@@ -116,6 +214,7 @@ function removeStartDay(){
 	let startDays = document.querySelectorAll('.startDay'); 
 	for(day of startDays){
 		day.classList.remove('startDay');
+		day.querySelector('p').textContent = '';
 	}
 }
 
@@ -136,9 +235,9 @@ function setEndDay(e){
 	
 
 	let year = date.getFullYear();
-	let month = date.getMonth() + 1;
+	let month = String(date.getMonth() + 1).padStart(2,'0');
 	let ym = year + '-' + month;
-	document.querySelector('#end').value = ym + '-' + endDate;		
+	document.querySelector('#end').value = ym + '-' + endDate.padStart(2,'0');		
 }
 
 //시작날짜와 끝날짜 비교 
@@ -151,8 +250,83 @@ function reValue(){
 
 //종료날짜 달력에서 제거 및 종료날짜 초기화  
 function removeEndDay(){
-	if(document.querySelector('.endDay'))
-		document.querySelector('.endDay').classList.remove('endDay');
+	let endDay = document.querySelector('.endDay');
+	if(endDay){
+		endDay.classList.remove('endDay');
+		endDay.querySelector('p').textContent = '';	
+	}
 	document.querySelector('#end').value = '';
 	endDate = null;
 }
+
+
+let startInp = document.querySelector('#start');
+let endInp = document.querySelector('#end');
+
+// 처방일자 만료일자 달력에 표시
+function setCalendarText(){
+	setCalendarStartText();
+	setCalendarEndText();	
+}
+
+//시작일텍스트 달력에 표시
+function setCalendarStartText(){
+	let yearMonth = date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0');
+	let startYM = String(startInp.value).substring(0,7);
+	let startD = +String(startInp.value).substring(8);
+	let daySpans = document.querySelectorAll('.date.this span');
+	let tagP = document.querySelectorAll('.date.this p');
+
+	if(startInp.value){
+		if(yearMonth === startYM){
+			for(let daySpan of daySpans){
+				if(daySpan.textContent == startD){
+					daySpan.parentElement.classList.add('startDay');
+					setStartText();
+				}
+			}
+		}			
+	}
+}
+
+//종료일텍스트 달력에 표시
+function setCalendarEndText(){
+	let yearMonth = date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0');
+	let endYM = String(endInp.value).substring(0,7);
+	let endD = +String(endInp.value).substring(8);
+	let daySpans = document.querySelectorAll('.date.this span');
+	let tagP = document.querySelectorAll('.date.this p');
+
+	if(endInp.value){
+		if(yearMonth === endYM){
+			for(let daySpan of daySpans){
+				if(daySpan.textContent == endD){
+					daySpan.parentElement.classList.add('endDay');
+					setEndText();
+				}
+			}
+		}
+	}
+}
+
+//처방기간 달력에 표시
+function setCalendarDuration(){
+	let times = document.querySelectorAll('[data-time]');
+	for(let time of times){
+		let dataTime = new Date(time.getAttribute('data-time'));
+		let startTime = new Date(startInp.value);
+		let endTime = new Date(endInp.value);
+		console.log(dataTime);
+		if(dataTime > startTime && dataTime < endTime){
+			time.classList.add('period');
+		}
+	}
+}
+
+//처방기간 달력에서 제거
+function removeCalendarDuration(){
+	document.querySelectorAll('.period').classList.remove('period');
+}
+
+setCalendarText();
+setCalendarDuration();
