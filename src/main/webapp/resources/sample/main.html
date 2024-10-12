@@ -7,45 +7,50 @@
 
     <!-- jQuery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Gmarket Sans SDK -->
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-face.css" />
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-family.css" />
-    <!-- Noto Sans Kor SDK-->
-    <link href="https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff" rel="stylesheet">
+    <!-- Gmarket SANS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css"/>
+    <!-- NotoSans KR-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- bxSlider SDK -->
     <link rel="stylesheet" href="css/jquery.bxslider.css">
     <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
     <!-- 기본 템플릿 CSS -->
-    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
     
 
 </head>
 
 <body>
 
+    <!-- 모달 창 -->
+    <div class="modal">
+        <div class="modal_body">
+            <h2>제목</h2>
+            <p>내용 </p>
+        </div>
+    </div>
+
 <div id="backcontainer" class="boxv">
 
 <!-- 헤더 : main logo, user status -->
 
 <header id="header" class="boxh">
-
     <div class="boxh headerbar">
-
         <a href="#">
             <div class="boxh title">
                 <img id="logo" src="img/logo.svg">
                 <h1> TimePill </h1>
             </div>
-        </a>
-        
+        </a> 
         <div class="boxh logout">
             <a href="#">
-                <img src="img/logout.png" alt="로그아웃" style="width: 40px;">
+                <img src="img/logout.png" alt="로그아웃" style="width: 35px;">
             </a>
         </div>
-
     </div>
-
 </header>
 
 
@@ -63,116 +68,121 @@
     </div>
 
     <!-- 날짜 표기 -->
-    <div class="datebox boxh" style="height: 100px;">
+    <div class="datebox boxh" style="height: 15%;">
         <h3 class="hilightdesc" style="margin-right: 3%;"> 2024. 10. 10 </h3>
         <div class="round-btn boxh" style="margin: 0;">
             <img class="calender" src="img/calender.png" style="width: 20px;"> 
         </div>
     </div>
-
-    <!-- 모달 창 -->
-    <div class="modal">
-        <div class="modal_body">
-            <h2>제목</h2>
-            <p>내용 </p>
-        </div>
-    </div>
-
-
-    <div class="slider-container checkline boxh">
+    <div class="slider-container boxh">
 
         <!-- 이전 버튼 -->
         <div class="prev">
         </div>
 
         
-        <div class="bxslider checkline">
+        <div class="bxslider">
 
             <div class="card">
+
                 <div class="boxv">
-                    <h1 class="checkline">취침전</h1>
-                    <div class="checkline boxh"> 
-                        <input name="time" type="time" value="12:00">
-                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    <h1 style="color: white; text-align: center; margin: 18px;"> 아침약 </h1>
+
+                    <div class="whiteround boxh">
+                        <input name="time" type="time" value="12:00"> <p class="alarmdesc gsasdw"> 알림 </p> 
+                        <img class="btn-spring" src="img/gear.png" style="width: 28px;"> 
                     </div>
-                    <div class="checkline">
-                        <ul>
-                            <li>
+
+
+                    <div class="">
+                        <ul class="medlist">
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 당뇨약 </label>
+                                <label class="label"> 당뇨약 </label>
                             </li>
-                            <li>
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 혈압약 </label>
+                                <label class="label"> 혈압약 </label>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
 
+
+
             <div class="card">
+
                 <div class="boxv">
-                    <h1 class="checkline">취침전</h1>
-                    <div class="checkline boxh"> 
-                        <input name="time" type="time" value="12:00">
-                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    <h1 style="color: white; text-align: center; margin: 18px;"> 아침약 </h1>
+
+                    <div class="whiteround boxh">
+                        <input name="time" type="time" value="12:00"> <p class="alarmdesc gsasdw"> 알림 </p> 
+                        <img class="btn-spring" src="img/gear.png" style="width: 28px;"> 
                     </div>
-                    <div class="checkline">
-                        <ul>
-                            <li>
+
+
+                    <div class="">
+                        <ul class="medlist">
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 당뇨약 </label>
+                                <label class="label"> 당뇨약 </label>
                             </li>
-                            <li>
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 혈압약 </label>
+                                <label class="label"> 혈압약 </label>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
 
             <div class="card">
+
                 <div class="boxv">
-                    <h1 class="checkline">취침전</h1>
-                    <div class="checkline boxh"> 
-                        <input name="time" type="time" value="12:00">
-                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    <h1 style="color: white; text-align: center; margin: 18px;"> 아침약 </h1>
+
+                    <div class="whiteround boxh">
+                        <input name="time" type="time" value="12:00"> <p class="alarmdesc gsasdw"> 알림 </p> 
+                        <img class="btn-spring" src="img/gear.png" style="width: 28px;"> 
                     </div>
-                    <div class="checkline">
-                        <ul>
-                            <li>
+
+
+                    <div class="">
+                        <ul class="medlist">
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 당뇨약 </label>
+                                <label class="label"> 당뇨약 </label>
                             </li>
-                            <li>
+                            <li class="medlist-detail">
                                 <input type="checkbox" name="" value="">
-                                <label> 혈압약 </label>
+                                <label class="label"> 혈압약 </label>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
 
             <div class="card">
                 <div class="boxv">
-                    <h1 class="checkline">취침전</h1>
-                    <div class="checkline boxh"> 
-                        <input name="time" type="time" value="12:00">
-                        <img class="btn-spring" src="img/gear.png" style="width: 25px;"> 
+                    <h1 style="color: white; text-align: center; margin: 18px;"> 취침전 </h1>
+
+                    <div class="whiteround boxh">
+                        <input name="time" type="time" value="12:00"> <p class="alarmdesc gsasdw"> 알림 </p> 
+                        <img class="btn-spring" src="img/gear.png" style="width: 28px;"> 
                     </div>
-                    <div class="checkline">
-                        <ul>
-                            <li>
-                                <input type="checkbox" name="" value="">
-                                <label> 당뇨약 </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="" value="">
-                                <label> 혈압약 </label>
-                            </li>
-                        </ul>
-                    </div>
+
+                    <p class="alarmask"> 지금 알림을 등록해보세요! </p> 
+
+                    <a href="#" class="white-btn">
+                        <div class="boxh">
+                            <img id="logo" src="img/logo.svg" style="width: 30px; margin: 0;"> <p style="margin-left: 5px;">알림 등록하기 </p>
+                        </div>
+                    </a>
+
                 </div>
             </div>
 
@@ -181,10 +191,25 @@
         <!-- 다음 버튼-->
         <div class="next">
         </div>
-
-
     </div>
+
+
+    <!-- 카카오톡 알림 받기 신청 -->
+     <div  class="boxh kakaobox">
+        <div>
+            <p class="caption"> 더 쉽고 빠르게 복용 알림을 받고 싶다면? </p>
+             <span class="kakao-span boxh"> <img src="img/kakao.png" width="15px"> 카카오톡 알림 받기 </span>
+        </div>
+        <div>
+            <input type="checkbox" id="toggle" hidden> 
+            <label for="toggle" class="toggleSwitch">
+            <span class="toggleButton"></span>
+            </label>
+        </div>
+    </div>
+
 </div>
+
 
     
     
@@ -230,11 +255,35 @@
 
 <script>
     $(function () {
-        $('.bxslider').bxSlider({
+
+        const windowWidth = $(window).width();
+        let imgSize;
+        
+        function bxWitdth() {
+            if (windowWidth > 360) {
+                return 330; // 데스크탑 크기일 때
+            } else {
+                return 280; // 모바일 크기일 때
+            }
+        }
+
+        function adjustButtonSize() {
+            if (windowWidth > 360) {
+                imgSize = '60px'; // 데스크탑
+            } else {
+                imgSize = '30px'; // 모바일
+            }
+        }
+
+        // 버튼 크기를 조정하는 함수 호출
+        adjustButtonSize();
+
+        const slider = $('.bxslider').bxSlider({
             mode: 'horizontal',
-            slideWidth: 300,
-            infiniteLoop: true, // next를 눌렀을 때 처음으로 넘어옴 
+            slideWidth: bxWitdth(),
+            infiniteLoop: true,
             nextSelector: '.next',
+            touchEnabled : false,
             prevSelector: '.prev',
             onSliderLoad: function () {
                 // prev 버튼 처리
@@ -243,7 +292,7 @@
                     prevLink.textContent = ''; // Prev 텍스트 제거
                     const prevImgElement = document.createElement('img');
                     prevImgElement.src = 'img/left.png'; // prev 이미지 경로
-                    prevImgElement.style.width = '50px';
+                    prevImgElement.style.width = imgSize;
                     prevLink.appendChild(prevImgElement);
                 }
 
@@ -253,14 +302,14 @@
                     nextLink.textContent = ''; // Next 텍스트 제거
                     const nextImgElement = document.createElement('img');
                     nextImgElement.src = 'img/right.png'; // next 이미지 경로
-                    nextImgElement.style.width = '50px';
+                    nextImgElement.style.width = imgSize;
                     nextLink.appendChild(nextImgElement);
                 }
+
                 // viewport  처리
                 const wid = document.querySelector('.bx-viewport');
                 if (wid) {
-                    wid.style.width = '310px';
-
+                    wid.style.width = '102%';
                 }
             },
         });
@@ -300,9 +349,7 @@
     const modal = document.querySelector('.modal');
     const btnOpenModal=document.querySelector('.round-btn');
 
-    btnOpenModal.addEventListener("click", ()=>{
-        modal.style.display="flex";
-    });
+    btnOpenModal.addEventListener("click", ()=>{ modal.style.display="flex"; });
 
     // 모달 외부를 클릭했을 때 모달 닫기
     modal.addEventListener("click", (event) => {
