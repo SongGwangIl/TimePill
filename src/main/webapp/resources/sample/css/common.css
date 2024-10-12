@@ -23,9 +23,9 @@ body {
 }
 
 /* 체크용 line */
-/* .checkline {
+.checkline {
     border: 1px solid black;
-} */
+}
 
 /* box horizon*/
 .boxh {

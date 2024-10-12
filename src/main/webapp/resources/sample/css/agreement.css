@@ -119,16 +119,6 @@
     align-items: center;
 }
 
-.btn-kakao {
-    width: 73%;
-    height: 25%;
-    border-radius: 20px;
-    background-color: #FEE500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .btndesc {
     text-align: center;
     font-size: 1.5em;
@@ -178,5 +168,4 @@
         font-weight: 400;
         margin: 0;
     }
-    
 }
