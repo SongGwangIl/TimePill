@@ -37,11 +37,8 @@ ul.bxslider {
   display: inline-block;
   vertical-align: bottom;
 }
-/* .bx-wrapper .bx-pager-item {
-  font-size: 0;
-  line-height: 0;
-} */
- /* DIRECTION CONTROLS (NEXT / PREV) */
+
+
 .bx-wrapper .bx-prev {
   left: 10px;
   background: url('/img/left.png') no-repeat 0 -32px;
