@@ -1,66 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"		uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>TimePill - 로그인</title>
-<link rel="stylesheet" href="/resources/css/user/login.css" type="text/css">
-<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
-<style>
-.bg { 
-	width:1920px;
-	height:700px;
-	position:absolute;
-	left:0px;
-	top:80px;
-	background-image:url(resources/img/background.png);
-	background-repeat:no-repeat;
-	background-size:cover;
-}
-.text4 {
-      position: absolute;
-      top: 830px;
-      left:880px;
-      width: 262px;
-      height: 20px;
-      text-align: left;
-      font: normal normal normal 14px/20px 'Noto Sans CJK KR';
-      letter-spacing: 0px;
-      color: #000000;
-      opacity: 1;
-    }
-</style>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LOGIN</title>
+
+    <!-- jQuery 3.7.1-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Gmarket SANS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css"
+        type="text/css" />
+    <!-- NotoSans KR-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- 기본 템플릿 CSS -->
+    <link rel="stylesheet" href="/resources/css/common.css">
+    <link rel="stylesheet" href="/resources/css/login.css">
 </head>
 <body>
-<div class="bg"></div>
-	<div id="wrap">
-		<h1>로그인</h1>
-		<form action="/user/login" method="post">
-			<ul class="input">
-				<li>
-	                <label>아이디</label>
-	                <input type="text" name="userId" id="userId" required>
-	            <li>
-	                <label>비밀번호</label>
-	                <input type="password" name="password" id="password">
-				</li>
-            </ul>
-	    	<input type="submit" value="로그인" class="btn">
-	    	<sec:csrfInput />
-		</form>
-		<a href="${pageContext.request.contextPath}/kakao/login">카카오로그인</a>
-		<a href="${pageContext.request.contextPath}/user/terms">회원가입</a>
-		<a href="/user/find-id">아이디를 잃어버렸습니까?</a>
-		<a href="/user/auth-email">비밀번호를 잃어버렸습니까?</a>
-	</div>
-	<div id="footer" class="text4">
-	<h3>copyrightⓒtimePill</h3>
+<div id="backcontainer" class="boxv">
+    <div id="contents" class="bgimg">
+        <!-- 약병 그림 -->
+        <div class="main-ico"></div>
+
+        <!-- 타이틀 -->
+        <div class="boxh titlebox">
+            <img src="/resources/img/logo.svg" class="logo">
+            <h1 class="gsansdown title">TimePill</h1>
+        </div>
+
+        <div>
+            <form id="loginform" action="/user/login" method="post">
+
+                <table class="loginform">
+                    <tr>
+                        <td><h3 class="margin-init">아이디</h3></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input password">
+                                <input type="text" name="userId" class="form-input" placeholder="아이디를 입력해주세요.">
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3 class="margin-init">비밀번호</h3></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input password">
+                                <input type="password" name="password" class="form-input pwd" placeholder="비밀번호를 입력해주세요.">
+                                <img class="eye" src="/resources/img/eye.png"></img>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <sec:csrfInput />
+            </form>
+        </div>
+
+
+        <div class="btns boxv genbtn">
+            <a href="" id="login" class="btn-sky">
+                <p class="btndesc"> 로그인 </p>
+            </a>
+            <a href="/kakao/login" class="btn-kakao">
+                <img src="/resources/img/kakao.png" width="10%" style="margin: 2%;">
+                <p class="btndesc"> 카카오톡으로 로그인 </p>
+            </a>
+            <a href="#">
+                <p class="caption"> 아이디 / 비밀번호 찾기 </p>
+            </a>
+        </div>
+    </div>
 </div>
 
-<script>
+    <script>
+        // eye 이미지 클릭 시 패스워드 필드 토글
+        document.querySelector('.eye').addEventListener('click', function() {
+            const pwdfiled = document.querySelector('.pwd');
+            const type = pwdfiled.getAttribute('type');
+            
+            if (type === 'password') {
+                pwdfiled.setAttribute('type', 'text');
+                this.src = '/resources/img/eyeno.png';
+            } else {
+                pwdfiled.setAttribute('type', 'password');
+                this.src = '/resources/img/eye.png';
+            }
+        });
+
+        // '로그인' 버튼 클릭 시 form 제출
+        document.getElementById('login').addEventListener('click', 
+            function (event) {
+                event.preventDefault();
+                document.getElementById('loginform').submit();
+        });
+   
+
+
 <c:if test="${not empty sessionScope.message}">
 	alert("<c:out value='${sessionScope.message}'/>");
 	<c:remove var="message" scope="session"/>
