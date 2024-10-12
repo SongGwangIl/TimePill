@@ -1,3 +1,11 @@
+#contents {
+    overflow: auto;
+}
+
+#backcontainer {
+    overflow: auto;
+}
+
 /* slider */
 .slider-container {
     width: 100%;
@@ -73,32 +81,7 @@ input[type='time'] {
     margin: 0 auto;
 }
 
-/* 기본 체크박스 숨기고 커스텀 스타일 적용 */
-input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #fff;
-    border-radius: 50%; /* 둥근 모양 */
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-}
 
-/* 체크되었을 때의 스타일 */
-input[type="checkbox"]:checked {
-    background-color: green; /* 체크된 상태에서 초록색 배경 */
-    border-color: green;
-}
-
-/* 체크 표시 모양 */
-input[type="checkbox"]:checked::after {
-    content: "✔";
-    font-size: 17px;
-    color: white; /* 체크 마크 색 */
-}
 
 .medlist {
     padding: 0;
@@ -169,6 +152,7 @@ input[type="checkbox"]:checked::after {
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
 .caption {
     font-family: "Noto Sans KR", sans-serif;
     letter-spacing: -2.5px;
