@@ -12,7 +12,6 @@ body {
     height: 100vh;
     bottom: 100px;
     background: #f8f8f8; 
-    overflow: auto;
 }
 
 /* 컨텐츠 */
@@ -21,7 +20,6 @@ body {
     width: 480px;
     background-color: #f8f8f8;
     height: 85%;
-    overflow: auto;
 }
 
 /* 체크용 line */
@@ -72,6 +70,35 @@ li {
     text-align: center;
 }
 
+/* checkbox */
+/* 기본 체크박스 숨기고 커스텀 스타일 적용 */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #b1b1b1;
+    border-radius: 50%; /* 둥근 모양 */
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+/* 체크되었을 때의 스타일 */
+input[type="checkbox"]:checked {
+    background-color: green; /* 체크된 상태에서 초록색 배경 */
+    border-color: green;
+}
+
+/* 체크 표시 모양 */
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    font-size: 17px;
+    color: white; /* 체크 마크 색 */
+}
+
+/* toggle switch */
 .toggleSwitch {
     width: 50px;
     height: 25px;
