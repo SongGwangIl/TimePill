@@ -6,122 +6,234 @@
 
 <%-- header --%>
 <c:import url="/header" charEncoding="utf-8">
-	<c:param name="title" value="TimePill - 스케줄 관리"/>
+	<c:param name="title" value="TimePill"/>
 </c:import>
 
-<style>
-	.input-container {
-	    position: relative;
-	    display: inline-block;
-	}
-	.input-container input {
-	    position: relative;
-	    z-index: 1;
-	}
-	.input-container::after {
-	    content: '';
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    width: 80%;
-	    height: 100%;
-	    background: rgba(255, 255, 255, 0.0); /* 반투명 막 */
-	    pointer-events: auto; /* 클릭 불가 */
-	    z-index: 2;
-	}
-</style>
 
-<div id="contents">
+<div id="contents" class="">
 
-	<div class="greeting">
-	    <h3> <c:out value="${loginUser.nickname}"/> 님, <br>
-	        오늘의 복약정보를 확인하세요!
-	    </h3>
-	</div>
+	<!-- 안내 박스-->
+    <div class="greeting boxh">
+        <h3 class="greetingdesc"> 
+            <span class="hilightdesc"><c:out value="${loginUser.nickname}"/></span> 님, <br>
+            오늘의 복약정보를 확인하세요!
+        </h3>
+        <img class="fadein" src="/resources/img/pill.png" style="width: 70px; margin-left: 5%;">
+    </div>
 	
-	<span id="selectedDay"></span>
+	<!-- 날짜 표기 -->
+    <div class="datebox boxh" style="height: 15%;">
+        <h3 id="selectedDay" class="hilightdesc" style="margin-right: 3%;"></h3>
+        <div class="round-btn boxh" style="margin: 0;">
+            <img class="calender" src="/resources/img/calender.png" style="width: 20px;"> 
+        </div>
+    </div>
 	
-	<div class="slider-container">
-		<div class="bxslider center">
+	<div class="slider-container boxh">
+		<!-- 이전 버튼 -->
+        <div class="prev"></div>
+	
+		<div class="bxslider">
 			<c:forEach var="resultAlarm" items="${alarmList}">
 				<div class="card" data-alarm-id="${resultAlarm.alarmId}">
-					<%-- 알람타입 --%>
-					<c:choose>
-						<c:when test="${resultAlarm.alarmType eq '1'}">
-							아침
-						</c:when>
-						<c:when test="${resultAlarm.alarmType eq '2'}">
-							점심
-						</c:when>
-						<c:when test="${resultAlarm.alarmType eq '3'}">
-							저녁
-						</c:when>
-						<c:when test="${resultAlarm.alarmType eq '4'}">
-							취침전
-						</c:when>
-					</c:choose>
-					<br>
-					
-					<%-- 알람시간 --%>
-					<fmt:parseDate value="${resultAlarm.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
-   					<div class="input-container">
-   					<input type="time" class="timepick" step="300" name="alarmTime" 
-   						value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px;">
+					<div class="boxv">
+						<%-- 알람타입 --%>
+						<h1 style="color: white; text-align: center; margin: 18px;">
+							<c:choose>
+								<c:when test="${resultAlarm.alarmType eq '1'}">
+									아침약
+								</c:when>
+								<c:when test="${resultAlarm.alarmType eq '2'}">
+									점심약
+								</c:when>
+								<c:when test="${resultAlarm.alarmType eq '3'}">
+									저녁약
+								</c:when>
+								<c:when test="${resultAlarm.alarmType eq '4'}">
+									취침전
+								</c:when>
+							</c:choose>
+						</h1>
+						
+						<%-- 알람시간 --%>
+						<fmt:parseDate value="${resultAlarm.alarmTime}" pattern="HH:mm:ss" var="alarmTime"/>
+	   					<div class="whiteround boxh">
+		   					<input type="time" class="timepick" step="300" name="alarmTime" 
+		   						value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px;">
+	   						<p class="alarmdesc gsasdw"> 알림 </p>
+	   						<img class="btn-spring" src="/resources/img/gear.png" style="width: 28px;">
+						</div>
+						<br>
+						
+						<%-- 복약 일정 --%>
+						<div class="daySchedule">
+							<ul class="medlist">
+								<!-- 인풋, 라벨이 아닌 이미지, 스판으로 생성됨 협의 필요 -->
+							</ul>
+						</div>
 					</div>
-					<br>
-					
-					<%-- 복약 일정 --%>
-					<div class="daySchedule"></div>
 				</div>
 			</c:forEach>
 		</div>
+		
+		<!-- 다음 버튼-->
+        <div class="next"></div>
 	</div>
 	
 	<sec:authorize access="principal.username.contains('KAKAO_')">
-	<span>카카오톡 알림설정</span>
-	<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
-	<script type="text/javascript">
-		$(document).ready(function() {
-			// 카카오 알림설정 동작
-			$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
-			// 카카오 알림설정 로드
-			$('#kakaoAlarmToggle').click();
-		});
-	</script>
+		<!-- 카카오톡 알림 받기 신청 -->
+	    <div  class="boxh kakaobox">
+	        <div>
+	            <p class="caption"> 카카오 복약 알림을 받고 싶다면? </p>
+	             <span class="kakao-span boxh"> <img src="/resources/img/kakao.png" width="15px"> 카카오톡 알림 설정 </span>
+	        </div>
+	        <div>
+	        	<!-- 알림설정 수정 필요 -->
+				<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
+<!-- 	            <input type="checkbox" id="toggle" hidden>  -->
+<!-- 	            <label for="toggle" class="toggleSwitch"> -->
+<!-- 	            <span class="toggleButton"></span> -->
+<!-- 	            </label> -->
+	        </div>
+	    </div>
+		<script>
+			$(document).ready(function() {
+				// 카카오 알림설정 동작
+				$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
+				// 카카오 알림설정 로드
+				$('#kakaoAlarmToggle').click();
+			});
+		</script>
 	</sec:authorize>
-	
-	
-<script src="/resources/js/main/mainFunc.js"></script>
-<c:import url="/calendar"/><!-- 캘린터 선택한 날짜 변수 : selectedDay -->
-<script src="/resources/js/calendar/mainCalendar.js"></script>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
 </div>
 
+<!-- 모달 창 -->
+<div class="modal">
+	<div class="modal_body">
+		<script src="/resources/js/main/mainFunc.js"></script>
+		<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
+		<c:import url="/calendar"/>
+		<script src="/resources/js/calendar/mainCalendar.js"></script>
+	</div>
+</div>
 
+<!-- bxSlider SDK -->
+<link rel="stylesheet" href="/resources/css/jquery.bxslider.css">
+<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+
+<script>
+$(function() {
+
+	const windowWidth = $(window).width();
+	let imgSize;
+
+	function bxWitdth() {
+		if (windowWidth > 360) {
+			return 330; // 데스크탑 크기일 때
+		} else {
+			return 280; // 모바일 크기일 때
+		}
+	}
+
+	function adjustButtonSize() {
+		if (windowWidth > 360) {
+			imgSize = '60px'; // 데스크탑
+		} else {
+			imgSize = '30px'; // 모바일
+		}
+	}
+
+	// 버튼 크기를 조정하는 함수 호출
+	adjustButtonSize();
+
+	const slider = $('.bxslider').bxSlider({
+		mode : 'horizontal',
+		slideWidth : bxWitdth(),
+		infiniteLoop : true,
+		nextSelector : '.next',
+		touchEnabled : false,
+		prevSelector : '.prev',
+		onSliderLoad : function() {
+			// prev 버튼 처리
+			const prevLink = document.querySelector('.prev .bx-prev');
+			if (prevLink) {
+				prevLink.textContent = ''; // Prev 텍스트 제거
+				const prevImgElement = document.createElement('img');
+				prevImgElement.src = '/resources/img/left.png'; // prev 이미지 경로
+				prevImgElement.style.width = imgSize;
+				prevLink.appendChild(prevImgElement);
+			}
+
+			// next 버튼 처리
+			const nextLink = document.querySelector('.next .bx-next');
+			if (nextLink) {
+				nextLink.textContent = ''; // Next 텍스트 제거
+				const nextImgElement = document.createElement('img');
+				nextImgElement.src = '/resources/img/right.png'; // next 이미지 경로
+				nextImgElement.style.width = imgSize;
+				nextLink.appendChild(nextImgElement);
+			}
+
+			// viewport  처리
+			const wid = document.querySelector('.bx-viewport');
+			if (wid) {
+				wid.style.width = '102%';
+			}
+		},
+	});
+});
+</script>
+<script>
+// 페이지가 로드되었을 때
+window.onload = function () {
+    const fadeInElement = document.querySelector('.fadein');
+    fadeInElement.style.opacity = '1';
+};
+</script>
+
+<script>
+// 모달 열기 
+const modal = document.querySelector('.modal');
+const btnOpenModal = document.querySelector('.round-btn');
+
+btnOpenModal.addEventListener("click", () => { modal.style.display = "flex"; });
+
+// 모달 외부를 클릭했을 때 모달 닫기
+modal.addEventListener("click", (event) => {
+    // 클릭한 요소가 모달 바디가 아닌 경우
+    if (event.target === modal) {
+        modal.style.display = "none"; // 모달 닫기
+    }
+});
+</script>
 
 <script>
 $(document).ready(function() {
 	
+	// 알람시간 변경 띄우기
+	$(function () {
+	    // btn-spring 클래스를 가진 이미지들에 대해 클릭 이벤트 리스너 추가
+	    const timePickImages = document.querySelectorAll('.btn-spring');
+
+	    // 각 이미지에 대해 클릭 이벤트 리스너 추가
+	    timePickImages.forEach((img) => {
+	        img.addEventListener('click', function (event) {
+	            // 이미지를 클릭했을 때, 같은 부모 요소 내에 있는 input[type="time"] 요소를 찾음
+	            const timeInput = this.closest('.boxh').querySelector('input[type="time"]');
+
+	            // time input이 존재하면 시간을 선택할 수 있는 팝업을 띄움
+	            if (timeInput) {
+	                timeInput.showPicker();  // 시간 선택 팝업 띄우기
+	            }
+	        });
+	    });
+	});
+	
 	// 알람 시간 변경
-	$('.timepick').on('focusout', updateAlarm);
+	$('.timepick').on('change', updateAlarm);
 	// 복약 스케줄 완료 체크 동작
 	$(document).on('click', '.sche-chk', chkTodo);
 	
-});
-
-$(function () {
-    $('.bxslider').bxSlider({
-        mode: 'horizontal',
-        slideWidth: 300,
-        touchEnabled: false,  // 터치 드래그 활성화 (모바일 등 터치 디바이스에서 동작)
-    });
 });
 </script>
 

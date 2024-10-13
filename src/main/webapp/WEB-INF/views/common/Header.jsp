@@ -10,50 +10,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 
+<!-- 시큐리티 csrf토큰 -->
 <sec:csrfMetaTags/>
+<!-- 시큐리티 로그인 여부 -->
 <sec:authorize access="isAuthenticated()" var="auth">
-<sec:authentication property="principal" var="principal"/>
+	<sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
-<!-- Gmarket Sans SDK -->
-<link href="https://webfontworld.github.io/gmarket/GmarketSans.css" rel="stylesheet">
-<!-- Noto Sans Kor SDK-->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<!-- 파비콘 -->
+<link rel="icon" href="/resources/img/logo.svg">
 
-<!-- jquery -->
+<!-- Gmarket SANS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css"/>
+<!-- NotoSans KR-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- 기본 템플릿 CSS -->
+<link rel="stylesheet" href="/resources/css/common.css">
+<link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
+<link rel="stylesheet" href="/resources/css/main.css">
+
+<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<!-- bxSlider SDK -->
-<link rel="stylesheet" href="/resources/css/template.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
 
 </head>
 <body>
-<div id="backcontainer">
-
-<!-- 헤더 : main logo, user status -->
-
-<header id="header">
-    <div class="boxh title">
-        <img id="logo" src="/resources/img/timpill.svg">
-        <h1 onclick="location.href='/'" onmouseover="this.style.cursor='pointer';"> TimePill </h1>
-    </div>
-    <div class="boxh logout">
-        <c:choose>
-			<c:when test="${auth eq true}">
-				<div class="boxh userstatus">
-					<h3 onclick="document.getElementById('logoutForm').submit();">로그아웃</h3>
-					<form id="logoutForm" method="POST" action="/user/logout" style="display: none;">
-						<sec:csrfInput/>
-					</form>
+	<div id="backcontainer" class="boxv">
+		<!-- 헤더 : main logo, user status -->
+		<header id="header" class="boxh">
+			<div class="boxh headerbar">
+				<a href="/">
+					<div class="boxh title">
+						<img id="logo" src="/resources/img/logo.svg">
+						<h1>TimePill</h1>
+					</div>
+				</a>
+				<div class="boxh logout">
+					<c:if test="${auth eq true}">
+						<a href="#" onclick="document.getElementById('logoutForm').submit();">
+							<img src="/resources/img/logout.png" alt="로그아웃" style="width: 35px;">
+						</a>
+						<form id="logoutForm" method="POST" action="/user/logout" style="display: none;">
+							<sec:csrfInput/>
+						</form>
+					</c:if>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="boxh userstatus">
-					<h3 onclick="location.href='/user/login'">로그인</h3>
-				</div>
-			</c:otherwise>
-		</c:choose>
-    </div>
-</header>
+			</div>
+		</header>

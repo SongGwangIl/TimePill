@@ -1,0 +1,42 @@
+/* 푸터 부분 : 메뉴 */
+#mainmenu {
+    width: 100%; /* 전체 너비 사용 */
+    height: 100px;
+    background-color:#f8f8f8;
+    /* border-top: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu li {
+    padding: 5%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+a {
+    text-decoration: none;
+    font-weight: 800;
+    color: #111;
+}
+
+/* 480~360 */
+@media (max-width: 480px) {
+    #mainmenu {
+        width: 100%; /* 전체 너비 사용 */
+        height: 80px;
+        background-color:#f8f8f8;
+        /* border-top: 1px solid black; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
