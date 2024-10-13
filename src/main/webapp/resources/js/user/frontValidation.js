@@ -60,10 +60,12 @@ pw.addEventListener('change', () => {
   pwVal = pw.value
   if(pwRegExp.test(pwVal)) { // 정규식 조건 만족 O
     pwMsg.textContent = "조건만족"
+    pwMsg.style.color = "#2fb380"
     pwMsg.style.fontSize = '16px';
   } 
   else { // 정규식 조건 만족 X
     pwMsg.textContent = "10~20자 영문, 숫자, 특수문자를 사용하세요."
+    pwMsg.style.color = "#dc3545";
     pw.value = null;
   }
   check();
@@ -85,12 +87,12 @@ function checkPwValid() {
       pwReMsg.textContent = "다시 입력해 주세요"
     }
     else if(pwVal === pwReVal) { // 비밀번호 재입력 일치      
-      pwReMsg.style.color = "green";
+      pwReMsg.style.color = "#2fb380";
       pwReMsg.textContent = "일치";
       pwReMsg.style.fontSize = '16px';
     }
     else { // 비밀번호 재입력 불일치
-      pwReMsg.style.color = "red";
+      pwReMsg.style.color = "#dc3545";
       pwReMsg.textContent = "불일치";
       pwReMsg.style.fontSize = '16px';
       
