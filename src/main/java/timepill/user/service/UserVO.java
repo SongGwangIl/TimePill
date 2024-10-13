@@ -26,7 +26,7 @@ public class UserVO implements UserDetails {
 	@NotBlank
 	private String nickname; // 유저이름
 	private String role; // 유저권한
-	@NotBlank @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$")
+	@NotBlank @Pattern(regexp = "^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$")
 	private String password; // 유저비밀번호
 	@NotBlank @Email
 	private String email; // 유저이메일

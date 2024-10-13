@@ -834,7 +834,6 @@ termsAgreeAll.onclick = function(){
 const checklist = document.querySelector('.checklist');
 const consentBtn = document.querySelector('#consent');
 checklist.onchange = check;
-check();
 
 function check() {
 	if(termsAgree1.checked == false || termsAgree2.checked == false || termsAgree3.checked == false){

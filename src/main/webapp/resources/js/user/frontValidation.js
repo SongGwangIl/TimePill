@@ -3,17 +3,17 @@ var header = $("meta[name='_csrf_header']").attr("content");
 
 let userId = document.querySelector("#userId");
 let idCheck = document.querySelector("#idCheck");
-userId.onchange = checkId
+userId.onchange = checkId;
 
 function checkId(){
   let userIdVal = userId.value;
   let idFlag = false;
-  const idRegExp = /^[a-zA-Z0-9]{4,15}$/
-	console.log(userIdVal, idRegExp.test(userIdVal));
+  const idRegExp = /^[a-zA-Z0-9]{4,15}$/;
   if(!idRegExp.test(userIdVal)){
     userId.value = null;
     idCheck.innerText = "4~15자리의 영문이나 숫자를 가져야 합니다."
     idCheck.style.color = "#dc3545";
+    idCheck.style.fontSize = '16px';
     userId.focus();  
   }
   else {
@@ -31,18 +31,23 @@ function checkId(){
 		},
 		success: function(result){
         	if(result == 1){
-          		idCheck.innerText = "이미 사용중인 아이디입니다."
-          		idCheck.style.color = "#dc3545"
+          		idCheck.innerText = "이미 사용중인 아이디입니다.";
+          		idCheck.style.color = "#dc3545";
+          		idCheck.style.fontSize = '16px';
+          		document.querySelector('#idCheck').setAttribute('check', 'false');
         	}
         	else if(result == 0){
           		idCheck.innerText = "사용할 수 있는 아이디입니다."
           		idCheck.style.color = "#2fb380"    
+          		idCheck.style.fontSize = '16px';
+          		document.querySelector('#idCheck').setAttribute('check', 'true');
         	}
 		},
       	error: function(){
         	alert("서버요청실패")
       	}
     });
+    check();
   }
 }
   
@@ -51,17 +56,17 @@ let pwVal = "", pwReVal = ""
 const pw = document.querySelector('#password')
 const pwMsg = document.querySelector('#userPwdMsg')
 pw.addEventListener('change', () => {
-  const pwRegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
+  const pwRegExp = /^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$/
   pwVal = pw.value
-  console.log('실행')
   if(pwRegExp.test(pwVal)) { // 정규식 조건 만족 O
     pwMsg.textContent = "조건만족"
+    pwMsg.style.fontSize = '16px';
   } 
   else { // 정규식 조건 만족 X
-    pwMsg.textContent = "8~20자 영문 대문자, 소문자, 숫자, 특수문자를 사용하세요."
-//    pw.value = null;
-    pw.focus();
+    pwMsg.textContent = "10~20자 영문, 숫자, 특수문자를 사용하세요."
+    pw.value = null;
   }
+  check();
   
 });
 
@@ -69,23 +74,26 @@ pw.addEventListener('change', () => {
 const pwRe = document.querySelector('#checkUserPwd')
 const pwReMsg = document.querySelector('#checkUserPwdMsg')
 pwRe.addEventListener('change', () => {
-  pwReVal = pwRe.value
   checkPwValid()
 });
 
 // 비밀번호와 재입력 값 일치 여부
 function checkPwValid() {
+	pwReVal = pwRe.value
     
     if(pwReVal === "") { // 미입력
-      pwReMsg.textContent = ""
+      pwReMsg.textContent = "다시 입력해 주세요"
     }
     else if(pwVal === pwReVal) { // 비밀번호 재입력 일치      
-      pwReMsg.style.color = "green"
-      pwReMsg.textContent = "일치"
+      pwReMsg.style.color = "green";
+      pwReMsg.textContent = "일치";
+      pwReMsg.style.fontSize = '16px';
     }
     else { // 비밀번호 재입력 불일치
-      pwReMsg.style.color = "red"
-      pwReMsg.textContent = "불일치"
+      pwReMsg.style.color = "red";
+      pwReMsg.textContent = "불일치";
+      pwReMsg.style.fontSize = '16px';
+      
       pwRe.value = null;
       pwRe.focus();
     }
