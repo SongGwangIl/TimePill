@@ -14,7 +14,10 @@ public interface KakaoDAO {
 	/** 카카오 회원가입 */
 	int insertUser(UserVO vo) throws Exception;
 	
-	/** 카카오 토큰 설정 */
+	/** 카카오 액세스 토큰 설정 */
+	int updateAccessToken(UserVO vo) throws Exception;
+	
+	/** 카카오 리프레시 토큰 설정 */
 	int updateRefreshToken(UserVO vo) throws Exception;
 	
 	/** 카카오 리프레시 토큰 조회 */

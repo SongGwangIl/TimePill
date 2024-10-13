@@ -36,6 +36,15 @@ INSERT INTO users(
 )
 </insert>
 
+<!-- 액세스 토큰 저장 -->
+<update id="updateAccessToken">
+UPDATE users SET
+	ACCESS_TOKEN = #{accessToken}
+WHERE 
+	USER_ID = #{userId}
+		AND TOKEN_USE_AT = 'Y'
+</update>
+
 <!-- 리프레시 토큰 저장 -->
 <update id="updateRefreshToken">
 UPDATE users SET
@@ -57,6 +66,7 @@ WHERE
 <select id="selectKakaoRefreshTokenList" resultType="UserVO">
 SELECT
 	A.REFRESH_TOKEN
+	, A.ACCESS_TOKEN
 FROM
 	users A
 		JOIN alarm_set B ON A.USER_ID = B.USER_ID
@@ -67,7 +77,7 @@ WHERE
 	AND A.TOKEN_USE_AT = 'Y'
 	AND CURDATE() BETWEEN D.START_DATE AND D.END_DATE
 	AND B.ALARM_TIME BETWEEN CURTIME() - INTERVAL 10 SECOND AND CURTIME() + INTERVAL 10 SECOND
-GROUP BY A.REFRESH_TOKEN
+GROUP BY A.REFRESH_TOKEN, A.ACCESS_TOKEN
 </select>
  
 </mapper>
