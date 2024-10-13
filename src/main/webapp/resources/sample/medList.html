@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDLIST</title>
+
+    <!-- jQuery 3.7.1-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Gmarket SANS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css"
+        type="text/css" />
+    <!-- NotoSans KR-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- bxSlider SDK -->
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+    <!-- 기본 템플릿 CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/medList.css">
+
+
+</head>
+
+<body>
+
+
+    <div id="backcontainer" class="boxv">
+
+        <!-- 헤더 : main logo, user status -->
+
+        <header id="header" class="boxh">
+            <div class="boxh headerbar">
+                <a href="#">
+                    <div class="boxh title">
+                        <img id="logo" src="img/logo.svg">
+                        <h1> TimePill </h1>
+                    </div>
+                </a>
+                <div class="boxh logout">
+                    <a href="#">
+                        <img src="img/logout.png" alt="로그아웃" style="width: 35px;">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- 컨텐츠 -->
+
+        <div id="contents" class="">
+
+            <!-- 타이틀 -->
+            <div>
+                <h1 class="txa subtitle"> 복약리스트 </h1>
+            </div>
+
+
+            <!-- 복약리스트 -->
+            <!-- 리스트박스 -->
+            <div class="listbox checkline">
+
+                <ul class="margin-init">
+
+                    <!-- 투여 약 리스트 -->
+                    <li class="medlistcard boxh checkline">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline"> 당뇨약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+
+                    <li class="medlistcard boxh checkline ">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline ">  혈압약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+
+                    <li class="medlistcard boxh checkline ">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline ">  혈압약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+
+                    <li class="medlistcard boxh checkline ">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline ">  혈압약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+
+                    <li class="medlistcard boxh checkline ">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline ">  혈압약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+                    
+                    <li class="medlistcard boxh checkline ">
+                        <img class="checkline" src="img/medblue.png" width="25px">
+                        <p class="medname checkline ">  혈압약 </p>
+                        <a href="" class="btn-upd txa">수정</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <!-- 등록버튼 -->
+            <a href="#" class="checkline">
+                <div class="boxh white-btn">
+                    <img id="logo" src="img/logo.svg" style="width: 30px; margin: 0;">
+                    <p style="margin-left: 5px;">알림 추가하기 </p>
+                </div>
+            </a>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 푸터 : nav -->
+        <nav id="mainmenu" class="">
+            <ul class="menu">
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/sched.png" style="width: 50px;">
+                            <a href="#"> 스케줄 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/medmng.png" style="width: 50px;">
+                            <a href="#"> 복약관리 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/myinfo.png" style="width: 50px;">
+                            <a href="#"> 내 정보 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/notice.png" style="width: 50px;">
+                            <a href="#"> 공지사항 </a>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+</body>
+
+</html>

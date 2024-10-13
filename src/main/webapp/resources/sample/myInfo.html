@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>JOIN</title>
+    <title>myinfo</title>
 
     <!-- jQuery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -15,41 +15,62 @@
     <!-- NotoSans KR-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
+    <!-- bxSlider SDK -->
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
     <!-- 기본 템플릿 CSS -->
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/joinform.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/myInfo.css">
+
 
 </head>
 
 <body>
-    <div id="backcontainer" class="boxv">
-        <div id="contents" class="bgimg">
 
-            <!-- 약병 그림 -->
-            <div class="main-ico">
+
+    <div id="backcontainer" class="boxv">
+
+        <!-- 헤더 : main logo, user status -->
+
+        <header id="header" class="boxh">
+            <div class="boxh headerbar">
+                <a href="#">
+                    <div class="boxh title">
+                        <img id="logo" src="img/logo.svg">
+                        <h1> TimePill </h1>
+                    </div>
+                </a>
+                <div class="boxh logout">
+                    <a href="#">
+                        <img src="img/logout.png" alt="로그아웃" style="width: 35px;">
+                    </a>
+                </div>
             </div>
+        </header>
+
+
+        <!-- 컨텐츠 -->
+
+        <div id="contents" class="">
 
             <!-- 타이틀 -->
-            <div class="boxh titlebox">
-                <img src="/img/logo.svg" class="logo">
-                <h1 class="gsansdown title">TimePill</h1>
-            </div>
             <div>
-                <h1 class="jointitle txa"> 회원 가입 </h1>
+                <h1 class="txa subtitle"> 내 정보 수정 </h1>
             </div>
 
-            <div>
+
+
                 <form action=" ">
-
                     <table class="joinform">
+
                         <tr>
-                            <td>아이디</td>
+                            <td>이름</td>
                         </tr>
                         <tr>
                             <td>
-                                <div class="input password">
-                                    <input type="text" name="id" class="form-input" placeholder="아이디를 입력해주세요.">
-                                </div>
+                                <input type="text" name="name" class="form-input" placeholder="변경하실 경우 입력해주세요.">
                             </td>
                         </tr>
 
@@ -59,7 +80,8 @@
                         <tr>
                             <td>
                                 <div class="input password">
-                                    <input type="password" name="password" class="form-input pwd" placeholder="비밀번호를 입력해주세요.">
+                                    <input type="password" name="password" class="form-input pwd"
+                                        placeholder="변경하실 경우 입력해주세요.">
                                     <img class="eye" src="img/eye.png"></img>
                                 </div>
                             </td>
@@ -70,15 +92,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="password" name="pwdcheck" class="form-input" placeholder="비밀번호를 다시 입력해주세요.">
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>이름</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="name" class="form-input" placeholder="이름을 입력해주세요.">
+                                <input type="password" name="pwdcheck" class="form-input"
+                                    placeholder="변경하실 경우 재입력해주세요.">
                             </td>
                         </tr>
                         <tr>
@@ -86,7 +101,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="date" name="birth" class="form-input" >
+                                <input type="date" name="birth" class="form-input">
                             </td>
                         </tr>
                         <tr>
@@ -105,27 +120,69 @@
                         </tr>
                     </table>
                 </form>
-            </div>
-
-
-            <div class="btns boxv genbtn">
+                
+            <div class="btns boxh">
                 <a href="#" class="btn-sky">
                     <img id="logo" src="img/chhe.png" style="width: 20px; margin: 0;">
-                    <p class="btndesc"> 가입하기 </p>
+                    <p class="btndesc"> 수정하기 </p>
                 </a>
                 <a href="#" class="btn-white">
                     <p class="btndesc"> 돌아가기 </p>
                 </a>
             </div>
+
+
+
         </div>
+
+
+
+        <!-- 푸터 : nav -->
+        <nav id="mainmenu" class="">
+            <ul class="menu">
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/sched.png" style="width: 50px;">
+                            <a href="#"> 스케줄 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/medmng.png" style="width: 50px;">
+                            <a href="#"> 복약관리 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/myinfo.png" style="width: 50px;">
+                            <a href="#"> 내 정보 </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <img id="logo" src="img/notice.png" style="width: 50px;">
+                            <a href="#"> 공지사항 </a>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
+
 
     <script>
         // eye 이미지 클릭 시 패스워드 필드 토글
-        document.querySelector('.eye').addEventListener('click', function() {
+        document.querySelector('.eye').addEventListener('click', function () {
             const pwdfiled = document.querySelector('.pwd');
             const type = pwdfiled.getAttribute('type');
-            
+
             if (type === 'password') {
                 pwdfiled.setAttribute('type', 'text');
                 this.src = 'img/eyeno.png';
@@ -136,11 +193,14 @@
         });
 
         // '가입하기' 버튼 클릭 시 form 제출
-        document.getElementById('submitBtn').addEventListener('click', 
+        document.getElementById('submitBtn').addEventListener('click',
             function (event) {
                 event.preventDefault();
                 document.getElementById('joinForm').submit();
-        });
+            });
     </script>
+
+
 </body>
+
 </html>

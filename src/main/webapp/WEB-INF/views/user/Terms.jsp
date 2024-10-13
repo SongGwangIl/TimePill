@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/resources/css/agreement.css">
 </head>
 <body>
-<div id="backcontainer" class="boxv">
+<div id="backcontainer" class="boxv"> 
 
     <div id="contents" class="bgimg">
 
@@ -781,8 +781,9 @@
 
 
         <div class="btns boxv genbtn">
-            <a href="/user/singup" class="btn-white" id="consent">
-                <p class="btndesc"> 확인 </p>
+            <a href="/user/singup" class="btn-sky" id="consent">
+            	<img src="/resources/img/chhe.png" style="width: 20px; margin: 0;">
+                <p class="btndesc"> 동의하기 </p>
             </a>
             <a href="/cover" class="btn-white">
                 <p class="btndesc"> 돌아가기 </p>

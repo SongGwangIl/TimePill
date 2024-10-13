@@ -1,7 +1,7 @@
 /* 컨텐츠 */
 #contents {
     background-color: #f8f8f8;
-    background-image: url(/img/bg.png);
+    background-image: url(/resources/img/bg.png);
     background-position: top center;
     /* 배경 이미지를 화면의 위쪽 가운데로 배치 */
     background-size: 100%;
@@ -14,7 +14,7 @@
 
 /* 약통 배경 */
 .main-ico {
-    background-image: url(/img/mainico.png);
+    background-image: url(/resources/img/mainico.png);
     width: 220px;
     height: 200px;
     background-size: cover;
@@ -120,7 +120,7 @@
 .btn-sky {
     width: 35%;
     height: 30%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: skyblue;
     margin-bottom: 3%;
     display: flex;
@@ -131,7 +131,7 @@
 .btn-white{
     width: 35%;
     height: 30%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: #dddddd;
     margin-bottom: 3%;
     display: flex;
@@ -181,15 +181,8 @@
         width: 80%;
         height: 70%;
     }
+
     .btndesc {
-        text-align: center;
-        font-size: 1.2em;
-        font-weight: 400;
-        margin: 0;
+        font-size: 1.1em;
     }
 }
-
-
-
-
-
