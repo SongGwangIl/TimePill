@@ -128,11 +128,9 @@ input[type='time'] {
 .modal_body{
     position:absolute;
     top:50%;
-    width:400px;
-    height:400px;
-
-    padding:40px;  
-
+    width:450px;
+    height:470px;
+    
     text-align: center;
 
     background-color: rgb(255,255,255);
