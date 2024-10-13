@@ -8,7 +8,7 @@
 	
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${title}</title>
+<title>${param.title}</title>
 
 <!-- 시큐리티 csrf토큰 -->
 <sec:csrfMetaTags/>

@@ -61,6 +61,12 @@ public class KakaoServiceImpl implements KakaoService {
 
 	@Value("${kakao-api-host}")
 	private String KAKAO_API_HOST;
+	
+	/** 카카오유저 DB정보 가져오기 */
+	@Override
+	public UserVO selectUserInfo(UserVO vo) throws Exception {
+		return kakaoDAO.selectUserInfo(vo);
+	}
 
 	/** 인가코드 요청 주소 */
 	@Override
@@ -146,12 +152,6 @@ public class KakaoServiceImpl implements KakaoService {
 		return httpCallService.CallwithToken("GET", uri, httpSession.getAttribute("token").toString());
 	}
 	
-	/** 카카오유저 DB정보 가져오기 */
-	@Override
-	public UserVO selectUserInfo(UserVO vo) throws Exception {
-		return kakaoDAO.selectUserInfo(vo);
-	}
-
 	/** 카카오 가입&로그인 핸들러 */
 	@Override
 	public String userAuthHandler() throws Exception {
@@ -165,6 +165,7 @@ public class KakaoServiceImpl implements KakaoService {
 		UserVO vo = new UserVO();
 		vo.setUserId("KAKAO_" + kakaoId);
 		vo.setNickname(nickname);
+		vo.setAccessToken(httpSession.getAttribute("token").toString());
 
 		// 회원가입 여부 체크
 		UserVO userInfoResult = kakaoDAO.selectUserInfo(vo);
@@ -174,12 +175,10 @@ public class KakaoServiceImpl implements KakaoService {
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authToken);
 			
-			System.out.println("액세스토큰 : " + httpSession.getAttribute("token").toString());
+			System.out.println("액세스토큰 : " + vo.getAccessToken());
 			
-			// 메세지 알람을 위한 리프레시 토큰 사용 여부 확인
-//			if ("Y".equals(userInfoResult.getTokenUseAt())) { 
-//				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
-//			}
+			// 액세스 토큰 저장 (알림 동의한 경우만)
+			kakaoDAO.updateAccessToken(vo);
 			
 			return "green";
 		} 
@@ -218,7 +217,9 @@ public class KakaoServiceImpl implements KakaoService {
 		String checkScopeUrl = KAKAO_API_HOST + "/v2/user/scopes";
 		
 		// HTTP 요청 (메세지 권한 확인)
+		System.out.println("권한확인 요청 시작");
 		String response = httpCallService.CallwithToken("GET", checkScopeUrl, token, null); 
+		System.out.println("권한확인 요청 끝");
 		
 		// JSON 응답 파싱
 		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
@@ -302,8 +303,11 @@ public class KakaoServiceImpl implements KakaoService {
 			accessToken = httpSession.getAttribute("token").toString();
 		}
 		System.out.println("요청을 보내기 전 최종 액세스 토큰값 : " + accessToken);
+		
 		// HTTP 요청 (메세지 보내기)
-		return httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
+		String callwithToken = httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
+		
+		return callwithToken;
 	}
 
 }

@@ -35,6 +35,7 @@ public class UserVO implements UserDetails {
 	private String tokenUseAt; 		// 카카오 토큰 사용 여부
 	private String refreshToken; 	// 카카오 리프레시 토큰
 	private String oldRefreshToken; // 기존 리프레시 토큰
+	private String accessToken; 	// 카카오 액세스 토큰
 
 	// 스프링 시큐리티 메소드
 	

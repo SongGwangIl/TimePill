@@ -18,7 +18,7 @@ public class KakaoMessageScheduler {
 	KakaoService kakaoService;
 
 	// 카카오 메세지 알람 스케줄
-	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
+	// @Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
 		System.out.println("카카오 알람 스케줄러 실행");
 		

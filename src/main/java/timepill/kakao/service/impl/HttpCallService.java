@@ -19,6 +19,7 @@ public class HttpCallService {
 	public String Call(String method, String reqURL, String header, String param) {
 		
 		String result = "";
+		int responseCode = 0;
 		
 		try {
 			
@@ -41,7 +42,7 @@ public class HttpCallService {
 			}
 			
 			// HTTP 응답 코드 반환
-			int responseCode = conn.getResponseCode();
+			responseCode = conn.getResponseCode();
 			System.out.println("HTTP 응답 코드: " + responseCode);
 	        System.out.println("요청 URL: " + reqURL);
 	        System.out.println("요청 메서드: " + method);
@@ -68,6 +69,9 @@ public class HttpCallService {
 			
 		} catch (IOException e) {
 			System.out.println("예외 발생: " + e.getMessage());
+			if (responseCode == 401) {
+				return Integer.toString(responseCode);
+			}
 			return e.getMessage();
 			
 		}
