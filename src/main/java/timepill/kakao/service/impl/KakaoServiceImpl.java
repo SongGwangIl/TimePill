@@ -62,15 +62,10 @@ public class KakaoServiceImpl implements KakaoService {
 	@Value("${kakao-api-host}")
 	private String KAKAO_API_HOST;
 	
-	/** 카카오유저 DB정보 가져오기 */
-	@Override
-	public UserVO selectUserInfo(UserVO vo) throws Exception {
-		return kakaoDAO.selectUserInfo(vo);
-	}
-
 	/** 인가코드 요청 주소 */
 	@Override
 	public String goKakaoOAuth(String scope, String rediUri) throws Exception {
+		System.out.println("callback 호출됨: " + rediUri);
 		
 		// 요청 콜백 구분
 		String uri = "";
@@ -92,6 +87,8 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 액세스 토큰 요청 및 저장 */
 	@Override
 	public void callback(String code, String rediUri) throws Exception {
+		System.out.println("callback 호출됨: " + rediUri);
+		
 		// 요청 처리 구분
 		String callbackUri = "";
 		if ("login-callback".equals(rediUri)) { // 로그인 요청
@@ -131,10 +128,14 @@ public class KakaoServiceImpl implements KakaoService {
 		JsonObject element = JsonParser.parseString(response).getAsJsonObject();
 		String newAccessToken = element.get("access_token").getAsString();
 		
+		UserVO vo = new UserVO();
+		vo.setTokenUseAt("Y");
+		vo.setAccessToken(newAccessToken);
+		// 새로운 액세스 토큰 저장
+		kakaoDAO.updateAccessToken(vo);
+		
 		// 리프레시토큰 갱신 여부 체크
 		if (element.has("refresh_token")) {
-			UserVO vo = new UserVO();
-			vo.setTokenUseAt("Y");
 			vo.setRefreshToken(element.get("refresh_token").getAsString());
 			vo.setOldRefreshToken(refreshToken);
 			// 리프레시 토큰 갱신
@@ -143,6 +144,12 @@ public class KakaoServiceImpl implements KakaoService {
 		
 		// 새로운 액세스 토큰 반환
 		return newAccessToken;
+	}
+	
+	/** 카카오유저 DB정보 가져오기 */
+	@Override
+	public UserVO selectUserInfo(UserVO vo) throws Exception {
+		return kakaoDAO.selectUserInfo(vo);
 	}
 
 	/** 카카오 사용자 정보 가져오기 */
@@ -212,6 +219,7 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 카카오 메세지 권한 동의 여부 체크 */
 	@Override
 	public boolean checkMessageAuth() throws Exception {
+		System.out.println("checkMessageAuth 호출됨");
 		
 		String token = httpSession.getAttribute("token").toString();
 		String checkScopeUrl = KAKAO_API_HOST + "/v2/user/scopes";
@@ -248,6 +256,8 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 카카오 메세지 권한 동의 철회 */
 	@Override
 	public boolean revokeMessageAuth() throws Exception {
+		System.out.println("revokeMessageAuth 호출됨");
+		
 		String refeshToken = httpSession.getAttribute("refreshToken").toString();
 		String newAccessToken = getNewAccessToken(refeshToken);
 	    String revokeScopeUrl = KAKAO_API_HOST + "/v2/user/revoke/scopes";
