@@ -59,6 +59,5 @@
         </div>
     </div>
 </div>
-
-<!-- footer -->
-<c:import url="/footer" charEncoding="utf-8"/>
+</body>
+</html>
