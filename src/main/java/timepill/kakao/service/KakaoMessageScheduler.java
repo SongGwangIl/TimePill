@@ -20,9 +20,10 @@ public class KakaoMessageScheduler {
 	// 카카오 메세지 알람 스케줄
 	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
+		System.out.println("카카오 알람 스케줄러 실행");
 		
 		// 메세지 알람 사용자 리프레시 토큰 가져오기
-		List<UserVO> tokenList = kakaoService.selectKakaoScheList();
+		List<UserVO> tokenList = kakaoService.selectKakaoRefreshTokenList();
 		for (UserVO token : tokenList) {
 			String refreshToken = token.getRefreshToken();
 			
@@ -30,7 +31,8 @@ public class KakaoMessageScheduler {
 			String newAccessToken = kakaoService.getNewAccessToken(refreshToken);
 			
 			// 새로운 액세스 토큰으로 메세지 보내기
-			kakaoService.message(newAccessToken);
+			String message = kakaoService.message(newAccessToken);
+			System.out.println("메세지 보내기 완료 : " + message);
 		}
 	}
 }

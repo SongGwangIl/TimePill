@@ -114,6 +114,8 @@ public class KakaoServiceImpl implements KakaoService {
 	/** 액세스 토큰 재발급 */
 	@Override
 	public String getNewAccessToken(String refreshToken) throws Exception {
+		System.out.println("getNewAccessToken 호출됨: " + refreshToken);
+		
 		String param = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + REST_API_KEY + "&client_secret=" + CLIENT_SECRET;
 		
 		// HTTP 요청
@@ -131,9 +133,9 @@ public class KakaoServiceImpl implements KakaoService {
 			vo.setOldRefreshToken(refreshToken);
 			// 리프레시 토큰 갱신
 			kakaoDAO.updateRefreshToken(vo);
-			
 		}
 		
+		// 새로운 액세스 토큰 반환
 		return newAccessToken;
 	}
 
@@ -144,7 +146,7 @@ public class KakaoServiceImpl implements KakaoService {
 		return httpCallService.CallwithToken("GET", uri, httpSession.getAttribute("token").toString());
 	}
 	
-	/** 카카오 유저정보 가져오기 */
+	/** 카카오유저 DB정보 가져오기 */
 	@Override
 	public UserVO selectUserInfo(UserVO vo) throws Exception {
 		return kakaoDAO.selectUserInfo(vo);
@@ -172,15 +174,17 @@ public class KakaoServiceImpl implements KakaoService {
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authToken);
 			
+			System.out.println("액세스토큰 : " + httpSession.getAttribute("token").toString());
+			
 			// 메세지 알람을 위한 리프레시 토큰 사용 여부 확인
-			if ("Y".equals(userInfoResult.getTokenUseAt())) { 
-				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
-			}
+//			if ("Y".equals(userInfoResult.getTokenUseAt())) { 
+//				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
+//			}
 			
 			return "green";
 		} 
 		
-		// 카카오 소셜 회원가입 진행
+		// 회원가입
 		kakaoDAO.insertUser(vo);
 		
 		// 신규 유저 알람 생성 (아침, 점심, 저녁, 취침전)
@@ -277,24 +281,27 @@ public class KakaoServiceImpl implements KakaoService {
         return false;
 	}
 
-	/** 카카오 메세지 알람을 보내기 위한 리스트 조회 */
+	/** 카카오 메세지 알람을 보내기 위한 리프레시 토큰 리스트 조회 */
 	@Override
-	public List<UserVO> selectKakaoScheList() throws Exception {
+	public List<UserVO> selectKakaoRefreshTokenList() throws Exception {
 		return kakaoDAO.selectKakaoRefreshTokenList();
 	}
 
 	/** 카카오 메세지 보내기 */
 	@Override
 	public String message(String token) throws Exception {
+		System.out.println("message 메서드 호출됨: " + token);
+		
 		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
 		
 		String accessToken = token;
 		
 		// 파라미터로 받은 토큰이 비어있는 경우
 		if (!StringUtils.hasText(accessToken)) {
+			System.out.println("토큰이 비어있음");
 			accessToken = httpSession.getAttribute("token").toString();
 		}
-		
+		System.out.println("요청을 보내기 전 최종 액세스 토큰값 : " + accessToken);
 		// HTTP 요청 (메세지 보내기)
 		return httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
 	}

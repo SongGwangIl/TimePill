@@ -73,6 +73,10 @@ function createTodo(dayScheList) {
 	for (const daySchedule of dayScheList) {
 		// 담을 박스 선택
 		let alarmDiv = document.querySelectorAll('div.card[data-alarm-id="' + daySchedule.alarmId + '"]');
+		
+		// li 생성
+		let newLi = document.createElement('li');
+		newLi.classList.add('medlist-detail');
 
 		// 체크박스 생성
 		let newImg = document.createElement('img');
@@ -99,9 +103,10 @@ function createTodo(dayScheList) {
 		for (let result of alarmDiv) {
 			if (!result.classList.contains('bx-clone')) { // bx슬라이더 클론 제외
 //				console.log(result);
-				result.querySelector('.daySchedule').append(newImg);
-				result.querySelector('.daySchedule').append(newSpan);
-				result.querySelector('.daySchedule').append(br);
+				result.querySelector('.daySchedule').append(newLi);
+				result.querySelector('.medlist-detail').append(newImg);
+				result.querySelector('.medlist-detail').append(newSpan);
+				result.querySelector('.medlist-detail').append(br);
 			}
 		}
 
@@ -111,7 +116,9 @@ function createTodo(dayScheList) {
 	let cards = document.querySelectorAll('.daySchedule');
 	for(card of cards) {
 		// 내용이 비어있는지 확인 및 bx슬라이더 클론 제외
-		if (card.innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
+		console.log(card);
+		if (card.querySelector('.medlist').innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
+			card.innerHTML = '';
 			let newSpan = document.createElement('span');
 			newSpan.textContent = '등록된 복약일정이 없습니다.';
 			let br = document.createElement('br');
@@ -246,12 +253,12 @@ function kakaoAlarmToggle() {
 			xhr.setRequestHeader("Accept", "application/json");
 		},
 		success: function(result) {
-			if (result == '') {
-				alert('오류 : 카카오 복약 알림에 대한 권한이 없습니다.');
-				chk.attr('src', '/resources/img/ico-off.png');
-			} else if (result === 'Y') {
+			if (result === 'Y') {
 				chk.attr('src', '/resources/img/ico-on.png');
 			} else if (result === 'N') {
+				chk.attr('src', '/resources/img/ico-off.png');
+			} else if (result == '') {
+				alert('오류 : 카카오 복약 알림에 대한 권한이 없습니다.');
 				chk.attr('src', '/resources/img/ico-off.png');
 			} else {
 				window.location.href = result;

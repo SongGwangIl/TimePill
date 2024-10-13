@@ -11,19 +11,19 @@ public class KakaoMessageTemplate {
 		    "content": {
 		        "title": "복약 알림",
 		        "description": "약먹을 시간이에요.",
-		        "image_url": "http://115.10.156.136/image/c687a0f4-713e-4c03-a6ea-b09d0c004d0d",
+		        "image_url": "이미지url주소",
 		        "image_width": 640,
 		        "image_height": 640,
 		        "link": {
-		            "web_url": "http://115.10.156.136/board/69"
+		            "web_url": "url주소"
 		        }
 		    },
 		    "buttons": [
 		        {
 		            "title": "복약체크",
 		            "link": {
-		                "web_url": "http://115.10.156.136/board/69",
-		                "mobile_web_url": "http://115.10.156.136/board/69"
+		                "web_url": "url주소",
+		                "mobile_web_url": "url주소"
 		            }
 		        }
 		    ]

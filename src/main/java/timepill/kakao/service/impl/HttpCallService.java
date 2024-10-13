@@ -25,12 +25,15 @@ public class HttpCallService {
 			String response = "";
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 요청 URL
+			
+			System.out.println("HTTP 요청 시작: " + reqURL);
+			
 			conn.setRequestMethod(method); // 요청 method 타입
 			conn.setRequestProperty("Authorization", header); // 인증 방식 ex)액세스 토큰으로 인증 요청
 			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			
 			if (param != null) {
-				System.out.println("param : " + param);
+				System.out.println("파라미터 존재: " + param);
 				conn.setDoOutput(true);
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 				bw.write(param);
@@ -39,10 +42,10 @@ public class HttpCallService {
 			
 			// HTTP 응답 코드 반환
 			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-			System.out.println("reqURL : " + reqURL);
-			System.out.println("method : " + method);
-			System.out.println("Authorization : " + header);
+			System.out.println("HTTP 응답 코드: " + responseCode);
+	        System.out.println("요청 URL: " + reqURL);
+	        System.out.println("요청 메서드: " + method);
+	        System.out.println("Authorization 헤더: " + header);
 
 			// 에러 체크
 			InputStream stream = conn.getErrorStream();
@@ -51,20 +54,20 @@ public class HttpCallService {
 					scanner.useDelimiter("\\Z");
 					response = scanner.next();
 				}
-				System.out.println("error response : " + response);
+				System.out.println("에러 응답: " + response);
 			}
 
-			// HTTP 응답 입력 스트림 읽기
+			// HTTP 응답 읽기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : " + result);
+			System.out.println("HTTP 응답 본문: " + result);
 			br.close();
 			
 		} catch (IOException e) {
-			
+			System.out.println("예외 발생: " + e.getMessage());
 			return e.getMessage();
 			
 		}
