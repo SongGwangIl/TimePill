@@ -89,6 +89,7 @@
 		left: 18px;
 		font-size: 10px;
 		color: black;
+		pointer-events: none;
 	}
 	.date.this>span{
 		display: inline-block;
@@ -97,7 +98,7 @@
 		cursor: pointer;
 	}
 	.date>p[data-id]{
-		top: 14px;
+		top: 20px;
 		left: 8px;
 	}
 	
@@ -114,23 +115,11 @@
 	.other{
 		opacity: 0.3;
 	}
-	
-	.today::before{
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		z-index: -1;
-		width: 30px;
-		height: 30px;
-		display: block;
-		background: #e84;
-		border-radius: 50%;
-		content: '';
-	}
+
 	.today{
 		position: relative;
- 		color: #e84;
+		font-weight: 900;
+		color: #1188dd;
 	}
 	
 
