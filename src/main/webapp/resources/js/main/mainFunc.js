@@ -77,16 +77,19 @@ function createTodo(dayScheList) {
 		// li 생성
 		let newLi = document.createElement('li');
 		newLi.classList.add('medlist-detail');
+		newLi.classList.add('boxh');
+
+		
 
 		// 체크박스 생성
 		let newImg = document.createElement('img');
 		newImg.className = "sche-chk";
 		newImg.alt = "체크";
-		newImg.width = 14;
-		newImg.height = 14;
+		newImg.width = 24;
+		newImg.height = 24;
 		newImg.setAttribute('data-med-id', daySchedule.medId);
 		newImg.setAttribute('data-alarm-id', daySchedule.alarmId);
-		newImg.style.display = 'inline-block';
+		//newImg.style.display = 'inline-block';
 		if (daySchedule.scheChk == "Y") {
 			newImg.src = "/resources/img/ico-checked.png";
 		} else {
@@ -96,6 +99,8 @@ function createTodo(dayScheList) {
 		// 약이름 생성
 		let newSpan = document.createElement('span');
 		newSpan.textContent = daySchedule.medName;
+		newSpan.classList.add('label');
+		newSpan.classList.add('gsasdw');
 
 		let br = document.createElement('br');
 

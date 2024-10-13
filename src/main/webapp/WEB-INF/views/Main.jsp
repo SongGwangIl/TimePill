@@ -89,11 +89,13 @@
 	        </div>
 	        <div>
 	        	<!-- 알림설정 수정 필요 -->
-				<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="">
-<!-- 	            <input type="checkbox" id="toggle" hidden>  -->
-<!-- 	            <label for="toggle" class="toggleSwitch"> -->
-<!-- 	            <span class="toggleButton"></span> -->
-<!-- 	            </label> -->
+				<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="" width="55px" style="margin-left:15%">
+<!-- 	            <div id="kakaoAlarmToggle"> -->
+<!-- 		            <input type="checkbox" id="toggle" hidden>  -->
+<!-- 		            <label for="toggle" class="toggleSwitch"> -->
+<!-- 		            <span class="toggleButton"></span> -->
+<!-- 	            </div> -->
+	            </label>
 	        </div>
 	    </div>
 		<script>
@@ -123,10 +125,8 @@
 
 <script>
 $(function() {
-
 	const windowWidth = $(window).width();
 	let imgSize;
-
 	function bxWitdth() {
 		if (windowWidth > 360) {
 			return 330; // 데스크탑 크기일 때
@@ -134,7 +134,6 @@ $(function() {
 			return 280; // 모바일 크기일 때
 		}
 	}
-
 	function adjustButtonSize() {
 		if (windowWidth > 360) {
 			imgSize = '60px'; // 데스크탑
@@ -143,7 +142,6 @@ $(function() {
 		}
 	}
 
-	// 버튼 크기를 조정하는 함수 호출
 	adjustButtonSize();
 
 	const slider = $('.bxslider').bxSlider({
@@ -163,7 +161,6 @@ $(function() {
 				prevImgElement.style.width = imgSize;
 				prevLink.appendChild(prevImgElement);
 			}
-
 			// next 버튼 처리
 			const nextLink = document.querySelector('.next .bx-next');
 			if (nextLink) {
@@ -173,7 +170,6 @@ $(function() {
 				nextImgElement.style.width = imgSize;
 				nextLink.appendChild(nextImgElement);
 			}
-
 			// viewport  처리
 			const wid = document.querySelector('.bx-viewport');
 			if (wid) {
@@ -190,7 +186,6 @@ window.onload = function () {
     fadeInElement.style.opacity = '1';
 };
 </script>
-
 <script>
 // 모달 열기 
 const modal = document.querySelector('.modal');
@@ -205,35 +200,34 @@ modal.addEventListener("click", (event) => {
         modal.style.display = "none"; // 모달 닫기
     }
 });
+
+// document.getElementById("kakaoAlarmToggle").addEventListener("click", function() {
+//     var checkbox = document.getElementById("toggle");
+//     checkbox.checked = !checkbox.checked;  // 현재 체크 상태를 반전시킴
+// });
+
 </script>
 
 <script>
+// 알람시간 변경 띄우기
 $(document).ready(function() {
-	
-	// 알람시간 변경 띄우기
 	$(function () {
-	    // btn-spring 클래스를 가진 이미지들에 대해 클릭 이벤트 리스너 추가
 	    const timePickImages = document.querySelectorAll('.btn-spring');
 
 	    // 각 이미지에 대해 클릭 이벤트 리스너 추가
 	    timePickImages.forEach((img) => {
 	        img.addEventListener('click', function (event) {
-	            // 이미지를 클릭했을 때, 같은 부모 요소 내에 있는 input[type="time"] 요소를 찾음
 	            const timeInput = this.closest('.boxh').querySelector('input[type="time"]');
-
-	            // time input이 존재하면 시간을 선택할 수 있는 팝업을 띄움
 	            if (timeInput) {
 	                timeInput.showPicker();  // 시간 선택 팝업 띄우기
 	            }
 	        });
 	    });
 	});
-	
 	// 알람 시간 변경
 	$('.timepick').on('change', updateAlarm);
 	// 복약 스케줄 완료 체크 동작
-	$(document).on('click', '.sche-chk', chkTodo);
-	
+	$(document).on('click', '.sche-chk', chkTodo);	
 });
 </script>
 

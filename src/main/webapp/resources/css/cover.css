@@ -1,7 +1,7 @@
 /* 컨텐츠 */
 #contents {
     background-color: #f8f8f8;
-    background-image: url(/img/bg.png);
+    background-image: url(/resources/img/bg.png);
     background-position: top center; /* 배경 이미지를 화면의 위쪽 가운데로 배치 */
     background-size: 100%; /* 너비는 div에 맞추고 높이는 자동으로 설정 */
     background-repeat: no-repeat; /* 이미지 반복 안 함 */
