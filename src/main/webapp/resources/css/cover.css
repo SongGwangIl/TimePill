@@ -58,7 +58,7 @@
 .btn-sky {
     width: 35%;
     height: 94%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: skyblue;
     margin-right: 3%;
     margin-bottom: 3%;
@@ -70,7 +70,7 @@
 .btn-white{
     width: 35%;
     height: 94%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: #dddddd;
     margin-bottom: 3%;
     display: flex;
@@ -81,12 +81,13 @@
 .btn-kakao {
     width: 73%;
     height: 25%;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: #FEE500;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 .btndesc {
     text-align: center;

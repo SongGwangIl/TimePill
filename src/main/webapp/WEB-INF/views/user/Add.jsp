@@ -110,7 +110,8 @@
         </div>
 
         <div class="btns boxv genbtn">
-            <a href="#" class="btn-white" id="signup">
+            <a href="#" class="btn-sky" id="signup">
+            	<img src="/resources/img/chhe.png" style="width: 20px; margin: 0;">
                 <p class="btndesc"> 가입하기 </p>
             </a>
             <a href="#" class="btn-white">

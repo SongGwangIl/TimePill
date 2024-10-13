@@ -1,7 +1,7 @@
 /* 컨텐츠 */
 #contents {
     background-color: #f8f8f8;
-    background-image: url(/img/bg.png);
+    background-image: url(/resources/img/bg.png);
     background-position: top center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -10,7 +10,7 @@
 
 /* 약통 배경 */
 .main-ico {
-    background-image: url(/img/mainico.png);
+    background-image: url(/resources/img/mainico.png);
     width: 220px;
     height: 200px;
     background-size: cover;
