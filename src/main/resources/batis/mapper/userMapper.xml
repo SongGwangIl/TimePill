@@ -67,9 +67,14 @@
   <update id="changeMyInfo">
   	UPDATE users
   	SET nickname = #{nickname}
-  		, password = #{password}
   		, email = #{email}
   	WHERE user_id = #{userId} 
   </update>
+  
+  <select id="getPassword" resultType="String">
+  	SELECT password
+  	FROM users
+  	WHERE user_id = #{userId}
+  </select>
   
 </mapper>

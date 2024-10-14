@@ -25,4 +25,6 @@ public interface UserDAO {
 	void changeMyInfo(UserVO vo);
 
 	UserVO getMyInfo(UserVO vo);
+
+	String getPassword(String userId);
 }

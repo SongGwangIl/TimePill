@@ -88,8 +88,6 @@ public class UserServiceImpl implements UserService {
 		
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);		
-		String encodedPwd = bCryptPasswordEncoder.encode(vo.getPassword());
-		vo.setPassword(encodedPwd);		
 		userdao.changeMyInfo(vo);
 		
 	}
@@ -98,6 +96,12 @@ public class UserServiceImpl implements UserService {
 	public UserVO getMyInfo(UserVO vo) {
 		
 		return userdao.getMyInfo(vo);
+	}
+
+	@Override
+	public String getPassword(String userId) {
+		
+		return userdao.getPassword(userId);
 	}
 
 }
