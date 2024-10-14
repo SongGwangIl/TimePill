@@ -17,8 +17,8 @@
 
 	<!-- 복약리스트 -->
 	<div class="listbox checkline">
-		
 		<ul class="margin-init">
+			
 			<c:forEach var="resultMed" items="${medList}">
 				<li class="medlistcard boxh checkline">
 					<img class="checkline" src="/resources/img/medblue.png" width="25px">
@@ -26,14 +26,14 @@
 					<a href="/medication/${resultMed.medId}" class="btn-upd txa">수정</a>
 				</li>
 			</c:forEach>
+			
+			<c:if test="${empty medList}">
+				<li class="margin-init">
+					<p>등록된 약이 없습니다.</p>
+				</li>
+			</c:if>
+			
 		</ul>
-		
-		<c:if test="${empty medList}">
-			<ul class="margin-init">
-				<p>등록된 약이 없습니다.</p>
-			</li>
-		</c:if>
-		
 	</div>
 	
 	<!-- 등록버튼 -->

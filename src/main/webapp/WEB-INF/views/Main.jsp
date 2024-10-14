@@ -68,9 +68,6 @@
 						
 						<%-- 복약 일정 --%>
 						<div class="daySchedule">
-							<ul class="medlist">
-								<!-- 인풋, 라벨이 아닌 이미지, 스판으로 생성됨 협의 필요 -->
-							</ul>
 						</div>
 					</div>
 				</div>

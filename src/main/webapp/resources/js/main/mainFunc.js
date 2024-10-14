@@ -119,19 +119,34 @@ function createTodo(dayScheList) {
 	// 빈 daySchedule 처리
 	let cards = document.querySelectorAll('.daySchedule');
 	for(card of cards) {
+//		console.log(card);
+
 		// 내용이 비어있는지 확인 및 bx슬라이더 클론 제외
-		console.log(card);
-		if (card.querySelector('.medlist').innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
+		if (card.innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
 			card.innerHTML = '';
+			
+			// li 생성
+			let newLi1 = document.createElement('li');
+			newLi1.classList.add('medlist-detail');
+			newLi1.classList.add('boxh');
+			let newLi2 = document.createElement('li');
+			newLi2.classList.add('medlist-detail');
+			newLi2.classList.add('boxh');
+			
+			
 			let newSpan = document.createElement('span');
 			newSpan.textContent = '등록된 복약일정이 없습니다.';
-			let br = document.createElement('br');
+			
+			newLi1.append(newSpan);
+			
 			let medRegistLink = document.createElement('a');
 			medRegistLink.href = '/medication/reg';
-			medRegistLink.textContent = '복약등록 바로가기'
-		    card.append(newSpan);
-		    card.append(br);
-		    card.append(medRegistLink);
+			medRegistLink.textContent = '복약등록 바로가기';
+			
+			newLi2.append(medRegistLink);
+			
+		    card.append(newLi1);
+		    card.append(newLi2);
 		}
 	}
 }

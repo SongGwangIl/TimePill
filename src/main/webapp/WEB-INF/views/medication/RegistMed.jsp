@@ -17,7 +17,7 @@
 	</c:otherwise>
 </c:choose>
 
-<link rel="stylesheet" href="/resources/css/medList.css">
+<!-- <link rel="stylesheet" href="/resources/css/medList.css"> -->
 
 <style>
 input {
@@ -127,8 +127,6 @@ input {
 <script>
 $(document).ready(function () {
 	let medId = "${result.medId}";
-	
-	console.log(medId);
 	
 	//공백제거
 	$('input').on('input', function() {
