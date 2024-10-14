@@ -102,16 +102,15 @@ function createTodo(dayScheList) {
 		newSpan.classList.add('label');
 		newSpan.classList.add('gsasdw');
 
-		let br = document.createElement('br');
+		// li에 내용 넣기
+		newLi.append(newImg);
+		newLi.append(newSpan);
 
 		// 생성된 element 담기
 		for (let result of alarmDiv) {
 			if (!result.classList.contains('bx-clone')) { // bx슬라이더 클론 제외
 //				console.log(result);
 				result.querySelector('.daySchedule').append(newLi);
-				result.querySelector('.medlist-detail').append(newImg);
-				result.querySelector('.medlist-detail').append(newSpan);
-				result.querySelector('.medlist-detail').append(br);
 			}
 		}
 

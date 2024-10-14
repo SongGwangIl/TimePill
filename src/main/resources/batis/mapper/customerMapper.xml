@@ -12,7 +12,7 @@
 	</resultMap>
 	
 	<select id="getAllnoticeList" resultMap="CustomerMap">
-		SELECT ntc_id, ntc_title, ntc_date
+		SELECT ntc_id, ntc_title, ntc_date, ntc_content
 		FROM notice
 	</select>
 	

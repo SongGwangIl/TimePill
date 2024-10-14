@@ -16,7 +16,7 @@
     <div class="greeting boxh">
         <h3 class="greetingdesc"> 
             <span class="hilightdesc"><c:out value="${loginUser.nickname}"/></span> 님, <br>
-            오늘의 복약정보를 확인하세요!
+            복약스케줄을 확인하세요!
         </h3>
         <img class="fadein" src="/resources/img/pill.png" style="width: 70px; margin-left: 5%;">
     </div>
