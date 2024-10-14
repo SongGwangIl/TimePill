@@ -88,13 +88,8 @@
 	             <span class="kakao-span boxh"> <img src="/resources/img/kakao.png" width="15px"> 카카오톡 알림 설정 </span>
 	        </div>
 	        <div>
-	        	<!-- 알림설정 수정 필요 -->
+	        	<!-- 알림 토글 -->
 				<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="" width="55px" style="margin-left:15%">
-<!-- 	            <div id="kakaoAlarmToggle"> -->
-<!-- 		            <input type="checkbox" id="toggle" hidden>  -->
-<!-- 		            <label for="toggle" class="toggleSwitch"> -->
-<!-- 		            <span class="toggleButton"></span> -->
-<!-- 	            </div> -->
 	            </label>
 	        </div>
 	    </div>
@@ -201,15 +196,10 @@ modal.addEventListener("click", (event) => {
     }
 });
 
-// document.getElementById("kakaoAlarmToggle").addEventListener("click", function() {
-//     var checkbox = document.getElementById("toggle");
-//     checkbox.checked = !checkbox.checked;  // 현재 체크 상태를 반전시킴
-// });
-
 </script>
 
 <script>
-// 알람시간 변경 띄우기
+// 알람시간 변경창 띄우기
 $(document).ready(function() {
 	$(function () {
 	    const timePickImages = document.querySelectorAll('.btn-spring');
@@ -224,10 +214,12 @@ $(document).ready(function() {
 	        });
 	    });
 	});
+	
 	// 알람 시간 변경
 	$('.timepick').on('change', updateAlarm);
 	// 복약 스케줄 완료 체크 동작
-	$(document).on('click', '.sche-chk', chkTodo);	
+	$(document).on('click', '.sche-chk', chkTodo);
+	
 });
 </script>
 

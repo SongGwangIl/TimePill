@@ -1,49 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%-- header --%>
-<c:import url="/header" charEncoding="utf-8">
-	<c:param name="title" value="TimePill - 스케줄 관리"/>
-</c:import>
+<c:choose>
+	<c:when test="${empty result.medId}">
+		<c:import url="/header" charEncoding="utf-8">
+			<c:param name="title" value="복약등록 - TimePill"/>
+		</c:import>
+	</c:when>
+	<c:otherwise>
+		<c:import url="/header" charEncoding="utf-8">
+			<c:param name="title" value="복약수정 - TimePill"/>
+		</c:import>
+	</c:otherwise>
+</c:choose>
 
-<style>
-/* .content-wrapper { */
-/* 	display: flex; */
-/* 	flex-direction: column; */
-/* 	justify-content: center; */
-/* 	align-items: center; */
-/* 	width: 90%; */
-/* 	margin: 20px auto; */
-/* } */
-/* .single-line { */
-/* 	width: 90%; */
-/* 	text-align: center; */
-/* 	padding: 10px; */
-/* 	margin: 10px; */
-/* } */
-
-/* .same-line { */
-/* 	justify-content: center; */
-/* 	display: flex; */
-/* 	width: 100%; */
-/* } */
-</style>
-
-<div id="contents">
-
-<div class="content-wrapper">
-	<c:choose>
-		<c:when test="${empty result.medId}">
-			<h2 class="single-line">처방약 등록</h2>
-		</c:when>
-		<c:otherwise>
-			<h2 class="single-line">처방약 수정</h2>
-		</c:otherwise>
-	</c:choose>
+<!-- 컨텐츠 시작 -->
+<div id="contents" class="">
+	
+	<!-- 타이틀 -->
+	<div>
+		<c:choose>
+			<c:when test="${empty result.medId}">
+				<h1 class="txa subtitle">복약 등록</h1>
+			</c:when>
+			<c:otherwise>
+				<h1 class="txa subtitle">복약 수정</h1>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	
+	<!-- 작성 영역 -->
 	<form id="frm" action="/medication/${result.medId}${empty result.medId ? 'add' : '/edit'}" method="post">
 		<div style="display: block;">
 		<input type="hidden" name="medId" value="${result.medId}">
@@ -90,10 +80,11 @@
 		</div>
 		<sec:csrfInput/>
 	</form>
+	
 </div>
+<!-- 컨텐츠 끝 -->
 
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/calendar/medCalendar.js"></script>
+<script src="/resources/js/calendar/medCalendar.js"></script>
 <script>
 $(document).ready(function () {
 	let medId = "${result.medId}";
@@ -117,7 +108,6 @@ $(document).ready(function () {
 });
 </script>
 	
-</div>
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
 	
