@@ -8,6 +8,21 @@
 	<c:param name="title" value="공지사항 - TimePill"/>
 </c:import>
 
+<style>
+.cha {
+    margin-left: 1%;
+    width: 4%;
+}
+.agredetaildesc {
+    font-family: 'Noto Sans Kr';
+    width: 80%;
+/*     height: 300px; */
+/*     border: 1px solid #999; */
+    padding: 3%;
+    overflow: auto;
+}
+</style>
+
  <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
 
@@ -20,7 +35,11 @@
 	<c:forEach var="getAllnoticeList" items="${noticeList}">
 	<div style="border: 1px solid #ccc">
 		<p><fmt:formatDate value="${getAllnoticeList.date}" pattern="yyyy. MM. dd" /></p>
-		<a href="/detail/${getAllnoticeList.id}"><p>${getAllnoticeList.title}</p></a>
+		<span>${getAllnoticeList.title}</span>
+		<img class="cha" src="/resources/img/rightarrow.png">
+		<div class="checkdesc" style="display: none;">
+			<p class="agredetaildesc"><c:out value="${getAllnoticeList.content}"/></p>
+		</div>
 	</div>
 	</c:forEach>
 	<br>
@@ -32,6 +51,26 @@
 	
 </div>
 <!-- 컨텐츠 끝 -->
+
+<script>
+// 모든 .cha 요소를 선택
+const chaElements = document.querySelectorAll('.cha');
+
+// 각 .cha 요소에 클릭 이벤트 추가
+chaElements.forEach(cha => {
+    cha.addEventListener('click', function() {
+
+        const checkdesc = this.nextElementSibling;
+
+        // checkdesc가 존재할 때 토글 동작
+        if (checkdesc.style.display === "none") {
+            checkdesc.style.removeProperty('display'); // display 속성 제거 (기본값으로 돌아감)
+        } else {
+            checkdesc.style.setProperty('display', 'none'); // display 속성을 none으로 설정
+        }
+    });
+});
+</script>
 
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
