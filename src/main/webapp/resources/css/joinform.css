@@ -14,15 +14,10 @@
 
 /* 약통 배경 */
 .main-ico {
-    background-image: url(/resources/img/mainico.png);
-    width: 220px;
-    height: 200px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* 이미지 반복 안 함 */
+    width: 55%;
     margin-left: 28%;
     margin-top: 8%;
-    margin-bottom: 8%;
+    margin-bottom: 1%;
 }
 
 /* 로고 */
@@ -147,7 +142,7 @@
 }
 
 .btns {
-    margin-top: 5%;
+    margin: 0;
     height: 25%;
     justify-content: center;
     align-items: center;
@@ -167,9 +162,7 @@
 
     /* 약통 배경 */
     .main-ico {
-        background-image: url(/img/mainico.png);
-        width: 160px;
-        height: 160px;
+        width: 55%;
         margin-left: 28%;
         margin-top: 8%;
         margin-bottom: 10%;

@@ -91,7 +91,7 @@ public class UserController {
 	@GetMapping("/user/find-id")
 	public String findId() {
 		
-		return "user/findId";
+		return "user/FindId";
 	}
 	/** 아이디 찾기 */
 	@ResponseBody

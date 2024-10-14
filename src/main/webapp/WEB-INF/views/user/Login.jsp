@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -8,29 +7,27 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>LOGIN</title>
+    <title>로그인 - TimePill</title>
 
     <!-- jQuery 3.7.1-->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Gmarket SANS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css"
-        type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css" />
     <!-- NotoSans KR-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- 기본 템플릿 CSS -->
     <link rel="stylesheet" href="/resources/css/common.css">
     <link rel="stylesheet" href="/resources/css/login.css">
 </head>
 <body>
+
 <div id="backcontainer" class="boxv">
     <div id="contents" class="bgimg">
         <!-- 약병 그림 -->
-        <div class="main-ico"></div>
+        <img src="/resources/img/mainico.png" class="main-ico">
 
         <!-- 타이틀 -->
-        <div class="boxh titlebox">
+        <div class="boxh">
             <img src="/resources/img/logo.svg" class="logo">
             <h1 class="gsansdown title">TimePill</h1>
         </div>

@@ -21,15 +21,13 @@
 
     <div id="contents" class="bgimg">
 
-        <div class="main-ico">
-        </div>
-            
+        <img src="/resources/img/mainico.png" class="main-ico">
 
-        <div class="boxh titlebox">
+        <div class="boxh">
             <img src="/resources/img/logo.svg" class="logo">
             <h1 class="gsansdown title">TimePill</h1>
         </div>
-
+            
 
         <div>
             <h1 class="jointitle txa"> 회원 가입 </h1>
@@ -781,7 +779,7 @@
 
 
         <div class="btns boxv genbtn">
-            <a href="/user/singup" class="btn-sky" id="consent">
+            <a href="/user/singup" class="btn-white" id="consent" style="pointer-events: none;">
             	<img src="/resources/img/chhe.png" style="width: 20px; margin: 0;">
                 <p class="btndesc"> 동의하기 </p>
             </a>
