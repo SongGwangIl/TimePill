@@ -91,7 +91,7 @@ public class UserController {
 	@GetMapping("/user/find-id")
 	public String findId() {
 		
-		return "user/FindId";
+		return "user/findId";
 	}
 	/** 아이디 찾기 */
 	@ResponseBody
@@ -150,7 +150,7 @@ public class UserController {
 			return "/user/Auth-email";
 		}
 				
-		return "user/ResetPassword";
+		return "user/ChangePassword";
 	}
 	
 	/** 패스워드 변경 */
@@ -178,25 +178,42 @@ public class UserController {
 	
 	/** 내 정보 변경 페이지 요청 */
 	@PostMapping("/mypage")
-	public String myPage(String password, UserVO vo, HttpSession session) {
+	public String myPage(String password, HttpSession session) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId);
 		
-		UserVO uvo = userService.getMyInfo(vo); // 내정보 가져오기
-		boolean isMatch = encoder.matches(password, uvo.getPassword()); // 비밀번호 일치여부 확인
+		String encodedPassword = userService.getPassword(userId); // 내정보 가져오기
+		boolean isMatch = encoder.matches(password, encodedPassword); // 비밀번호 일치여부 확인
 		
-		if(isMatch) // 비밀번호 일치
-			return "redirect:/changeMyInfo";
+		if(isMatch) { // 비밀번호 일치
+			session.setAttribute("changeInfoUser", userId);
+			session.setAttribute("message", "인증되었습니다.");
+		}
 		else // 비밀번호 불일치
 			session.setAttribute("message", "비밀번호가 일치하지 않습니다.");
-		return "user/Mypage";
+		return "redirect:/mypage";
 	}
 	
 	/** 비밀번호 변경페이지 요청 */
-	@GetMapping("/mypage/change-Password")
-	public String changePw() {
+	@GetMapping("/mypage/change-password")
+	public String changePw(HttpSession session) {
+		if(session.getAttribute("changeInfoUser") == null) {
+			session.setAttribute("message", "인증 후 이용가능합니다.");
+			return "redirect:/mypage";
+		}		
+		return "user/ChangePassword";
+	}
+	@PostMapping("/mypage/change-password")
+	public String changePw(HttpSession session, UserVO vo) {
+		String userInfo = (String) session.getAttribute("changeInfoUser");
+		if(userInfo == null) {
+			session.setAttribute("message", "잘못된 접근입니다.");
+			return "redirect:/mypage";
+		}
+		vo.setUserId(userInfo);
+		userService.resetPassword(vo);
+		session.setAttribute("message", "비밀번호가 변경되었습니다.");
 		
-		return "user/ResetPassword";
+		return "redirect:/mypage";
 	}
 	
 	/** 내 정보 변경 페이지 요청 */
@@ -213,14 +230,18 @@ public class UserController {
 	
 	/** 내 정보 변경 */
 	@PostMapping("/mypage/change-myinfo")
-	public String chageMyInfo(UserVO vo, BindingResult result, Model model) {
-		
+	public String chageMyInfo(UserVO vo, BindingResult result, Model model, HttpSession session) {
+		String userInfo = (String) session.getAttribute("changeInfoUser");
+		if(userInfo == null) {
+			session.setAttribute("message", "잘못된 접근입니다.");
+			return "redirect:/mypage";
+		}
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
-			return "changeMyInfo";
+			return "ChangeMyInfo";
 		
 		userService.changeMyInfo(vo); // 유저정보변경
-		model.addAttribute("message", "변경되었습니다.");
+		model.addAttribute("message", "정보가 변경되었습니다.");
 		
 		return "redirect:/";
 	}

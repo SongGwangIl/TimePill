@@ -145,7 +145,7 @@ function addEvent(){
 					if(selectedDay)	
 						selectedDay.classList.remove('selectedDay');
 					setSelectedDay(e);
-					
+					modal.style.display = "none"; // 모달 닫기
 					// mainFunc.js 하루 일정 가져오기 함수
 					getDaySche();				
 			});

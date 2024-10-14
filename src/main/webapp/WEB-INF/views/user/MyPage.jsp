@@ -8,60 +8,53 @@
 <c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="TimePill"/>
 </c:import>
-<style>
-
-	input[name="password"]{
-		width: 250px;
-	}
-
-	.modal {
-		display: none;
-		position: fixed;
-		width: 450px;
-		padding: 10px;
-		border-radius: 10px;
-		top: 40%;
-		left: 50%;
-		z-index: 2;
-		background: white;
-	}
-	
-	.modal.active {
-		display: block;
-	}
-</style>
-
+<link rel="stylesheet" href="/resources/css/mypage.css">
+<link rel="stylesheet" href="/resources/css/common.css">
 <div id="contents">
 
 	<h1>설정</h1>
-	<button id="changeBtn">내 정보 변경</button><br>
-	<form id="pwFrm" class="modal" action="/mypage" method="post">
-		<label>비밀번호확인</label>
-		<input name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
-		<button type="button" id="submitBtn">확인</button><button type="button" id="cancelBtn">취소</button>
-		<sec:csrfInput/>
-	</form>
-	<button id="changePwBtn">비밀번호변경</button><br>
-
+	
+	<div class="boxv btns">
+        <div class="boxh genbtn">
+			<a href="/mypage/change-myinfo" class="btn-sky" id="changeInfoBtn">
+                <p class="btndesc"> 내정보 변경 </p>
+            </a>			
+			<a href="/mypage/change-password" class="btn-sky" id="changePwBtn">
+                <p class="btndesc"> 비밀번호 변경 </p>
+            </a>          
+        </div>	        
+    </div>
+	<div class="fModal">
+		<div class="fModal_body">
+			<form id="pwFrm" action="/mypage" method="post">
+				<div class="pwFrmWrap">
+					<label>비밀번호확인</label>
+					<input class="form-input" name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
+				</div>
+				<div class="buttonWrap">
+					<button class="btn" type="button" id="submitBtn">확인</button>
+					<button class="btn" type="button" id="cancelBtn">취소</button>
+				</div>
+				<sec:csrfInput/>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
-	let pwFrm = document.querySelector('#pwFrm');
-	let cancelBtn = document.querySelector('#cancelBtn');
-	let changePwBtn = document.querySelector('#changePwBtn');
-	let submitBtn = document.querySelector('#submitBtn');
+	const fModal = document.querySelector('.fModal');
+	const fModalBody = document.querySelector('.fModal_body');
+	const pwFrm = document.querySelector('#pwFrm');
+	const submitBtn = document.querySelector('#submitBtn');
+	const cancelBtn = document.querySelector('#cancelBtn');
+
+	<c:if test="${empty sessionScope.changeInfoUser}">
+		userAuth();	
+	</c:if>
 	
-	pwFrm.style.left = ( window.innerWidth/2 - parseInt(window.getComputedStyle(pwFrm)
-		.getPropertyValue('width')) /2 ) + 'px';
-	
-	document.querySelector('#changeBtn').onclick = function(){
-		let modal = document.querySelector('.modal');
-		modal.classList.add('active');
-		pwInp.focus();		
-	}
-	
-	changePwBtn.onclick = function(){
-		window.location.href = "/mypage/change-Password";
+	function userAuth(){
+		// 모달 열기 
+		fModal.style.display = "flex";
 	}
 	
 	submitBtn.onclick = function(){
@@ -69,7 +62,8 @@
 	}
 	
 	cancelBtn.onclick = function(){
-		pwFrm.classList.remove('active');
+		
+		fModal.style.display = "none";
 	}
 </script>
 

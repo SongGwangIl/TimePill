@@ -24,4 +24,6 @@ public interface UserService extends UserDetailsService {
 	// 내정보 가져오기
 	public UserVO getMyInfo(UserVO vo);
 
+	// 비밀번호 가져오기
+	public String getPassword(String userId);
 }
