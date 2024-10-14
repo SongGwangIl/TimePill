@@ -3,13 +3,14 @@ body {
     margin: 0;
     background-color: #eee;
     font-family: 'Gmarket Sans';
+    height: 100dvh;
 }
 
 /* 헤더와 메뉴바 포함 전체 컨테이너*/
 #backcontainer {
     margin: 0 auto;
     width: 480px; 
-    height: 100vh;
+    height: 100%;
     bottom: 100px;
     background: #f8f8f8; 
 }
@@ -23,9 +24,9 @@ body {
 }
 
 /* 체크용 line */
-.checkline {
+/* .checkline {
     border: 1px solid black;
-}
+} */
 
 /* box horizon*/
 .boxh {
@@ -132,20 +133,34 @@ input[type="checkbox"]:checked {
 
 /* 480~360 */
 @media (max-width: 480px) {
+	body {
+		width: 100dvw;
+        max-width: 480px;
+        height: 100dvh;
+	}
     #backcontainer {
-        width: 360px;
+        width: 100%;
+        height: 100%;
+        margin: 0;
     }
     /* 컨텐츠 */
     #contents {
         width: 100%;
+        margin: 0;
     }
 }
 
 
 /* Galaxy S23 */
 @media (max-width: 360px) {
+	body {
+		width: 100dvw;
+		max-width: 360px;
+		height: 100dvh;
+	}
     #backcontainer {
         width: 100%;
+/*         height: 85.5vh; */
     }
     /* 컨텐츠 */
     #contents {

@@ -20,7 +20,8 @@
    		<intercept-url pattern="/schedule/**" access="isAuthenticated()"/>
    		<intercept-url pattern="/medication/**" access="isAuthenticated()"/>
    		<intercept-url pattern="/mypage/**" access="isAuthenticated()"/>
-   		<intercept-url pattern="/notice/**" access="isAuthenticated()"/>
+   		<intercept-url pattern="/notice" access="isAuthenticated()"/>
+   		<intercept-url pattern="/notice/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')"/>
    		
    		<!-- 접근 거부 핸들러 -->
 		<access-denied-handler ref="customAccessDeniedHandler"/>

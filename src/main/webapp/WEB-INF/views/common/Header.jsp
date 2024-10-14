@@ -29,7 +29,6 @@
 <link rel="stylesheet" href="/resources/css/common.css">
 <link rel="stylesheet" href="/resources/css/header.css">
 
-
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 

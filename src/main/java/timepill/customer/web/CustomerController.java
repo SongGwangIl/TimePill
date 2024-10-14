@@ -1,4 +1,4 @@
-package timepill.customer;
+package timepill.customer.web;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import timepill.customer.service.CustomerService;
+import timepill.customer.service.CustomerVO;
 
 @Controller
 public class CustomerController {
@@ -47,33 +48,4 @@ public class CustomerController {
 		return "redirect: /notice";
 	}
 	
-	
-	// 공지사항 내용
-	@GetMapping("/notice/detail/{id}")
-	public String detail(Model model, CustomerVO cvo) {
-
-		CustomerVO notice = customerService.getnoticeList(cvo);
-		model.addAttribute("notice", notice);
-
-		return "customer/Detail";
-	}
-	
-	// 공지사항 변경
-	@PostMapping("/notice/detail/{id}")
-	public String updateNotice(CustomerVO cvo) {
-
-		customerService.updateNotice(cvo);
-
-		return "redirect:/detail/" + cvo.getId();
-	}
-	
-	// 공지사항 삭제
-	@GetMapping("/notice/delete/{id}")
-	public String delete(CustomerVO cvo) {
-		
-		customerService.deleteNotice(cvo);
-		System.out.println("공지사항 삭제");
-		
-		return "redirect: /notice";
-	}
 }
