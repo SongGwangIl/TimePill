@@ -179,4 +179,14 @@ input[type='time'] {
         transform:translateY(-50%);
     }
     
+    .whiteround.boxh input.timepick {
+        font-size: 15px;
+        max-width: 100px;
+    }
+    .whiteround.boxh p.alarmdesc {
+        font-size: 16px;
+    }
+    .whiteround.boxh img.btn-spring {
+        width: 20px;
+    }
 }

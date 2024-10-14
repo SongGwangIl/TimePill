@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import timepill.customer.CustomerVO;
+import timepill.customer.service.CustomerVO;
 
 @Mapper
 public interface CustomerDAO{

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import timepill.customer.CustomerVO;
 import timepill.customer.service.CustomerService;
+import timepill.customer.service.CustomerVO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

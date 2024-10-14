@@ -136,6 +136,12 @@
 	.selectedDay{
 		background: olive;
 	}
+	
+	@media (max-width: 480px) {
+		.calendar {
+			margin: 0px;
+		}
+	}
 </style>
 </head>
 

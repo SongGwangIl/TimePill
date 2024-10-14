@@ -1,4 +1,4 @@
-package timepill.customer;
+package timepill.customer.service;
 
 import java.util.Date;
 

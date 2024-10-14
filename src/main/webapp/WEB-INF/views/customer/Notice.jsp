@@ -8,44 +8,42 @@
 	<c:param name="title" value="공지사항 - TimePill"/>
 </c:import>
 
-<style>
-.cha {
-    margin-left: 1%;
-    width: 25px;
-}
-.agredetaildesc {
-    font-family: 'Noto Sans Kr';
-    width: 80%;
-/*     height: 300px; */
-/*     border: 1px solid #999; */
-	margin: 10px;
-    padding: 3%;
-    overflow: auto;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/notice.css">
+
 
  <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
 
 	<!-- 타이틀 -->
-	<div>
+	<section>
 		<h1 class="txa subtitle">공지사항</h1>
-	</div>
-	
+	</section>
+
 	<!-- 공지사항 리스트 -->
 	<c:forEach var="getAllnoticeList" items="${noticeList}">
-	<div style="border: 1px solid #ccc">
-		<p style="margin: 10px; margin-bottom: 5px;"><fmt:formatDate value="${getAllnoticeList.date}" pattern="yyyy. MM. dd" /></p>
-		<span style="font-size: x-large; margin: 10px;"><c:out value="${getAllnoticeList.title}"/></span>
-		<img class="cha" src="/resources/img/ico-unfolding.png">
-		<div class="checkdesc" style="display: none;">
-			<hr style="width: 90%;">
-			<p class="agredetaildesc"><c:out value="${getAllnoticeList.content}"/></p>
-		</div>
-	</div>
+		<article class="bbslist">
+			<!-- 날짜 -->
+			<p class="bbsdate">
+				<fmt:formatDate value="${getAllnoticeList.date}" pattern="yyyy. MM. dd" />
+			</p>
+			<details class="bbs">
+				<!-- 제목 -->
+				<summary class="bbstitle">
+					<h1 class="bbstitledesc">
+						<c:out value="${getAllnoticeList.title}" />
+					</h1>
+					<img src="/resources/img/down.png">
+				</summary>
+				<!-- 내용 -->
+				<div class="bbsdescbox">
+					<p class="bbsdesc">
+						<c:out value="${getAllnoticeList.content}" />
+					</p>
+				</div>
+			</details>
+		</article>
 	</c:forEach>
-	<br>
-	
+
 	<!-- 관리자만 접근 가능 -->
 	<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
 		<a href="/write">글쓰기</a>
@@ -55,24 +53,17 @@
 <!-- 컨텐츠 끝 -->
 
 <script>
-// 모든 .cha 요소를 선택
-const chaElements = document.querySelectorAll('.cha');
+const titles = document.querySelectorAll('.bbstitle');
 
-// 각 .cha 요소에 클릭 이벤트 추가
-chaElements.forEach(cha => {
-    cha.addEventListener('click', function() {
-
-        const checkdesc = this.nextElementSibling;
-
-        // checkdesc가 존재할 때 토글 동작
-        if (checkdesc.style.display === "none") {
-        	this.src = '/resources/img/ico-folding.png';
-            checkdesc.style.removeProperty('display'); // display 속성 제거 (기본값으로 돌아감)
-        } else {
-        	this.src = '/resources/img/ico-unfolding.png';
-            checkdesc.style.setProperty('display', 'none'); // display 속성을 none으로 설정
-        }
-    });
+titles.forEach(title => {
+	title.addEventListener('click', function () {
+		const img = title.querySelector('img');
+		if (img.src.includes('down.png')) {
+			img.src = '/resources/img/up.png';  // up 이미지로 변경
+		} else {
+			img.src = '/resources/img/down.png';  // 다시 down 이미지로 변경
+		}
+	});
 });
 </script>
 

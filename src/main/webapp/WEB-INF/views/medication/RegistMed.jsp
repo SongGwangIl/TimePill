@@ -17,13 +17,11 @@
 	</c:otherwise>
 </c:choose>
 
-<!-- <link rel="stylesheet" href="/resources/css/medList.css"> -->
-
 <style>
 input {
 	margin-top: 10px;
     width: 215px;
-    height: 32px;
+    height: 30px;
     padding-left: 2%;
     font-family: 'Noto Sans KR';
     font-size: 15px;
@@ -32,8 +30,59 @@ input {
     outline: none;
     background-color: rgb(233, 233, 233);
 }
-.calendar {
-	margin: 10px;
+h1 {
+	margin-top: 10px; 
+ 	margin-bottom: 10px; 
+}
+.frm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto; /* 가운데 정렬을 위해 추가 */
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.label-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 가운데 정렬을 위해 변경 */
+    width: 100%;
+    margin-bottom: 10px;
+}
+.label-input-container label {
+    margin-right: 10px; /* 라벨과 인풋 사이의 간격 조정 */
+}
+label {
+	margin-top: 15px;
+}
+.checkbox-container label {
+	margin-top: 10px;
+}
+
+.btn-sky {
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 2%;
+    margin-bottom: 3%;
+    background-color: skyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-white{
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #dddddd;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
 
@@ -55,10 +104,12 @@ input {
 	<!-- 작성 영역 -->
 		<form id="frm" action="/medication/${result.medId}${empty result.medId ? 'add' : '/edit'}" method="post">
 			
-			<div class="frm" style="width: 80%; margin: 0; margin-left: 95px;">
+			<div class="frm" style="width: 80%;">
 				<input type="hidden" name="medId" value="${result.medId}">
-				<label for="medName">복약이름</label> 
-				<input type="text" name="medName"placeholder="약이름을 입력해주세요." value="${result.medName}" required> <br>
+				<div class="label-input-container">
+					<label for="medName">약이름</label> 
+					<input type="text" name="medName" placeholder="약이름을 입력해주세요." value="${result.medName}" required>
+				</div>
 				
 				<c:forEach var="resultAlarmType" items="${result.alarmTypes}">
 					<c:choose>
@@ -76,46 +127,61 @@ input {
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
-				<label for="alarm1">아침</label>
-				<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
-				<label for="alarm2">점심</label>
-				<input type="checkbox" id="alarm3" name="alarmTypes" value="3" ${not empty alarmOn3 ? 'checked' : ''}>
-				<label for="alarm3">저녁</label>
-				<input type="checkbox" id="alarm4" name="alarmTypes" value="4" ${not empty alarmOn4 ? 'checked' : ''}>
-				<label for="alarm4">취침전</label>
-				<br>
+				<div class="checkbox-container">
+					<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
+					<label for="alarm1">아침</label>
+					<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
+					<label for="alarm2">점심</label>
+					<input type="checkbox" id="alarm3" name="alarmTypes" value="3" ${not empty alarmOn3 ? 'checked' : ''}>
+					<label for="alarm3">저녁</label>
+					<input type="checkbox" id="alarm4" name="alarmTypes" value="4" ${not empty alarmOn4 ? 'checked' : ''}>
+					<label for="alarm4">취침전</label>
+				</div>
 				
-				<label for="startDate">처방일자</label> 
-				<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly> <br>
-				<label for="endDate">만료일자</label> 
-				<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly> <br>
+				<div class="label-input-container">
+					<label for="startDate">시작일</label> 
+					<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+				</div>
+				<div class="label-input-container">
+					<label for="endDate">만료일</label> 
+					<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+				</div>
 			</div>
-			
-			
 			
 			<c:import url="/calendar"/>
-			<script>
-				document.querySelector('.calendar').style.margin = '20px';
-				document.querySelector('.calendar').style.marginBottom = '0px';
-			</script>
+			<style>
+			.calendar{
+				margin: 0 auto;
+			}
+			.days{
+				display: flex;
+				margin: 10px 0 10px;
+			}
+			.dates{
+				height: 200px;
+			}
+			</style>
 			
-			<div class="button-container" style="text-align: center; margin-top: 0px;">
-				<!-- 등록버튼 -->
-				<button type="submit" id="btn-frm">
-					${empty result.medId ? '등록' : '수정'}
-				</button>
-				
-				<!-- 취소버튼 -->
-				<button type="button" onclick="location.href='/medication'">취소</button>
-				
-				<%-- 삭제버튼 --%>
+			<div class="btns boxh">
+				<button type="submit" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
+                <a href="#" class="btn-sky">
+                    <p class="btndesc">${empty result.medId ? '등록' : '수정'}</p>
+                </a>
+                </button>
+                <button type="button" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
+                <a href="#" class="btn-white">
+                    <p class="btndesc"> 취소 </p>
+                </a>
+                </button>
+                <%-- 삭제버튼 --%>
 				<c:if test="${not empty result.medId}">
-					<button type="button" id="btn-del">
-						삭제
-					</button>
+					<button type="button" id="btn-del" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
+		                <a href="#" class="btn-white">
+		                    <p class="btndesc"> 삭제 </p>
+		                </a>
+	                </button>
 				</c:if>
-			</div>
+            </div>
 			
 			<sec:csrfInput/>
 		</form>
@@ -147,4 +213,3 @@ $(document).ready(function () {
 	
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
-	
