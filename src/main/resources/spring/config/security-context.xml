@@ -17,9 +17,10 @@
    		<intercept-url pattern="/" access="isAuthenticated()"/>
    		<intercept-url pattern="/kakao/**" access="isAuthenticated()"/>
    		<intercept-url pattern="/alarm/**" access="isAuthenticated()"/>
-   		<intercept-url pattern="/medication/**" access="isAuthenticated()"/>
    		<intercept-url pattern="/schedule/**" access="isAuthenticated()"/>
+   		<intercept-url pattern="/medication/**" access="isAuthenticated()"/>
    		<intercept-url pattern="/mypage/**" access="isAuthenticated()"/>
+   		<intercept-url pattern="/notice/**" access="isAuthenticated()"/>
    		
    		<!-- 접근 거부 핸들러 -->
 		<access-denied-handler ref="customAccessDeniedHandler"/>

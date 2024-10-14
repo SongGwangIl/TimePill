@@ -9,6 +9,7 @@
 	<c:param name="title" value="TimePill"/>
 </c:import>
 
+<link rel="stylesheet" href="/resources/css/main.css">
 
 <div id="contents" class="">
 

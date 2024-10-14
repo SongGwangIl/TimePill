@@ -11,13 +11,14 @@
 <style>
 .cha {
     margin-left: 1%;
-    width: 4%;
+    width: 25px;
 }
 .agredetaildesc {
     font-family: 'Noto Sans Kr';
     width: 80%;
 /*     height: 300px; */
 /*     border: 1px solid #999; */
+	margin: 10px;
     padding: 3%;
     overflow: auto;
 }
@@ -34,10 +35,11 @@
 	<!-- 공지사항 리스트 -->
 	<c:forEach var="getAllnoticeList" items="${noticeList}">
 	<div style="border: 1px solid #ccc">
-		<p><fmt:formatDate value="${getAllnoticeList.date}" pattern="yyyy. MM. dd" /></p>
-		<span>${getAllnoticeList.title}</span>
-		<img class="cha" src="/resources/img/rightarrow.png">
+		<p style="margin: 10px; margin-bottom: 5px;"><fmt:formatDate value="${getAllnoticeList.date}" pattern="yyyy. MM. dd" /></p>
+		<span style="font-size: x-large; margin: 10px;"><c:out value="${getAllnoticeList.title}"/></span>
+		<img class="cha" src="/resources/img/ico-unfolding.png">
 		<div class="checkdesc" style="display: none;">
+			<hr style="width: 90%;">
 			<p class="agredetaildesc"><c:out value="${getAllnoticeList.content}"/></p>
 		</div>
 	</div>
@@ -64,8 +66,10 @@ chaElements.forEach(cha => {
 
         // checkdesc가 존재할 때 토글 동작
         if (checkdesc.style.display === "none") {
+        	this.src = '/resources/img/ico-folding.png';
             checkdesc.style.removeProperty('display'); // display 속성 제거 (기본값으로 돌아감)
         } else {
+        	this.src = '/resources/img/ico-unfolding.png';
             checkdesc.style.setProperty('display', 'none'); // display 속성을 none으로 설정
         }
     });
