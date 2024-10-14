@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TimePill - 스케줄 관리</title>
+
+<!-- 시큐리티 csrf토큰 -->
+<meta name="_csrf_parameter" content="_csrf" /><meta name="_csrf_header" content="X-CSRF-TOKEN" /><meta name="_csrf" content="37857928-570e-4ee2-a799-b1d6ec17c44d" />
+<!-- 시큐리티 로그인 여부 -->
+
+	
+
+
+<!-- 파비콘 -->
+<link rel="icon" href="/img/logo.svg">
+
+<!-- Gmarket SANS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css"/>
+<!-- NotoSans KR-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- 기본 템플릿 CSS -->
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+<body>
+	<div id="backcontainer" class="boxv">
+		<!-- 헤더 : main logo, user status -->
+		<header id="header" class="boxh">
+			<div class="boxh headerbar">
+				<a href="/">
+					<div class="boxh title">
+						<img id="logo" src="/img/logo.svg">
+						<h1>TimePill</h1>
+					</div>
+				</a>
+				<div class="boxh logout">
+					
+						<a href="#" onclick="document.getElementById('logoutForm').submit();">
+							<img src="/img/logout.png" alt="로그아웃" style="width: 35px;">
+						</a>
+						<form id="logoutForm" method="POST" action="/user/logout" style="display: none;">
+							<input type="hidden" name="_csrf" value="37857928-570e-4ee2-a799-b1d6ec17c44d" />
+						</form>
+					
+				</div>
+			</div>
+		</header>
+
+<style>
+/* .content-wrapper { */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	width: 90%; */
+/* 	margin: 20px auto; */
+/* } */
+/* .single-line { */
+/* 	width: 90%; */
+/* 	text-align: center; */
+/* 	padding: 10px; */
+/* 	margin: 10px; */
+/* } */
+
+/* .same-line { */
+/* 	justify-content: center; */
+/* 	display: flex; */
+/* 	width: 100%; */
+/* } */
+</style>
+
+<div id="contents">
+
+<div class="content-wrapper">
+	
+		
+		
+			<h2 class="single-line">처방약 수정</h2>
+		
+	
+	<form id="frm" action="/medication/MED_0000000012/edit" method="post">
+		<div style="display: block;">
+		<input type="hidden" name="medId" value="MED_0000000012">
+		<input type="text" name="medName"placeholder="복약이름" value="감기약" required> <br>
+		
+		
+			
+				
+					
+				
+				
+				
+				
+			
+		
+			
+				
+				
+					
+				
+				
+				
+			
+		
+			
+				
+				
+				
+					
+				
+				
+			
+		
+			
+				
+				
+				
+				
+					
+				
+			
+		
+		<input type="checkbox" id="alarm1" name="alarmTypes" value="1" checked>
+		<label for="alarm1">아침</label>
+		<input type="checkbox" id="alarm2" name="alarmTypes" value="2" checked>
+		<label for="alarm2">점심</label>
+		<input type="checkbox" id="alarm3" name="alarmTypes" value="3" checked>
+		<label for="alarm3">저녁</label>
+		<input type="checkbox" id="alarm4" name="alarmTypes" value="4" checked>
+		<label for="alarm4">취침전</label>
+		<br>
+		
+		<label for="startDate">처방일자</label> 
+		<input type="text" name="startDate" id="start" value="2024-10-10" required> <br>
+		<label for="endDate">만료일자</label> 
+		<input type="text" name="endDate" id="end" value="2024-10-24" required> <br>
+		
+		
+
+
+<head>
+<meta charset="UTF-8">
+
+<style type="text/css">
+
+	cBody * {
+		clear: both;
+	}
+	
+	cBody{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.calendar{
+		width: 300px;
+		margin: 50px;
+	}
+	
+	.calHeader{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.year-month {
+		font-size: 20px;
+	}
+	
+	.nav{
+		margin: 0 auto;
+		display: flex;
+		
+		
+	}
+	
+	.nav-btn{
+		width: 50px;
+		height: 30px;
+		border: none;
+		font-size: 16px;
+		line-height: 34px;
+		background: transparent;
+		cursor: pointer;
+		padding-left: 10px;
+		padding-right: 10px;
+		
+	}
+	
+	.go-today {
+		width: 75px;
+	}
+	
+	.days{
+		display: flex;
+		margin: 25px 0 10px;
+	}
+	
+	.day{
+		width: calc(100% / 7);
+		text-align: center;
+	}
+	
+	.dates{
+		display: flex;
+		flex-flow: row wrap;
+		height: 300px;
+		align-items: center;
+	}
+	
+	.date{
+		width: calc(100% / 7);
+		text-align: center;
+		height: calc(100%/7);
+		position: relative;	
+		border-radius: 5px;
+	}
+	.date>p{
+		position: absolute;
+		top: 10px;
+		left: 18px;
+		font-size: 10px;
+		color: black;
+		pointer-events: none;
+	}
+	.date.this>span{
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+	}
+	.date>p[data-id]{
+		top: 20px;
+		left: 8px;
+	}
+	
+	.day:nth-child(7n + 1),
+	.date:nth-child(7n + 1) {
+		color: #d13e3e;
+	}
+	
+	.day:nth-child(7n),
+	.date:nth-child(7n) {
+		color: #396ee2;
+	}
+	
+	.other{
+		opacity: 0.3;
+	}
+
+	.today{
+		position: relative;
+		font-weight: 900;
+		color: #1188dd;
+	}
+	
+
+	.startDay{
+		background: yellowgreen;
+	}
+	.period{
+		background: yellow;
+	}
+		
+	.endDay{
+		background: pink;
+	}
+	.selectedDay{
+		background: olive;
+	}
+</style>
+</head>
+
+<cBody>
+<!-- 	<section> -->
+<!-- 		<input id="start" readonly> -->
+<!-- 		<input id="end" readonly> -->
+<!-- 	</section> -->
+	<section class='calendar'>
+		<div class='calHeader'>
+			<div class="nav">
+				<button type="button" class="nav-btn go-prev" onclick='prevMonth()'>&lt;</button>
+				<div class="year-month"></div>
+				<button type="button" class="nav-btn go-next" onclick='nextMonth()'>&gt;</button>
+			</div>
+		</div>
+		<div class='calMain'>
+			<div class="days">
+				<div class="day">일</div>
+				<div class="day">월</div>
+				<div class="day">화</div>
+				<div class="day">수</div>
+				<div class="day">목</div>
+				<div class="day">금</div>
+				<div class="day">토</div>
+			</div>
+			<div class="dates"></div>
+		</div>
+	</section>
+</cBody>
+
+		
+		<button type="submit" id="btn-reg" >수정</button> <br>
+		
+			<button type="submit" id="btn-del">삭제</button> <br>
+		
+		<button type="button" onclick="location.href='/medication'">취소</button>
+		</div>
+		<input type="hidden" name="_csrf" value="37857928-570e-4ee2-a799-b1d6ec17c44d" />
+	</form>
+</div>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/calendar/medCalendar.js"></script>
+<script>
+$(document).ready(function () {
+	let medId = "MED_0000000012";
+	
+	console.log(medId);
+	
+	//공백제거
+	$('input').on('input', function() {
+		$(this).val($(this).val().replace(/\s/g, ''));
+	});
+	
+	// 삭제버튼
+	$('#btn-del').on('click', function () {
+		event.preventDefault();
+		if (!confirm("삭제하시겠습니까?")) {
+			return false;
+		}
+		$('#frm').attr('action', '/medication/'+medId+'/del');
+		$('#frm').submit();
+	});
+});
+</script>
+	
+</div>
+
+
+
+
+
+		<!-- 푸터 : nav -->
+        <nav id="mainmenu" class="">
+            <ul class="menu">
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <a href="/">
+	                            <img id="logo" src="/img/sched.png" style="width: 50px;">
+                            	<br>스케줄
+                             </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <a href="/medication">
+	                            <img id="logo" src="/img/medmng.png" style="width: 50px;">
+                            	<br>복약관리
+                            </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <a href="/mypage">
+                            	<img id="logo" src="/img/myinfo.png" style="width: 50px;">
+                            	<br>내 정보
+                             </a>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="boxv">
+                            <a href="/notice">
+	                            <img id="logo" src="/img/notice.png" style="width: 50px;">
+	                            <br>공지사항
+                            </a>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+</script>
+
+	

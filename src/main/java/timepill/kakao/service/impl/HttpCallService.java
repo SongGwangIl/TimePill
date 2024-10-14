@@ -12,42 +12,57 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class HttpCallService {
+	
+	private boolean isMessageSent = false;
 
 	/** HTTP 요청을 보내고 응답을 받는 메소드 */
 	public String Call(String method, String reqURL, String header, String param) {
+		log.debug("HTTP 요청 시작");
+		
+		if (isMessageSent) {
+			return ""; // 이미 메시지가 전송된 경우 중단
+		}
+
+		// 메시지 전송 로직
+		isMessageSent = true;
+		
 		
 		String result = "";
 		int responseCode = 0;
 		
 		try {
 			
+			// 요청 url 설정
 			String response = "";
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 요청 URL
+			System.out.println("요청 URL: " + reqURL);
 			
-			System.out.println("HTTP 요청 시작: " + reqURL);
-			
+			// 요청 메서드 및 헤더 설정
 			conn.setRequestMethod(method); // 요청 method 타입
 			conn.setRequestProperty("Authorization", header); // 인증 방식 ex)액세스 토큰으로 인증 요청
-			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			log.debug("메서드: {}", method);
+			log.debug("Authorization: {}", header);
+
 			
+			// 요청 전송
 			if (param != null) {
-				System.out.println("파라미터 존재: " + param);
 				conn.setDoOutput(true);
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 				bw.write(param);
 				bw.flush();
 			}
+			log.debug("파라미터: ", param == null ? "null" : param);
 			
 			// HTTP 응답 코드 반환
 			responseCode = conn.getResponseCode();
-			System.out.println("HTTP 응답 코드: " + responseCode);
-	        System.out.println("요청 URL: " + reqURL);
-	        System.out.println("요청 메서드: " + method);
-	        System.out.println("Authorization 헤더: " + header);
-
+			System.out.println("응답 코드: " + responseCode);
+			
 			// 에러 체크
 			InputStream stream = conn.getErrorStream();
 			if (stream != null) {
@@ -55,7 +70,7 @@ public class HttpCallService {
 					scanner.useDelimiter("\\Z");
 					response = scanner.next();
 				}
-				System.out.println("에러 응답: " + response);
+				log.debug("에러 응답: {}", response);
 			}
 
 			// HTTP 응답 읽기
@@ -64,18 +79,18 @@ public class HttpCallService {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("HTTP 응답 본문: " + result);
 			br.close();
+			log.debug("응답 본문: {}", result);
 			
 		} catch (IOException e) {
-			System.out.println("예외 발생: " + e.getMessage());
-			if (responseCode == 401) {
-				return Integer.toString(responseCode);
-			}
-			return e.getMessage();
+			log.debug("예외 발생: {}", e.getMessage());
 			
+			if (responseCode == 401)
+				return Integer.toString(responseCode);
+			isMessageSent = false;
+			return e.getMessage();
 		}
-		
+		isMessageSent = false;
 		return result;
 	}
 

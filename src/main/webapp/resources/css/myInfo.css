@@ -1,37 +1,24 @@
-/* 컨텐츠 */
+/* 기본 템플릿 스크롤 여부 */
 #contents {
-    background-color: #f8f8f8;
-    background-image: url(/resources/img/bg.png);
-    background-position: top center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+    overflow: auto;
 }
 
-/* 약통 배경 */
-.main-ico {
-    width: 55%;
-    margin-left: 28%;
-    margin-top: 8%;
-    margin-bottom: 10%;
+#backcontainer {
+    overflow: auto;
 }
 
-/* 로고 */
-.logo {
-    width: 13%;
-    margin-right: 5px;
+.subtitle {
+    font-size: 1.8em;
+    margin: 1%;
 }
 
-/* 타이틀 */
-.title {
-    font-size: 3em;
-}
 
 /* table */
-.loginform {
+.joinform {
     margin: auto;
     width: 60%;
     height: 70%;
+    margin-top: 5%;
 }
 
 .email {
@@ -53,31 +40,38 @@
     padding-left: 2%;
     font-family: 'Noto Sans KR';
     font-size: 15px;
-    letter-spacing: -1.5px;
     border: 0;
-    border-bottom: 2px dotted #999;;
+    border-radius: 12px;
     outline: none;
-    background-color: transparent;
-    
+    background-color: rgb(233, 233, 233);
 }
 
 /* icon */
 .input {
     position: relative;
-    margin-bottom: 4%;
 }
+
 .eye {
     width: 30px;
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
     margin: auto 2px;
     height: 30px;
     cursor: pointer;
 }
 
-/* btn */
+.btn {
+    width: 262px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(164, 199, 255);
+}
+
 .btn:active {
     width: 262px;
     height: 32px;
@@ -90,45 +84,41 @@
 }
 
 .btn-sky {
-    width: 50%;
-    height: 30%;
-    border-radius: 20px;
+    width: 140px;
+    height: 40px;
+    border-radius: 15px;
+    margin-right: 2%;
+    margin-bottom: 3%;
     background-color: skyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-white{
+    width: 140px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #dddddd;
     margin-bottom: 3%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
 .btndesc {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 400;
     margin: 0;
+    margin-left: 2%;
 }
 
 .btns {
-    margin-top: 5%;
-    height: 25%;
+    margin-top: 2%;
+    height: 20%;
     justify-content: center;
     align-items: center;
-}
-
-.btn-kakao {
-    width: 50%;
-    height: 30%;
-    border-radius: 20px;
-    background-color: #FEE500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.caption {
-    font-size: 1em;
-    text-align: center;
-    color: #5a5a5a;
 }
 
 
@@ -145,34 +135,40 @@
 
     /* 약통 배경 */
     .main-ico {
-        width: 55%;
+        background-image: url(/img/mainico.png);
+        width: 160px;
+        height: 160px;
         margin-left: 28%;
         margin-top: 8%;
         margin-bottom: 10%;
     }
 
-    .title {
-        font-size: 2.5em;
-    }
-    .titlebox {
-        height: 90px;
-    }
     /* table */
-    .loginform {
+    .joinform {
         margin: auto;
+        margin-top: 0;
         width: 80%;
         height: 70%;
     }
     .btndesc {
         text-align: center;
-        font-size: 1em;
-        font-weight: 400;
+        font-size: 1.1em;
+        font-weight: 800;
         margin: 0;
+        margin-left: 5%;
     }
 
-    .caption {
-        font-size: 0.8em;
+    .btn-sky {
+        width: 120px;
+        margin-bottom: 3%;
+        margin-right: 2%;
     }
+    
+    .btn-white{
+        width: 120px;
+        margin-bottom: 3%;
+    }
+    
 }
 
 

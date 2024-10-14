@@ -1,7 +1,5 @@
 package timepill.kakao.web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -100,34 +98,13 @@ public class KakaoController {
 	@ResponseBody
 	@GetMapping("/kakao/message-test")
 	public void sendMessage(UserVO vo, HttpSession session) throws Exception {
-//		boolean checkMessageAuth = kakaoService.checkMessageAuth(); // 메세지 권한 동의 여부 체크
-//		if (checkMessageAuth) {
-//			// 메세지 보내기 실행
-//			String messageResult = kakaoService.message("");
-//			System.out.println("messageResult : " + messageResult);
-//		} 
 		System.out.println("테스트 메세지 보내기 실행");
-		
-		// 메세지 알람 사용자 리프레시 토큰 가져오기
-		List<UserVO> tokenList = kakaoService.selectKakaoRefreshTokenList();
-		for (UserVO token : tokenList) {
-			
-			String accessToken = token.getAccessToken();
-			String message = kakaoService.message(accessToken);
-			
-			if ("401".equals(message)) {
-				String refreshToken = token.getRefreshToken();
-				
-				// 액세스토큰 재발급
-				String newAccessToken = kakaoService.getNewAccessToken(refreshToken);
-				
-				// 새로운 액세스 토큰으로 메세지 보내기
-				kakaoService.message(newAccessToken);
-				
-			}
-			
-			System.out.println("메세지 보내기 완료 : " + message);
-		}
+		boolean checkMessageAuth = kakaoService.checkMessageAuth(); // 메세지 권한 동의 여부 체크
+		if (checkMessageAuth) {
+			// 메세지 보내기 실행
+			String messageResult = kakaoService.message("");
+			System.out.println("messageResult : " + messageResult);
+		} 
 	}
 	
 

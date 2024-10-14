@@ -34,17 +34,11 @@
  <div id="backcontainer" class="boxv">
     <div id="contents" class="bgimg">
 
-        <!-- 약병 그림 -->
-        <div class="main-ico">
-        </div>
+       <img src="/resources/img/mainico.png" class="main-ico">
 
-        <!-- 타이틀 -->
-        <div class="boxh titlebox">
+        <div class="boxh">
             <img src="/resources/img/logo.svg" class="logo">
             <h1 class="gsansdown title">TimePill</h1>
-        </div>
-        <div>
-            <h1 class="jointitle txa"> 회원 가입 </h1>
         </div>
 
         <div>
@@ -58,7 +52,7 @@
                         <td>
                             <div class="input password">
                                 <form:input type="text" class="form-input" path="userId" id="userId" placeholder="4-15자리 영문과 숫자로 입력" minlength="4" maxlength="15" required="required"/>
-                                <p id="idCheck" class="checkText"></p>
+                                <p id="idCheck" class="checkText" style="margin: 0;">&nbsp;</p>
            						<form:errors path="userId"  class="checkText"></form:errors>
                             </div>
                         </td>
@@ -72,7 +66,7 @@
                             <div class="input password">
                                 <form:input type="password" class="form-input pwd" path="password" id="password" placeholder="10-20자리 영문, 숫자, 특수문자 포함" required="required"/>
                                 <img class="eye" src="/resources/img/eye.png"></img>
-                                <p id="userPwdMsg"></p>
+                                <p id="userPwdMsg" style="margin: 0;">&nbsp;</p>
            						<form:errors path="password"></form:errors>
                             </div>
                         </td>
@@ -84,7 +78,7 @@
                     <tr>
                         <td>
                             <input type="password" class="form-input" placeholder="비밀번호를 다시 입력해주세요." id="checkUserPwd" required="required"/>
-                            <p id="checkUserPwdMsg"></p>
+                            <p id="checkUserPwdMsg" style="margin: 0;">&nbsp;</p>
                         </td> 
                     </tr>
                     <tr>
@@ -110,11 +104,11 @@
         </div>
 
         <div class="btns boxv genbtn">
-            <a href="#" class="btn-sky" id="signup">
+           <a href="#" class="btn-white" id="signup" style="pointer-events: none;">
             	<img src="/resources/img/chhe.png" style="width: 20px; margin: 0;">
                 <p class="btndesc"> 가입하기 </p>
             </a>
-            <a href="#" class="btn-white">
+            <a href="/cover" class="btn-white">
                 <p class="btndesc"> 돌아가기 </p>
             </a>
         </div>

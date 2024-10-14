@@ -7,6 +7,8 @@
 	<c:param name="title" value="복약관리 - TimePill"/>
 </c:import>
 
+<link rel="stylesheet" href="/resources/css/medList.css">
+
  <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
 
