@@ -46,8 +46,3 @@ function checkPwValid() {
     }
 }
 
-document.querySelector('#change').onclick = function(){
-	event.preventDefault();
-	if(pw.value != null && pwRe != null)
-		document.querySelector('#passFrm').submit();
-}
