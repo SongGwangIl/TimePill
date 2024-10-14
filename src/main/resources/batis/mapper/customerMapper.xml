@@ -14,6 +14,7 @@
 	<select id="getAllnoticeList" resultMap="CustomerMap">
 		SELECT ntc_id, ntc_title, ntc_date, ntc_content
 		FROM notice
+		ORDER BY ntc_id DESC
 	</select>
 	
 	<select id="getnoticeList" resultMap="CustomerMap">
