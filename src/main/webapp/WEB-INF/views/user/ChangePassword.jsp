@@ -11,23 +11,33 @@
 <div id="contents">
 	<h1>비밀번호 변경</h1>
 	
-	<form action="/user/reset-password" method="post">
+	<form id="passFrm" action="/user/reset-password" method="post">
 		<div class="passWrap">
 			<label>새비밀번호</label>
-			<input id="password" class="form-input" type="password" name="password" requierd><br>
+			<input id="password" class="form-input" type="password" name="password" required><br>
 			<p id="userPwdMsg" class="msg"></p>
 			<label>비밀번호확인</label>
-			<input id="checkUserPwd" class="form-input" type="password" name="checkPassword" requierd>
+			<input id="checkUserPwd" class="form-input" type="password" name="checkPassword" required>
 			<p id="checkUserPwdMsg" class="msg"></p>			
 			<div class="btns boxh">
-				<a href="#" class="btn-sky" id="change">
-                    <p class="btndesc"> 변경 </p>
-                </a>
-            </div>	
+            <a href="#" class="btn-sky" id="change">
+                <p class="btndesc"> 수정하기 </p>
+            </a>
+            <a href="/mypage" class="btn-white">
+                <p class="btndesc"> 돌아가기 </p>
+            </a>
+        </div>
 		</div>
-		<sec:csrfInput/>	
+<%-- 		<sec:csrfInput/>	 --%>
 	</form>	
 </div>
 <script src="/resources/js/user/changePassword.js"></script>
+<script>
+document.querySelector('#change').addEventListener('click', function(event){
+	event.preventDefault();
+	if(pw.value != null && pwRe != null)
+		document.querySelector('#passFrm').submit();
+});
+</script>
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
