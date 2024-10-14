@@ -53,13 +53,13 @@
         </div>
 
         <div class="btns boxh">
-                <a href="#" class="btn-white" id="change">
-                    <p class="btndesc"> 수정하기 </p>
-                </a>
-                <a href="/" class="btn-white">
-                    <p class="btndesc"> 돌아가기 </p>
-                </a>
-            </div>
+            <a href="#" class="btn-white" id="change">
+                <p class="btndesc"> 수정하기 </p>
+            </a>
+            <a href="/" class="btn-white">
+                <p class="btndesc"> 돌아가기 </p>
+            </a>
+        </div>
     </div>
 </div>
 <template id="checkImg">
