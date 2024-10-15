@@ -61,14 +61,14 @@ public class UserController {
 	@GetMapping("/user/singup")
 	public String addForm(UserVO vo) {
 		
-		return "user/Add";
+		return "user/Signup";
 	}
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
 	public String add(@Valid UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
 		if(result.hasErrors())
-			return "user/Add";
+			return "user/Signup";
 		
 		userService.add(vo); //유저정보 DB추가
 		
