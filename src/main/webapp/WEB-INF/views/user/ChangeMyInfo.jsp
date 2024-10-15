@@ -31,22 +31,24 @@
             <form:form id="joinForm" action="/mypage/change-myinfo" modelAttribute="userVO" method="post">
                 <table class="joinform">
                     <tr>
-                            <td>이름</td>
+                            <td>이름(닉네임)</td>
                         </tr>
                         <tr>
                             <td>
                                 <form:input type="text" path="nickname" class="form-input" required="required" />
                             </td>
                         </tr>
-                        <tr>
-                            <td>이메일</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form:input type="email" class="form-input" path="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required="required"/>
-                                <form:errors path="email"></form:errors>
-                            </td>
-                        </tr>
+                        <sec:authorize access="!principal.username.contains('KAKAO_')">
+	                        <tr>
+	                            <td>이메일</td>
+	                        </tr>
+	                        <tr>
+	                            <td>
+	                                <form:input type="email" class="form-input" path="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required="required"/>
+	                                <form:errors path="email"></form:errors>
+	                            </td>
+	                        </tr>
+                        </sec:authorize>
                 </table>
                 <sec:csrfInput /> 
             </form:form>

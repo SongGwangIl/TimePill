@@ -23,7 +23,6 @@ public class MainController {
 	@Autowired
 	AlarmService alarmService;
 	
-	
 	/** 커버 */
 	@GetMapping("/cover")
 	public String cover() throws Exception {

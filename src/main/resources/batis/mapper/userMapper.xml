@@ -17,7 +17,8 @@
   
   <select id="getMyInfo">
   	SELECT
-  		nickname
+  		user_id
+  		, nickname
   		, email
     FROM users 
     WHERE user_id = #{userId}
@@ -56,6 +57,12 @@
   	UPDATE users
   	SET password = #{password}  		
   	WHERE user_id = #{userId} AND email = #{email}
+  </update>
+  
+  <update id="changePassword">
+  	UPDATE users
+  	SET password = #{password}  		
+  	WHERE user_id = #{userId}
   </update>
   
   <select id="checkUser">

@@ -11,51 +11,39 @@
 <div id="contents">
 	<h1>비밀번호 변경</h1>
 	
-	<form id="passFrm" action="/mypage/change-password" method="post">
+	<form id="passFrm" action="/user/reset-password" method="post">
 		<div class="passWrap">
 			<label>새비밀번호</label>
-			<input id="password" class="form-input" type="password" name="password" required/><br>
+			<input id="password" class="form-input" type="password" name="password" required><br>
 			<p id="userPwdMsg" class="msg"></p>
 			<label>비밀번호확인</label>
-			<input id="checkUserPwd" class="form-input" type="password" name="checkPassword" required/>
+			<input id="checkUserPwd" class="form-input" type="password" name="checkPassword" required>
 			<p id="checkUserPwdMsg" class="msg"></p>			
-        </div>
-		<div class="btns boxh">
-            <a class="btn-sky" id="change">
+			<div class="btns boxh">
+            <a href="#" class="btn-sky" id="change">
                 <p class="btndesc"> 수정하기 </p>
             </a>
-            <a class="btn-white" id="cancel">
+            <a href="#" class="btn-white" id="cancel">
                 <p class="btndesc"> 돌아가기 </p>
             </a>
+        </div>
 		</div>
-		<sec:csrfInput/>
+<%-- 		<sec:csrfInput/>	 --%>
 	</form>	
 </div>
 <script src="/resources/js/user/changePassword.js"></script>
 <script>
-const passwordInp = document.querySelector('#password');
-const checkUserPwdInp = document.querySelector('#checkUserPwd');
-
 document.getElementById('change').addEventListener('click', function () {
+	event.stopPropagation();
     let changeConfirm = confirm("등록된 정보로 수정하시겠습니까?");
     if(changeConfirm){
-    	if (!checkValidity()) {
-            event.preventDefault(); // 유효성 검사 실패 시 제출 방지
-            alert("입력을 확인하세요.");
-        }
-    	else
-    		document.getElementById('passFrm').submit();
+    	document.getElementById('passFrm').submit();
     }
 });
 document.getElementById('cancel').addEventListener('click', function () {
+	event.stopPropagation();
 	window.location.href = "/";
 });
-
-function checkValidity(){
-	if(passwordInp.value === '' || checkUserPwdInp === '')
-		return false;
-	return true;
-}
     
 </script>
 <%-- footer --%>
