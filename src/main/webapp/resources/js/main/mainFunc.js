@@ -118,6 +118,7 @@ function createTodo(dayScheList) {
 	
 	// 빈 daySchedule 처리
 	let cards = document.querySelectorAll('.daySchedule');
+	let template = document.querySelector('#blank-todo');
 	for(card of cards) {
 //		console.log(card);
 
@@ -126,7 +127,7 @@ function createTodo(dayScheList) {
 			card.innerHTML = '';
 			
 			// li 생성
-			let newLi1 = document.createElement('li');
+			/*let newLi1 = document.createElement('li');
 			newLi1.classList.add('medlist-detail');
 			newLi1.classList.add('boxh');
 			let newLi2 = document.createElement('li');
@@ -143,10 +144,14 @@ function createTodo(dayScheList) {
 			medRegistLink.href = '/medication/reg';
 			medRegistLink.textContent = '복약등록 바로가기';
 			
-			newLi2.append(medRegistLink);
+			newLi2.append(medRegistLink);*/
 			
-		    card.append(newLi1);
-		    card.append(newLi2);
+			
+			
+			let clone = document.importNode(template.content, true);
+			
+		    card.append(clone);
+		    /*card.append(newLi2);*/
 		}
 	}
 }
