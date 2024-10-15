@@ -30,6 +30,10 @@ input {
     outline: none;
     background-color: rgb(233, 233, 233);
 }
+.inp-date {
+    background-color: #f8f8f8;
+    pointer-events: none;
+}
 h1 {
 	margin-top: 10px; 
  	margin-bottom: 10px; 
@@ -57,9 +61,6 @@ h1 {
 }
 label {
 	margin-top: 15px;
-}
-.checkbox-container label {
-	margin-top: 10px;
 }
 
 .btn-sky {
@@ -107,7 +108,7 @@ label {
 			<div class="frm" style="width: 80%;">
 				<input type="hidden" name="medId" value="${result.medId}">
 				<div class="label-input-container">
-					<label for="medName">약이름</label> 
+					<label for="medName">약이름 :</label> 
 					<input type="text" name="medName" placeholder="약이름을 입력해주세요." value="${result.medName}" required>
 				</div>
 				
@@ -127,7 +128,7 @@ label {
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<div class="checkbox-container">
+				<div class="label-input-container">
 					<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
 					<label for="alarm1">아침</label>
 					<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
@@ -139,12 +140,12 @@ label {
 				</div>
 				
 				<div class="label-input-container">
-					<label for="startDate">시작일</label> 
-					<input type="text" name="startDate" id="start" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+					<label for="startDate">시작일 :</label> 
+					<input type="text" name="startDate" id="start" class="inp-date" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
 				</div>
 				<div class="label-input-container">
-					<label for="endDate">만료일</label> 
-					<input type="text" name="endDate" id="end" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+					<label for="endDate">만료일 :</label> 
+					<input type="text" name="endDate" id="end" class="inp-date" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
 				</div>
 			</div>
 			
@@ -171,7 +172,7 @@ label {
                 </button>
                 <%-- 삭제버튼 --%>
 				<c:if test="${not empty result.medId}">
-					<button type="button" id="btn-del" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
+					<button type="button" id="btn-del" style="border: 0px; margin: 0; padding: 0; background: none;">
 	                    <p class="btn-white btndesc"> 삭제 </p>
 	                </button>
 				</c:if>
@@ -195,6 +196,7 @@ $(document).ready(function () {
 	
 	// 삭제버튼
 	$('#btn-del').on('click', function () {
+		console.log('test');
 		event.preventDefault();
 		if (!confirm("삭제하시겠습니까?")) {
 			return false;

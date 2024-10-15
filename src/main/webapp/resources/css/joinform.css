@@ -157,9 +157,9 @@
 
 /* 480~360 */
 @media (max-width: 480px) {
-    #backcontainer {
-        width: 360px;
-    }
+/*     #backcontainer { */
+/*         width: 360px; */
+/*     } */
 
     #contents {
         margin: 0 auto;
