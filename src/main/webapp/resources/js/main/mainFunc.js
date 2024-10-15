@@ -207,7 +207,8 @@ function chkTodo(e) {
 		data: {
 			medId: medId,
 			alarmId: alarmId,
-			scheChk: scheChk
+			scheChk: scheChk,
+			selectedDay: selectedDay
 		},
 		dataType: 'text',
 		beforeSend: function(xhr) {

@@ -53,7 +53,7 @@
                     <tr>
                         <td>
                             <div class="input password">
-                                <input type="password" name="password" class="form-input pwd" placeholder="비밀번호를 입력해주세요.">
+                                <input type="password" name="password" id="pwd" class="form-input pwd" placeholder="비밀번호를 입력해주세요.">
                                 <img class="eye" src="/resources/img/eye.png"></img>
                             </div>
                         </td>
@@ -72,10 +72,12 @@
                 <img src="/resources/img/kakao.png" width="10%" style="margin: 2%;">
                 <p class="btndesc"> 카카오톡으로 로그인 </p>
             </a>
-            <a href="#">
-                <p class="caption"> 아이디 / 비밀번호 찾기 </p>
-            </a>
-        </div>
+
+			<p class="caption">
+				<a href="/user/find-id">아이디 찾기</a> / <a href="/user/auth-email">비밀번호 찾기</a>
+			</p>
+
+			</div>
     </div>
 </div>
 
@@ -95,11 +97,19 @@
         });
 
         // '로그인' 버튼 클릭 시 form 제출
-        document.getElementById('login').addEventListener('click', 
-            function (event) {
-                event.preventDefault();
-                document.getElementById('loginform').submit();
-        });
+        document.getElementById('login').addEventListener('click', submitLogin);
+       
+        document.querySelector('#pwd').addEventListener('keydown', function (event) {
+			if (event.key === 'Enter') {
+				submitLogin();
+			}
+		});
+        
+        // form제출
+        function submitLogin () {
+            event.preventDefault();
+            document.getElementById('loginform').submit();
+    }
    
 
 

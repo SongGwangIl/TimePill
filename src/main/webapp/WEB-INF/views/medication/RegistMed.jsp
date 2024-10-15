@@ -164,21 +164,15 @@ label {
 			
 			<div class="btns boxh">
 				<button type="submit" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
-                <a href="#" class="btn-sky">
-                    <p class="btndesc">${empty result.medId ? '등록' : '수정'}</p>
-                </a>
+                    <p class="btn-sky btndesc">${empty result.medId ? '등록' : '수정'}</p>
                 </button>
                 <button type="button" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
-                <a href="#" class="btn-white">
-                    <p class="btndesc"> 취소 </p>
-                </a>
+                    <p class="btn-white btndesc"> 취소 </p>
                 </button>
                 <%-- 삭제버튼 --%>
 				<c:if test="${not empty result.medId}">
 					<button type="button" id="btn-del" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
-		                <a href="#" class="btn-white">
-		                    <p class="btndesc"> 삭제 </p>
-		                </a>
+	                    <p class="btn-white btndesc"> 삭제 </p>
 	                </button>
 				</c:if>
             </div>

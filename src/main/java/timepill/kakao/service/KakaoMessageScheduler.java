@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.util.StringUtils;
 
 import timepill.user.service.UserVO;
 
@@ -25,11 +26,18 @@ public class KakaoMessageScheduler {
 		// 메세지 알람 사용자 리프레시 토큰 가져오기
 		List<UserVO> tokenList = kakaoService.selectKakaoRefreshTokenList();
 		for (UserVO token : tokenList) {
+			
+			String message = null;
+			
+			// 토큰이 비어있지 않은 경우
+			if (StringUtils.hasText(token.getAccessToken())) {
+				
+				// 메세지 보내기 실행
+				message = kakaoService.message(token.getAccessToken());
+			}
 
-			String accessToken = token.getAccessToken();
-			String message = kakaoService.message(accessToken);
-
-			if ("401".equals(message)) {
+			// 토큰이 비어있거나 만료된 경우
+			if (!StringUtils.hasText(message) ||"401".equals(message)) {
 				String refreshToken = token.getRefreshToken();
 
 				// 액세스토큰 재발급
@@ -37,7 +45,6 @@ public class KakaoMessageScheduler {
 
 				// 새로운 액세스 토큰으로 메세지 보내기
 				kakaoService.message(newAccessToken);
-
 			}
 
 			System.out.println("메세지 보내기 완료 : " + message);
