@@ -66,7 +66,8 @@ pw.addEventListener('change', () => {
   else { // 정규식 조건 만족 X
     pwMsg.textContent = "10~20자 영문, 숫자, 특수문자를 사용하세요."
     pwMsg.style.color = "#dc3545";
-    pw.value = null;
+    pw.focus();
+//    pw.value = null;
   }
   check();
   
@@ -81,10 +82,19 @@ pwRe.addEventListener('change', () => {
 
 // 비밀번호와 재입력 값 일치 여부
 function checkPwValid() {
-	pwReVal = pwRe.value
+	pwVal = pw.value;
+	pwReVal = pwRe.value;
+	const pwRegExp = /^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$/
     
     if(pwReVal === "") { // 미입력
       pwReMsg.textContent = "다시 입력해 주세요"
+    }
+    else if(!pwRegExp.test(pwReVal)){ // 정규식 조건 만족 X
+    	pwReMsg.style.color = "#dc3545";
+		pwReMsg.textContent = "10~20자 영문, 숫자, 특수문자를 사용하세요.";
+		pwReMsg.style.fontSize = '16px';
+		pwRe.value = null;
+    	pwRe.focus();
     }
     else if(pwVal === pwReVal) { // 비밀번호 재입력 일치      
       pwReMsg.style.color = "#2fb380";
