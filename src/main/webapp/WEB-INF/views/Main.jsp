@@ -184,7 +184,12 @@ window.onload = function () {
 const modal = document.querySelector('.modal');
 const btnOpenModal = document.querySelector('.round-btn');
 
-btnOpenModal.addEventListener("click", () => { modal.style.display = "flex"; });
+btnOpenModal.addEventListener("click", () => { 
+	modal.style.display = "flex";
+	clearCalendar();
+	renderCalendar();
+	addEvent();
+});
 
 // 모달 외부를 클릭했을 때 모달 닫기
 modal.addEventListener("click", (event) => {
