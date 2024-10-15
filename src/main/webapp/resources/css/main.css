@@ -47,10 +47,11 @@ input[type='time'] {
 }
 
 .alarmask {
+	margin: 10px;
     font-family: "Noto Sans KR", sans-serif;
     text-align: center;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 17px;
     color: white;
     letter-spacing: -2.5px;
 }

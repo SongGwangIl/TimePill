@@ -31,7 +31,7 @@
 			<form id="pwFrm" action="/mypage" method="post">
 				<div class="pwFrmWrap">
 					<label class="pwLabel">비밀번호확인</label>
-					<input class="form-input" name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
+					<input class="form-input" name="password" type="password" placeholder="비밀번호를 입력해주세요." requierd>
 				</div>
 				<div class="buttonWrap">
 					<button class="btn" type="button" id="submitBtn">확인</button>
@@ -65,7 +65,8 @@
 	
 	cancelBtn.onclick = function(){
 		
-		fModal.style.display = "none";
+		window.location.href = '/';
+		
 	}
 </script>
 

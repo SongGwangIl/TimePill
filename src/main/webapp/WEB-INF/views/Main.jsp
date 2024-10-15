@@ -64,7 +64,6 @@
 	   						<p class="alarmdesc gsasdw" style="padding-top: 4px;"> 알림 </p>
 	   						<img class="btn-spring" src="/resources/img/gear.png" style="width: 28px;">
 						</div>
-						<br>
 						
 						<%-- 복약 일정 --%>
 						<div class="daySchedule">
@@ -111,6 +110,19 @@
 		<script src="/resources/js/calendar/mainCalendar.js"></script>
 	</div>
 </div>
+
+<!-- 빈 카드 템플릿 -->
+<template id="blank-todo">
+	<p class="alarmask">알림이 없습니다.</p>
+	<p class="alarmask">지금 알림을 등록해보세요!</p>
+
+	<a href="/medication/reg" class="white-btn">
+		<div class="boxh white-btn">
+			<img id="logo" src="/resources/img/logo.svg" style="width: 30px; margin: 0;">
+			<p style="margin-left: 5px;">등록하기</p>
+		</div>
+	</a>
+</template>
 
 <!-- bxSlider SDK -->
 <link rel="stylesheet" href="/resources/css/jquery.bxslider.css">

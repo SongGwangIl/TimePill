@@ -265,6 +265,11 @@ public class UserController {
 			vo.setEmail("카카오유저");
 		
 		userService.changeMyInfo(vo); // 유저정보변경
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		if (user != null) {
+		    user.setNickname(vo.getNickname());
+		    session.setAttribute("loginUser", user);
+		}
 		model.addAttribute("message", "정보가 변경되었습니다.");
 		
 		return "redirect:/";
