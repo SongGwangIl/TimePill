@@ -19,7 +19,6 @@
 
 <style>
 input {
-	margin-top: 10px;
     width: 215px;
     height: 30px;
     padding-left: 2%;
@@ -58,9 +57,7 @@ h1 {
 }
 .label-input-container label {
     margin-right: 10px; /* 라벨과 인풋 사이의 간격 조정 */
-}
-label {
-	margin-top: 15px;
+	margin-top: 4px;
 }
 
 .btn-sky {
@@ -128,7 +125,7 @@ label {
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<div class="label-input-container">
+				<div class="label-input-container" style="margin-top: 5px;">
 					<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
 					<label for="alarm1">아침</label>
 					<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
@@ -164,7 +161,7 @@ label {
 			</style>
 			
 			<div class="btns boxh">
-				<button type="submit" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
+				<button type="button" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
                     <p class="btn-sky btndesc">${empty result.medId ? '등록' : '수정'}</p>
                 </button>
                 <button type="button" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
@@ -189,19 +186,26 @@ label {
 $(document).ready(function () {
 	let medId = "${result.medId}";
 	
-	//공백제거
+	// 공백제거
 	$('input').on('input', function() {
 		$(this).val($(this).val().replace(/\s/g, ''));
 	});
 	
-	// 삭제버튼
+	// 등록&수정 버튼
+	$('#btn-frm').on('click', function () {
+		if (!confirm("등록하시겠습니까?")) {
+			return false;
+		}
+		$('#frm').submit();
+	});
+	
+	// 삭제 버튼
 	$('#btn-del').on('click', function () {
-		console.log('test');
-		event.preventDefault();
+// 		event.preventDefault();
 		if (!confirm("삭제하시겠습니까?")) {
 			return false;
 		}
-		$('#frm').attr('action', '/medication/'+medId+'/del');
+		$('#frm').attr('action', '/medication/' + medId + '/del');
 		$('#frm').submit();
 	});
 });

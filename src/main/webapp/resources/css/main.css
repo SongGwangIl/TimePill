@@ -6,6 +6,18 @@
     overflow: auto;
 }
 
+/* 이중클릭 방지 */
+.disabled {
+    pointer-events: none;
+}
+
+.alarm-type {
+	margin: 10px;
+	margin-bottom: 5px;
+	color: white;
+	text-align: center;
+}
+
 /* slider */
 .slider-container {
     width: 100%;
@@ -13,11 +25,18 @@
 }
 
 .card {
+	max-width: 320px;
     height: 300px;
     background-color: rgb(62, 142, 255);
     border-radius: 30px;
     margin-left: 5px;
     margin-right: 5px;
+}
+.daySchedule {
+	display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    justify-content: center; 
 }
 
 /* time picker icon*/
@@ -71,7 +90,7 @@ input[type='time'] {
 
 .whiteround {
     border: 2px solid white;
-    padding: 12px;
+    padding: 10px;
     border-radius: 25px;
 }
 
@@ -97,13 +116,19 @@ input[type='time'] {
 .medlist-detail {
     list-style: none;
     text-align: center;
-    padding-bottom: 10px;
+    padding-top: 5px;
 }
 
 /* 로딩 완료 후 페이드인 */
 .fadein {
-    opacity: 0; /* 투명도 0 */
-    transition: opacity 2s ease; /* 애니메이션 효과 */
+    opacity: 0;
+    animation: fadeInAnimation 5s forwards;
+}
+
+@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+    }
 }
 
 /* 동그라미 버튼 */
@@ -190,4 +215,10 @@ input[type='time'] {
     .whiteround.boxh img.btn-spring {
         width: 20px;
     }
+}
+
+@media (max-width: 360px) {
+	.card {
+		max-width: 270px;	
+	}
 }

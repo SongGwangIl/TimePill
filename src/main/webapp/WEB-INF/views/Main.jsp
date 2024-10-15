@@ -30,16 +30,18 @@
         </div>
     </div>
 	
+	<!-- 카드 슬라이드 -->
 	<div class="slider-container boxh">
 		<!-- 이전 버튼 -->
         <div class="prev"></div>
 	
+		<!-- 일정카드 -->
 		<div class="bxslider">
 			<c:forEach var="resultAlarm" items="${alarmList}">
 				<div class="card" data-alarm-id="${resultAlarm.alarmId}">
 					<div class="boxv">
 						<%-- 알람타입 --%>
-						<h1 style="color: white; text-align: center; margin: 18px;">
+						<h1 class="alarm-type">
 							<c:choose>
 								<c:when test="${resultAlarm.alarmType eq '1'}">
 									아침약
@@ -51,7 +53,7 @@
 									저녁약
 								</c:when>
 								<c:when test="${resultAlarm.alarmType eq '4'}">
-									취침전
+									취침약
 								</c:when>
 							</c:choose>
 						</h1>
@@ -66,8 +68,7 @@
 						</div>
 						
 						<%-- 복약 일정 --%>
-						<div class="daySchedule">
-						</div>
+						<div class="daySchedule"></div>
 					</div>
 				</div>
 			</c:forEach>
@@ -101,16 +102,6 @@
 	</sec:authorize>
 </div>
 
-<!-- 모달 창 -->
-<div class="modal">
-	<div class="modal_body">
-		<script src="/resources/js/main/mainFunc.js"></script>
-		<!-- 캘린터 선택한 날짜 변수 : selectedDay -->
-		<c:import url="/calendar"/>
-		<script src="/resources/js/calendar/mainCalendar.js"></script>
-	</div>
-</div>
-
 <!-- 빈 카드 템플릿 -->
 <template id="blank-todo">
 	<p class="alarmask">알림이 없습니다.</p>
@@ -127,70 +118,21 @@
 <!-- bxSlider SDK -->
 <link rel="stylesheet" href="/resources/css/jquery.bxslider.css">
 <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+<!-- bxSlider.js -->
+<script src="/resources/js/main/bxSliderFunc.js"></script>
 
-<script>
-$(function() {
-	const windowWidth = $(window).width();
-	let imgSize;
-	function bxWitdth() {
-		if (windowWidth > 360) {
-			return 330; // 데스크탑 크기일 때
-		} else {
-			return 280; // 모바일 크기일 때
-		}
-	}
-	function adjustButtonSize() {
-		if (windowWidth > 360) {
-			imgSize = '60px'; // 데스크탑
-		} else {
-			imgSize = '30px'; // 모바일
-		}
-	}
+<!-- mainFunc.js -->
+<script src="/resources/js/main/mainFunc.js"></script>
 
-	adjustButtonSize();
+<!-- 모달 창 -->
+<div class="modal">
+	<div class="modal_body">
+		<!-- 캘린터 삽입 -->
+		<c:import url="/calendar"/>
+		<script src="/resources/js/calendar/mainCalendar.js"></script>
+	</div>
+</div>
 
-	const slider = $('.bxslider').bxSlider({
-		mode : 'horizontal',
-		slideWidth : bxWitdth(),
-		infiniteLoop : true,
-		nextSelector : '.next',
-		touchEnabled : false,
-		prevSelector : '.prev',
-		onSliderLoad : function() {
-			// prev 버튼 처리
-			const prevLink = document.querySelector('.prev .bx-prev');
-			if (prevLink) {
-				prevLink.textContent = ''; // Prev 텍스트 제거
-				const prevImgElement = document.createElement('img');
-				prevImgElement.src = '/resources/img/left.png'; // prev 이미지 경로
-				prevImgElement.style.width = imgSize;
-				prevLink.appendChild(prevImgElement);
-			}
-			// next 버튼 처리
-			const nextLink = document.querySelector('.next .bx-next');
-			if (nextLink) {
-				nextLink.textContent = ''; // Next 텍스트 제거
-				const nextImgElement = document.createElement('img');
-				nextImgElement.src = '/resources/img/right.png'; // next 이미지 경로
-				nextImgElement.style.width = imgSize;
-				nextLink.appendChild(nextImgElement);
-			}
-			// viewport  처리
-			const wid = document.querySelector('.bx-viewport');
-			if (wid) {
-				wid.style.width = '102%';
-			}
-		},
-	});
-});
-</script>
-<script>
-// 페이지가 로드되었을 때
-window.onload = function () {
-    const fadeInElement = document.querySelector('.fadein');
-    fadeInElement.style.opacity = '1';
-};
-</script>
 <script>
 // 모달 열기 
 const modal = document.querySelector('.modal');
@@ -210,25 +152,20 @@ modal.addEventListener("click", (event) => {
         modal.style.display = "none"; // 모달 닫기
     }
 });
-
 </script>
 
 <script>
-// 알람시간 변경창 띄우기
 $(document).ready(function() {
-	$(function () {
-	    const timePickImages = document.querySelectorAll('.btn-spring');
-
-	    // 각 이미지에 대해 클릭 이벤트 리스너 추가
-	    timePickImages.forEach((img) => {
-	        img.addEventListener('click', function (event) {
-	            const timeInput = this.closest('.boxh').querySelector('input[type="time"]');
-	            if (timeInput) {
-	                timeInput.showPicker();  // 시간 선택 팝업 띄우기
-	            }
-	        });
-	    });
-	});
+	
+	// 알람시간 변경창 띄우기
+    $('.btn-spring').on('click', function() {
+        const timeInput = $(this).closest('.boxh').find('input[type="time"]');
+        if (timeInput.length) {
+            // 기존 시간값 저장
+            timeVal = timeInput.val();
+            timeInput[0].showPicker();  // 시간 선택 팝업 띄우기
+        }
+    });
 	
 	// 알람 시간 변경
 	$('.timepick').on('change', updateAlarm);

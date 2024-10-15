@@ -120,38 +120,12 @@ function createTodo(dayScheList) {
 	let cards = document.querySelectorAll('.daySchedule');
 	let template = document.querySelector('#blank-todo');
 	for(card of cards) {
-//		console.log(card);
-
 		// 내용이 비어있는지 확인 및 bx슬라이더 클론 제외
 		if (card.innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
 			card.innerHTML = '';
-			
-			// li 생성
-			/*let newLi1 = document.createElement('li');
-			newLi1.classList.add('medlist-detail');
-			newLi1.classList.add('boxh');
-			let newLi2 = document.createElement('li');
-			newLi2.classList.add('medlist-detail');
-			newLi2.classList.add('boxh');
-			
-			
-			let newSpan = document.createElement('span');
-			newSpan.textContent = '등록된 복약일정이 없습니다.';
-			
-			newLi1.append(newSpan);
-			
-			let medRegistLink = document.createElement('a');
-			medRegistLink.href = '/medication/reg';
-			medRegistLink.textContent = '복약등록 바로가기';
-			
-			newLi2.append(medRegistLink);*/
-			
-			
-			
+			// 템플릿 클론 생성 및 추가
 			let clone = document.importNode(template.content, true);
-			
 		    card.append(clone);
-		    /*card.append(newLi2);*/
 		}
 	}
 }
@@ -160,11 +134,20 @@ function createTodo(dayScheList) {
 
 
 //알람 시간 변경
+let timeVal; // 기존 알람 시간 저장
 function updateAlarm() {
 	const timepick = $(this);
-	const alarmTime = timepick.val();
 	const alarmId = timepick.data('alarm');
-
+	let alarmTime = timepick.val();
+	
+	// 알람시간이 빈 경우
+	if(alarmTime == '') {
+		// 기존 알람 시간 다시 삽입
+		alarmTime = timeVal;
+		timepick.val(timeVal);
+		return false;
+	}
+	
 	$.ajax({
 		url: '/alarm',
 		type: 'post',
