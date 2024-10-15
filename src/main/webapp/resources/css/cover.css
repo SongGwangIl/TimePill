@@ -101,9 +101,9 @@
 /* Galaxy S23 360 x 640 */
 
 @media (max-width: 480px) {
-    #backcontainer {
-        width: 360px;
-    }
+/*     #backcontainer { */
+/*         width: 360px; */
+/*     } */
     #contents {
         margin: 0 auto;
         width: 100%;
