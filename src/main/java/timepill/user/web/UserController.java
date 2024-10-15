@@ -150,7 +150,7 @@ public class UserController {
 			return "/user/Auth-email";
 		}
 				
-		return "user/ChangePassword";
+		return "user/ResetPassword";
 	}
 	
 	/** 패스워드 변경 */
@@ -171,7 +171,13 @@ public class UserController {
 	
 	/** 마이페이지 요청 */
 	@GetMapping("/mypage")
-	public String myPage() {
+	public String myPage(UserVO vo, HttpSession session) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId); // 시큐리티에서 유저 아이디 가져와 셋팅
+		UserVO uvo = userService.getMyInfo(vo); // 유저 정보 가져오기
+
+		if(uvo.getUserId().startsWith("Kakao_"));
+			session.setAttribute("changeInfoUser", userId);
 		
 		return "user/MyPage";
 	}
@@ -195,11 +201,18 @@ public class UserController {
 	
 	/** 비밀번호 변경페이지 요청 */
 	@GetMapping("/mypage/change-password")
-	public String changePw(HttpSession session) {
+	public String changePwForm(HttpSession session, UserVO vo) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId); // 시큐리티에서 유저 아이디 가져와 셋팅
+		UserVO uvo = userService.getMyInfo(vo); // 유저 정보 가져오기
+		
 		if(session.getAttribute("changeInfoUser") == null) {
 			session.setAttribute("message", "인증 후 이용가능합니다.");
 			return "redirect:/mypage";
-		}		
+		}else if(uvo.getUserId().startsWith("Kakao_")) {
+			session.setAttribute("message", "카카오 유저입니다.");
+			return "redirect:/mypage";
+		}
 		return "user/ChangePassword";
 	}
 	@PostMapping("/mypage/change-password")
@@ -210,17 +223,26 @@ public class UserController {
 			return "redirect:/mypage";
 		}
 		vo.setUserId(userInfo);
-		userService.resetPassword(vo);
-		session.setAttribute("message", "비밀번호가 변경되었습니다.");
 		
+		System.out.println(vo.getPassword());
+		int result = userService.changePassword(vo);
+		if(result > 0)
+			session.setAttribute("message", "비밀번호가 변경되었습니다.");
+		else
+			session.setAttribute("message", "비밀번호변경을 실패했습니다.");
 		return "redirect:/mypage";
 	}
 	
 	/** 내 정보 변경 페이지 요청 */
 	@GetMapping("/mypage/change-myinfo")
-	public String changeMyInfo(UserVO vo, Model model) {
-		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId); // 시큐리티에서 유저 아이디 가져와 셋팅
+	public String changeMyInfo(UserVO vo, Model model, HttpSession session) {
+		String userInfo = (String) session.getAttribute("changeInfoUser");
+		if(userInfo == null) {
+			session.setAttribute("message", "잘못된 접근입니다.");
+			return "redirect:/mypage";
+		}
+		
+		vo.setUserId(userInfo);
 		UserVO uvo = userService.getMyInfo(vo); // 유저 정보 가져오기
 		
 		model.addAttribute("userVO", uvo); // 기존유저정보 셋팅
@@ -238,7 +260,9 @@ public class UserController {
 		}
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
-			return "ChangeMyInfo";
+			return "user/ChangeMyInfo";
+		if(userInfo.startsWith("Kakao_"))
+			vo.setEmail("카카오유저");
 		
 		userService.changeMyInfo(vo); // 유저정보변경
 		model.addAttribute("message", "정보가 변경되었습니다.");

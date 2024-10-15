@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 	// 인증번호 등록
 	public void setAuthNumber(UserVO vo);
 	
-	// 비밀번호 변경
+	// 비밀번호 변경(로그인 전)
 	public void resetPassword(UserVO vo);
 
 	// 내정보 변경
@@ -26,4 +26,7 @@ public interface UserService extends UserDetailsService {
 
 	// 비밀번호 가져오기
 	public String getPassword(String userId);
+
+	// 비밀번호 변경(로그인 후)
+	public int changePassword(UserVO vo);
 }

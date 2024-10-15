@@ -104,4 +104,12 @@ public class UserServiceImpl implements UserService {
 		return userdao.getPassword(userId);
 	}
 
+	@Override
+	public int changePassword(UserVO vo) {
+		String encodedPwd = bCryptPasswordEncoder.encode(vo.getPassword());
+		vo.setPassword(encodedPwd);
+		
+		return userdao.changePassword(vo);
+	}
+
 }

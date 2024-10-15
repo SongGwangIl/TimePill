@@ -18,17 +18,19 @@
         <div class="boxh genbtn">
 			<a href="/mypage/change-myinfo" class="btn-sky" id="changeInfoBtn">
                 <p class="btndesc"> 내정보 변경 </p>
-            </a>			
-			<a href="/mypage/change-password" class="btn-sky" id="changePwBtn">
-                <p class="btndesc"> 비밀번호 변경 </p>
-            </a>          
+            </a>
+            <sec:authorize access="!principal.username.contains('KAKAO_')">			
+				<a href="/mypage/change-password" class="btn-sky" id="changePwBtn">
+	                <p class="btndesc"> 비밀번호 변경 </p>
+	            </a>          
+            </sec:authorize>
         </div>	        
     </div>
 	<div class="fModal">
 		<div class="fModal_body">
 			<form id="pwFrm" action="/mypage" method="post">
 				<div class="pwFrmWrap">
-					<label>비밀번호확인</label>
+					<label class="pwLabel">비밀번호확인</label>
 					<input class="form-input" name="password" type="password" placeholder="현재 사용하고있는 비밀번호를 입력하세요" requierd>
 				</div>
 				<div class="buttonWrap">
