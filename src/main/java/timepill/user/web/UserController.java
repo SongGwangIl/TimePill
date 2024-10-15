@@ -91,7 +91,7 @@ public class UserController {
 	@GetMapping("/user/find-id")
 	public String findId() {
 		
-		return "user/findId";
+		return "user/FindId";
 	}
 	/** 아이디 찾기 */
 	@ResponseBody
@@ -172,12 +172,12 @@ public class UserController {
 	/** 마이페이지 요청 */
 	@GetMapping("/mypage")
 	public String myPage(UserVO vo, HttpSession session) {
+		
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		vo.setUserId(userId); // 시큐리티에서 유저 아이디 가져와 셋팅
-		UserVO uvo = userService.getMyInfo(vo); // 유저 정보 가져오기
 
-		if(uvo.getUserId().startsWith("Kakao_"));
+		if(userId.startsWith("KAKAO_")) {
 			session.setAttribute("changeInfoUser", userId);
+		}
 		
 		return "user/MyPage";
 	}
@@ -209,7 +209,7 @@ public class UserController {
 		if(session.getAttribute("changeInfoUser") == null) {
 			session.setAttribute("message", "인증 후 이용가능합니다.");
 			return "redirect:/mypage";
-		}else if(uvo.getUserId().startsWith("Kakao_")) {
+		}else if(uvo.getUserId().startsWith("KAKAO_")) {
 			session.setAttribute("message", "카카오 유저입니다.");
 			return "redirect:/mypage";
 		}
@@ -261,7 +261,7 @@ public class UserController {
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
 			return "user/ChangeMyInfo";
-		if(userInfo.startsWith("Kakao_"))
+		if(userInfo.startsWith("KAKAO_"))
 			vo.setEmail("카카오유저");
 		
 		userService.changeMyInfo(vo); // 유저정보변경

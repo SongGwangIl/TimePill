@@ -140,8 +140,8 @@ WHERE
 	AND ALARM_ID = #{alarmId}
 	AND USER_ID = #{userId}
 	<choose>
-		<when test="scheDate != null">
-			AND SCHE_DATE = #{scheDate}
+		<when test="selectedDay != null">
+			AND SCHE_DATE = #{selectedDay}
 		</when>
 		<otherwise>
 			AND SCHE_DATE = CURDATE()
@@ -163,8 +163,8 @@ INSERT INTO sche_log (
 	, #{alarmId}
 	, #{userId}
 	<choose>
-		<when test="scheDate != null">
-			, #{scheDate}
+		<when test="selectedDay != null">
+			, #{selectedDay}
 		</when>
 		<otherwise>
 			, CURDATE()
@@ -192,8 +192,8 @@ WHERE
 	AND ALARM_ID = #{alarmId}
 	AND USER_ID = #{userId}
 	<choose>
-		<when test="scheDate != null">
-			AND SCHE_DATE = #{scheDate}
+		<when test="selectedDay != null">
+			AND SCHE_DATE = #{selectedDay}
 		</when>
 		<otherwise>
 			AND SCHE_DATE = CURDATE()

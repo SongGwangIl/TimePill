@@ -244,9 +244,11 @@ public class KakaoServiceImpl implements KakaoService {
 				vo.setUserId(userId);
 				vo.setTokenUseAt("Y");
 				vo.setRefreshToken(httpSession.getAttribute("refreshToken").toString());
+				vo.setAccessToken(httpSession.getAttribute("token").toString());
 				
-				// 리프레시 토큰 저장
+				// 리프레시 토큰 & 액세스 토큰 저장
 				kakaoDAO.updateRefreshToken(vo);
+				kakaoDAO.updateAccessToken(vo);
 				return true;
 			}
 		}

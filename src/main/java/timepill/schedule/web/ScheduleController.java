@@ -50,6 +50,8 @@ public class ScheduleController {
 
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
+		
+		System.out.println("선택된 날짜 : " + vo.getSelectedDay());
 
 		scheduleService.handleScheduleLog(vo);
 

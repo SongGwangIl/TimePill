@@ -61,7 +61,7 @@
 	   					<div class="whiteround boxh">
 		   					<input type="time" class="timepick" step="300" name="alarmTime" 
 		   						value="<fmt:formatDate value="${alarmTime}" pattern="HH:mm"/>" data-alarm="${resultAlarm.alarmId}" required style="border: 0px; pointer-events: none;">
-	   						<p class="alarmdesc gsasdw"> 알림 </p>
+	   						<p class="alarmdesc gsasdw" style="padding-top: 4px;"> 알림 </p>
 	   						<img class="btn-spring" src="/resources/img/gear.png" style="width: 28px;">
 						</div>
 						<br>
