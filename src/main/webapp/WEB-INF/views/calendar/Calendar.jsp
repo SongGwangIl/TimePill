@@ -23,6 +23,7 @@
 	.calendar{
 		width: 300px;
 		margin: 0;
+		margin-top: 10px;
 	}
 	
 	.calHeader{
@@ -61,7 +62,7 @@
 	
 	.days{
 		display: flex;
-		margin: 25px 0 10px;
+		margin: 15px 0 10px;
 	}
 	
 	.day{
@@ -145,9 +146,6 @@
 	}
 	
 	@media (max-width: 480px) {
-		.calendar {
-			margin: 0px;
-		}
 	}
 </style>
 </head>

@@ -15,13 +15,13 @@
 <div id="contents">
 
 	<div>
-		<h1 class="txa subtitle">내정보 설정</h1>
+		<h1 class="txa subtitle">내 정보</h1>
 	</div>
 	
 	<div class="boxv btns">
         <div class="boxh genbtn">
 			<a href="/mypage/change-myinfo" class="btn-sky" id="changeInfoBtn">
-                <p class="btndesc"> 내정보 변경 </p>
+                <p class="btndesc"> 내 정보 변경 </p>
             </a>
             <sec:authorize access="!principal.username.contains('KAKAO_')">			
 				<a href="/mypage/change-password" class="btn-sky" id="changePwBtn">

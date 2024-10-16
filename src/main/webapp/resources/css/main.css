@@ -34,8 +34,7 @@
 }
 .daySchedule {
 	display: flex;
-    flex-direction: column; /* 세로로 정렬 */
-    align-items: flex-start; /* 왼쪽 정렬 */
+    flex-direction: column;
     justify-content: center; 
 }
 
@@ -199,8 +198,11 @@ div.date{
         top:50%;
         width:70%;
         height:50%;
+        min-height:400px;
     
-        padding:40px;  
+        padding:20px;
+        padding-top:10px;
+        padding-bottom: 10px;
     
         text-align: center;
     

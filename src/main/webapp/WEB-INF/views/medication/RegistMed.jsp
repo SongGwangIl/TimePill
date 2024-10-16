@@ -60,7 +60,7 @@
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<div class="label-input-container" style="margin-top: 5px;">
+				<div class="label-input-container" style="margin-top: 0px; margin-bottom: 0px;">
 					<input type="checkbox" id="alarm1" name="alarmTypes" value="1" ${not empty alarmOn1 ? 'checked' : ''}>
 					<label for="alarm1">아침</label>
 					<input type="checkbox" id="alarm2" name="alarmTypes" value="2" ${not empty alarmOn2 ? 'checked' : ''}>
@@ -71,7 +71,7 @@
 					<label for="alarm4">취침전</label>
 				</div>
 				
-				<div class="label-input-container">
+				<div class="label-input-container" style="margin-bottom: 0px;">
 					<label for="startDate">시작일 :</label> 
 					<input type="text" name="startDate" id="start" class="inp-date" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
 				</div>
@@ -86,6 +86,10 @@
 			/* 캘린더 */
 			.calendar {
 				margin: 0 auto;
+				border: 2px solid #eee;
+				box-shadow: 1px 1px 4px #888;
+   				border-radius: 15px;
+   				height: 355px;
 			}
 			
 			.days {
@@ -94,7 +98,7 @@
 			}
 			
 			.dates {
-				height: 200px;
+				height: 290px;
 			}
 			</style>
 
