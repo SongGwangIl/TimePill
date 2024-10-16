@@ -31,16 +31,8 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>	
 	
-<!-- 	<mvc:interceptors> -->
-<!-- 		<mvc:interceptor> -->
-<!-- 			<mvc:mapping path="/**"/> -->
-<!-- 			<mvc:exclude-mapping path="/resources/**"/> -->
-<!-- 			<mvc:exclude-mapping path="/user/**"/> -->
-<!-- 			<mvc:exclude-mapping path="/cover"/> -->
-<!-- 						<beans:bean class="timepill.com.LoginInterceptor"></beans:bean> -->
-<!-- 		</mvc:interceptor> -->
-<!-- 	</mvc:interceptors>	 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<beans:property name="basename" value="errmsg"></beans:property>
+		<beans:property name="basename" value="properties/errmsg"/>
+		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 </beans:beans>

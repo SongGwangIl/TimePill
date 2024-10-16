@@ -1,184 +1,130 @@
 /* 기본 템플릿 스크롤 여부 */
 #contents {
-    overflow: auto;
+	overflow: auto;
 }
 
 #backcontainer {
-    overflow: auto;
+	overflow: auto;
 }
 
 .subtitle {
-    font-size: 1.8em;
-    margin: 1%;
+	font-size: 1.8em;
+	margin: 1%;
 }
-
 
 /* table */
 .joinform {
-    margin: auto;
-    width: 60%;
-    height: 70%;
-    margin-top: 5%;
+	margin: auto;
+	width: 60%;
+	height: 70%;
+	margin-top: 5%;
 }
 
 .email {
-    width: 100%;
-    height: 32px;
-    font-size: 15px;
-    border: 0;
-    border-color: lightgray;
-    border-radius: 15px;
-    outline: none;
-    padding-left: 10px;
-    background-color: rgb(233, 233, 233);
+	width: 100%;
+	height: 32px;
+	font-size: 15px;
+	border: 0;
+	border-color: lightgray;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	background-color: rgb(233, 233, 233);
 }
 
 /* input 입력부분 */
 .form-input {
 	display: inline-block;
-    width: 100%;
-    height: 32px;
-    padding-left: 2%;
-    font-family: 'Noto Sans KR';
-    font-size: 15px;
-    border: 0;
-    border-radius: 12px;
-    outline: none;
-    background-color: rgb(233, 233, 233);
+	width: 100%;
+	height: 32px;
+	padding-left: 2%;
+	font-family: 'Noto Sans KR';
+	font-size: 15px;
+	border: 0;
+	border-radius: 12px;
+	outline: none;
+	background-color: rgb(233, 233, 233);
 }
 
 /* icon */
 .input {
-    position: relative;
+	position: relative;
 }
 
 .eye {
-    width: 30px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: auto 2px;
-    height: 30px;
-    cursor: pointer;
+	width: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: auto 2px;
+	height: 30px;
+	cursor: pointer;
 }
 
 .btn {
-    width: 262px;
-    height: 32px;
-    font-size: 15px;
-    border: 0;
-    border-radius: 15px;
-    outline: none;
-    padding-left: 10px;
-    background-color: rgb(164, 199, 255);
+	width: 262px;
+	height: 32px;
+	font-size: 15px;
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	background-color: rgb(164, 199, 255);
 }
 
 .btn:active {
-    width: 262px;
-    height: 32px;
-    font-size: 15px;
-    border: 0;
-    border-radius: 15px;
-    outline: none;
-    padding-left: 10px;
-    background-color: rgb(61, 135, 255);
+	width: 262px;
+	height: 32px;
+	font-size: 15px;
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	background-color: rgb(61, 135, 255);
 }
 
 .btn-sky {
-    width: 140px;
-    height: 40px;
-    border-radius: 15px;
-    margin-right: 2%;
-    margin-bottom: 3%;
-    background-color: skyblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 140px;
+	height: 40px;
+	border-radius: 15px;
+	margin-right: 2%;
+	margin-bottom: 3%;
+	background-color: skyblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.btn-white{
-    width: 140px;
-    height: 40px;
-    border-radius: 15px;
-    background-color: #dddddd;
-    margin-bottom: 3%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.btn-white {
+	width: 140px;
+	height: 40px;
+	border-radius: 15px;
+	background-color: #dddddd;
+	margin-bottom: 3%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .btndesc {
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: 400;
-    margin: 0;
-    margin-left: 2%;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 400;
+	margin: 0;
+	margin-left: 2%;
 }
 
 .btns {
-    margin-top: 2%;
-    height: 20%;
-    justify-content: center;
-    align-items: center;
+	margin-top: 2%;
+	height: 20%;
+	justify-content: center;
+	align-items: center;
 }
+
 .ui-autocomplete {
 	font-family: 'Gmarket Sans';
 }
-.nonClick{
+
+.nonClick {
 	pointer-events: none;
 }
-
-
-/* 480~360 */
-@media (max-width: 480px) {
-    #backcontainer {
-        width: 360px;
-    }
-
-    #contents {
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    /* 약통 배경 */
-    .main-ico {
-        background-image: url(/img/mainico.png);
-        width: 160px;
-        height: 160px;
-        margin-left: 28%;
-        margin-top: 8%;
-        margin-bottom: 10%;
-    }
-
-    /* table */
-    .joinform {
-        margin: auto;
-        margin-top: 0;
-        width: 80%;
-        height: 70%;
-    }
-    .btndesc {
-        text-align: center;
-        font-size: 1.1em;
-        font-weight: 800;
-        margin: 0;
-        margin-left: 5%;
-    }
-
-    .btn-sky {
-        width: 120px;
-        margin-bottom: 3%;
-        margin-right: 2%;
-    }
-    
-    .btn-white{
-        width: 120px;
-        margin-bottom: 3%;
-    }
-    
-}
-
-
-
-
-

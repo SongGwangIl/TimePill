@@ -192,7 +192,6 @@ public class UserController {
 		
 		if(isMatch) { // 비밀번호 일치
 			session.setAttribute("changeInfoUser", userId);
-			session.setAttribute("message", "인증되었습니다.");
 		}
 		else // 비밀번호 불일치
 			session.setAttribute("message", "비밀번호가 일치하지 않습니다.");
