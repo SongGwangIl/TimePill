@@ -756,7 +756,7 @@
                             <img class="cha" src="/resources/img/rightarrow.png">
                         </li>
                         <div class="checkdesc"  style="display: none;">
-                            <p class="agredetaildesc"> 
+                            <div class="agredetaildesc"> 
                             	<h3>개인정보 3자 이용 동의서</h3>
 								<ul>본인은 [회사명] (이하 "회사")가 수집한 개인정보를 제3자에게 제공하는 것에 대해 다음과 같이 동의합니다.</ul>
 																
@@ -775,7 +775,7 @@
 								<h4>동의 거부 권리 및 불이익</h4>								
 								<ul>본인은 개인정보 제3자 제공에 동의하지 않을 권리가 있으며, 동의하지 않을 경우 [예: 서비스 이용에 제한이 있을 수 있음]의 불이익이 있을 수 있습니다.</ul>
 								<ul>본인은 위 내용을 충분히 이해하였으며, 개인정보 제3자 제공에 동의합니다.</ul>
-                            </p>
+                            </div>
                         </div>
 
                     </ul>
@@ -787,7 +787,7 @@
                     <img class="cha" src="/resources/img/rightarrow.png">
                 </li>
                 <div class="checkdesc boxh"  style="display: none;">
-                    <p class="agredetaildesc"> 
+                    <div class="agredetaildesc"> 
                     	<h3>마케팅 수신 동의서</h3>
 						<ul>본인은 [회사명] (이하 "회사")가 다음과 같은 방식으로 제안하는 마케팅 정보 수신에 대해 동의합니다.</ul>
 						
@@ -806,7 +806,7 @@
 						<h4>동의 기간</h4>						
 						<ul>본인의 동의는 [예: 별도의 철회 요청이 있을 때까지] 유효합니다.</ul>
 						<ul>본인은 위 내용을 충분히 이해하였으며, 마케팅 정보 수신에 동의합니다.</ul>
-                    </p>
+                    </div>
                 </div>
             </ul>
         </div>

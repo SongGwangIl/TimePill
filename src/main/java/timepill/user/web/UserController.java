@@ -179,7 +179,7 @@ public class UserController {
 			session.setAttribute("changeInfoUser", userId);
 		}
 		
-		return "user/MyPage";
+		return "myPage/MyPage";
 	}
 	
 	/** 내 정보 변경 페이지 요청 */
@@ -213,7 +213,7 @@ public class UserController {
 			session.setAttribute("message", "카카오 유저입니다.");
 			return "redirect:/mypage";
 		}
-		return "user/MyPassword";
+		return "myPage/MyPassword";
 	}
 	@PostMapping("/mypage/myPassword")
 	public String changePw(HttpSession session, UserVO vo) {
@@ -247,7 +247,7 @@ public class UserController {
 		
 		model.addAttribute("userVO", uvo); // 기존유저정보 셋팅
 		
-		return "user/MyInfo";
+		return "myPage/MyInfo";
 	}
 	
 	/** 내 정보 변경 */
