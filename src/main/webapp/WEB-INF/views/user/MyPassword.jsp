@@ -4,14 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- header --%>
 <c:import url="/header" charEncoding="utf-8">
-	<c:param name="title" value="TimePill"/>
+	<c:param name="title" value="비밀번호 변경 - TimePill"/>
 </c:import>
-<link rel="stylesheet" href="/resources/css/changePassword.css">
-<link rel="stylesheet" href="/resources/css/common.css">
+<link rel="stylesheet" href="/resources/css/user/password.css">
+<link rel="stylesheet" href="/resources/css/common/common.css">
 <div id="contents">
 	<h1>비밀번호 변경</h1>
 	
-	<form id="passFrm" action="/mypage/change-password" method="post">
+	<form id="passFrm" action="/mypage/myPassword" method="post">
 		<div class="passWrap">
 			<label>새비밀번호</label>
 			<input id="password" class="form-input" type="password" name="password" required/><br>
@@ -31,7 +31,7 @@
 		<sec:csrfInput/>
 	</form>	
 </div>
-<script src="/resources/js/user/changePassword.js"></script>
+<script src="/resources/js/user/password.js"></script>
 <script>
 const passwordInp = document.querySelector('#password');
 const checkUserPwdInp = document.querySelector('#checkUserPwd');

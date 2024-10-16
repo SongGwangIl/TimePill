@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>JOIN</title>
+	<title>회원가입 - TimePill</title>
 	
 	<!-- jQuery 3.7.1-->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -24,8 +24,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
 	    
 	<!-- 기본 템플릿 CSS -->
-	<link rel="stylesheet" href="/resources/css/common.css">
-	<link rel="stylesheet" href="/resources/css/joinform.css">
+	<link rel="stylesheet" href="/resources/css/common/common.css">
+	<link rel="stylesheet" href="/resources/css/user/signup.css">
 
 </head>
 

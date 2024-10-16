@@ -22,8 +22,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
 	    
 	<!-- 기본 템플릿 CSS -->
-	<link rel="stylesheet" href="/resources/css/common.css">
-	<link rel="stylesheet" href="/resources/css/findId.css">
+	<link rel="stylesheet" href="/resources/css/common/common.css">
+	<link rel="stylesheet" href="/resources/css/user/findId.css">
 	<sec:csrfMetaTags/>
 </head>
 <body>

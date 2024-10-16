@@ -47,7 +47,7 @@
                 <a href="/user/login" class="btn-sky">
                     <p class="btndesc"> 일반 로그인 </p>
                 </a>
-                <a href="/user/terms" class="btn-white">
+                <a href="/user/termsAgree" class="btn-white">
                     <p class="btndesc"> 일반 회원가입 </p>
                 </a>
             </div>            
