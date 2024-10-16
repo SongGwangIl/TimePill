@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%-- header --%>
@@ -8,17 +8,6 @@
 	<c:param name="title" value="내 정보 수정 - TimePill"/>
 </c:import>
 
-<!-- jQuery 3.7.1-->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>    
-<!-- Gmarket SANS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css" />
-<!-- NotoSans KR-->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-<!-- jQuery UI -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
-<!-- 기본 템플릿 CSS -->   
-<link rel="stylesheet" href="/resources/css/common/common.css">
 <link rel="stylesheet" href="/resources/css/myPage/myInfo.css">
 
 <div id="backcontainer" class="boxv">
