@@ -140,8 +140,7 @@ const btnOpenModal = document.querySelector('.round-btn');
 
 btnOpenModal.addEventListener("click", () => { 
 	modal.style.display = "flex";
-	clearCalendar();
-	renderCalendar();
+	goToday();
 	addEvent();
 });
 

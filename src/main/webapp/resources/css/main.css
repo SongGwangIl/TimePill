@@ -155,8 +155,8 @@ input[type='time'] {
 .modal_body{
     position:absolute;
     top:50%;
-    width:450px;
-    height:470px;
+    width:380px;
+    height:390px;
     
     text-align: center;
 
@@ -165,6 +165,11 @@ input[type='time'] {
     box-shadow:0 2px 3px 0 rgba(34,36,38,0.15); 
 
     transform:translateY(-50%);
+}
+
+div.date{
+	border-bottom: 1px solid #ddd;
+	border-radius: 0px;
 }
 
 .kakao-span {

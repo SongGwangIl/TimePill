@@ -22,7 +22,7 @@
 	
 	.calendar{
 		width: 300px;
-		margin: 50px;
+		margin: 0;
 	}
 	
 	.calHeader{
@@ -85,11 +85,15 @@
 	}
 	.date>p{
 		position: absolute;
-		top: 10px;
-		left: 18px;
+		top: 14px;
+		left: 19px;
 		font-size: 10px;
 		color: black;
 		pointer-events: none;
+	}
+	.date>p img{
+		margin-left: -2px;
+		margin-top: 2px;
 	}
 	.date.this>span{
 		display: inline-block;
@@ -136,6 +140,9 @@
 	.selectedDay{
 		background: olive;
 	}
+	.move{
+		margin-top: 3px;
+	}
 	
 	@media (max-width: 480px) {
 		.calendar {
@@ -153,9 +160,13 @@
 	<section class='calendar'>
 		<div class='calHeader'>
 			<div class="nav">
-				<button type="button" class="nav-btn go-prev" onclick='prevMonth()'>&lt;</button>
+				<button type="button" class="nav-btn go-prev" onclick='prevMonth()'>
+					<img class="move" alt="prevMonth" src="/resources/img/left-arrow.png">
+				</button>
 				<div class="year-month"></div>
-				<button type="button" class="nav-btn go-next" onclick='nextMonth()'>&gt;</button>
+				<button type="button" class="nav-btn go-next" onclick='nextMonth()'>
+					<img class="move" alt="nextMonth" src="/resources/img/right-arrow.png">
+				</button>
 			</div>
 		</div>
 		<div class='calMain'>
