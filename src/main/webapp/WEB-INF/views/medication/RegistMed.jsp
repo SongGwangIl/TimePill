@@ -17,7 +17,7 @@
 	</c:otherwise>
 </c:choose>
 
-<link rel="stylesheet" href="/resources/css/registMed.css">
+<link rel="stylesheet" href="/resources/css/medication/registMed.css">
 
 <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
@@ -86,9 +86,6 @@
 			/* 캘린더 */
 			.calendar {
 				margin: 0 auto;
-				border: 2px solid #eee;
-				box-shadow: 1px 1px 4px #888;
-   				border-radius: 15px;
    				height: 355px;
 			}
 			
@@ -103,15 +100,15 @@
 			</style>
 
 		<div class="btns boxh">
-				<button type="button" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
+				<button type="button" id="btn-frm">
                     <p class="btn-sky btndesc">${empty result.medId ? '등록' : '수정'}</p>
                 </button>
-                <button type="button" style="border: 0px; margin: 0; padding: 0; background: none;" onclick="location.href='/medication'">
+                <button type="button" id="btn-csl" onclick="location.href='/medication'">
                     <p class="btn-white btndesc"> 취소 </p>
                 </button>
                 <%-- 삭제버튼 --%>
 				<c:if test="${not empty result.medId}">
-					<button type="button" id="btn-del" style="border: 0px; margin: 0; padding: 0; background: none;">
+					<button type="button" id="btn-del">
 	                    <p class="btn-white btndesc"> 삭제 </p>
 	                </button>
 				</c:if>

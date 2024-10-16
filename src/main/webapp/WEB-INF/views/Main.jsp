@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -9,7 +8,7 @@
 	<c:param name="title" value="TimePill"/>
 </c:import>
 
-<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/resources/css/main/main.css">
 
 <div id="contents" class="">
 
@@ -115,7 +114,7 @@
 </template>
 
 <!-- bxSlider SDK -->
-<link rel="stylesheet" href="/resources/css/jquery.bxslider.css">
+<link rel="stylesheet" href="/resources/css/main/jquery.bxslider.css">
 <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
 <!-- bxSlider.js -->
 <script src="/resources/js/main/bxSliderFunc.js"></script>
@@ -133,44 +132,27 @@
 </div>
 
 <script>
-// 모달 열기 
-const modal = document.querySelector('.modal');
-const btnOpenModal = document.querySelector('.round-btn');
+	$(document).ready(
+			function() {
+				// 알람시간 변경창 띄우기
+				$('.btn-spring').on(
+						'click',
+						function() {
+							const timeInput = $(this).closest('.boxh').find(
+									'input[type="time"]');
+							if (timeInput.length) {
+								// 기존 시간값 저장
+								timeVal = timeInput.val();
+								timeInput[0].showPicker(); // 시간 선택 팝업 띄우기
+							}
+						});
 
-btnOpenModal.addEventListener("click", () => { 
-	modal.style.display = "flex";
-	goToday();
-	addEvent();
-});
+				// 알람 시간 변경
+				$('.timepick').on('change', updateAlarm);
+				// 복약 스케줄 완료 체크 동작
+				$(document).on('click', '.sche-chk', chkTodo);
 
-// 모달 외부를 클릭했을 때 모달 닫기
-modal.addEventListener("click", (event) => {
-    // 클릭한 요소가 모달 바디가 아닌 경우
-    if (event.target === modal) {
-        modal.style.display = "none"; // 모달 닫기
-    }
-});
-</script>
-
-<script>
-$(document).ready(function() {
-	
-	// 알람시간 변경창 띄우기
-    $('.btn-spring').on('click', function() {
-        const timeInput = $(this).closest('.boxh').find('input[type="time"]');
-        if (timeInput.length) {
-            // 기존 시간값 저장
-            timeVal = timeInput.val();
-            timeInput[0].showPicker();  // 시간 선택 팝업 띄우기
-        }
-    });
-	
-	// 알람 시간 변경
-	$('.timepick').on('change', updateAlarm);
-	// 복약 스케줄 완료 체크 동작
-	$(document).on('click', '.sche-chk', chkTodo);
-	
-});
+			});
 </script>
 
 <%-- footer --%>

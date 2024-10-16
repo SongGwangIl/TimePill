@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="/resources/css/footer.css">
+<link rel="stylesheet" href="/resources/css/common/footer.css">
 
 		<!-- 푸터 : nav -->
         <nav id="mainmenu" class="">
@@ -41,13 +41,14 @@
             </ul>
         </nav>
     </div>
-</body>
-
-</html>
-
+    
 <script>
 <c:if test="${not empty sessionScope.message}">
 	alert("<c:out value='${sessionScope.message}'/>");
 	<c:remove var="message" scope="session"/>
 </c:if>
 </script>
+
+</body>
+</html>
+

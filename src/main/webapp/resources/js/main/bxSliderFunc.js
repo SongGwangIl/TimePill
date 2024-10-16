@@ -1,28 +1,20 @@
-$(function() {
+$(document).ready(function() {
 	const windowWidth = $(window).width();
 	let imgSize;
 	
 	// bx슬라이더 데스크탑 및 모바일 너비 설정
-	function bxWitdth() {
-		if (windowWidth >= 480) {
-			return 330;
-		} else if (windowWidth >= 360) {
-			return 280;
-		}
+	function getBxWidth() {
+		return windowWidth >= 480 ? 330 : 280
 	}
 	function adjustButtonSize() {
-		if (windowWidth >= 480) {
-			imgSize = '30px'; // 데스크탑
-		} else {
-			imgSize = '20px'; // 모바일
-		}
+		imgSize = windowWidth >= 480 ? '30px' : '20px';
 	}
 
 	adjustButtonSize();
 
-	const slider = $('.bxslider').bxSlider({
+	$('.bxslider').bxSlider({
 		mode : 'horizontal',
-		slideWidth : bxWitdth(),
+		slideWidth : getBxWidth(),
 		infiniteLoop : true,
 		nextSelector : '.next',
 		touchEnabled : false,
@@ -45,11 +37,6 @@ $(function() {
 				nextImgElement.src = '/resources/img/right.png'; // next 이미지 경로
 				nextImgElement.style.width = imgSize;
 				nextLink.appendChild(nextImgElement);
-			}
-			// viewport  처리
-			const wid = document.querySelector('.bx-viewport');
-			if (wid) {
-				wid.style.width = '100%';
 			}
 		},
 	});
