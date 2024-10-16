@@ -62,8 +62,8 @@ async function renderCalendar(){
 		sp.textContent = date;
 		let p = document.createElement('p');
 		el.append(sp);
-		el.append(p);
-
+		el.append(p);	
+		
 		dateEl.append(el);
 		
 	});
@@ -185,7 +185,14 @@ function setTodoList(){
 	for(let i=0; i<keys.length; i++){
 		for(thisSpan of thisSpans){
 			if(keys[i] == thisSpan.textContent){
-				thisSpan.nextElementSibling.textContent = values[i];				
+				if(values[i] != 0)
+					thisSpan.nextElementSibling.textContent = values[i];				
+				else {
+					let img = document.createElement('img');
+					img.src = '/resources/img/done.png';
+					img.setAttribute("width", '10px');
+					thisSpan.nextElementSibling.append(img);
+				}
 			}
 		}
 	}	
