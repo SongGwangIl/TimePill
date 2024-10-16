@@ -38,7 +38,7 @@
         </div>
 
 
-        <div>
+        <div class="viewBox">
             <ul class="checklist">
 
                 <li class="boxh">
@@ -780,13 +780,13 @@
 
                     </ul>
                 </div>
-
+               
                 <li class="boxh">
                     <input type="checkbox" >
                     <p> [선택] 마케팅 수신 이용에 대한 동의 </p>
                     <img class="cha" src="/resources/img/rightarrow.png">
-                </li>
-                <div class="checkdesc boxh"  style="display: none;">
+	            </li>
+                <div class="checkdesc marketing"  style="display: none;">
                     <div class="agredetaildesc"> 
                     	<h3>마케팅 수신 동의서</h3>
 						<ul>본인은 [회사명] (이하 "회사")가 다음과 같은 방식으로 제안하는 마케팅 정보 수신에 대해 동의합니다.</ul>
@@ -807,7 +807,7 @@
 						<ul>본인의 동의는 [예: 별도의 철회 요청이 있을 때까지] 유효합니다.</ul>
 						<ul>본인은 위 내용을 충분히 이해하였으며, 마케팅 정보 수신에 동의합니다.</ul>
                     </div>
-                </div>
+                </div>		    		
             </ul>
         </div>
 

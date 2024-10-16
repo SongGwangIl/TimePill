@@ -1,4 +1,7 @@
 /* 컨텐츠 */
+#backcontainer{
+	overflow: auto;
+}
 #contents {
     background-color: #f8f8f8;
     background-image: url(/resources/img/bg.png);
@@ -46,6 +49,9 @@
     margin-left: 1%;
     width: 4%;
 }
+.viewBox{
+	overflow: auto;
+}
 
 .checklist {
     padding: 0;
@@ -74,6 +80,10 @@
     display: flex;
     align-items: center;
     margin: 0 auto;
+}
+.marketing {
+	 width: 80%;
+	 margin-left: 20%
 }
 
 .hilightdesc {
