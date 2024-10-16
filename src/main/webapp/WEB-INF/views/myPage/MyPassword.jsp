@@ -6,7 +6,7 @@
 <c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="비밀번호 변경 - TimePill"/>
 </c:import>
-<link rel="stylesheet" href="/resources/css/myPassword.css">
+<link rel="stylesheet" href="/resources/css/myPage/myPassword.css">
 <link rel="stylesheet" href="/resources/css/common/common.css">
 <div id="contents">
 	<h1>비밀번호 변경</h1>
