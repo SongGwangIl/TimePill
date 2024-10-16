@@ -9,10 +9,10 @@ import timepill.user.service.UserVO;
 @Mapper
 public interface KakaoDAO {
 	/** 카카오 유저정보 가져오기 */
-	UserVO selectUserInfo(UserVO vo) throws Exception;
+	UserVO selectKakaoUserInfo(UserVO vo) throws Exception;
 	
 	/** 카카오 회원가입 */
-	int insertUser(UserVO vo) throws Exception;
+	int insertKakaoUser(UserVO vo) throws Exception;
 	
 	/** 카카오 액세스 토큰 설정 */
 	int updateAccessToken(UserVO vo) throws Exception;
@@ -20,6 +20,6 @@ public interface KakaoDAO {
 	/** 카카오 리프레시 토큰 설정 */
 	int updateRefreshToken(UserVO vo) throws Exception;
 	
-	/** 카카오 리프레시 토큰 조회 */
-	List<UserVO> selectKakaoRefreshTokenList() throws Exception;
+	/** 카카오 토큰 조회 */
+	List<UserVO> selectKakaoTokenList() throws Exception;
 }

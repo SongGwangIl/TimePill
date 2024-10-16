@@ -7,44 +7,36 @@
         <nav id="mainmenu" class="">
             <ul class="menu">
                 <li>
-                    <a href="#">
-                        <div class="boxv">
-                            <a href="/">
-	                            <img id="logo" src="/resources/img/sched.png" style="width: 50px;">
-                            	<br>스케줄
-                             </a>
-                        </div>
-                    </a>
+					<div class="boxv">
+					    <a class="menu-link" href="/">
+					     <img id="logo" src="/resources/img/sched.png" style="width: 50px;">
+					    	<br><span class="footer-menu">스케줄</span>
+					     </a>
+					</div>
                 </li>
                 <li>
-                    <a href="#">
-                        <div class="boxv">
-                            <a href="/medication">
-	                            <img id="logo" src="/resources/img/medmng.png" style="width: 50px;">
-                            	<br>복약관리
-                            </a>
-                        </div>
-                    </a>
+					<div class="boxv">
+					    <a class="menu-link" href="/medication">
+					     <img id="logo" src="/resources/img/medmng.png" style="width: 50px;">
+					    	<br><span class="footer-menu">복약관리</span>
+					    </a>
+					</div>
                 </li>
                 <li>
-                    <a href="#">
-                        <div class="boxv">
-                            <a href="/mypage">
-                            	<img id="logo" src="/resources/img/myinfo.png" style="width: 50px;">
-                            	<br>내 정보
-                             </a>
-                        </div>
-                    </a>
+					<div class="boxv">
+					    <a class="menu-link" href="/mypage">
+					    	<img id="logo" src="/resources/img/myinfo.png" style="width: 50px;">
+					    	<br><span class="footer-menu">내 정보</span>
+					     </a>
+					</div>
                 </li>
                 <li>
-                    <a href="#">
-                        <div class="boxv">
-                            <a href="/notice">
-	                            <img id="logo" src="/resources/img/notice.png" style="width: 50px;">
-	                            <br>공지사항
-                            </a>
-                        </div>
-                    </a>
+					<div class="boxv">
+					    <a class="menu-link" href="/notice">
+					     <img id="logo" src="/resources/img/notice.png" style="width: 50px;">
+					     <br><span class="footer-menu">공지사항</span>
+					    </a>
+					</div>
                 </li>
             </ul>
         </nav>

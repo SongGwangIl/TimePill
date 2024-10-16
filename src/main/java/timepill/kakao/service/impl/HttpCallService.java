@@ -18,19 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HttpCallService {
 	
-	private boolean isMessageSent = false;
 
 	/** HTTP 요청을 보내고 응답을 받는 메소드 */
 	public String Call(String method, String reqURL, String header, String param) {
 		log.debug("HTTP 요청 시작");
-		
-		if (isMessageSent) {
-			return ""; // 이미 메시지가 전송된 경우 중단
-		}
-
-		// 메시지 전송 로직
-		isMessageSent = true;
-		
 		
 		String result = "";
 		int responseCode = 0;
@@ -61,7 +52,7 @@ public class HttpCallService {
 			
 			// HTTP 응답 코드 반환
 			responseCode = conn.getResponseCode();
-			System.out.println("응답 코드: " + responseCode);
+			log.debug("응답 코드: {}", responseCode);
 			
 			// 에러 체크
 			InputStream stream = conn.getErrorStream();
@@ -87,10 +78,8 @@ public class HttpCallService {
 			
 			if (responseCode == 401)
 				return Integer.toString(responseCode);
-			isMessageSent = false;
 			return e.getMessage();
 		}
-		isMessageSent = false;
 		return result;
 	}
 

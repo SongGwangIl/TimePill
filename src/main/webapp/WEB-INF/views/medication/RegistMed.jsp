@@ -17,72 +17,7 @@
 	</c:otherwise>
 </c:choose>
 
-<style>
-input {
-    width: 215px;
-    height: 30px;
-    padding-left: 2%;
-    font-family: 'Noto Sans KR';
-    font-size: 15px;
-    border: 0;
-    border-radius: 12px;
-    outline: none;
-    background-color: rgb(233, 233, 233);
-}
-.inp-date {
-    background-color: #f8f8f8;
-    pointer-events: none;
-}
-h1 {
-	margin-top: 10px; 
- 	margin-bottom: 10px; 
-}
-.frm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px auto; /* 가운데 정렬을 위해 추가 */
-}
-.checkbox-container {
-    display: flex;
-    align-items: center;
-}
-
-.label-input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 가운데 정렬을 위해 변경 */
-    width: 100%;
-    margin-bottom: 10px;
-}
-.label-input-container label {
-    margin-right: 10px; /* 라벨과 인풋 사이의 간격 조정 */
-	margin-top: 4px;
-}
-
-.btn-sky {
-    width: 100px;
-    height: 30px;
-    border-radius: 15px;
-    margin-right: 2%;
-    margin-bottom: 3%;
-    background-color: skyblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-white{
-    width: 100px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: #dddddd;
-    margin-bottom: 3%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/registMed.css">
 
 <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
@@ -148,19 +83,22 @@ h1 {
 			
 			<c:import url="/calendar"/>
 			<style>
-			.calendar{
+			/* 캘린더 */
+			.calendar {
 				margin: 0 auto;
 			}
-			.days{
+			
+			.days {
 				display: flex;
 				margin: 10px 0 10px;
 			}
-			.dates{
+			
+			.dates {
 				height: 200px;
 			}
 			</style>
-			
-			<div class="btns boxh">
+
+		<div class="btns boxh">
 				<button type="button" id="btn-frm" style="border: 0px; margin: 0; padding: 0; background: none;">
                     <p class="btn-sky btndesc">${empty result.medId ? '등록' : '수정'}</p>
                 </button>
@@ -181,7 +119,9 @@ h1 {
 </div>
 <!-- 컨텐츠 끝 -->
 
+<!-- medCalendar.js -->
 <script src="/resources/js/calendar/medCalendar.js"></script>
+
 <script>
 $(document).ready(function () {
 	let medId = "${result.medId}";

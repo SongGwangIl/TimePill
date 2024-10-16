@@ -22,10 +22,14 @@
     padding-top: 0px;
     padding-bottom: 0px;
 }
-a {
+.menu-link {
     text-decoration: none;
     font-weight: 800;
     color: #111;
+}
+
+.boxv a {
+	text-align: center;
 }
 
 /* 480~360 */
@@ -38,5 +42,9 @@ a {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    
+    .footer-menu {
+     font-size: 14px;
     }
 }
