@@ -104,8 +104,7 @@
 
 <!-- 빈 카드 템플릿 -->
 <template id="blank-todo">
-	<p class="alarmask">알림이 없습니다.</p>
-	<p class="alarmask">지금 알림을 등록해보세요!</p>
+	<p class="alarmask">알림이 없습니다. <br> 지금 알림을 등록해보세요! </p>
 
 	<a href="/medication/reg" class="white-btn">
 		<div class="boxh white-btn">

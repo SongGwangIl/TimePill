@@ -258,7 +258,7 @@ function kakaoAlarmToggle() {
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-		cardss: function(result) {
+		success: function(result) {
 			if (result === 'Y') {
 				chk.attr('src', '/resources/img/ico-on.png');
 			} else if (result === 'N') {

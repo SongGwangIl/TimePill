@@ -17,7 +17,7 @@
                 <li>
 					<div class="boxv">
 					    <a class="menu-link" href="/medication">
-					     <img id="logo" src="/resources/img/medmng.png" style="width: 50px;">
+					     <img id="logo" src="/resources/img/medmng.png" style="width: 50px; margin-left: 5px;">
 					    	<br><span class="footer-menu">복약관리</span>
 					    </a>
 					</div>

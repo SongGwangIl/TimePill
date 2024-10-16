@@ -18,8 +18,8 @@
 <!-- jQuery UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
 <!-- 기본 템플릿 CSS -->   
-<link rel="stylesheet" href="/resources/css/myInfo.css">
 <link rel="stylesheet" href="/resources/css/common.css">
+<link rel="stylesheet" href="/resources/css/myInfo.css">
 
 <div id="backcontainer" class="boxv">
      <div id="contents" class="">
