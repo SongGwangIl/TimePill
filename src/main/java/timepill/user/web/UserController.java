@@ -51,10 +51,10 @@ public class UserController {
 	}
 	
 	/** 약관동의 화면요청 */
-	@GetMapping("/user/terms")
+	@GetMapping("/user/termsAgree")
 	public String terms() {
 		
-		return "user/Terms";
+		return "user/TermsAgree";
 	}
 	
 	/** 회원가입 화면요청 */
@@ -141,7 +141,7 @@ public class UserController {
 	}
 	
 	/** 이메일 인증 확인 */
-	@GetMapping("/user/reset-password")
+	@GetMapping("/user/password")
 	public String resetPassword(HttpSession session) {
 		
 		if(session.getAttribute("authOK") == null) { // 인증여부 확인
@@ -150,11 +150,11 @@ public class UserController {
 			return "/user/Auth-email";
 		}
 				
-		return "user/ResetPassword";
+		return "user/Password";
 	}
 	
 	/** 패스워드 변경 */
-	@PostMapping("/user/reset-password")
+	@PostMapping("/user/password")
 	public String resetPassword(UserVO vo, HttpSession session) {
 		
 		// 인증된 정보와 패스워드로 DB내용 변경
@@ -200,7 +200,7 @@ public class UserController {
 	}
 	
 	/** 비밀번호 변경페이지 요청 */
-	@GetMapping("/mypage/change-password")
+	@GetMapping("/mypage/myPassword")
 	public String changePwForm(HttpSession session, UserVO vo) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId); // 시큐리티에서 유저 아이디 가져와 셋팅
@@ -213,9 +213,9 @@ public class UserController {
 			session.setAttribute("message", "카카오 유저입니다.");
 			return "redirect:/mypage";
 		}
-		return "user/ChangePassword";
+		return "user/MyPassword";
 	}
-	@PostMapping("/mypage/change-password")
+	@PostMapping("/mypage/myPassword")
 	public String changePw(HttpSession session, UserVO vo) {
 		String userInfo = (String) session.getAttribute("changeInfoUser");
 		if(userInfo == null) {
@@ -234,7 +234,7 @@ public class UserController {
 	}
 	
 	/** 내 정보 변경 페이지 요청 */
-	@GetMapping("/mypage/change-myinfo")
+	@GetMapping("/mypage/myinfo")
 	public String changeMyInfo(UserVO vo, Model model, HttpSession session) {
 		String userInfo = (String) session.getAttribute("changeInfoUser");
 		if(userInfo == null) {
@@ -247,11 +247,11 @@ public class UserController {
 		
 		model.addAttribute("userVO", uvo); // 기존유저정보 셋팅
 		
-		return "user/ChangeMyInfo";
+		return "user/MyInfo";
 	}
 	
 	/** 내 정보 변경 */
-	@PostMapping("/mypage/change-myinfo")
+	@PostMapping("/mypage/myinfo")
 	public String chageMyInfo(UserVO vo, BindingResult result, Model model, HttpSession session) {
 		String userInfo = (String) session.getAttribute("changeInfoUser");
 		if(userInfo == null) {
@@ -260,7 +260,7 @@ public class UserController {
 		}
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
-			return "user/ChangeMyInfo";
+			return "user/MyInfo";
 		if(userInfo.startsWith("KAKAO_"))
 			vo.setEmail("카카오유저");
 		

@@ -10,7 +10,7 @@
 </c:import>
 
 <link rel="stylesheet" href="/resources/css/common/common.css">
-<link rel="stylesheet" href="/resources/css/user/mypage.css">
+<link rel="stylesheet" href="/resources/css/myPage/myPage.css">
 
 <div id="contents">
 
@@ -24,7 +24,7 @@
                 <p class="btndesc"> 내 정보 변경 </p>
             </a>
             <sec:authorize access="!principal.username.contains('KAKAO_')">			
-				<a href="/mypage/myPassword" class="btn-sky" id="changePwBtn">
+				<a href="/mypage/mypassword" class="btn-sky" id="changePwBtn">
 	                <p class="btndesc"> 비밀번호 변경 </p>
 	            </a>          
             </sec:authorize>

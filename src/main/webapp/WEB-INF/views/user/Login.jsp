@@ -16,8 +16,8 @@
     <!-- NotoSans KR-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- 기본 템플릿 CSS -->
-    <link rel="stylesheet" href="/resources/css/common.css">
-    <link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="stylesheet" href="/resources/css/common/common.css">
+    <link rel="stylesheet" href="/resources/css/user/login.css">
 </head>
 <body>
 

@@ -1,11 +1,3 @@
-//리셋버튼동작
-function reset(){
-	document.querySelector('#start').value = '';
-	document.querySelector('#end').value = '';
-	removeStartDay();
-	removeEndDay();
-	goToday();
-}
 //현재 날짜를 저장
 let date = new Date();
 let firstDate;
@@ -123,6 +115,24 @@ function goToday(){
 	renderCalendar();
 	addEvent();
 }
+
+// 모달 열기 
+const modal = document.querySelector('.modal');
+const btnOpenModal = document.querySelector('.round-btn');
+
+btnOpenModal.addEventListener("click", () => { 
+	modal.style.display = "flex";
+	goToday();
+	addEvent();
+});
+
+// 모달 외부를 클릭했을 때 모달 닫기
+modal.addEventListener("click", (event) => {
+    // 클릭한 요소가 모달 바디가 아닌 경우
+    if (event.target === modal) {
+        modal.style.display = "none"; // 모달 닫기
+    }
+});
 
 let startFlag = true;
 let startDate;

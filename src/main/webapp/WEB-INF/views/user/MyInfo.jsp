@@ -5,7 +5,7 @@
 
 <%-- header --%>
 <c:import url="/header" charEncoding="utf-8">
-	<c:param name="title" value="TimePill"/>
+	<c:param name="title" value="내 정보 수정 - TimePill"/>
 </c:import>
 
 <!-- jQuery 3.7.1-->
@@ -18,8 +18,8 @@
 <!-- jQuery UI -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
 <!-- 기본 템플릿 CSS -->   
-<link rel="stylesheet" href="/resources/css/common.css">
-<link rel="stylesheet" href="/resources/css/myInfo.css">
+<link rel="stylesheet" href="/resources/css/common/common.css">
+<link rel="stylesheet" href="/resources/css/user/myInfo.css">
 
 <div id="backcontainer" class="boxv">
      <div id="contents" class="">
@@ -28,7 +28,7 @@
             <h1 class="txa subtitle"> 내 정보 수정 </h1>
         </div>
         <div>
-            <form:form id="joinForm" action="/mypage/change-myinfo" modelAttribute="userVO" method="post">
+            <form:form id="joinForm" action="/mypage/myinfo" modelAttribute="userVO" method="post">
                 <table class="joinform">
                     <tr>
                             <td>이름(닉네임)</td>
