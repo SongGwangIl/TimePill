@@ -8,7 +8,7 @@
 	<c:param name="title" value="공지사항 - TimePill"/>
 </c:import>
 
-<link rel="stylesheet" href="/resources/css/notice.css">
+<link rel="stylesheet" href="/resources/css/notice/notice.css">
 
 
  <!-- 컨텐츠 시작 -->

@@ -7,7 +7,7 @@
 	<c:param name="title" value="복약관리 - TimePill"/>
 </c:import>
 
-<link rel="stylesheet" href="/resources/css/medList.css">
+<link rel="stylesheet" href="/resources/css/medication/medList.css">
 
  <!-- 컨텐츠 시작 -->
 <div id="contents" class="">
@@ -21,6 +21,7 @@
 	<div class="listbox checkline">
 		<ul class="margin-init">
 			
+			<!-- 리스트 가져오기 -->
 			<c:forEach var="resultMed" items="${medList}">
 				<li class="medlistcard boxh checkline">
 					<img class="checkline" src="/resources/img/medblue.png" width="25px">
@@ -28,7 +29,7 @@
 					<a href="/medication/${resultMed.medId}" class="btn-upd txa">수정</a>
 				</li>
 			</c:forEach>
-			
+			<!-- 리스트가 없을 때 -->
 			<c:if test="${empty medList}">
 				<li class="margin-init">
 					<p>등록된 약이 없습니다.</p>
@@ -45,6 +46,7 @@
 			<p style="margin-left: 5px;">복약 추가하기</p>
 		</div>
 	</a>
+	
 </div>
  <!-- 컨텐츠 끝 -->
 

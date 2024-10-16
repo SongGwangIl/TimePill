@@ -1,0 +1,65 @@
+/* 기본 템플릿 스크롤 여부 */
+#contents {
+	overflow: auto;
+}
+
+#backcontainer {
+	overflow: auto;
+}
+
+/* 복약리스트 */
+.subtitle {
+	margin-bottom: 10%;
+}
+
+.white-btn {
+	background-color: #fff;
+	width: 160px;
+	height: 50px;
+	border-radius: 15px;
+	margin: 0 auto;
+	box-shadow: 3px 3px 3px rgb(206, 206, 206);
+}
+
+/* 리스트 박스 */
+.listbox {
+	width: 80%;
+	height: 60%;
+	overflow: auto;
+	border-radius: 30px;
+	margin: auto;
+	margin-bottom: 8%;
+}
+
+/* list */
+.medlisttitle {
+	margin-left: 15%;
+	margin-right: 10%;
+	margin-top: 10%;
+}
+
+.medname {
+	margin-left: 2%;
+	width: 60%;
+}
+/* 수정 버튼 */
+.btn-upd {
+	padding: 2%;
+	border-radius: 10px;
+	background-color: #cccccc;
+	width: 16%;
+}
+/* 리스트 카드 */
+.medlistcard {
+	border: 3px solid rgb(62, 142, 255);
+	border-radius: 15px;
+	background-color: #ffffff;
+	margin-bottom: 3%;
+	width: 80%;
+}
+
+@media ( max-width : 480px) {
+	.subtitle {
+		font-size: 1.5em;
+	}
+}
