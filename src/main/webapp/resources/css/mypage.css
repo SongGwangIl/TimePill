@@ -44,7 +44,6 @@ h1{
 	margin: 5px auto;
 }
 .btn {
-	width: 50px;
 	font-family: 'Noto Sans KR';
     font-size: 15px;
 }
@@ -57,7 +56,8 @@ h1{
     height: 30px;
     cursor: pointer;
 }
-/* 모달 */
+
+/* 모달배경 */
 .fModal{
     position:absolute;
     display:none;
@@ -69,6 +69,7 @@ h1{
     background-color: rgba(0,0,0,0.4);
     z-index: 100;
 }
+/* 모달창 */
 .fModal_body{
     position:absolute;
     top:50%;
@@ -98,21 +99,12 @@ h1{
 
 /* Galaxy S23 */
 @media (max-width: 480px) {
-    .modal_body{
+    .fModal_body{
+    	display: flex;
+    	align-items: center;
         position:absolute;
-        top:50%;
-        width:70%;
-        height:50%;
-    
-        padding:40px;  
-    
-        text-align: center;
-    
-        background-color: rgb(255,255,255);
-        border-radius:10px;
-        box-shadow:0 2px 3px 0 rgba(34,36,38,0.15); 
-    
-        transform:translateY(-50%);
+        width:300px;
+        height: 120px;
     }
     
 }

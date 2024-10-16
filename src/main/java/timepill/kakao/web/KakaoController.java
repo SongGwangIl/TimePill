@@ -1,7 +1,6 @@
 package timepill.kakao.web;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,7 +55,7 @@ public class KakaoController {
 		}
 		
 		vo.setUserId(userId);
-		UserVO resultUserInfo = kakaoService.selectUserInfo(vo);
+		UserVO resultUserInfo = kakaoService.getKakaoUserInfo(vo);
 		
 		// 초기값
 		if (!StringUtils.hasText(vo.getTokenUseAt())) {
@@ -94,18 +93,4 @@ public class KakaoController {
 		return "redirect:/";
 	}
 	
-	/** 테스트용 메세지 보내기 */
-	@ResponseBody
-	@GetMapping("/kakao/message-test")
-	public void sendMessage(UserVO vo, HttpSession session) throws Exception {
-		System.out.println("테스트 메세지 보내기 실행");
-		boolean checkMessageAuth = kakaoService.checkMessageAuth(); // 메세지 권한 동의 여부 체크
-		if (checkMessageAuth) {
-			// 메세지 보내기 실행
-			String messageResult = kakaoService.message("");
-			System.out.println("messageResult : " + messageResult);
-		} 
-	}
-	
-
 }

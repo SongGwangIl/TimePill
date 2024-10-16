@@ -32,7 +32,7 @@ public class MainController {
 	/** 메인페이지 */
 	@GetMapping("/")
 	public String main(ScheduleVO vo, ModelMap model) throws Exception {
-
+		
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		vo.setUserId(userId);
 		

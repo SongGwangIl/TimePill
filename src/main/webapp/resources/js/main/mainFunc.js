@@ -63,23 +63,21 @@ function createTodo(dayScheList) {
 	document.querySelector('#selectedDay').textContent = selectedDaySpan;
 
 	// Todo 초기화
-	let alarmDiv = document.querySelectorAll('div.card');
-	for (let result of alarmDiv) {
+	let cards = document.querySelectorAll('div.card');
+	for (let result of cards) {
 		result.querySelector('.daySchedule').innerHTML = '';
 	}
 	
-	
 	// Todo 생성 시작
 	for (const daySchedule of dayScheList) {
+		
 		// 담을 박스 선택
-		let alarmDiv = document.querySelectorAll('div.card[data-alarm-id="' + daySchedule.alarmId + '"]');
+		let cards = document.querySelectorAll('div.card[data-alarm-id="' + daySchedule.alarmId + '"]');
 		
 		// li 생성
 		let newLi = document.createElement('li');
 		newLi.classList.add('medlist-detail');
 		newLi.classList.add('boxh');
-
-		
 
 		// 체크박스 생성
 		let newImg = document.createElement('img');
@@ -107,30 +105,29 @@ function createTodo(dayScheList) {
 		newLi.append(newSpan);
 
 		// 생성된 element 담기
-		for (let result of alarmDiv) {
-			if (!result.classList.contains('bx-clone')) { // bx슬라이더 클론 제외
+		for (let card of cards) {
+			if (!card.classList.contains('bx-clone')) { // bx슬라이더 클론 제외
 //				console.log(result);
-				result.querySelector('.daySchedule').append(newLi);
+				card.querySelector('.daySchedule').append(newLi);
 			}
 		}
 
 	}
 	
-	// 빈 daySchedule 처리
-	let cards = document.querySelectorAll('.daySchedule');
+	// 빈 daySchedule 처리 (bx-clone 카드 제외)
+	let todoList = Array.from(document.querySelectorAll('.card'))
+				.filter(card => !card.classList.contains('bx-clone'))
+				.map(card => card.querySelector('.daySchedule'));
 	let template = document.querySelector('#blank-todo');
-	for(card of cards) {
-		// 내용이 비어있는지 확인 및 bx슬라이더 클론 제외
-		if (card.innerHTML.trim() === '' && !card.classList.contains('bx-clone')) {
-			card.innerHTML = '';
+	for(todo of todoList) {
+		if (todo.innerHTML.trim() === '') { //&& !card.classList.contains('bx-clone')
+			todo.innerHTML = '';
 			// 템플릿 클론 생성 및 추가
 			let clone = document.importNode(template.content, true);
-		    card.append(clone);
+		    todo.append(clone);
 		}
 	}
 }
-
-
 
 
 //알람 시간 변경
@@ -168,6 +165,7 @@ function updateAlarm() {
 		}
 	});
 }
+
 
 // 복약 스케줄 완료 체크 동작
 function chkTodo(e) {
@@ -260,7 +258,7 @@ function kakaoAlarmToggle() {
 			xhr.setRequestHeader(header, token);
 			xhr.setRequestHeader("Accept", "application/json");
 		},
-		success: function(result) {
+		cardss: function(result) {
 			if (result === 'Y') {
 				chk.attr('src', '/resources/img/ico-on.png');
 			} else if (result === 'N') {

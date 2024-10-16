@@ -8,11 +8,15 @@
 <c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="TimePill"/>
 </c:import>
-<link rel="stylesheet" href="/resources/css/mypage.css">
+
 <link rel="stylesheet" href="/resources/css/common.css">
+<link rel="stylesheet" href="/resources/css/mypage.css">
+
 <div id="contents">
 
-	<h1>설정</h1>
+	<div>
+		<h1 class="txa subtitle">내정보 설정</h1>
+	</div>
 	
 	<div class="boxv btns">
         <div class="boxh genbtn">

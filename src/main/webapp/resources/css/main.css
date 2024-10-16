@@ -86,6 +86,7 @@ input[type='time'] {
     font-size: 26px;
     font-weight: 800;
     margin: 0;
+    margin-top: 6px;
 }
 
 .whiteround {
@@ -215,6 +216,10 @@ input[type='time'] {
     .whiteround.boxh img.btn-spring {
         width: 20px;
     }
+    
+    .card {
+		max-width: 270px;	
+	}
 }
 
 @media (max-width: 360px) {

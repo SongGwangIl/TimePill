@@ -5,7 +5,7 @@
 <mapper namespace="timepill.kakao.service.KakaoDAO">
 
 <!-- 카카오 유저정보 가져오기 -->
-<select id="selectUserInfo" resultType="UserVO">
+<select id="selectKakaoUserInfo" resultType="UserVO">
 SELECT
 	USER_ID
 	, ROLE
@@ -18,7 +18,7 @@ WHERE USER_ID = #{userId}
 
 
 <!-- 카카오 회원가입 -->
-<insert id="insertUser">
+<insert id="insertKakaoUser">
 INSERT INTO users(
 	USER_ID
 	, ROLE
@@ -63,7 +63,7 @@ WHERE
 </update>
 
 <!-- 카카오 유저 리프레시 토큰 가져오기 -->
-<select id="selectKakaoRefreshTokenList" resultType="UserVO">
+<select id="selectKakaoTokenList" resultType="UserVO">
 SELECT
 	A.REFRESH_TOKEN
 	, A.ACCESS_TOKEN
