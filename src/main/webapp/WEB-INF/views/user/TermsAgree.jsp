@@ -53,7 +53,7 @@
                             <p> 서비스 이용 동의 </p> 
                             <img class="cha" src="/resources/img/rightarrow.png">
                         </li>
-                        <div class="checkdesc"  style="display: none;">
+                        <div class="checkdesc context context1" style="display: none;">
                             <div class="agredetaildesc"> 
                             	<div id="policyService" class="det_cnt1">
 									<h3>제1장 총칙</h3>
@@ -493,7 +493,7 @@
                             <p> 개인(신용) 정보 수집 및 이용 </p> 
                             <img class="cha" src="/resources/img/rightarrow.png">
                         </li>
-                        <div class="checkdesc"  style="display: none;">
+                        <div class="checkdesc context context2" style="display: none;">
                             <div class="agredetaildesc"> 
                             	<div id="privacy" class="agree_cnt3">
 								<p class="txt_cnt1">주식회사 timepill('이하 회사'라 함)은 『개인정보 보호법』 및 『정보통신망 이용촉진 및 정보보호 등에 관한 법률』, 통신비밀보호법, 전기통신사업법,
@@ -755,7 +755,7 @@
                             <p> 개인(신용) 정보 제 3자 제공 동의</p> 
                             <img class="cha" src="/resources/img/rightarrow.png">
                         </li>
-                        <div class="checkdesc"  style="display: none;">
+                        <div class="checkdesc context context3"  style="display: none;">
                             <div class="agredetaildesc"> 
                             	<h3>개인정보 3자 이용 동의서</h3>
 								<ul>본인은 [회사명] (이하 "회사")가 수집한 개인정보를 제3자에게 제공하는 것에 대해 다음과 같이 동의합니다.</ul>
@@ -782,11 +782,11 @@
                 </div>
                
                 <li class="boxh">
-                    <input type="checkbox" >
+                    <input type="checkbox" id="marketing">
                     <p> [선택] 마케팅 수신 이용에 대한 동의 </p>
                     <img class="cha" src="/resources/img/rightarrow.png">
 	            </li>
-                <div class="checkdesc marketing"  style="display: none;">
+                <div class="checkdesc marketing" style="display: none;">
                     <div class="agredetaildesc"> 
                     	<h3>마케팅 수신 동의서</h3>
 						<ul>본인은 [회사명] (이하 "회사")가 다음과 같은 방식으로 제안하는 마케팅 정보 수신에 대해 동의합니다.</ul>
@@ -842,10 +842,11 @@ chaElements.forEach(cha => {
     });
 });
 
-const termsAgreeAll = document.querySelector("#termsAgreeAll")
-const termsAgree1 = document.querySelector("#termsAgree1")
-const termsAgree2 = document.querySelector("#termsAgree2")
-const termsAgree3 = document.querySelector("#termsAgree3")
+const termsAgreeAll = document.querySelector("#termsAgreeAll");
+const termsAgree1 = document.querySelector("#termsAgree1");
+const termsAgree2 = document.querySelector("#termsAgree2");
+const termsAgree3 = document.querySelector("#termsAgree3");
+
 let agreeFlag = false;
 
 termsAgreeAll.onclick = function(){
@@ -853,8 +854,7 @@ termsAgreeAll.onclick = function(){
 		termsAgree1.checked=true
 		termsAgree2.checked=true
 		termsAgree3.checked=true		
-		agreeFlag = true;
-		
+		agreeFlag = true;		
 	}
 	else if(agreeFlag) {
 		termsAgree1.checked=false
@@ -868,7 +868,7 @@ const checklist = document.querySelector('.checklist');
 const consentBtn = document.querySelector('#consent');
 checklist.onchange = check;
 
-function check() {
+function check(ev) {
 	if(termsAgree1.checked == false || termsAgree2.checked == false || termsAgree3.checked == false){
 		consentBtn.setAttribute('class', "btn-white");
 		consentBtn.style.pointerEvents = 'none';
@@ -876,6 +876,29 @@ function check() {
 		consentBtn.setAttribute('class', "btn-sky");
 		consentBtn.style.pointerEvents = 'auto';
 	}
+	targetClose(ev);
+}
+
+function targetClose(ev){
+	let targetId = ev.target.id;
+	let contexts = document.querySelectorAll('.context');
+	let context1 = document.querySelector('.context1');
+	let context2 = document.querySelector('.context2');
+	let context3 = document.querySelector('.context3');
+	let context4 = document.querySelector('.marketing');
+	
+	if(targetId === 'termsAgreeAll'){
+		for(let context of contexts){
+			context.style.setProperty('display', 'none');
+		}		
+	}else if(targetId === 'termsAgree1')
+		context1.style.setProperty('display', 'none');
+	else if(targetId === 'termsAgree2')
+		context2.style.setProperty('display', 'none');
+	else if(targetId === 'termsAgree3')
+		context3.style.setProperty('display', 'none');
+	else if(targetId === 'marketing')
+		context4.style.setProperty('display', 'none');
 }
 </script>
 </body>

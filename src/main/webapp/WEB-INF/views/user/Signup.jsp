@@ -95,6 +95,7 @@
                     <tr>
                         <td>
                             <form:input type="email" class="form-input" path="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required="required"/>
+                            <p id="emailCheck" class="checkText" style="margin: 0;">&nbsp;</p>
                             <form:errors path="email"></form:errors>
                         </td>
                     </tr>

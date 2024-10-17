@@ -22,9 +22,7 @@
   		, email
     FROM users 
     WHERE user_id = #{userId}
-  </select>
-  
-  
+  </select>  
   
   <insert id="add">
   	INSERT INTO users (
@@ -45,6 +43,12 @@
   	SELECT COUNT(*) 
   	FROM users 
   	WHERE user_id = #{userId}
+  </select>
+  
+  <select id="checkEmail" resultType="String">
+  	SELECT COUNT(*) 
+  	FROM users 
+  	WHERE email = #{email}
   </select>
   
   <select id="findId" resultType="String">

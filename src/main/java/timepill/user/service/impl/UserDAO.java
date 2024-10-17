@@ -13,6 +13,8 @@ public interface UserDAO {
 	UserVO login(String userId);
 
 	String checkId(String userId);
+	
+	String checkEmail(String email);
 
 	String findId(String email);
 
@@ -28,5 +30,5 @@ public interface UserDAO {
 
 	String getPassword(String userId);
 
-	int changePassword(UserVO vo);
+	int changePassword(UserVO vo);	
 }
