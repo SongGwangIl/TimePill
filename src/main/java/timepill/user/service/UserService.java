@@ -9,6 +9,9 @@ public interface UserService extends UserDetailsService {
 	// 사용가능한 아이디 확인
 	String checkId(String userId);
 
+	// 메일 등록가능 여부 확인 
+	public String checkEmail(String email);
+	
 	// 이메일주소로 아이디 확인
 	String findId(String email);
 
@@ -29,4 +32,5 @@ public interface UserService extends UserDetailsService {
 
 	// 비밀번호 변경(로그인 후)
 	public int changePassword(UserVO vo);
+
 }

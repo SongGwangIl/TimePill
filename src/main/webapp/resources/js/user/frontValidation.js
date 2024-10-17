@@ -34,13 +34,13 @@ function checkId(){
           		idCheck.innerText = "이미 사용중인 아이디입니다.";
           		idCheck.style.color = "#dc3545";
           		idCheck.style.fontSize = '16px';
-          		document.querySelector('#idCheck').setAttribute('check', 'false');
+          		idCheck.setAttribute('check', 'false');
         	}
         	else if(result == 0){
           		idCheck.innerText = "사용할 수 있는 아이디입니다."
           		idCheck.style.color = "#2fb380"    
           		idCheck.style.fontSize = '16px';
-          		document.querySelector('#idCheck').setAttribute('check', 'true');
+          		idCheck.setAttribute('check', 'true');
         	}
 		},
       	error: function(){
@@ -134,17 +134,50 @@ function autoEmail(a,b){
   }
 }
   
-const email = document.querySelector("#email")
-const emailMsg = document.querySelector('#userPwdMsg')
+const email = document.querySelector("#email");
+const emailP = document.querySelector('#emailCheck');
 let emailVal;
-email.onchange = emailCheck 
+email.addEventListener('change', emailCheck);
 
 function emailCheck(){
+	console.log('체크동작');
   const eamilRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i
   emailVal = email.value
+  let emailFlag = false;
   if(!eamilRegExp.test(emailVal)) { // 정규식 조건 만족 X
     email.value = null;
     email.focus();    
+  }else
+  	emailFlag = true;
+  	
+  if(emailFlag == true){
+    $.ajax({
+		url : "/user/check-email",
+		type: "post",
+		data: {email:emailVal},
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(header, token);
+			xhr.setRequestHeader("Accept", "application/String");
+		},
+		success: function(result){			
+        	if(result == 0){
+          		emailP.textContent = "등록 가능한 메일입니다."
+          		emailP.style.color = "#2fb380"    
+          		emailP.style.fontSize = '16px';
+          		emailP.setAttribute('check', 'true');
+        	}
+        	else{        	
+          		emailP.textContent = "이미 등록된 메일입니다.";
+          		emailP.style.color = "#dc3545";
+          		emailP.style.fontSize = '16px';
+          		emailP.setAttribute('check', 'false');
+    			email.focus();
+        	}
+		},
+      	error: function(){
+        	alert("서버요청실패");
+      	}
+    });
+    check();
   }
 }
-

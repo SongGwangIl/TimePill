@@ -59,6 +59,13 @@ public class UserServiceImpl implements UserService {
 
 		return userdao.checkId(userId);
 	}
+	
+	@Override
+	public String checkEmail(String email) {
+		
+		return userdao.checkEmail(email);
+	}
+
 
 	@Override
 	public String findId(String email) {
@@ -111,5 +118,4 @@ public class UserServiceImpl implements UserService {
 		
 		return userdao.changePassword(vo);
 	}
-
 }

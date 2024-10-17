@@ -68,13 +68,19 @@ public class UserController {
 	@PostMapping("/user/singup")
 	public String add(@Valid UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
 		if(result.hasErrors())
+			
 			return "user/Signup";
 		
-		userService.add(vo); //유저정보 DB추가
+		String check = userService.checkEmail(vo.getEmail());
+		if(check.equals("0")) {
+			userService.add(vo); //유저정보 DB추가
+			request.getSession().setAttribute("message", "회원가입 되었습니다.");
+			
+			return "user/Login";			
+		}		
+		request.getSession().setAttribute("message", "이미등록된 메일이라 가입할 수 없습니다.");
 		
-		request.getSession().setAttribute("message", "회원가입 되었습니다.");
-		
-		return "user/Login";			
+		return "user/Signup";
 	}
 	
 	/** 아이디 사용유무확인 ajax 요청,응답 */
@@ -83,6 +89,15 @@ public class UserController {
 	public String checkId(String userId) {
 		
 		String result = userService.checkId(userId); // DB에 존재하는 userId인지 확인
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/check-email")
+	public String checkEmail(String email) {
+		
+		String result = userService.checkEmail(email);
 		
 		return result;
 	}
