@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- 시큐리티 csrf토큰 -->
+	<sec:csrfMetaTags/>
+    
     <title>TimePill</title>
 
     <!-- jQuery 3.7.1-->
@@ -65,6 +68,5 @@
 	<c:remove var="message" scope="session"/>
 </c:if>
 </script>
-
 </body>
 </html>

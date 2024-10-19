@@ -32,11 +32,15 @@
 	margin-left: 5px;
 	margin-right: 5px;
 }
+.todo-box {
+	max-width: 230px;
+}
 
 .daySchedule {
+	max-height: 150px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	overflow: auto;
 }
 
 /* time picker icon*/
@@ -114,8 +118,8 @@ input[type='time'] {
 
 .medlist-detail {
 	list-style: none;
-	text-align: center;
 	padding-top: 5px;
+	margin-left: 20px;
 }
 
 /* 로딩 완료 후 페이드인 */

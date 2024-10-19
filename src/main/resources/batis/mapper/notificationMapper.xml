@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timepill.notification.service.NotificationDAO">
+
+<!-- 구독정보 등록 -->
+<insert id="insertSub">
+INSERT INTO push_info (
+	USER_ID
+	, ENDPOINT
+	, P256DH
+	, AUTH
+) VALUES(
+	#{userId}
+	, #{endpoint}
+	, #{p256dh}
+	, #{auth}
+)
+
+</insert>
+
+<!-- 구독정보 리스트 조회 -->
+<select id="selectListSub" resultType="NotificationVO">
+SELECT
+	B.ENDPOINT
+	, B.P256DH
+	, B.AUTH
+FROM
+	users A
+		JOIN push_info B ON A.USER_ID = B.USER_ID
+		JOIN alarm_set C ON A.USER_ID = C.USER_ID
+		JOIN schedule D ON C.ALARM_ID = D.ALARM_ID
+		JOIN med_info E ON D.MED_ID = E.MED_ID
+WHERE 
+	A.USER_STATUS = 'Y'
+	AND CURDATE() BETWEEN E.START_DATE AND E.END_DATE
+	AND C.ALARM_TIME BETWEEN CURTIME() - INTERVAL 10 SECOND AND CURTIME() + INTERVAL 10 SECOND
+GROUP BY B.ENDPOINT, B.P256DH, B.AUTH
+</select>
+
+
+</mapper>

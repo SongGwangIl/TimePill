@@ -46,7 +46,7 @@
 
 	<!-- 관리자만 접근 가능 -->
 	<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
-		<a href="/write">글쓰기</a>
+		<a href="/notice/write">글쓰기</a>
 	</sec:authorize>
 	
 </div>

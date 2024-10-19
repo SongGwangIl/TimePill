@@ -41,7 +41,7 @@
 				<input type="hidden" name="medId" value="${result.medId}">
 				<div class="label-input-container">
 					<label for="medName">약이름 :</label> 
-					<input type="text" name="medName" placeholder="약이름을 입력해주세요." value="${result.medName}" required>
+					<input type="text" name="medName" id="medName" placeholder="약이름을 입력해주세요." value="${result.medName}" maxlength="8">
 				</div>
 				
 				<c:forEach var="resultAlarmType" items="${result.alarmTypes}">
@@ -73,11 +73,11 @@
 				
 				<div class="label-input-container" style="margin-bottom: 0px;">
 					<label for="startDate">시작일 :</label> 
-					<input type="text" name="startDate" id="start" class="inp-date" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+					<input type="text" name="startDate" id="start" class="inp-date" value="<fmt:formatDate value="${result.startDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." readonly>
 				</div>
 				<div class="label-input-container">
 					<label for="endDate">만료일 :</label> 
-					<input type="text" name="endDate" id="end" class="inp-date" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." required readonly>
+					<input type="text" name="endDate" id="end" class="inp-date" value="<fmt:formatDate value="${result.endDate}" pattern="yyyy-MM-dd"/>" placeholder="캘린더에서 날짜를 선택해주세요." readonly>
 				</div>
 			</div>
 			
@@ -104,12 +104,12 @@
                     <p class="btn-sky btndesc">${empty result.medId ? '등록' : '수정'}</p>
                 </button>
                 <button type="button" id="btn-csl" onclick="location.href='/medication'">
-                    <p class="btn-white btndesc"> 취소 </p>
+                    <p class="btn-white btndesc">취소</p>
                 </button>
                 <%-- 삭제버튼 --%>
 				<c:if test="${not empty result.medId}">
 					<button type="button" id="btn-del">
-	                    <p class="btn-white btndesc"> 삭제 </p>
+	                    <p class="btn-white btndesc">삭제</p>
 	                </button>
 				</c:if>
             </div>
@@ -134,6 +134,14 @@ $(document).ready(function () {
 	
 	// 등록&수정 버튼
 	$('#btn-frm').on('click', function () {
+		if ($('#medName').val().trim() == '') {
+			alert('약이름을 입력해 주세요');
+			return false;
+		}
+		if ($('#start').val().trim() == '' || $('#end').val().trim() == '') {
+			alert('날짜를 선택해 주세요');
+			return false;
+		}
 		if (!confirm("등록하시겠습니까?")) {
 			return false;
 		}
