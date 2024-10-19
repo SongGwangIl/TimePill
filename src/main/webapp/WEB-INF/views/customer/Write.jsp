@@ -6,8 +6,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <%-- header --%>
-<c:import url="/WEB-INF/views/common/header.jsp" charEncoding="utf-8">
-	<c:param name="title" value="TimePill - 스케줄 관리"/>
+<c:import url="/header" charEncoding="utf-8">
+	<c:param name="title" value="공지사항 - TimePill"/>
 </c:import>
 
 <style>
@@ -84,6 +84,7 @@ p, span {
 
 
 </div>
+
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
 

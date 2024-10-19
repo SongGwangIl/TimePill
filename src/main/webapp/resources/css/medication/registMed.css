@@ -81,6 +81,8 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Gmarket Sans';
+	font-size: 16px;
 }
 
 .btn-white {
@@ -93,4 +95,6 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Gmarket Sans';
+	font-size: 16px;
 }

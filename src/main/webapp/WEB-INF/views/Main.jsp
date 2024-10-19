@@ -38,7 +38,7 @@
 		<div class="bxslider">
 			<c:forEach var="resultAlarm" items="${alarmList}">
 				<div class="card" data-alarm-id="${resultAlarm.alarmId}">
-					<div class="boxv">
+					<div class="boxv todo-box">
 						<%-- 알람타입 --%>
 						<h1 class="alarm-type">
 							<c:choose>
@@ -99,6 +99,28 @@
 			});
 		</script>
 	</sec:authorize>
+	<sec:authorize access="!principal.username.contains('KAKAO_')">
+		<!-- 일반유저 푸시 알림 받기 신청 -->
+	    <div  class="boxh kakaobox">
+	        <div>
+	            <p class="caption">복약 푸시 알림을 받고 싶다면? </p>
+	        </div>
+	        <div>
+	        	<!-- 알림 토글 -->
+	        	<button id="NotificationToggle">푸시알림</button>
+				<!-- <img id="NotificationToggle" alt="브라우저 푸시 알림 설정 버튼" src="" width="55px" style="margin-left:15%"> -->
+	            </label>
+	        </div>
+	    </div>
+		<script>
+			$(document).ready(function() {
+				// 푸시 알림설정 동작
+				$(document).on('click', '#NotificationToggle', notification);
+				// 푸시 알림설정 로드
+				// $('#NotificationToggle').click();
+			});
+		</script>
+	</sec:authorize>
 </div>
 
 <!-- 빈 카드 템플릿 -->
@@ -132,28 +154,29 @@
 </div>
 
 <script>
-	$(document).ready(
+$(document).ready(function() {
+	// 알람시간 변경창 띄우기
+	$('.btn-spring').on(
+			'click',
 			function() {
-				// 알람시간 변경창 띄우기
-				$('.btn-spring').on(
-						'click',
-						function() {
-							const timeInput = $(this).closest('.boxh').find(
-									'input[type="time"]');
-							if (timeInput.length) {
-								// 기존 시간값 저장
-								timeVal = timeInput.val();
-								timeInput[0].showPicker(); // 시간 선택 팝업 띄우기
-							}
-						});
-
-				// 알람 시간 변경
-				$('.timepick').on('change', updateAlarm);
-				// 복약 스케줄 완료 체크 동작
-				$(document).on('click', '.sche-chk', chkTodo);
-
+				const timeInput = $(this).closest('.boxh').find(
+						'input[type="time"]');
+				if (timeInput.length) {
+					// 기존 시간값 저장
+					timeVal = timeInput.val();
+					timeInput[0].showPicker(); // 시간 선택 팝업 띄우기
+				}
 			});
+
+	// 알람 시간 변경
+	$('.timepick').on('change', updateAlarm);
+	// 복약 스케줄 완료 체크 동작
+	$(document).on('click', '.sche-chk', chkTodo);
+
+});
 </script>
+
+<script src="/resources/js/notification.js"></script>
 
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>

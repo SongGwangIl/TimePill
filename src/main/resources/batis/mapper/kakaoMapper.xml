@@ -62,7 +62,7 @@ WHERE
 	
 </update>
 
-<!-- 카카오 유저 리프레시 토큰 가져오기 -->
+<!-- 카카오 유저 토큰 가져오기 -->
 <select id="selectKakaoTokenList" resultType="UserVO">
 SELECT
 	A.REFRESH_TOKEN
