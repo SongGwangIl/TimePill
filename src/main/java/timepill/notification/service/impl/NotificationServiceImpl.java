@@ -40,16 +40,23 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	NotificationDAO notificationDAO;
 
-	/** 푸시구독정보 저장 */
+	/** 푸시 구독정보 저장 */
 	@Override
 	public int saveSubscription(NotificationVO vo) throws Exception {
 		int insertSub = notificationDAO.insertSub(vo);
 		return insertSub;
 	}
+	
+	/** 푸시 구독정보 삭제 */
+	@Override
+	public int delSubscription(NotificationVO vo) throws Exception {
+		int delSub = notificationDAO.deleteSub(vo);
+		return delSub;
+	}
 
 	/** 푸시알림 전송 */
 	@Override
-	public void sendPushMessage(Subscription subscription, String payload) throws Exception {
+	public int sendPushMessage(Subscription subscription, String payload) throws Exception {
 
 		// 푸시 서비스에 키 설정
 		PushService pushService = new PushService();
@@ -66,6 +73,7 @@ public class NotificationServiceImpl implements NotificationService {
 		// 알림 전송
 		HttpResponse send = pushService.send(notification);
 		System.out.println("요청 응답 : " + send);
+		return send.getStatusLine().getStatusCode();
 	}
 
 	// 구독자들에게 푸시 알림을 보냄
@@ -73,9 +81,11 @@ public class NotificationServiceImpl implements NotificationService {
 		List<NotificationVO> subscriptions = notificationDAO.selectListSub();
 		for (NotificationVO vo : subscriptions) {
 			Subscription sub = new Subscription(vo.getEndpoint(), new Subscription.Keys(vo.getP256dh(), vo.getAuth()));
-			System.out.println(sub.toString());
 			// 각 구독자에게 푸시 메시지 전송
-			sendPushMessage(sub, message);
+			int sendPushMessage = sendPushMessage(sub, message);
+			if (sendPushMessage == 410) {
+				notificationDAO.deleteSub(vo);
+			}
 		}
 	}
 }
