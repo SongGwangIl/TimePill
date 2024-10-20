@@ -4,7 +4,7 @@ let token = document.querySelector("meta[name='_csrf']").getAttribute("content")
 document.querySelector('#findIdBtn').onclick = findId;
 document.querySelector('#goLoginBtn').onclick = goLogin;
 
-const authNumDiv = document.querySelector('#authNumber');
+const btns = document.querySelector('#btns');
 
 // MutationObserver 설정
 const observer = new MutationObserver((mutations) => {
@@ -17,14 +17,14 @@ const observer = new MutationObserver((mutations) => {
 });
 
 // 관찰할 대상과 설정
-observer.observe(authNumDiv, { childList: true });
+observer.observe(btns, { childList: true });
 
 
 function findId(){
 	let userEmail = document.querySelector('#emailInp');
-	let viewIdSp = document.querySelector('#viewId');
+	let viewIdInp = document.querySelector('#viewId');
 	let msgSp = document.querySelector('#msg');
-	
+	const template = document.querySelector('#findTemp');
 	$.ajax({
 		url: "/user/find-id",
 		type: "post",
@@ -34,7 +34,6 @@ function findId(){
 			xhr.setRequestHeader("Accept", "application/String");
 		},
 		success: function(result){
-			console.log(result);
 			if(result === ''){
 				msgSp.innerText = "등록되지 않은 이메일 입니다.";
 			}else{
@@ -43,12 +42,9 @@ function findId(){
 					rPBtn.remove();
 					
 				msgSp.textContent = "";
-				viewIdSp.innerText = result;
-				let resetPwBtn = document.createElement('button');
-				resetPwBtn.type = 'button';
-				resetPwBtn.id = 'resetPasswordBtn';
-				resetPwBtn.textContent = "비밀번호 재설정"
-				document.querySelector('#authNumber').append(resetPwBtn);
+				viewIdInp.value = result;
+				let clone = document.importNode(template.content, true);				
+				document.querySelector('#btns').prepend(clone);
 			}
 		},
 		error: function(){
@@ -58,7 +54,7 @@ function findId(){
 }
 
 function goResetPw(){
-	window.location.href = "/user/auth-email";
+	document.querySelector('#authEmailForm').submit();
 }
 
 function goLogin(){
