@@ -52,7 +52,7 @@ document.getElementById('change').addEventListener('click', function () {
     }
 });
 document.getElementById('cancel').addEventListener('click', function () {
-	window.location.href = "/";
+	window.location.href = "/mypage ";
 });
 
 function checkValidity(){

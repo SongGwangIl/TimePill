@@ -1,0 +1,159 @@
+/* 컨텐츠 */
+#contents {
+    background-color: #f8f8f8;
+    background-image: url(/resources/img/bg.png);
+    background-position: top center;
+    /* 배경 이미지를 화면의 위쪽 가운데로 배치 */
+    background-size: 100%;
+    /* 배경 이미지를 요소 크기에 맞춰 비율을 유지하며 채움 */
+    background-repeat: no-repeat;
+    /* 이미지 반복 안 함 */
+    background-attachment: scroll;
+    /* 기본값으로 배경 이미지는 페이지와 함께 스크롤 */
+}
+
+/* 약통 배경 */
+.main-ico {
+    width: 55%;
+    margin-left: 28%;
+    margin-top: 8%;
+    margin-bottom: 1%;
+}
+
+/* 로고 */
+.logo {
+    width: 8%;
+    margin-right: 5px;
+}
+
+
+/* 타이틀 */
+.titlebox {
+    margin-bottom: 8%;
+}
+
+.title {
+    font-size: 1.8em;
+    margin: 1%;
+}
+
+/* 회원가입 */
+.jointitle {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+/* table */
+.wrap {
+    margin: auto;
+    width: 60%;
+    height: 70%;
+}
+
+/* input 입력부분 */
+.form-input {
+    width: 100%;
+    height: 32px;
+    padding-left: 2%;
+    font-family: 'Noto Sans KR';
+    font-size: 15px;
+    border: 0;
+    border-radius: 12px;
+    outline: none;
+    background-color: rgb(233, 233, 233);
+    display: inline-block;
+}
+
+/* icon */
+
+.eye {
+    width: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: auto 2px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.btn {
+    height: 34px;
+    margin-top: 20px;
+}
+
+.btn-sky {
+    width: 40%;
+    height: 30px;
+    border-radius: 15px;
+    background-color: skyblue;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-sky:hover{
+	cursor: pointer;
+	background: #87bdda;
+}
+
+.btn-white{
+    width: 40%;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #dddddd;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-white:hover{
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+.btndesc {
+    text-align: center;
+    font-weight: 400;
+    margin: 0;
+}
+
+.btns {
+    margin: 0;
+    height: 20%;
+    max-height: 150px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+/* 480~360 */
+@media (max-width: 480px) {
+/*     #backcontainer { */
+/*         width: 360px; */
+/*     } */
+
+    #contents {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* 약통 배경 */
+    .main-ico {
+        width: 55%;
+        margin-left: 28%;
+        margin-top: 8%;
+        margin-bottom: 10%;
+    }
+
+    /* table */
+    .joinform {
+        margin: auto;
+        width: 80%;
+        height: 70%;
+    }
+}
