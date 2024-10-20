@@ -11,6 +11,9 @@ public interface NotificationDAO {
 	
 	/** 구독정보 등록 */
 	int insertSub(NotificationVO vo) throws Exception;
+	
+	/** 구독정보 삭제 */
+	int deleteSub(NotificationVO vo) throws Exception;
 
 	/** 구독정보 리스트 조회 */
 	List<NotificationVO> selectListSub() throws Exception;
