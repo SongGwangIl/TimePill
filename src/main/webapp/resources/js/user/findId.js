@@ -1,8 +1,8 @@
 let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 let token = document.querySelector("meta[name='_csrf']").getAttribute("content");
 
-document.querySelector('#findIdBtn').onclick = findId;
-document.querySelector('#goLoginBtn').onclick = goLogin;
+document.querySelector('#findId').onclick = findId;
+document.querySelector('#goLogin').onclick = goLogin;
 
 const btns = document.querySelector('#btns');
 

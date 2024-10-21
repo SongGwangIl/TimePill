@@ -45,7 +45,7 @@
                     <span id="msg"></span>
                 </div>                       
                 <div class="btns boxh">
-		            <a class="btn-white btn" id="findIdBtn">
+		            <a class="btn-white btn" id="findId">
 		                <p class="btndesc"> 찾기 </p>
 		            </a>
 				</div>
@@ -58,7 +58,7 @@
 				</div>
 			</form>
 				<div class="btns boxh" id="btns">
-		            <a class="btn-white" id="goLoginBtn">
+		            <a class="btn-white" id="goLogin">
 		                <p class="btndesc"> 로그인화면 </p>
 		            </a>
 				</div>
