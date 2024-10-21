@@ -1,4 +1,4 @@
-package timepill.com;
+package timepill.com.security;
 
 import java.io.IOException;
 
