@@ -117,6 +117,11 @@ public class UserController {
 		
 		return result;
 	}
+	@GetMapping("/user/auth-email")
+	public String authEmail() {
+		
+		return "user/AuthEmail";
+	}
 	
 	/** 이메일 인증 페이지 요청 */
 	@PostMapping("/user/auth-email")
@@ -146,7 +151,7 @@ public class UserController {
 		if(result.equals("Y")) { // 인증 성공
 			session.setAttribute("authOK", vo);
 			
-			return "user/ResetPassword";
+			return "user/Password";
 		}			
 		else { // 인증 실패
 			model.addAttribute("message", "인증에 실패했습니다.");
