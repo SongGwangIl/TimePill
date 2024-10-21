@@ -1,9 +1,7 @@
 package timepill.notification.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,18 +45,5 @@ public class NotificationController {
 		// db에 구독정보 저장
 		int delSubscription = notificationService.saveSubscription(vo);
 		return delSubscription;
-	}
-
-	/** 푸시알람 테스트 */
-	@GetMapping("/test")
-	public ResponseEntity<Void> test() throws Exception {
-		String jsonString = "{"
-		        + "\"title\": \"복약 알림\","
-		        + "\"body\": \"약먹을 시간이에요.\","
-		        + "\"icon\": \"/resources/img/logo.svg\","
-		        + "\"url\": \"/\""
-		        + "}";
-		notificationService.sendNotificationToAllSubscribers(jsonString);
-		return ResponseEntity.ok().build();
 	}
 }

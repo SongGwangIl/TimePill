@@ -1,9 +1,9 @@
-package timepill.kakao.service;
+package timepill.com.push;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-public class KakaoMessageTemplate {
+public class PushMessageTemplate {
 
 	/* 카카오 피드 메세지 템플릿 참고 형태
 	 	{
@@ -31,7 +31,7 @@ public class KakaoMessageTemplate {
 	 */
 	
 	/** 카카오 피드 메세지 템플릿 */
-	public static String getDefaultMessageParam() {
+	public static String getKakaoMessage() {
 		JsonObject link = new JsonObject();
 //		link.addProperty("web_url", "http://www.friendlycommunity.xyz/board/69");
 //		link.addProperty("mobile_web_url", "http://www.friendlycommunity.xyz/board/69");
@@ -61,5 +61,23 @@ public class KakaoMessageTemplate {
 		return "template_object=" + templateObject.toString();
 	}
 	
+	/* 웹 푸시 메세지 템플릿 참고 형태
+		{
+		   "title": "복약 알림",
+		    "body": "약먹을 시간이에요.",
+		    "icon": "/resources/img/logo.svg",
+		    "url": "/"
+		}
+	*/
 	
+	/** 웹 푸시 메세지 템플릿 */
+	public static String getWebPushMessage() {
+		JsonObject jsonMessge = new JsonObject();
+		jsonMessge.addProperty("title", "복약 알림");
+		jsonMessge.addProperty("body", "약먹을 시간이에요.");
+		jsonMessge.addProperty("icon", "/resources/img/logo.svg");
+		jsonMessge.addProperty("url", "/");
+		
+		return jsonMessge.toString();
+	}
 }
