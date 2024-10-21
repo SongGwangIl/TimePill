@@ -58,9 +58,9 @@
     
     <!-- 시큐리티 객체 등록 -->
     <beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <beans:bean id="customAuthenticationSuccessHandler" class="timepill.com.CustomAuthenticationSuccessHandler"/>
-    <beans:bean id="customAuthenticationFailureHandler" class="timepill.com.CustomAuthenticationFailureHandler"/>
-    <beans:bean id="customLogoutSuccessHandler" class="timepill.com.CustomLogoutSuccessHandler"/>
-    <beans:bean id="customAccessDeniedHandler" class="timepill.com.CustomAccessDeniedHandler" />
-    <beans:bean id="customAuthenticationEntryPoint" class="timepill.com.CustomAuthenticationEntryPoint" />
+    <beans:bean id="customAuthenticationSuccessHandler" class="timepill.com.security.CustomAuthenticationSuccessHandler"/>
+    <beans:bean id="customAuthenticationFailureHandler" class="timepill.com.security.CustomAuthenticationFailureHandler"/>
+    <beans:bean id="customLogoutSuccessHandler" class="timepill.com.security.CustomLogoutSuccessHandler"/>
+    <beans:bean id="customAccessDeniedHandler" class="timepill.com.security.CustomAccessDeniedHandler" />
+    <beans:bean id="customAuthenticationEntryPoint" class="timepill.com.security.CustomAuthenticationEntryPoint" />
 </beans:beans>

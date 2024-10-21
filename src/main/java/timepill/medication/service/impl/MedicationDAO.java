@@ -19,7 +19,7 @@ public interface MedicationDAO {
 	List<String> selectMedAlarmTypes(ScheduleVO vo) throws Exception;
 	
 	/** 마지막 복약 아이디 조회 */
-	String selectLastMedId(ScheduleVO vo) throws Exception;
+	String selectLastMedId() throws Exception;
 	
 	/** 복약 정보 등록 */
 	int insertMedInfo(ScheduleVO vo) throws Exception;

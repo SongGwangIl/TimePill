@@ -1,4 +1,4 @@
-package timepill.kakao.service;
+package timepill.com.push;
 
 import java.util.List;
 
@@ -8,17 +8,25 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StringUtils;
 
+import nl.martijndwars.webpush.Subscription;
+import timepill.kakao.service.KakaoService;
+import timepill.notification.service.NotificationService;
+import timepill.notification.service.NotificationVO;
 import timepill.user.service.UserVO;
 
 @Configuration
 @EnableScheduling
-public class KakaoMessageScheduler {
+public class MessageScheduler {
 
 	/** kakaoService DI */
 	@Autowired
 	KakaoService kakaoService;
-
-	// 카카오 메세지 알람 스케줄
+	
+	/** notificationService DI */
+	@Autowired
+	private NotificationService notificationService;
+	
+	/** 카카오 메세지 알람 스케줄 */
 	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
 
@@ -47,6 +55,18 @@ public class KakaoMessageScheduler {
 				kakaoService.message(newAccessToken);
 			}
 
+		}
+	}
+	
+	/** 푸시알림 스케줄 */
+	@Scheduled(cron = "55 * * * * ?") // 매 분 55초에 실행
+	public void sendPush() throws Exception {
+		// 푸시 구독정보 리스트 가져오기
+		List<NotificationVO> subscriptions = notificationService.getSubcription();
+		for (NotificationVO vo : subscriptions) {
+			Subscription sub = new Subscription(vo.getEndpoint(), new Subscription.Keys(vo.getP256dh(), vo.getAuth()));
+			// 푸시 메시지 처리
+			notificationService.processSendMessage(sub, vo);
 		}
 	}
 }

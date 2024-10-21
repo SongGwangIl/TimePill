@@ -18,8 +18,8 @@ import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import timepill.alarm.service.AlarmService;
+import timepill.com.push.PushMessageTemplate;
 import timepill.kakao.service.KakaoDAO;
-import timepill.kakao.service.KakaoMessageTemplate;
 import timepill.kakao.service.KakaoService;
 import timepill.schedule.service.ScheduleVO;
 import timepill.user.service.UserVO;
@@ -320,7 +320,7 @@ public class KakaoServiceImpl implements KakaoService {
 		}
 		
 		// HTTP 요청 (메세지 보내기)
-		String callwithToken = httpCallService.CallwithToken("POST", uri, accessToken, KakaoMessageTemplate.getDefaultMessageParam());
+		String callwithToken = httpCallService.CallwithToken("POST", uri, accessToken, PushMessageTemplate.getKakaoMessage());
 		
 		return callwithToken;
 	}
