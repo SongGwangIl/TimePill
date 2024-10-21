@@ -51,6 +51,12 @@
   	WHERE email = #{email}
   </select>
   
+  <select id="checkEmailId" resultType="String">
+  	SELECT COUNT(*) 
+  	FROM users 
+  	WHERE email = #{email} AND user_id != #{userId}
+  </select>
+  
   <select id="findId" resultType="String">
   	SELECT user_id
   	FROM users

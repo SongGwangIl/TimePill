@@ -11,10 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import timepill.com.ValidGroup.EditInfo;
+import timepill.com.ValidGroup.EditPasswrod;
 import timepill.kakao.service.KakaoService;
 import timepill.user.service.AuthService;
 import timepill.user.service.AuthVO;
@@ -144,7 +147,7 @@ public class UserController {
 	
 	/** 이메일 인증 */
 	@PostMapping("/user/auth-atmp")
-	public String authAtmp(AuthVO vo, HttpSession session, Model model) {
+	public String authAtmp(AuthVO vo, HttpSession session) {
 		
 		String result = authService.authAtmp(vo); // 이메일 인증
 		
@@ -154,7 +157,7 @@ public class UserController {
 			return "user/Password";
 		}			
 		else { // 인증 실패
-			model.addAttribute("message", "인증에 실패했습니다.");
+			session.setAttribute("message", "인증에 실패했습니다.");
 			
 			return "user/AuthEmail";
 		}
@@ -237,13 +240,17 @@ public class UserController {
 		return "myPage/MyPassword";
 	}
 	@PostMapping("/mypage/myPassword")
-	public String changePw(HttpSession session, UserVO vo) {
+	public String changePw(HttpSession session,@Validated(EditPasswrod.class) UserVO vo, BindingResult valResult, Model model) {
 		String userInfo = (String) session.getAttribute("changeInfoUser");
 		if(userInfo == null) {
 			session.setAttribute("message", "잘못된 접근입니다.");
 			return "redirect:/mypage";
 		}
 		vo.setUserId(userInfo);
+		
+		if(valResult.hasErrors())
+			return "myPage/MyPassword";
+		
 		
 		System.out.println(vo.getPassword());
 		int result = userService.changePassword(vo);
@@ -273,7 +280,7 @@ public class UserController {
 	
 	/** 내 정보 변경 */
 	@PostMapping("/mypage/myinfo")
-	public String chageMyInfo(UserVO vo, BindingResult result, Model model, HttpSession session) {
+	public String chageMyInfo(@Validated(EditInfo.class) UserVO vo, BindingResult result, Model model, HttpSession session) {
 		String userInfo = (String) session.getAttribute("changeInfoUser");
 		if(userInfo == null) {
 			session.setAttribute("message", "잘못된 접근입니다.");
@@ -281,18 +288,24 @@ public class UserController {
 		}
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
-			return "user/MyInfo";
+			return "myPage/MyInfo";
 		if(userInfo.startsWith("KAKAO_"))
 			vo.setEmail("카카오유저");
-		
-		userService.changeMyInfo(vo); // 유저정보변경
+		String check = userService.checkEmailId(vo);
+		if(check.equals("0")) {
+			userService.changeMyInfo(vo); // 유저정보변경
+			session.setAttribute("message", "정보가 변경되었습니다.");			
+		}else {
+			session.setAttribute("message", "이미 등록된 이메일입니다.");
+			
+			return "redirect:/mypage/myinfo";
+		}
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		if (user != null) {
 		    user.setNickname(vo.getNickname());
 		    session.setAttribute("loginUser", user);
 		}
-		model.addAttribute("message", "정보가 변경되었습니다.");
 		
-		return "redirect:/";
+		return "redirect:/mypage";
 	}
 }

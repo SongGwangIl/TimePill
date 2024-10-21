@@ -118,4 +118,12 @@ public class UserServiceImpl implements UserService {
 		
 		return userdao.changePassword(vo);
 	}
+
+	@Override
+	public String checkEmailId(UserVO vo) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		vo.setUserId(userId);
+		
+		return userdao.checkEmailId(vo);
+	}
 }
