@@ -47,7 +47,7 @@
             <a href="#" class="btn-white" id="change">
                 <p class="btndesc"> 수정하기 </p>
             </a>
-            <a href="/" class="btn-white">
+            <a href="/mypage" class="btn-white">
                 <p class="btndesc"> 돌아가기 </p>
             </a>
         </div>
@@ -101,7 +101,7 @@ document.getElementById('change').addEventListener('click', function () {
     		changeBtn.classList.remove('nonClick');
     		changeBtn.style.pointerEvents = 'auto';
     		if(!document.querySelector('.btns img')){
-	    		let clone =document.importNode(template.content, true);
+	    		let clone = document.importNode(template.content, true);
 	    		changeBtn.prepend(clone);    			
     		}
     	}

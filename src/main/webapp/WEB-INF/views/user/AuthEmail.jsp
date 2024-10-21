@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>이메일 인증 - TimePill </title>
+	<title>비밀번호 찾기 - TimePill </title>
 	
 	<!-- jQuery 3.7.1-->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -28,12 +28,12 @@
 	<sec:csrfMetaTags/>
 </head>
 <body>
-	<h1>이메일 인증</h1>
+	<h1>비밀번호 찾기</h1>
 	<form action="/user/auth-atmp" id="authFrm" method="post">
 		<label>아이디</label>
-		<input type="text" id="userId" name="userId" required="required"><br>
+		<input type="text" id="userId" name="userId" value="${auth.userId}" required="required"><br>
 		<label>이메일</label>
-		<input type="text" id="email" name="email" required="required">
+		<input type="text" id="email" name="email" value="${auth.email}" required="required">
 		<button type="button" id="reqAuthNumBtn">인증번호요청</button><br>
 		<label>인증번호</label>
 		<input type="text" name="authNum" required="required">
@@ -51,7 +51,7 @@
 		let emailInp = document.querySelector('#email');
 		
 		$.ajax({
-			url: "/user/auth-email",
+			url: "/user/auth-email/send",
 			type: "post",
 			data: {
 				"userId": userIdInp.value,
