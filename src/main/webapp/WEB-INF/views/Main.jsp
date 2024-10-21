@@ -104,6 +104,7 @@
 	    <div  class="boxh kakaobox">
 	        <div>
 	            <p class="caption">복약 푸시 알림을 받고 싶다면? </p>
+	            <p class="caption">브라우저 푸시알림 여부 </p>
 	        </div>
 	        <div>
 	        	<!-- 알림 토글 -->

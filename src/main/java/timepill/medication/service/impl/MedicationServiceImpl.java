@@ -47,7 +47,7 @@ public class MedicationServiceImpl implements MedicationService {
 	@Override
 	public void insertMedInfo(ScheduleVO vo) throws Exception {
 		// 복약 아이디 생성 로직
-		String lastMedId = medicationDAO.selectLastMedId(vo); // 마지막 복약아이디 조회
+		String lastMedId = medicationDAO.selectLastMedId(); // 마지막 복약아이디 조회
 		int nextIdNum = 1;
 		if (lastMedId != null && lastMedId.startsWith("MED_")) {
 			nextIdNum = Integer.parseInt(lastMedId.substring("MED_".length())) + 1;

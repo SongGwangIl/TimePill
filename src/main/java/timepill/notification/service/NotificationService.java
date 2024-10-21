@@ -1,5 +1,7 @@
 package timepill.notification.service;
 
+import java.util.List;
+
 import nl.martijndwars.webpush.Subscription;
 
 public interface NotificationService {
@@ -12,7 +14,10 @@ public interface NotificationService {
 
 	/** 푸시알림 전송 */
 	public int sendPushMessage(Subscription subscription, String payload) throws Exception;
+	
+	/** 푸시알림 처리 */
+	public void processSendMessage(Subscription sub, NotificationVO vo) throws Exception;
 
-	// 구독자들에게 푸시 알림을 보냄(임시)
-	public void sendNotificationToAllSubscribers(String message) throws Exception;
+	/** 푸시 구독정보 가져오기*/
+	public List<NotificationVO> getSubcription() throws Exception;
 }

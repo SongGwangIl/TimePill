@@ -5,12 +5,14 @@
 <!-- 구독정보 등록 -->
 <insert id="insertSub">
 INSERT INTO push_info (
-	USER_ID
+	PUSH_ID
+	, USER_ID
 	, ENDPOINT
 	, P256DH
 	, AUTH
 ) VALUES(
-	#{userId}
+	#{pushId}
+	, #{userId}
 	, #{endpoint}
 	, #{p256dh}
 	, #{auth}
@@ -23,6 +25,13 @@ INSERT INTO push_info (
 DELETE FROM push_info
 WHERE ENDPOINT = #{endpoint}
 </delete>
+
+<!-- 마지막 구독정보 아이디 가져오기 -->
+<select id="selectLastSubId" resultType="java.lang.String">
+SELECT 
+	MAX(PUSH_ID) 
+FROM push_info
+</select>
 
 <!-- 구독정보 리스트 조회 -->
 <select id="selectListSub" resultType="NotificationVO">
