@@ -27,19 +27,49 @@
 	<sec:csrfMetaTags/>
 </head>
 <body>
-<h1>아이디찾기</h1>
-<form action="/user/auth-email/" method="post">
-	<label>Email: </label>
-	<input type="text" name="email" id="emailInp" placeholder="등록한 이메일주소를 입력하세요">
-	<button type="button" id="findIdBtn">찾기</button>
-	<sec:csrfInput/>
-</form>
-<div id="authNumber">
-	<span id="msg"></span><br>
-	<label>등록된 아이디: </label>
-	<span id="viewId"></span>
+<div id="backcontainer" class="boxv">
+    <div id="contents" class="bgimg">
+
+       <img src="/resources/img/mainico.png" class="main-ico">
+
+        <div class="boxh">
+            <img src="/resources/img/logo.svg" class="logo">
+            <h1 class="gsansdown title">아이디찾기</h1>
+        </div>
+
+        <div class="wrap">
+			<form id="authEmailForm" action="/user/auth-email/" method="post">				                 
+                <span>Email</span>	            
+                <div class="input password">
+                    <input type="email" class="form-input" name="email" id="emailInp" placeholder="등록한 이메일주소를 입력하세요" required="required"/>
+                    <span id="msg"></span>
+                </div>                       
+                <div class="btns boxh">
+		            <a class="btn-white btn" id="findIdBtn">
+		                <p class="btndesc"> 찾기 </p>
+		            </a>
+				</div>
+				<sec:csrfInput/>
+				<div id="authNumber">
+					<span id="msg"></span><br>
+					<label>등록된 아이디</label>
+					<input class="form-input" name="userId" type="text" id="viewId" readonly>
+					<span id="viewId"></span>
+				</div>
+			</form>
+				<div class="btns boxh" id="btns">
+		            <a class="btn-white" id="goLoginBtn">
+		                <p class="btndesc"> 로그인화면 </p>
+		            </a>
+				</div>
+        </div>
+    </div>
 </div>
-<button type="button" id="goLoginBtn">로그인화면 이동</button>
+<template id="findTemp">
+	<a class="btn-sky" id="resetPasswordBtn">
+        <p class="btndesc"> 비밀번호찾기 </p>
+    </a>
+</template>
 <script src="/resources/js/user/findId.js"></script>
 </body>
 </html>

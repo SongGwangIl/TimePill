@@ -119,15 +119,17 @@ public class UserController {
 	}
 	
 	/** 이메일 인증 페이지 요청 */
-	@GetMapping("/user/auth-email")
-	public String authEmail() {
+	@PostMapping("/user/auth-email")
+	public String authEmail(UserVO vo, Model model) {
+		vo.setAccessToken(null);
+		model.addAttribute("auth", vo);
 		
 		return "user/AuthEmail";
 	}
 	
 	/** 이메일 인증번호 발송 */
 	@ResponseBody
-	@PostMapping("/user/auth-email")
+	@PostMapping("/user/auth-email/send")
 	public String authEmail(AuthVO vo, HttpServletResponse response, Model model) throws Exception {
 		
 		String result = authService.authEmail(vo); // 이메일 셋팅 및 전송
