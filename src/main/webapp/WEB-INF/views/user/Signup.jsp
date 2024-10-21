@@ -142,32 +142,29 @@
     });
     
     const joinForm = document.querySelector('.joinform');
-    const idInp = document.querySelector('#userId');
-    const checkP = document.querySelector('#idCheck');
-    const pwInp = document.querySelector('#password');
-    const nameInp = document.querySelector('#nickname');
-    const emailInp = document.querySelector('#email');
+    let idInp = document.querySelector('#userId');
+    let idCheckP = document.querySelector('#idCheck');
+    let emailCheckP = document.querySelector('#emailCheck');
+    let pwInp = document.querySelector('#password');
+    let nameInp = document.querySelector('#nickname');
+    let emailInp = document.querySelector('#email');
     const signupBtn = document.querySelector('#signup');
     
-    joinForm.onchange = check;
-    
- // MutationObserver 설정
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach(mutation => {
-            check();
-        });
-    });
-
-    // 관찰할 대상과 설정
-    observer.observe(checkP, { attributes: true });
+    nameInp.oninput = check;
 
     function check() {
-    	if(idInp.value == '' || pwInp.value == '' || nameInp.value == '' || emailInp.value == '' || checkP.getAttribute('check') === 'false'){
+    	
+    	if(idInp.value !== '' || pwInp.value !== '' || nameInp.value !== '' || emailInp.value !== ''){
+    		if(idCheckP.getAttribute('check') === 'true' && emailCheckP.getAttribute('check') === 'true'){
+	    		signupBtn.setAttribute('class', "btn-sky");
+	    		signupBtn.style.pointerEvents = 'auto';    			
+    		}else{
+    			signupBtn.setAttribute('class', "btn-white");
+        		signupBtn.style.pointerEvents = 'none';    			
+    		}
+    	} else {
     		signupBtn.setAttribute('class', "btn-white");
     		signupBtn.style.pointerEvents = 'none';
-    	} else {
-    		signupBtn.setAttribute('class', "btn-sky");
-    		signupBtn.style.pointerEvents = 'auto';
     	}
     }
     

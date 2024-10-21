@@ -30,5 +30,7 @@ public interface UserDAO {
 
 	String getPassword(String userId);
 
-	int changePassword(UserVO vo);	
+	int changePassword(UserVO vo);
+
+	String checkEmailId(UserVO vo);
 }

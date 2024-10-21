@@ -1,7 +1,7 @@
 let pwVal = "", pwReVal = ""
 const pw = document.querySelector('#password')
 const pwMsg = document.querySelector('#userPwdMsg')
-pw.addEventListener('change', () => {
+pw.addEventListener('input', () => {
   const pwRegExp = /^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$/
   pwVal = pw.value
   if(pwRegExp.test(pwVal)) { // 정규식 조건 만족 O
@@ -12,7 +12,7 @@ pw.addEventListener('change', () => {
   else { // 정규식 조건 만족 X
     pwMsg.textContent = "10~20자 영문, 숫자, 특수문자를 사용하세요."
     pwMsg.style.color = "#dc3545";
-    pw.value = null;
+    pw.focus();
   }
   
 });
@@ -30,6 +30,7 @@ function checkPwValid() {
     
     if(pwReVal === "") { // 미입력
       pwReMsg.textContent = "다시 입력해 주세요"
+      pwReMsg.style.color = "black";
     }
     else if(pwVal === pwReVal) { // 비밀번호 재입력 일치      
       pwReMsg.style.color = "#2fb380";

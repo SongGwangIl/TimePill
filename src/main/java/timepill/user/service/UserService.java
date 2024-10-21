@@ -33,4 +33,7 @@ public interface UserService extends UserDetailsService {
 	// 비밀번호 변경(로그인 후)
 	public int changePassword(UserVO vo);
 
+	// 메일 등록가능 여부 확인(id포함)
+	public String checkEmailId(UserVO vo);
+
 }

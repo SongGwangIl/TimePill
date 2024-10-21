@@ -3,14 +3,14 @@ var header = $("meta[name='_csrf_header']").attr("content");
 
 let userId = document.querySelector("#userId");
 let idCheck = document.querySelector("#idCheck");
-userId.onchange = checkId;
+userId.oninput = checkId;
 
 function checkId(){
+	console.log('아이디체크동작');
   let userIdVal = userId.value;
   let idFlag = false;
   const idRegExp = /^[a-zA-Z0-9]{4,15}$/;
   if(!idRegExp.test(userIdVal)){
-    userId.value = null;
     idCheck.innerText = "4~15자리의 영문이나 숫자를 가져야 합니다."
     idCheck.style.color = "#dc3545";
     idCheck.style.fontSize = '16px';
@@ -35,27 +35,30 @@ function checkId(){
           		idCheck.style.color = "#dc3545";
           		idCheck.style.fontSize = '16px';
           		idCheck.setAttribute('check', 'false');
+          		check();
         	}
         	else if(result == 0){
           		idCheck.innerText = "사용할 수 있는 아이디입니다."
           		idCheck.style.color = "#2fb380"    
           		idCheck.style.fontSize = '16px';
           		idCheck.setAttribute('check', 'true');
+          		check();
         	}
 		},
       	error: function(){
         	alert("서버요청실패")
       	}
     });
-    check();
   }
+  
+  
 }
   
 
 let pwVal = "", pwReVal = ""
 const pw = document.querySelector('#password')
 const pwMsg = document.querySelector('#userPwdMsg')
-pw.addEventListener('change', () => {
+pw.addEventListener('input', () => {
   const pwRegExp = /^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$/
   pwVal = pw.value
   if(pwRegExp.test(pwVal)) { // 정규식 조건 만족 O
@@ -117,7 +120,7 @@ function autoEmail(a,b){
   const mailList = ['naver.com','gmail.com','daum.net','hanmail.net','yahoo.com','outlook.com','nate.com','kakao.com']; // 메일목록
   let availableCity = new Array; // 자동완성 키워드 리스트
   
-  if(b.includes("@")){  
+  if(true){  
 
     for(let i=0; i < mailList.length; i++ ){
       availableCity.push( mailId[0] +'@'+ mailList[i] ); // 입력되는 텍스트와 메일목록을 조합
@@ -137,15 +140,14 @@ function autoEmail(a,b){
 const email = document.querySelector("#email");
 const emailP = document.querySelector('#emailCheck');
 let emailVal;
-email.addEventListener('change', emailCheck);
+email.addEventListener('input', emailCheck);
 
 function emailCheck(){
-	console.log('체크동작');
+	console.log('이메일체크동작');
   const eamilRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i
   emailVal = email.value
   let emailFlag = false;
   if(!eamilRegExp.test(emailVal)) { // 정규식 조건 만족 X
-    email.value = null;
     email.focus();    
   }else
   	emailFlag = true;
@@ -165,6 +167,7 @@ function emailCheck(){
           		emailP.style.color = "#2fb380"    
           		emailP.style.fontSize = '16px';
           		emailP.setAttribute('check', 'true');
+          		check();
         	}
         	else{        	
           		emailP.textContent = "이미 등록된 메일입니다.";
@@ -172,12 +175,13 @@ function emailCheck(){
           		emailP.style.fontSize = '16px';
           		emailP.setAttribute('check', 'false');
     			email.focus();
+    			check();
         	}
 		},
       	error: function(){
         	alert("서버요청실패");
       	}
     });
-    check();
   }
+  
 }
