@@ -9,7 +9,8 @@
 </c:import>
 
 <link rel="stylesheet" href="/resources/css/myPage/myInfo.css">
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
 <div id="backcontainer" class="boxv">
      <div id="contents" class="">
         <!-- 타이틀 -->
@@ -57,8 +58,8 @@
 	<img id="logo" src="/resources/img/chhe.png" style="width: 20px; margin: 0;">
 </template>
 
-<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
 <script src="/resources/js/user/myInfoValidation.js"></script>
+
 
 <script>
 //'가입하기' 버튼 클릭 시 form 제출

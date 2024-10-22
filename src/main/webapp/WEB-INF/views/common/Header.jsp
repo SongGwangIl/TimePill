@@ -24,13 +24,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GmarketSans/GmarketSans.css" type="text/css"/>
 <!-- NotoSans KR-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+<!-- jQuery UI -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/themes/base/jquery-ui.css">
 <!-- 기본 템플릿 CSS -->
 <link rel="stylesheet" href="/resources/css/common/common.css">
 <link rel="stylesheet" href="/resources/css/common/header.css">
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- jQuery 3.7.1-->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
 <body>

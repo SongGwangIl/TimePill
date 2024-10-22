@@ -89,7 +89,7 @@
 		<sec:csrfInput/>
 	</form:form>	
 </div>
-<script src="/resources/js/user/password.js"></script>
+<script src="/resources/js/user/myPassword.js"></script>
 <script>
 // eye 이미지 클릭 시 패스워드 필드 토글
 document.querySelector('.eye').addEventListener('click', function() {
