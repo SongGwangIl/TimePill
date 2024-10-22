@@ -87,11 +87,10 @@
 	        <div>
 	        	<!-- 알림 토글 -->
 				<img id="kakaoAlarmToggle" alt="카카오톡 알림 설정 버튼" src="" width="55px" style="margin-left:15%">
-	            </label>
 	        </div>
 	    </div>
 		<script>
-			$(document).ready(function() {
+			$(function() {
 				// 카카오 알림설정 동작
 				$(document).on('click', '#kakaoAlarmToggle', kakaoAlarmToggle);
 				// 카카오 알림설정 로드
@@ -103,16 +102,10 @@
 		<!-- 일반유저 푸시 알림 받기 신청 -->
 	    <div  class="boxh kakaobox">
 	        <div>
-	            <p class="caption">복약 푸시 알림을 받고 싶다면? </p>
-	            <p class="caption">브라우저 푸시알림 여부 </p>
-	        </div>
-	        <div>
-	        	<!-- 알림 토글 -->
-				<img id="notificationToggle" alt="브라우저 푸시 알림 설정 버튼" src="/resources/img/ico-off.png" width="55px" style="margin-left:15%">
-	            </label>
+	            <p id="pushUseAt" class="caption">브라우저에서 푸시알림 설정을 해보세요!</p>
 	        </div>
 	    </div>
-	    <script src="/resources/js/notification.js"></script>
+	    <script src="/resources/js/main/notification.js"></script>
 		<script>
 			$(function() {
 				// 푸시 알림설정 로드
@@ -124,7 +117,7 @@
 
 <!-- 빈 카드 템플릿 -->
 <template id="blank-todo">
-	<p class="alarmask">알림이 없습니다. <br> 지금 알림을 등록해보세요! </p>
+	<p class="alarmask">알림이 없습니다. <br> 복약 등록하러 가기 </p>
 
 	<a href="/medication/reg" class="white-btn">
 		<div class="boxh white-btn">
@@ -153,7 +146,7 @@
 </div>
 
 <script>
-$(document).ready(function() {
+$(function() {
 	// 알람시간 변경창 띄우기
 	$('.btn-spring').on(
 			'click',
@@ -169,6 +162,7 @@ $(document).ready(function() {
 
 	// 알람 시간 변경
 	$('.timepick').on('change', updateAlarm);
+	
 	// 복약 스케줄 완료 체크 동작
 	$(document).on('click', '.sche-chk', chkTodo);
 

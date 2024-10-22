@@ -1,6 +1,6 @@
 // 푸시알림 로직
 function notification() {
-	let pushBtn = $('#notificationToggle'); // 푸시알림 활성화 버튼
+	let pushUseAt = $('#pushUseAt'); // 푸시알림 활성화 버튼
 
 	// 서비스 워커 및 알림 기능 지원 여부 확인
 	if ('serviceWorker' in navigator && 'Notification' in window) {
@@ -13,7 +13,7 @@ function notification() {
 					// 구독정보가 있을 때
 					if (subscription) {
 						// green
-						pushBtn.attr('src', '/resources/img/ico-on.png');
+						pushUseAt.text('브라우저 푸시알림 사용중');
 						return;
 					}
 				});
@@ -23,7 +23,7 @@ function notification() {
 		console.log('푸시알림 미지원 브라우저');
 	}
 	// red
-	pushBtn.attr('src', '/resources/img/ico-off.png');
+	pushUseAt.text('브라우저에서 푸시알림 설정을 해보세요!');
 }
 
 
@@ -31,7 +31,7 @@ function notification() {
 async function registerServiceWorker() {
 	try {
 		// 서비스 워커 등록
-		const registration = await navigator.serviceWorker.register('/resources/js/service-worker.js');
+		const registration = await navigator.serviceWorker.register('/resources/js/main/service-worker.js');
 
 		// 푸시알림 권한 확인
 		const permission = await Notification.requestPermission();

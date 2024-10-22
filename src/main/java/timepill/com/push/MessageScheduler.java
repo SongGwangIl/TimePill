@@ -21,11 +21,11 @@ public class MessageScheduler {
 	/** kakaoService DI */
 	@Autowired
 	KakaoService kakaoService;
-	
+
 	/** notificationService DI */
 	@Autowired
 	private NotificationService notificationService;
-	
+
 	/** 카카오 메세지 알람 스케줄 */
 	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
@@ -34,9 +34,9 @@ public class MessageScheduler {
 		List<UserVO> tokenList = kakaoService.getKakaoTokenList();
 		for (UserVO token : tokenList) {
 			String message = null;
-			
+
 			System.out.println("토큰 겟");
-			
+
 			// 토큰이 비어있지 않은 경우
 			if (StringUtils.hasText(token.getAccessToken())) {
 				System.out.println("토큰이 존재함 : " + token.getAccessToken());
@@ -45,7 +45,7 @@ public class MessageScheduler {
 			}
 
 			// 토큰이 비어있거나 만료된 경우
-			if (!StringUtils.hasText(message) ||"401".equals(message)) {
+			if (!StringUtils.hasText(token.getAccessToken()) || "401".equals(message)) {
 				String refreshToken = token.getRefreshToken();
 
 				// 액세스토큰 재발급
@@ -57,7 +57,7 @@ public class MessageScheduler {
 
 		}
 	}
-	
+
 	/** 푸시알림 스케줄 */
 	@Scheduled(cron = "55 * * * * ?") // 매 분 55초에 실행
 	public void sendPush() throws Exception {

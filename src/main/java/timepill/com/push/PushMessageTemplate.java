@@ -1,9 +1,15 @@
 package timepill.com.push;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class PushMessageTemplate {
+	
+	@Value("${message-url}")
+	private static String MESSAGE_URL;
+	
 
 	/* 카카오 피드 메세지 템플릿 참고 형태
 	 	{
@@ -35,8 +41,8 @@ public class PushMessageTemplate {
 		JsonObject link = new JsonObject();
 //		link.addProperty("web_url", "http://www.friendlycommunity.xyz/board/69");
 //		link.addProperty("mobile_web_url", "http://www.friendlycommunity.xyz/board/69");
-		link.addProperty("web_url", "http://192.168.0.118:8090");
-		link.addProperty("mobile_web_url", "http://192.168.0.118:8090");
+		link.addProperty("web_url", MESSAGE_URL);
+//		link.addProperty("mobile_web_url", "http://192.168.0.118:8090");
 
 		JsonObject content = new JsonObject();
 		content.addProperty("title", "복약 알림");
