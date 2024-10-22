@@ -286,6 +286,7 @@ public class UserController {
 			session.setAttribute("message", "잘못된 접근입니다.");
 			return "redirect:/mypage";
 		}
+		
 		// 검증결과 error가 있으면
 		if(result.hasErrors())
 			return "myPage/MyInfo";

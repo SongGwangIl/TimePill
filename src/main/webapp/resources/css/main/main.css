@@ -131,8 +131,7 @@ input[type='time'] {
 	animation: fadeInAnimation 5s forwards;
 }
 
-@
-keyframes fadeInAnimation {to { opacity:1;
+@keyframes fadeInAnimation {to { opacity:1;
 	
 }
 
