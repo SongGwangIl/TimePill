@@ -20,7 +20,7 @@ function notification() {
 			}
 		});
 	} else {
-		console.log('푸시알림 미지원 브라우저');
+		// console.log('푸시알림 미지원 브라우저');
 	}
 	// red
 	pushUseAt.text('브라우저에서 푸시알림 설정을 해보세요!');
@@ -36,13 +36,13 @@ async function registerServiceWorker() {
 		// 푸시알림 권한 확인
 		const permission = await Notification.requestPermission();
 		if (permission !== 'granted') {
-			console.log('알림 권한 : 거부됨');
+			// console.log('알림 권한 : 거부됨');
 			return null;
 		}
-		console.log('알림 권한 : 허용됨');
+		// console.log('알림 권한 : 허용됨');
 		return registration;
 	} catch (error) {
-		console.error('서비스 워커 등록 or 알림 권한 요청 중 오류 발생:', error);
+		// console.error('서비스 워커 등록 or 알림 권한 요청 중 오류 발생:', error);
 		return null;
 	}
 }
@@ -52,7 +52,7 @@ async function registerServiceWorker() {
 async function checkAndSubscribePush(registration) {
 	try {
 		const subscription = await registration.pushManager.getSubscription();
-		console.log('구독정보 여부 :', subscription == null ? 'N' : 'Y');
+		// console.log('구독정보 여부 :', subscription == null ? 'N' : 'Y');
 
 		// 구독정보가 없으면
 		if (subscription === null) {
@@ -63,12 +63,12 @@ async function checkAndSubscribePush(registration) {
 				userVisibleOnly: true,
 				applicationServerKey: applicationServerKey
 			});
-			console.log('신규 구독 :', newSubscription);
+			// console.log('신규 구독 :', newSubscription);
 			// DB에 구독정보 저장
 			sendSubscriptionToServer(newSubscription);
 			return newSubscription;
 		} else {
-			console.log('기존 구독 :', subscription);
+			// console.log('기존 구독 :', subscription);
 			return subscription;
 		}
 	} catch (error) {
@@ -96,7 +96,7 @@ function urlB64ToUint8Array(base64String) {
 
 // 서버에 구독 전송
 function sendSubscriptionToServer(subscription) {
-	console.log('서버에 구독전송 실행')
+	// console.log('서버에 구독전송 실행')
 	$.ajax({
 		url: '/subscribe',
 		type: 'post',
@@ -107,10 +107,10 @@ function sendSubscriptionToServer(subscription) {
 			xhr.setRequestHeader("Accept", "application/json");
 		},
 		success: function(response) {
-			console.log('DB에 저장 성공:', response);
+			// console.log('DB에 저장 성공:', response);
 		},
 		error: function(error) {
-			console.error('DB 저장 실패:', error);
+			// console.error('DB 저장 실패:', error);
 			alert('푸시알림 설정 중 오류가 발생하였습니다.');
 		}
 	});

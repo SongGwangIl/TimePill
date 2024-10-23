@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.StringUtils;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.martijndwars.webpush.Subscription;
 import timepill.kakao.service.KakaoService;
 import timepill.notification.service.NotificationService;
@@ -16,6 +17,7 @@ import timepill.user.service.UserVO;
 
 @Configuration
 @EnableScheduling
+@Slf4j
 public class MessageScheduler {
 
 	/** kakaoService DI */
@@ -29,7 +31,7 @@ public class MessageScheduler {
 	/** 카카오 메세지 알람 스케줄 */
 	@Scheduled(cron = "0 * * * * ?") // 매 분 00초에 실행
 	public void kakaoMessage() throws Exception {
-
+		log.info("카카오 메세지 알람 스케줄");
 		// 메세지 알람 사용자 토큰 가져오기
 		List<UserVO> tokenList = kakaoService.getKakaoTokenList();
 		for (UserVO token : tokenList) {
@@ -61,6 +63,7 @@ public class MessageScheduler {
 	/** 푸시알림 스케줄 */
 	@Scheduled(cron = "55 * * * * ?") // 매 분 55초에 실행
 	public void sendPush() throws Exception {
+		log.info("푸시알림 스케줄");
 		// 푸시 구독정보 리스트 가져오기
 		List<NotificationVO> subscriptions = notificationService.getSubcription();
 		for (NotificationVO vo : subscriptions) {

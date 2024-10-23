@@ -168,8 +168,7 @@ function updateAlarm() {
 
 
 // 복약 스케줄 완료 체크 동작
-function chkTodo(e) {
-	e.stopPropagation();
+function chkTodo() {
 	const chk = $(this);
 
 	// 클릭 이벤트 중복 방지
@@ -223,7 +222,6 @@ function chkTodo(e) {
 
 // 카카오톡 알림설정
 function kakaoAlarmToggle() {
-	event.stopPropagation();
 	const chk = $(this);
 
 	// 클릭 이벤트 중복 방지
