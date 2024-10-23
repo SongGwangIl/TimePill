@@ -39,10 +39,7 @@ public class PushMessageTemplate {
 	/** 카카오 피드 메세지 템플릿 */
 	public static String getKakaoMessage() {
 		JsonObject link = new JsonObject();
-//		link.addProperty("web_url", "http://www.friendlycommunity.xyz/board/69");
-//		link.addProperty("mobile_web_url", "http://www.friendlycommunity.xyz/board/69");
 		link.addProperty("web_url", MESSAGE_URL);
-//		link.addProperty("mobile_web_url", "http://192.168.0.118:8090");
 
 		JsonObject content = new JsonObject();
 		content.addProperty("title", "복약 알림");
