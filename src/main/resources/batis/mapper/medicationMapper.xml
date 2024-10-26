@@ -12,6 +12,7 @@ SELECT
 FROM med_info
 WHERE USER_ID = #{userId}
 	AND MED_STATUS = 'Y'
+	AND END_DATE >= CURDATE()
 </select>
 
 <!-- 마지막 복약 아이디 가져오기 -->

@@ -11,7 +11,7 @@
 	        A.START_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
 	        	AND A.START_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
 	        OR
-	        A.END_DATE >= DATE_FORMAT(#{mthEndDate}, '%Y-%m-01') 
+	        A.END_DATE >= DATE_FORMAT(#{mthStartDate}, '%Y-%m-01') 
 	        	AND A.END_DATE <= DATE_FORMAT(#{mthEndDate}, '%Y-%m-%d')
 	    )
 	    ]]>
@@ -28,6 +28,7 @@ SELECT
 FROM 
 	med_info A
 	JOIN schedule B ON A.MED_ID = B.MED_ID
+	JOIN alarm_set C ON B.ALARM_ID = C.ALARM_ID
 	<include refid="mthScheWhere"/>
 GROUP BY A.MED_ID , A.START_DATE , A.END_DATE 
 </select>
@@ -35,16 +36,19 @@ GROUP BY A.MED_ID , A.START_DATE , A.END_DATE
 <!-- 한달 완료된 스케줄 리스트 -->
 <select id="selectMthComplScheList" resultType="ScheduleVO">
 SELECT
-	A.MED_ID
-	, B.SCHE_DATE
+	C.MED_ID
+	, C.ALARM_ID
+	, C.SCHE_DATE
 	, COUNT(A.MED_ID) AS COMPLETED_DAY_TODO
 FROM 
 	med_info A
-	JOIN sche_log B ON A.MED_ID = B.MED_ID 
-						AND B.SCHE_CHK = 'Y' 
-						AND B.LOG_STATUS != 'N'
+	JOIN schedule B ON A.MED_ID = B.MED_ID 
+	JOIN sche_log C ON B.ALARM_ID = C.ALARM_ID
+						AND B.MED_ID = C.MED_ID
+						AND C.SCHE_CHK = 'Y' 
+						AND C.LOG_STATUS != 'N'
 <include refid="mthScheWhere"/>
-GROUP BY A.MED_ID , B.SCHE_DATE
+GROUP BY A.MED_ID , C.SCHE_DATE
 </select>
 
 

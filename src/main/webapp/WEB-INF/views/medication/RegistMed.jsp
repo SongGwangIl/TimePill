@@ -142,6 +142,16 @@ $(document).ready(function () {
 			alert('날짜를 선택해 주세요');
 			return false;
 		}
+		console.log($('#end').val().trim());
+		const today = new Date(); // 오늘 날짜
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 날짜
+		let tday = year + '-' + month + '-' + date;
+		if ($('#end').val().trim() < tday) {
+			alert('복약만료일을 오늘보다 이전으로 지정하실 수 없습니다.')
+			return false;
+		}
 		if (!confirm("등록하시겠습니까?")) {
 			return false;
 		}
@@ -151,7 +161,7 @@ $(document).ready(function () {
 	// 삭제 버튼
 	$('#btn-del').on('click', function () {
 // 		event.preventDefault();
-		if (!confirm("삭제하시겠습니까?")) {
+		if (!confirm("복약 스케줄과 기록이 같이 삭제됩니다.\n삭제하시겠습니까?")) {
 			return false;
 		}
 		$('#frm').attr('action', '/medication/' + medId + '/del');

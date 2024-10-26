@@ -61,7 +61,7 @@ public class MessageScheduler {
 	}
 
 	/** 푸시알림 스케줄 */
-	@Scheduled(cron = "55 * * * * ?") // 매 분 55초에 실행
+	@Scheduled(cron = "1 * * * * ?") // 매 분 01초에 실행
 	public void sendPush() throws Exception {
 		log.debug("푸시알림 스케줄");
 		// 푸시 구독정보 리스트 가져오기
