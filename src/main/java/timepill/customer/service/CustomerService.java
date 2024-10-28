@@ -12,8 +12,5 @@ public interface CustomerService {
 	
 	public int updateNotice(CustomerVO cvo);
 
-	public int deleteNotice(CustomerVO cvo);
-
-
-	
+	public int deleteNotice(CustomerVO cvo);	
 }

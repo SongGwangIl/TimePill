@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -46,6 +47,33 @@ public class CustomerController {
 		customerService.updateWrite(cvo);
 		
 		return "redirect: /notice";
+	}
+	
+	@GetMapping("/notice/edit/{id}")
+	public String edit(@PathVariable String id, Model model) {
+		CustomerVO cvo = new CustomerVO();
+		cvo.setId(id);
+		CustomerVO getVo = customerService.getnoticeList(cvo);
+		model.addAttribute("notice", getVo);
+		
+		return "customer/Edit";
+		
+	}
+	
+	@PostMapping("/notice/edit")
+	public String edit(CustomerVO cvo, HttpSession session) {
+		customerService.updateNotice(cvo);
+		session.setAttribute("message", "변경되었습니다.");
+		
+		return "redirect:/notice";
+	}
+	
+	@GetMapping("/notice/delete")
+	public String delete(CustomerVO cvo, HttpSession session) {
+		customerService.deleteNotice(cvo);
+		session.setAttribute("message", "삭제되었습니다.");
+		
+		return "redirect:/notice";
 	}
 	
 }

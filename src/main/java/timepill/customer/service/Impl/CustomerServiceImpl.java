@@ -39,7 +39,5 @@ public class CustomerServiceImpl implements CustomerService {
 	public int deleteNotice(CustomerVO cvo) {
 		return customerDAO.deleteNotice(cvo);
 		
-	}
-
-	
+	}	
 }

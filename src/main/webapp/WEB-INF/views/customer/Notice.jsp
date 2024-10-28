@@ -10,12 +10,15 @@
 
 <link rel="stylesheet" href="/resources/css/notice/notice.css">
 
-
  <!-- 컨텐츠 시작 -->
-<div id="contents" class="">
+<div id="contents">
 
 	<!-- 타이틀 -->
 	<section>
+		<!-- 관리자만 접근 가능 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
+			<a href="/notice/write" class="writeBtn">글쓰기</a>
+		</sec:authorize>
 		<h1 class="txa subtitle">공지사항</h1>
 	</section>
 
@@ -39,16 +42,14 @@
 					<p class="bbsdesc">
 						<c:out value="${getAllnoticeList.content}" />
 					</p>
+					<!-- 관리자만 접근 가능 -->
+					<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
+						<a href="/notice/edit/${getAllnoticeList.id}" class="editBtn">수정</a>
+					</sec:authorize>					
 				</div>
 			</details>
 		</article>
-	</c:forEach>
-
-	<!-- 관리자만 접근 가능 -->
-	<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
-		<a href="/notice/write">글쓰기</a>
-	</sec:authorize>
-	
+	</c:forEach>	
 </div>
 <!-- 컨텐츠 끝 -->
 

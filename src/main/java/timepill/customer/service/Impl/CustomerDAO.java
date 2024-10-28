@@ -19,5 +19,5 @@ public interface CustomerDAO{
 
 	int deleteNotice(CustomerVO cvo);
 
-
+	int editNotice(CustomerVO cvo);
 }

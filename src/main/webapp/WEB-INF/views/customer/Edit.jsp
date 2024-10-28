@@ -64,6 +64,19 @@
 	cursor: pointer;
 }
 
+.btn-pink {
+	width: 100px;
+	height: 40px;
+	border-radius: 15px;
+	margin-right: 2%;
+	margin-bottom: 3%;
+	background-color: pink;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
 .btn-white {
 	width: 100px;
 	height: 40px;
@@ -85,32 +98,48 @@
 <div id="contents">
 	<h1 class="txa subtitle">공지사항</h1>	
 	<div class="container">
-		<form class="frm" action="/notice/write" method="post">
-			<div>				
+		<form id="frm" action="/notice/edit" method="post">
+			<div>
+				<input type="hidden" name="id" value="${notice.id}">
+									
 				<label class="label">제목</label> 
-			 	<input type="text" name="title" class="form-input" required>			 
+				<input type="text" name="title" class="form-input" value="${notice.title}">
+								 
 			
-				<label class="label">내용</label>
-				<textarea name="content" rows="10" class="form-input-area" required></textarea>				
+				<label class="label">내용</label> 
+				<textarea name="content" rows="10" class="form-input-area">${notice.content}</textarea>					
 			</div>
-			<div class="btns">				
-				<a id="write" class="btn-sky">글쓰기</a>			
-				<a href="/notice" class="btn-white">취소</a>			
+			<div class="btns">					
+				<a id="editSubmit" class="btn-sky">수정</a>				
+				<a id="delete" class="btn-pink">삭제</a>					
+				<a href="/notice" class="btn-white">취소</a>				
 			</div>
-			<sec:csrfInput/>
+			<sec:csrfInput/>				
 		</form>				
-	</div>
+	</div>	
 </div>
-
 <script type="text/javascript">
-	document.querySelector('#write').onclick = function(){
-		let writeForm = document.querySelector('.frm');
-		let ok = writeForm.checkValidity();
-		if(ok)
-			writeForm.submit();
+	const noticeForm = document.querySelector('#frm');
+	
+	document.querySelector('#editSubmit').onclick = function(){
+		if(confirm("수정하시겠습니까?")){
+			noticeForm.action = "/notice/edit";
+			noticeForm.method = "POST";
+			noticeForm.submit();			
+		}
 	};
-</script>
 
+	document.querySelector('#delete').onclick = function(){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			noticeForm.action = "/notice/delete";
+			noticeForm.method = "GET";
+			noticeForm.submit();			
+		}
+	};
+
+
+
+</script>
 
 <%-- footer --%>
 <c:import url="/footer" charEncoding="utf-8"/>
