@@ -9,6 +9,9 @@ import timepill.notification.service.NotificationVO;
 @Mapper
 public interface NotificationDAO {
 	
+	/** 구독정보 확인 */
+	NotificationVO selectSub(NotificationVO vo) throws Exception;
+	
 	/** 구독정보 등록 */
 	int insertSub(NotificationVO vo) throws Exception;
 	

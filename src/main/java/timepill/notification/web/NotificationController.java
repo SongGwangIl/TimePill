@@ -16,6 +16,23 @@ public class NotificationController {
 	/** notificationService DI */
 	@Autowired
 	private NotificationService notificationService;
+	
+	/** 푸시 구독 확인 */
+	@PostMapping("/check-subscribe")
+	public NotificationVO checkSubscribe(@RequestBody Subscription subscription) throws Exception {
+		
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		NotificationVO vo = new NotificationVO();
+		vo.setUserId(userId);
+		vo.setEndpoint(subscription.endpoint);
+		
+		// db에 구독정보 가져오기
+		NotificationVO checkSubscription = notificationService.checkSubscription(vo);
+		if (checkSubscription != null) {
+			return checkSubscription;
+		}
+		return null;
+	}
 
 	/** 푸시 구독 */
 	@PostMapping("/subscribe")

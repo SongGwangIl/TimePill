@@ -5,6 +5,9 @@ import java.util.List;
 import nl.martijndwars.webpush.Subscription;
 
 public interface NotificationService {
+	
+	/** 푸시구독정보 확인 */
+	public NotificationVO checkSubscription(NotificationVO vo) throws Exception;
 
 	/** 푸시구독정보 저장 */
 	public int saveSubscription(NotificationVO vo) throws Exception;

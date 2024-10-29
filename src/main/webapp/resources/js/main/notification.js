@@ -69,6 +69,12 @@ async function checkAndSubscribePush(registration) {
 			return newSubscription;
 		} else {
 			// console.log('기존 구독 :', subscription);
+			// 서버에 저장된 푸시 구독정보 확인
+			const chkSub = await receiveSubscriptionToServer(subscription);
+			if(chkSub === 'blank') {
+				// 없는 경우 저장
+				sendSubscriptionToServer(subscription);
+			}
 			return subscription;
 		}
 	} catch (error) {
@@ -92,6 +98,31 @@ function urlB64ToUint8Array(base64String) {
 		outputArray[i] = rawData.charCodeAt(i);
 	}
 	return outputArray;
+}
+
+// 서버로부터 구독 정보 가져오기
+async function receiveSubscriptionToServer(subscription) {
+	try { 
+		const response = await $.ajax({
+			url: '/check-subscribe',
+			type: 'post',
+			contentType: 'application/json',
+			data: JSON.stringify(subscription),
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+				xhr.setRequestHeader("Accept", "application/json");
+			}
+		});
+		// ajax 결과
+		if(response === ''){
+			return 'blank';
+		}
+		return '';
+	} catch(error) {
+		alert('푸시알림 정보를 가져오는 중 오류가 발생하였습니다.');
+		return null;
+	}
+	
 }
 
 // 서버에 구독 전송

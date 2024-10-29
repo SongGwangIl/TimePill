@@ -14,6 +14,9 @@ public interface KakaoDAO {
 	/** 카카오 회원가입 */
 	int insertKakaoUser(UserVO vo) throws Exception;
 	
+	/** 카카오 유저 상태 변경 */
+	int updateKakaoUserStatus(UserVO vo) throws Exception;
+	
 	/** 카카오 액세스 토큰 설정 */
 	int updateAccessToken(UserVO vo) throws Exception;
 	

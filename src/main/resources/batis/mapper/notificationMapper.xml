@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="timepill.notification.service.impl.NotificationDAO">
 
+<!-- 구독정보 조회 -->
+<select id="selectSub" resultType="NotificationVO">
+SELECT
+	ENDPOINT
+	, P256DH
+	, AUTH
+FROM
+	push_info
+WHERE
+	USER_ID = #{userId}
+	AND ENDPOINT = #{endpoint}
+	AND P256DH = #{p256dh}
+	AND AUTH = #{auth}
+</select>
+
 <!-- 구독정보 등록 -->
 <insert id="insertSub">
 INSERT INTO push_info (
@@ -23,7 +38,15 @@ INSERT INTO push_info (
 <!-- 구독정보 삭제 -->
 <delete id="deleteSub">
 DELETE FROM push_info
-WHERE ENDPOINT = #{endpoint}
+WHERE 
+	<choose>
+		<when test='endpoint != null || endpoint != ""'>
+			ENDPOINT = #{endpoint}
+		</when>
+		<otherwise>
+			USER_ID = #{userId}
+		</otherwise>
+	</choose>
 </delete>
 
 <!-- 마지막 구독정보 아이디 가져오기 -->

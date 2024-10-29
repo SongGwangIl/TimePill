@@ -12,6 +12,9 @@
     
     <title>TimePill</title>
 
+    <!-- 파비콘 -->
+	<link rel="icon" href="/resources/img/logo.svg">
+
     <!-- jQuery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Gmarket SANS -->

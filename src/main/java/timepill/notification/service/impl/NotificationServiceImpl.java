@@ -40,6 +40,13 @@ public class NotificationServiceImpl implements NotificationService {
 	/** notificationDAO DI */
 	@Autowired
 	NotificationDAO notificationDAO;
+	
+	
+	/** 푸시구독정보 확인 */
+	@Override
+	public NotificationVO checkSubscription(NotificationVO vo) throws Exception{
+		return notificationDAO.selectSub(vo);
+	}
 
 	/** 푸시 구독정보 저장 */
 	@Override

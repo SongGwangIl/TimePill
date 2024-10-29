@@ -23,6 +23,9 @@ public interface KakaoService {
 
 	/** 카카오 가입&로그인 핸들러 */
 	public String userAuthHandler() throws Exception;
+	
+	/** 카카오 회원탈퇴 */
+	public int deleteKakaoAccount(UserVO vo) throws Exception;
 
 	/** 로그아웃 */
 	public void logout() throws Exception;

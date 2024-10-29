@@ -182,7 +182,7 @@ public class KakaoServiceImpl implements KakaoService {
 
 		// 회원가입 여부 체크
 		UserVO userInfoResult = kakaoDAO.selectKakaoUserInfo(vo);
-		if (userInfoResult != null) {
+		if (userInfoResult != null && "Y".equals(userInfoResult.getUserStatus())) {
 			
 			// 시큐리티 로그인
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userInfoResult, "", userInfoResult.getAuthorities());
@@ -193,6 +193,17 @@ public class KakaoServiceImpl implements KakaoService {
 			
 			return "green";
 		} 
+		
+		if (userInfoResult != null && !"Y".equals(userInfoResult.getUserStatus())) {
+			vo.setUserStatus("Y");
+			int resultCnt = kakaoDAO.updateKakaoUserStatus(vo);
+			if (resultCnt != 1) {
+				httpSession.setAttribute("message", "기존 회원정보를 불러오는데 문제가 발생했습니다.");
+				return "red";
+			}
+			httpSession.setAttribute("message", "기존 회원정보를 불러오는데 성공했습니다. 로그인을 해주세요.");
+			return "green";
+		}
 		
 		// 회원가입
 		kakaoDAO.insertKakaoUser(vo);
@@ -209,6 +220,20 @@ public class KakaoServiceImpl implements KakaoService {
 		httpSession.setAttribute("message", "회원가입이 완료되었습니다. 로그인을 해주세요.");
 		
 		return "green";
+	}
+	
+	/** 카카오 회원탈퇴 */
+	@Override
+	public int deleteKakaoAccount(UserVO vo) throws Exception {
+		
+		// 카카오 서버에 연결 끊기 요청
+		String uri = KAKAO_API_HOST + "/v1/user/unlink";
+		httpCallService.CallwithToken("POST", uri, httpSession.getAttribute("token").toString());
+		
+		// 카카오 회원정보 변경
+		int resultCnt = kakaoDAO.updateKakaoUserStatus(vo);
+		
+		return resultCnt;
 	}
 
 	/** 로그아웃 */

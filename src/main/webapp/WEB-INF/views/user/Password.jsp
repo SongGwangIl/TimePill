@@ -6,6 +6,10 @@
 <c:import url="/header" charEncoding="utf-8">
 	<c:param name="title" value="TimePill"/>
 </c:import>
+
+<!-- 파비콘 -->
+<link rel="icon" href="/resources/img/logo.svg">
+
 <link rel="stylesheet" href="/resources/css/user/password.css">
 <link rel="stylesheet" href="/resources/css/common/common.css">
 <div id="contents">

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import timepill.alarm.service.AlarmService;
+import timepill.notification.service.NotificationService;
+import timepill.notification.service.NotificationVO;
 import timepill.schedule.service.ScheduleVO;
 import timepill.user.service.UserService;
 import timepill.user.service.UserVO;
@@ -21,6 +23,10 @@ public class UserServiceImpl implements UserService {
 	/** alarmService DI */
 	@Autowired
 	AlarmService alarmService;
+	
+	/** notificationService DI */
+	@Autowired
+	private NotificationService notificationService;
 
 	/** 스프링시큐리티 bCryptPasswordEncoder DI */
 	@Autowired
@@ -42,6 +48,21 @@ public class UserServiceImpl implements UserService {
 			alarmService.insertAlarm(scheduleVO);
 		}
 		
+	}
+	
+	/** 일반회원탈퇴 */
+	@Override
+	public int deleteAccount(UserVO vo) throws Exception {
+		
+		// 푸시알림 구독정보 삭제
+		NotificationVO notificationVO = new NotificationVO();
+		notificationVO.setUserId(vo.getUserId());
+		notificationService.delSubscription(notificationVO);
+		
+		// 회원정보 삭제
+		int resultCnt = userdao.updateUserStatus(vo);
+		
+		return resultCnt;
 	}
 
 	/** 스프링 시큐리티 로그인 메서드 */

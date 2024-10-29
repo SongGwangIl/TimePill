@@ -9,6 +9,9 @@ import timepill.user.service.UserVO;
 public interface UserDAO {
 
 	int add(UserVO vo);
+	
+	/** 유저상태 변경 */
+	int updateUserStatus(UserVO vo);
 
 	UserVO login(String userId);
 

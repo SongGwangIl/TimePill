@@ -3,11 +3,12 @@ package timepill.user.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -85,6 +86,49 @@ public class UserController {
 		request.getSession().setAttribute("message", "이미등록된 메일이라 가입할 수 없습니다.");
 		
 		return "user/Signup";
+	}
+	
+	/** 회원탈퇴 */
+	@PostMapping("/deleteAccount")
+	public String deleteAccount(String delAcctAgree, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+		// 입력 문자열 검증
+		if (!"회원탈퇴".equals(delAcctAgree)) {
+			req.getSession().setAttribute("message", "잘못된 요청입니다.");
+			return "redirect:/";
+		}
+
+		// 파라미터 세팅
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		UserVO vo = new UserVO();
+		vo.setUserId(userId);
+		vo.setUserStatus("N");
+		int resultCnt = 0;
+
+		// 회원탈퇴
+		if (userId.startsWith("KAKAO_")) {
+			// 카카오 회원
+			vo.setTokenUseAt("N");
+			vo.setRefreshToken("");
+			vo.setAccessToken("");
+			resultCnt = kakaoService.deleteKakaoAccount(vo);
+		} else {
+			// 일반 회원
+			resultCnt = userService.deleteAccount(vo);
+		}
+
+		if (resultCnt != 1) {
+			req.getSession().setAttribute("message", "회원탈퇴 중 문제가 발생했습니다.");
+			return "redirect:/";
+		}
+		req.getSession().setAttribute("message", "회원탈퇴가 완료되었습니다.");
+		
+		// 로그아웃 처리
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null)
+			new SecurityContextLogoutHandler().logout(req, resp, auth);
+		
+		return "redirect:/cover";
 	}
 	
 	/** 아이디 사용유무확인 ajax 요청,응답 */
