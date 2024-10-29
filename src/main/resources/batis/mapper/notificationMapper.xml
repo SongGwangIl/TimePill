@@ -13,8 +13,6 @@ FROM
 WHERE
 	USER_ID = #{userId}
 	AND ENDPOINT = #{endpoint}
-	AND P256DH = #{p256dh}
-	AND AUTH = #{auth}
 </select>
 
 <!-- 구독정보 등록 -->
