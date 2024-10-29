@@ -53,7 +53,7 @@
                             <div class="input password">
                                 <form:input type="text" class="form-input" path="userId" id="userId" placeholder="4-15자리 영문과 숫자로 입력" minlength="4" maxlength="15" required="required"/>
                                 <p id="idCheck" class="checkText" style="margin: 0;">&nbsp;</p>
-           						<form:errors path="userId"  class="checkText"></form:errors>
+           						<form:errors path="userId"  class="checkText errors"></form:errors>
                             </div>
                         </td>
                     </tr>
@@ -67,7 +67,7 @@
                                 <form:input type="password" class="form-input pwd" path="password" id="password" placeholder="10-20자리 영문, 숫자, 특수문자 포함" required="required"/>
                                 <img class="eye" src="/resources/img/eye.png"></img>
                                 <p id="userPwdMsg" style="margin: 0;">&nbsp;</p>
-           						<form:errors path="password"></form:errors>
+           						<form:errors path="password" cssClass="errors"></form:errors>
                             </div>
                         </td>
                     </tr>
@@ -94,9 +94,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <form:input type="email" class="form-input" path="email" placeholder="이메일 입력" id="email" onkeyup='autoEmail("email",this.value)' required="required"/>
+                            <form:input type="email" class="form-input" path="email" placeholder="이메일 입력" id="email" oninput="autoEmail('email',this.value)"  required="required"/>
                             <p id="emailCheck" class="checkText" style="margin: 0;">&nbsp;</p>
-                            <form:errors path="email"></form:errors>
+                            <form:errors path="email" cssClass="errors"></form:errors>
                         </td>
                     </tr>
                 </table>
@@ -141,21 +141,26 @@
             	
     });
     
+ 	// 공백제거
+	$('.form-input').on('input', function() {
+		$(this).val($(this).val().replace(/\s/g, ''));
+	});
+    
     const joinForm = document.querySelector('.joinform');
     let idInp = document.querySelector('#userId');
     let idCheckP = document.querySelector('#idCheck');
     let emailCheckP = document.querySelector('#emailCheck');
     let pwInp = document.querySelector('#password');
+    let checkPwInp = document.querySelector('#checkUserPwd');
     let nameInp = document.querySelector('#nickname');
     let emailInp = document.querySelector('#email');
     const signupBtn = document.querySelector('#signup');
     
     nameInp.oninput = check;
 
-    function check() {
-    	
-    	if(idInp.value !== '' || pwInp.value !== '' || nameInp.value !== '' || emailInp.value !== ''){
-    		if(idCheckP.getAttribute('check') === 'true' && emailCheckP.getAttribute('check') === 'true'){
+    function check() {    	
+    	if(idInp.value !== '' && pwInp.value !== '' && checkPwInp.value !== ''  && nameInp.value !== '' && emailInp.value !== ''){
+    		if(idCheckP.getAttribute('check') === 'true' && emailCheckP.getAttribute('check') === 'true' && pwInp.value === checkPwInp.value){
 	    		signupBtn.setAttribute('class', "btn-sky");
 	    		signupBtn.style.pointerEvents = 'auto';    			
     		}else{

@@ -154,6 +154,10 @@
     flex-direction: row;
 }
 
+.errors{
+	color: #dc3545;
+}
+
 
 /* 480~360 */
 @media (max-width: 480px) {

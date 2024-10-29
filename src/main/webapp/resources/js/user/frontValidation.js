@@ -112,6 +112,7 @@ function checkPwValid() {
       pwRe.value = null;
       pwRe.focus();
     }
+    check();
 }
 
 function autoEmail(a,b){
@@ -135,6 +136,7 @@ function autoEmail(a,b){
       source: availableCity      
     });
   }
+  emailCheck();
 }
   
 const email = document.querySelector("#email");
@@ -143,14 +145,18 @@ let emailVal;
 email.addEventListener('input', emailCheck);
 
 function emailCheck(){
-	console.log('이메일체크동작');
   const eamilRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i
   emailVal = email.value
   let emailFlag = false;
   if(!eamilRegExp.test(emailVal)) { // 정규식 조건 만족 X
-    email.focus();    
+    emailP.textContent = "이메일 형식이 아닙니다.";
+	emailP.style.color = "#dc3545";
+	emailP.style.fontSize = '16px';
+	emailP.setAttribute('check', 'false');
+	email.focus();    
+	check();
   }else
-  	emailFlag = true;
+  	emailFlag = true;  
   	
   if(emailFlag == true){
     $.ajax({

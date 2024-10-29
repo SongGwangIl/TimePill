@@ -7,4 +7,6 @@ public class ValidGroup {
 	
 	public static interface EditInfo{}
 	
+	public static interface Singup{}
+	
 }

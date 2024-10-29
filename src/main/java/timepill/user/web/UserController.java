@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import timepill.com.ValidGroup.EditInfo;
 import timepill.com.ValidGroup.EditPasswrod;
+import timepill.com.ValidGroup.Singup;
 import timepill.kakao.service.KakaoService;
 import timepill.user.service.AuthService;
 import timepill.user.service.AuthVO;
@@ -69,7 +70,7 @@ public class UserController {
 	
 	/** 회원가입 */ 
 	@PostMapping("/user/singup")
-	public String add(@Valid UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
+	public String add(@Validated(Singup.class) UserVO vo, BindingResult result, HttpServletRequest request) throws Exception {
 		if(result.hasErrors())
 			
 			return "user/Signup";

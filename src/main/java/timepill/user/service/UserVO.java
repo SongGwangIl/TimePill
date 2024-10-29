@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import timepill.com.ValidGroup.EditInfo;
 import timepill.com.ValidGroup.EditPasswrod;
+import timepill.com.ValidGroup.Singup;
 
 @SuppressWarnings("serial")
 @Getter
@@ -23,14 +24,14 @@ import timepill.com.ValidGroup.EditPasswrod;
 public class UserVO implements UserDetails {
 
 	// users테이블
-	@NotBlank @Pattern(regexp = "^[a-zA-Z0-9]{4,15}$")
+	@NotBlank(groups = Singup.class) @Pattern(regexp = "^[a-zA-Z0-9]{4,15}$", groups = Singup.class)
 	private String userId; // 유저아이디
-	@NotBlank(groups = EditInfo.class)
+	@NotBlank(groups = {EditInfo.class, Singup.class})
 	private String nickname; // 유저이름
 	private String role; // 유저권한
-	@NotBlank(groups = EditPasswrod.class) @Pattern(regexp = "^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$", groups = EditPasswrod.class)
+	@NotBlank(groups = {EditPasswrod.class, Singup.class}) @Pattern(regexp = "^(?=.*[A-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,20}$", groups = {EditPasswrod.class, Singup.class})
 	private String password; // 유저비밀번호
-	@NotBlank(groups = EditInfo.class) @Email(groups = EditInfo.class)
+	@NotBlank(groups = {EditPasswrod.class, Singup.class}) @Email(groups = {EditPasswrod.class, Singup.class})
 	private String email; // 유저이메일
 	private String userStatus; // 유저사용상태 가입시 Y, 탈퇴시 N
 	
